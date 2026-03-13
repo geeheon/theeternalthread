@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Children · Young Men · Fathers</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: #0a0a10;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .container { max-width: 460px; margin: 0 auto; padding: 40px 20px 60px; }
+
+  .header { text-align: center; margin-bottom: 32px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 300;
+    color: #e8d8b0; letter-spacing: 3px;
+    line-height: 1.4;
+  }
+  .header .author {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; color: #706858; letter-spacing: 2px;
+    margin-top: 6px; font-weight: 700;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #e8d8b0, transparent);
+    margin: 10px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #888070; font-style: italic; line-height: 1.6;
+  }
+
+  /* Overview scripture */
+  .overview {
+    margin: 0 0 24px; padding: 18px 20px;
+    border-radius: 10px; text-align: center;
+    background: rgba(20,18,26,0.5);
+    border: 1px solid rgba(232,216,176,0.1);
+  }
+  .overview-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #b0a890; font-style: italic; line-height: 1.7;
+  }
+  .overview-ref {
+    font-size: 11px; letter-spacing: 1.5px; color: #706858; margin-top: 8px;
+  }
+
+  /* Problem box */
+  .problem {
+    margin: 0 0 28px; padding: 20px;
+    border-radius: 10px;
+    background: rgba(46,26,26,0.2);
+    border: 1px solid rgba(230,104,104,0.1);
+  }
+  .problem-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px;
+    color: #e66868; margin-bottom: 10px; text-align: center;
+  }
+  .problem-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #b09090; font-style: italic; line-height: 1.7;
+    text-align: center;
+  }
+
+  /* Stage section */
+  .stage-section {
+    margin: 28px 0 0;
+    padding: 24px 18px;
+    border-radius: 12px;
+    border: 1.5px solid;
+  }
+  .stage-section.children {
+    background: rgba(14,24,20,0.5);
+    border-color: rgba(104,230,160,0.15);
+  }
+  .stage-section.youngmen {
+    background: rgba(14,20,36,0.5);
+    border-color: rgba(104,160,230,0.15);
+  }
+  .stage-section.fathers {
+    background: rgba(32,26,14,0.5);
+    border-color: rgba(240,208,128,0.2);
+  }
+
+  .stage-header { text-align: center; margin-bottom: 18px; }
+  .stage-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px; font-weight: 300; opacity: 0.12; line-height: 1;
+  }
+  .children .stage-num { color: #68e6a0; }
+  .youngmen .stage-num { color: #68a0e6; }
+  .fathers .stage-num { color: #f0d080; }
+
+  .stage-title {
+    font-size: 14px; font-weight: 800; letter-spacing: 3px;
+    margin-top: -10px;
+  }
+  .children .stage-title { color: #68e6a0; }
+  .youngmen .stage-title { color: #68a0e6; }
+  .fathers .stage-title { color: #f0d080; }
+
+  .stage-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-style: italic; margin-top: 4px;
+  }
+  .children .stage-verse { color: rgba(104,230,160,0.5); }
+  .youngmen .stage-verse { color: rgba(104,160,230,0.5); }
+  .fathers .stage-verse { color: rgba(240,208,128,0.5); }
+
+  .stage-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; line-height: 1.6; color: #d4c5a0;
+    font-style: italic; text-align: center;
+    margin: 14px 0;
+    padding: 0 10px;
+  }
+
+  .stage-badge {
+    display: inline-block;
+    font-size: 9px; font-weight: 800; letter-spacing: 1.5px;
+    padding: 4px 12px; border-radius: 4px;
+    margin-top: 4px;
+  }
+  .children .stage-badge { color: #68e6a0; background: rgba(104,230,160,0.08); border: 1px solid rgba(104,230,160,0.15); }
+  .youngmen .stage-badge { color: #68a0e6; background: rgba(104,160,230,0.08); border: 1px solid rgba(104,160,230,0.15); }
+  .fathers .stage-badge { color: #f0d080; background: rgba(240,208,128,0.08); border: 1px solid rgba(240,208,128,0.15); }
+
+  /* Detail items within stage */
+  .detail { cursor: pointer; padding: 14px 16px; border-radius: 8px; margin-top: 10px; transition: all 0.3s ease; border: 1px solid transparent; }
+  .detail:active { transform: scale(0.98); }
+  .children .detail { background: rgba(104,230,160,0.04); }
+  .children .detail.active { background: rgba(104,230,160,0.08); border-color: rgba(104,230,160,0.15); }
+  .youngmen .detail { background: rgba(104,160,230,0.04); }
+  .youngmen .detail.active { background: rgba(104,160,230,0.08); border-color: rgba(104,160,230,0.15); }
+  .fathers .detail { background: rgba(240,208,128,0.04); }
+  .fathers .detail.active { background: rgba(240,208,128,0.08); border-color: rgba(240,208,128,0.15); }
+
+  .detail-title { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; }
+  .children .detail-title { color: #68e6a0; }
+  .youngmen .detail-title { color: #68a0e6; }
+  .fathers .detail-title { color: #f0d080; }
+
+  .detail-content {
+    font-size: 13.5px; line-height: 1.65; color: #b8b0a0;
+    margin-top: 8px; display: none;
+  }
+  .detail.active .detail-content { display: block; }
+
+  .detail-tap { font-size: 11px; color: #605850; margin-top: 4px; }
+  .detail.active .detail-tap { display: none; }
+
+  /* Arrow between stages */
+  .stage-arrow {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 10px 0;
+  }
+  .stage-arrow-line {
+    width: 1.5px; height: 20px;
+    background: linear-gradient(to bottom, rgba(232,216,176,0.2), rgba(232,216,176,0.1));
+  }
+  .stage-arrow-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 2px;
+    color: rgba(232,216,176,0.25); padding: 3px 0;
+  }
+  .stage-arrow-head {
+    width: 0; height: 0;
+    border-left: 5px solid transparent; border-right: 5px solid transparent;
+    border-top: 6px solid rgba(232,216,176,0.15);
+  }
+
+  /* Fromke insight */
+  .fromke {
+    margin: 28px 0; padding: 20px;
+    border-radius: 10px;
+    background: rgba(32,26,14,0.4);
+    border: 1px solid rgba(240,208,128,0.12);
+  }
+  .fromke-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px;
+    color: #f0d080; margin-bottom: 10px; text-align: center;
+  }
+  .fromke-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #b0a080; font-style: italic; line-height: 1.7;
+    text-align: center;
+  }
+
+  /* Where are you box */
+  .where {
+    margin: 24px 0; padding: 20px;
+    border-radius: 10px;
+    background: rgba(20,18,26,0.5);
+    border: 1px solid rgba(232,216,176,0.08);
+    text-align: center;
+  }
+  .where-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px;
+    color: #e8d8b0; margin-bottom: 12px;
+  }
+  .where-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; color: #908878; font-style: italic; line-height: 1.7;
+  }
+
+  .footer {
+    margin-top: 40px; text-align: center; padding: 20px 0;
+    border-top: 1px solid rgba(232,216,176,0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #888070; font-style: italic; line-height: 1.7; margin-bottom: 12px;
+  }
+  .footer-line { width: 20px; height: 1px; background: rgba(232,216,176,0.25); margin: 0 auto; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>CHILDREN · YOUNG MEN<br>FATHERS</h1>
+    <div class="author">1 JOHN 2:12–14 · READ THROUGH FROMKE</div>
+    <div class="header-line"></div>
+    <p>Three stages of spiritual growth — and where most Christians get stuck</p>
+  </div>
+
+  <div class="overview">
+    <div class="overview-text">"I write to you, little children, because your sins are forgiven you for His name's sake. I write to you, fathers, because you have known Him who is from the beginning. I write to you, young men, because you have overcome the wicked one."</div>
+    <div class="overview-ref">1 JOHN 2:12–13</div>
+  </div>
+
+  <div class="problem">
+    <div class="problem-label">THE PROBLEM FROMKE IDENTIFIES</div>
+    <div class="problem-text">
+      Most of Christianity is permanently camped at the "children" stage — endlessly focused on forgiveness, personal blessing, and what God has done <em>for me</em>. Some advance to "young men" — fighting battles, growing in the word, overcoming. But very few press through to "fathers" — those who know <em>Him who is from the beginning</em>, who see God's eternal purpose and live for it rather than for themselves.<br><br>
+      The journey from children to fathers is the journey from man-centred Christianity to God-centred Christianity. It is Fromke's "ultimate intention" applied to spiritual growth.
+    </div>
+  </div>
+
+  <!-- CHILDREN -->
+  <div class="stage-section children">
+    <div class="stage-header">
+      <div class="stage-num">01</div>
+      <div class="stage-title">CHILDREN</div>
+      <div class="stage-verse">1 John 2:12–13</div>
+      <div class="stage-scripture">"Your sins are forgiven you for His name's sake... you have known the Father."</div>
+      <div class="stage-badge">WHAT GOD HAS DONE FOR ME</div>
+    </div>
+
+    <div class="detail" onclick="toggle(this)">
+      <div class="detail-title">THE MARK: FORGIVENESS KNOWN</div>
+      <div class="detail-tap">Tap to expand</div>
+      <div class="detail-content">The child knows one glorious thing: my sins are forgiven. I know the Father. I'm in the family. This is real, it's wonderful, and it's the foundation of everything. No one outgrows the need for forgiveness. But it is the starting point, not the destination.</div>
+    </div>
+    <div class="detail" onclick="toggle(this)">
+      <div class="detail-title">THE FOOD: MILK</div>
+      <div class="detail-tap">Tap to expand</div>
+      <div class="detail-content">Peter says "as newborn babes, desire the pure milk of the word" (1 Peter 2:2). Milk is pre-digested — someone else processes it for you. The child depends on others to feed them. Sermons, devotionals, someone else's insights. There's nothing wrong with milk. Babies need it. But a thirty-year-old on a bottle has a problem.</div>
+    </div>
+    <div class="detail" onclick="toggle(this)">
+      <div class="detail-title">THE ORIENTATION: ME-CENTRED</div>
+      <div class="detail-tap">Tap to expand</div>
+      <div class="detail-content">The child's faith revolves around personal experience. What has God done for me? How do I feel? Am I blessed? Am I forgiven? This is natural and appropriate for infants. But Fromke's challenge is that vast portions of the church never move beyond this. Entire denominations are built around servicing spiritual infants — keeping them happy, entertained, and assured of their forgiveness — without ever calling them to grow up.</div>
+    </div>
+    <div class="detail" onclick="toggle(this)">
+      <div class="detail-title">THE DANGER: ARRESTED DEVELOPMENT</div>
+      <div class="detail-tap">Tap to expand</div>
+      <div class="detail-content">Hebrews 5:12 — "By this time you ought to be teachers, but you need someone to teach you again the elementary principles." The most common spiritual condition in the Western church is adult believers who are still infants. They know they're forgiven. They attend services. They consume teaching. But they've never moved beyond what God has done for them to what God is after for Himself. They mistake the shower for the celebration.</div>
+    </div>
+  </div>
+
+  <div class="stage-arrow">
+    <div class="stage-arrow-line"></div>
+    <div class="stage-arrow-label">GROWTH REQUIRES</div>
+    <div class="stage-arrow-head"></div>
+  </div>
+
+  <!-- YOUNG MEN -->
+  <div class="stage-section youngmen">
+    <div class="stage-header">
+      <div class="stage-num">02</div>
+      <div class="stage-title">YOUNG MEN</div>
+      <div class="stage-verse">1 John 2:13–14</div>
+      <div class="stage-scripture">"You are strong, the word of God abides in you, and you have overcome the wicked one."</div>
+      <div class="stage-badge">WHAT GOD IS DOING IN ME</div>
+    </div>
+
+    <div class="detail" onclick="toggle(this)">
+      <div class="detail-title">THE MARK: OVERCOMING</div>
+      <div class="detail-tap">Tap to expand</div>
+      <div class="detail-content">The young man has moved beyond just knowing he's forgiven. He's in a fight — and he's winning. He's overcome the wicked one. This is the believer who has learned to apply Romans 6, to reckon the old man dead, to stand against temptation by faith. He has tasted victory over sin, not by willpower but by the word of God abiding in him. This is the stage where the Christian life becomes active and powerful.</div>
+    </div>
+    <div class="detail" onclick="toggle(this)">
+      <div class="detail-title">THE FOOD: BREAD</div>
+      <div class="detail-tap">Tap to expand</div>
+      <div class="detail-content">Jesus said "I am the bread of life" (John 6:35). The young man feeds on Christ directly — not just pre-digested milk from others, but personal engagement with the living word. "The word of God abides in you." It's not just heard on Sunday — it lives inside. This is the believer who reads Scripture and hears Christ speaking, who takes in the word and is strengthened by it. Bread builds strength. The young man is strong.</div>
+    </div>
+    <div class="detail" onclick="toggle(this)">
+      <div class="detail-title">THE ORIENTATION: BATTLE-FOCUSED</div>
+      <div class="detail-tap">Tap to expand</div>
+      <div class="detail-content">The young man's world is defined by warfare. Overcoming sin. Fighting the enemy. Gaining spiritual ground. Growing in knowledge. This is a significant advance from the child — he's no longer passive, no longer just receiving. He's engaged. But notice: the focus is still largely on his own spiritual life. His battles. His growth. His victories. He sees what God is doing in him. He hasn't yet fully grasped what God is doing in the universe.</div>
+    </div>
+    <div class="detail" onclick="toggle(this)">
+      <div class="detail-title">THE DANGER: STAYING A WARRIOR FOREVER</div>
+      <div class="detail-tap">Tap to expand</div>
+      <div class="detail-content">Many strong believers plateau here. They become experts in spiritual warfare, deeply grounded in the word, able to overcome — but they never transition from warriors to fathers. They know how to fight but not how to birth. They know what God is doing in them but haven't yet seen what God purposed before the ages for Himself. They become the spiritual equivalent of a career soldier who never becomes a father — strong, disciplined, capable, but not reproducing. Not seeing beyond their own walk.</div>
+    </div>
+  </div>
+
+  <div class="stage-arrow">
+    <div class="stage-arrow-line"></div>
+    <div class="stage-arrow-label">MATURITY REQUIRES</div>
+    <div class="stage-arrow-head"></div>
+  </div>
+
+  <!-- FATHERS -->
+  <div class="stage-section fathers">
+    <div class="stage-header">
+      <div class="stage-num">03</div>
+      <div class="stage-title">FATHERS</div>
+      <div class="stage-verse">1 John 2:13–14</div>
+      <div class="stage-scripture">"You have known Him who is from the beginning."</div>
+      <div class="stage-badge">WHAT GOD IS AFTER FOR HIMSELF</div>
+    </div>
+
+    <div class="detail" onclick="toggle(this)">
+      <div class="detail-title">THE MARK: KNOWING HIM FROM THE BEGINNING</div>
+      <div class="detail-tap">Tap to expand</div>
+      <div class="detail-content">Notice what John does not say about the father. He doesn't say "you have overcome more." He doesn't say "you know more Scripture." He doesn't say "you have a bigger ministry." He says one thing, and he says it twice for emphasis: you have known Him who is from the beginning. The father has come to know God in terms of His eternal purpose. Not just God as Saviour (the child knows that). Not just God as the one who strengthens for battle (the young man knows that). But God as the one who purposed something before the foundation of the world — and is still working toward it. The father sees the beginning. He sees the end. And he sees where he fits.</div>
+    </div>
+    <div class="detail" onclick="toggle(this)">
+      <div class="detail-title">THE FOOD: SOLID FOOD</div>
+      <div class="detail-tap">Tap to expand</div>
+      <div class="detail-content">Hebrews 5:14 — "Solid food belongs to those who are of full age, who by reason of use have their senses trained to discern both good and evil." The father feeds on the deep things of God — not deep in the sense of complicated, but deep in the sense of ultimate. God's eternal purpose. The mystery. The ekklesia as the body and bride of Christ. The summing up of all things in Him. These aren't advanced topics reserved for scholars. They're the actual content of God's heart. But only the mature can digest them.</div>
+    </div>
+    <div class="detail" onclick="toggle(this)">
+      <div class="detail-title">THE ORIENTATION: GOD-CENTRED</div>
+      <div class="detail-tap">Tap to expand</div>
+      <div class="detail-content">This is Fromke's paradigm shift made personal. The child asks: what has God done for me? The young man asks: what is God doing in me? The father asks: what is God after for Himself? The entire orientation has shifted from self to God. The father doesn't despise forgiveness — he still needs it. He doesn't stop fighting — the warfare continues. But he's no longer the centre of his own spiritual universe. God's eternal purpose is the centre, and he's found his place within it. He lives for the ultimate intention, not for his own spiritual experience.</div>
+    </div>
+    <div class="detail" onclick="toggle(this)">
+      <div class="detail-title">THE MARK OF A FATHER: REPRODUCTION</div>
+      <div class="detail-tap">Tap to expand</div>
+      <div class="detail-content">A father produces children. That's what makes him a father. Spiritually, the father is one who can birth others into Christ and nurture them toward maturity. Not just evangelism — the child can share the gospel. But the father builds. He sees the whole arc from infancy to maturity and can guide others along it. He's a wise master builder. He doesn't just win battles — he raises warriors. He doesn't just know truth — he reproduces it in others. This is the apostolic function some describe as spiritual building: seeing lives formed and communities built in ways that are more than merely physical.</div>
+    </div>
+    <div class="detail" onclick="toggle(this)">
+      <div class="detail-title">THE SIMPLICITY OF THE FATHER</div>
+      <div class="detail-tap">Tap to expand</div>
+      <div class="detail-content">Notice something striking: John's description of the father is the simplest of the three. The child has two descriptions (sins forgiven, knows the Father). The young man has three (strong, word abides, overcome the evil one). The father has only one, repeated: knows Him who is from the beginning. Maturity isn't complexity — it's simplicity on the other side of complexity. The father has come through all the battles, all the theology, all the experiences, and arrived at one thing: knowing Him. Not knowing about Him. Not knowing doctrine. Knowing the Person. Everything else serves that single reality.</div>
+    </div>
+  </div>
+
+  <!-- Fromke's challenge -->
+  <div class="fromke">
+    <div class="fromke-label">FROMKE'S CHALLENGE</div>
+    <div class="fromke-text">
+      Most churches are nurseries that never produce adults.<br><br>
+      They are endlessly occupied with the care and feeding of spiritual infants — forgiveness, assurance, comfort, blessing — without ever challenging them to grow up into the Father's purpose.<br><br>
+      The remedial has become the ultimate.<br>
+      The shower has become the destination.<br>
+      The milk has become the permanent diet.<br><br>
+      God is looking for fathers — those who know Him from the beginning, who see His eternal intention, and who will build accordingly.
+    </div>
+  </div>
+
+  <!-- Where are you -->
+  <div class="where">
+    <div class="where-label">THE HONEST QUESTION</div>
+    <div class="where-text">
+      Where are you?<br><br>
+      Are you a child — still primarily occupied with what God has done for you?<br><br>
+      Are you a young man — strong, in the word, overcoming, but still focused on your own spiritual life?<br><br>
+      Or are you pressing into fatherhood — seeing God's eternal purpose and finding your place within it?<br><br>
+      The journey isn't about being better.<br>
+      It's about seeing bigger.<br>
+      From me, to Him, to His purpose.
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>The child knows the Father's love.<br>The young man knows the Father's power.<br>The father knows the Father's heart.<br><br>All three are real.<br>But only one has arrived<br>at the ultimate intention.</p>
+    <div class="footer-line"></div>
+  </div>
+
+</div>
+
+<script>
+function toggle(el) {
+  const was = el.classList.contains('active');
+  // Close all in same section
+  el.parentElement.querySelectorAll('.detail').forEach(d => d.classList.remove('active'));
+  if (!was) el.classList.add('active');
+}
+</script>
+</body>
+</html>

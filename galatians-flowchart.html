@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Galatians 2:20–3:3 — The Exchanged Life</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: #0c0e1a;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: #c9a0e6;
+    letter-spacing: 3px;
+    margin-bottom: 2px;
+  }
+  .header .ref {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: #c9a0e680;
+    letter-spacing: 1px;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #c9a0e6, transparent);
+    margin: 10px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #888070;
+    font-style: italic;
+  }
+
+  /* Two Columns Banner */
+  .binary-banner {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 32px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(201, 160, 230, 0.1);
+  }
+  .binary-side {
+    flex: 1;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .binary-side.death {
+    background: rgba(26, 18, 32, 0.8);
+    border-right: 1px solid rgba(201, 160, 230, 0.1);
+  }
+  .binary-side.life {
+    background: rgba(13, 28, 20, 0.8);
+  }
+  .binary-label {
+    font-size: 10px; font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+  }
+  .binary-side.death .binary-label { color: #c9a0e6; }
+  .binary-side.life .binary-label { color: #68e6a0; }
+  .binary-desc {
+    font-size: 11px;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .binary-side.death .binary-desc { color: #887090; }
+  .binary-side.life .binary-desc { color: #688070; }
+
+  /* Node Cards */
+  .node {
+    border-radius: 10px;
+    padding: 18px 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1.5px solid;
+  }
+  .node.active { transform: scale(1.02); }
+
+  .node.purple {
+    background: rgba(26, 18, 32, 0.8);
+    border-color: rgba(201, 160, 230, 0.25);
+  }
+  .node.purple.active {
+    background: #1a1220;
+    border-color: #c9a0e6;
+    box-shadow: 0 0 30px rgba(201, 160, 230, 0.1), 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .node.green {
+    background: rgba(13, 28, 20, 0.8);
+    border-color: rgba(104, 230, 160, 0.25);
+  }
+  .node.green.active {
+    background: #0d2818;
+    border-color: #68e6a0;
+    box-shadow: 0 0 30px rgba(104, 230, 160, 0.1), 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .node.gold {
+    background: rgba(32, 26, 14, 0.8);
+    border-color: rgba(230, 192, 104, 0.25);
+  }
+  .node.gold.active {
+    background: #201a0e;
+    border-color: #e6c068;
+    box-shadow: 0 0 30px rgba(230, 192, 104, 0.1), 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .node.red {
+    background: rgba(46, 26, 26, 0.8);
+    border-color: rgba(230, 104, 104, 0.25);
+  }
+  .node.red.active {
+    background: #2e1a1a;
+    border-color: #e66868;
+    box-shadow: 0 0 20px rgba(230, 104, 104, 0.1), 0 4px 16px rgba(0,0,0,0.3);
+  }
+
+  .node.blue {
+    background: rgba(14, 20, 36, 0.8);
+    border-color: rgba(104, 160, 230, 0.25);
+  }
+  .node.blue.active {
+    background: #0e1424;
+    border-color: #68a0e6;
+    box-shadow: 0 0 30px rgba(104, 160, 230, 0.1), 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .hinge-badge {
+    position: absolute;
+    top: -10px; right: 16px;
+    font-size: 9px; font-weight: 800;
+    letter-spacing: 1.5px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .purple .hinge-badge { background: #c9a0e6; color: #1a1220; }
+  .gold .hinge-badge { background: #e6c068; color: #201a0e; }
+
+  .node-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .node.active .node-header { margin-bottom: 10px; }
+
+  .node-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300;
+    line-height: 1; opacity: 0.5;
+  }
+  .purple .node-number { color: #c9a0e6; }
+  .green .node-number { color: #68e6a0; }
+  .gold .node-number { color: #e6c068; }
+  .red .node-number { color: #e66868; }
+  .blue .node-number { color: #68a0e6; }
+
+  .node-title {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; margin: 0;
+  }
+  .purple .node-title { color: #c9a0e6; }
+  .green .node-title { color: #68e6a0; }
+  .gold .node-title { color: #e6c068; }
+  .red .node-title { color: #e66868; }
+  .blue .node-title { color: #68a0e6; }
+
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-style: italic;
+  }
+  .purple .node-verse { color: rgba(201, 160, 230, 0.56); }
+  .green .node-verse { color: rgba(104, 230, 160, 0.56); }
+  .gold .node-verse { color: rgba(230, 192, 104, 0.56); }
+  .red .node-verse { color: rgba(230, 104, 104, 0.56); }
+  .blue .node-verse { color: rgba(104, 160, 230, 0.56); }
+
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; line-height: 1.6;
+    color: #d4c5a0;
+    margin: 8px 0;
+    font-style: italic;
+    border-left: 2px solid;
+    padding-left: 14px;
+    display: none;
+  }
+  .node.active .node-scripture { display: block; }
+  .purple .node-scripture { border-left-color: rgba(201, 160, 230, 0.25); }
+  .green .node-scripture { border-left-color: rgba(104, 230, 160, 0.25); }
+  .gold .node-scripture { border-left-color: rgba(230, 192, 104, 0.25); }
+  .red .node-scripture { border-left-color: rgba(230, 104, 104, 0.25); }
+  .blue .node-scripture { border-left-color: rgba(104, 160, 230, 0.25); }
+
+  .node-summary {
+    font-size: 13.5px; line-height: 1.65;
+    color: #b8b0a0;
+    margin: 8px 0 0 0;
+    display: none;
+  }
+  .node.active .node-summary { display: block; }
+
+  .node-tap {
+    font-size: 12px;
+    color: #706868;
+    margin-left: 38px;
+  }
+  .node.active .node-tap { display: none; }
+
+  /* Arrows */
+  .arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0;
+  }
+  .arrow-line { width: 1.5px; }
+  .arrow.purple .arrow-line { background: linear-gradient(to bottom, rgba(201,160,230,0.37), rgba(201,160,230,0.19)); }
+  .arrow.green .arrow-line { background: linear-gradient(to bottom, rgba(104,230,160,0.37), rgba(104,230,160,0.19)); }
+  .arrow.gold .arrow-line { background: linear-gradient(to bottom, rgba(230,192,104,0.37), rgba(230,192,104,0.19)); }
+  .arrow.red .arrow-line { background: linear-gradient(to bottom, rgba(230,104,104,0.37), rgba(230,104,104,0.19)); }
+  .arrow.blue .arrow-line { background: linear-gradient(to bottom, rgba(104,160,230,0.37), rgba(104,160,230,0.19)); }
+  .arrow.transition .arrow-line { background: linear-gradient(to bottom, rgba(201,160,230,0.3), rgba(230,192,104,0.3)); }
+
+  .arrow-label {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    padding: 2px 0;
+  }
+  .arrow.purple .arrow-label { color: rgba(201,160,230,0.5); }
+  .arrow.gold .arrow-label { color: rgba(230,192,104,0.5); }
+  .arrow.red .arrow-label { color: rgba(230,104,104,0.5); }
+  .arrow.blue .arrow-label { color: rgba(104,160,230,0.5); }
+  .arrow.transition .arrow-label { color: rgba(201,160,230,0.4); }
+
+  .arrow-head {
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+  }
+  .arrow.purple .arrow-head { border-top: 6px solid rgba(201,160,230,0.31); }
+  .arrow.green .arrow-head { border-top: 6px solid rgba(104,230,160,0.31); }
+  .arrow.gold .arrow-head { border-top: 6px solid rgba(230,192,104,0.31); }
+  .arrow.red .arrow-head { border-top: 6px solid rgba(230,104,104,0.31); }
+  .arrow.blue .arrow-head { border-top: 6px solid rgba(104,160,230,0.31); }
+  .arrow.transition .arrow-head { border-top: 6px solid rgba(230,192,104,0.31); }
+
+  /* Section dividers */
+  .section-divider {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .section-divider-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    padding: 6px 16px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+  .section-divider-label.warn {
+    color: #e66868;
+    background: rgba(230, 104, 104, 0.08);
+    border: 1px solid rgba(230, 104, 104, 0.15);
+  }
+  .section-divider-label.question {
+    color: #68a0e6;
+    background: rgba(104, 160, 230, 0.08);
+    border: 1px solid rgba(104, 160, 230, 0.15);
+  }
+
+  /* Contrast box */
+  .contrast-box {
+    margin: 28px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(201, 160, 230, 0.12);
+  }
+  .contrast-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(20, 16, 28, 0.6);
+    border-bottom: 1px solid rgba(201, 160, 230, 0.08);
+  }
+  .contrast-header span {
+    font-size: 9px; font-weight: 800;
+    letter-spacing: 2px; color: #c9a0e6;
+  }
+  .contrast-row {
+    display: flex;
+  }
+  .contrast-cell {
+    flex: 1;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .contrast-cell.flesh {
+    background: rgba(46, 26, 26, 0.3);
+    border-right: 1px solid rgba(201, 160, 230, 0.06);
+  }
+  .contrast-cell.spirit {
+    background: rgba(13, 28, 20, 0.3);
+  }
+  .contrast-cell-label {
+    font-size: 9px; font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .contrast-cell.flesh .contrast-cell-label { color: #e66868; }
+  .contrast-cell.spirit .contrast-cell-label { color: #68e6a0; }
+  .contrast-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    line-height: 1.8;
+    font-style: italic;
+  }
+  .contrast-cell.flesh .contrast-item { color: #a08080; }
+  .contrast-cell.spirit .contrast-item { color: #80a090; }
+
+  /* Callout */
+  .callout {
+    margin: 28px 0;
+    padding: 18px 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .callout.purple-theme {
+    background: rgba(26, 18, 32, 0.6);
+    border: 1px solid rgba(201, 160, 230, 0.19);
+  }
+  .callout-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+  .callout.purple-theme .callout-text { color: #c9a0e6; }
+  .callout-ref {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+  }
+  .callout.purple-theme .callout-ref { color: #887090; }
+
+  /* Footer */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(201, 160, 230, 0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #888070;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .footer-line {
+    width: 20px; height: 1px;
+    background: rgba(201, 160, 230, 0.25);
+    margin: 0 auto;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>THE EXCHANGED LIFE</h1>
+    <div class="ref">GALATIANS 2:20 – 3:3</div>
+    <div class="header-line"></div>
+    <p>No longer I, but Christ</p>
+  </div>
+
+  <!-- Binary Banner -->
+  <div class="binary-banner">
+    <div class="binary-side death">
+      <div class="binary-label">I DIED</div>
+      <div class="binary-desc">The old source ended</div>
+    </div>
+    <div class="binary-side life">
+      <div class="binary-label">CHRIST LIVES</div>
+      <div class="binary-desc">The new source began</div>
+    </div>
+  </div>
+
+  <!-- Main Flow -->
+  <div id="main-flow"></div>
+
+  <!-- Contrast Box -->
+  <div class="contrast-box">
+    <div class="contrast-header">
+      <span>THE TWO SOURCES — SAME TREE OR DIFFERENT?</span>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-cell flesh">
+        <div class="contrast-cell-label">FLESH</div>
+        <div class="contrast-item">Self-effort</div>
+        <div class="contrast-item">Law-keeping</div>
+        <div class="contrast-item">Religious performance</div>
+        <div class="contrast-item">Moral willpower</div>
+        <div class="contrast-item">Obvious sin</div>
+        <div class="contrast-item" style="margin-top:10px;font-size:12px;color:#886060;">Same source.<br>Same tree.<br>All independence from God.</div>
+      </div>
+      <div class="contrast-cell spirit">
+        <div class="contrast-cell-label">SPIRIT</div>
+        <div class="contrast-item">Christ's life flowing</div>
+        <div class="contrast-item">Grace operating</div>
+        <div class="contrast-item">Faith reckoning</div>
+        <div class="contrast-item">Dependence on Him</div>
+        <div class="contrast-item">Fruit of the Spirit</div>
+        <div class="contrast-item" style="margin-top:10px;font-size:12px;color:#688070;">One source.<br>Tree of life.<br>All Christ in you.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing Callout -->
+  <div class="callout purple-theme">
+    <div class="callout-text">"Are you so foolish? Having begun in the Spirit, are you now being made perfect by the flesh?"</div>
+    <div class="callout-ref">GALATIANS 3:3</div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>The Christian life is not hard to live.<br>It is impossible to live.<br>Only one Person has ever lived it.<br>He wants to live it again — in you.</p>
+    <div class="footer-line"></div>
+  </div>
+
+</div>
+
+<script>
+const nodes = [
+  {
+    num: 1, title: "THE CRUCIFIXION", verse: "Galatians 2:20a", cls: "purple",
+    hinge: true, hingeText: "FOUNDATION",
+    scripture: "I have been crucified with Christ;",
+    summary: "Past tense. Accomplished. The 'I' — the old man, the self-life, the independent human trying to please God — was put to death with Christ on the cross. This is not something you do. It is something that was done."
+  },
+  {
+    num: 2, title: "THE EXCHANGE", verse: "Galatians 2:20b", cls: "green",
+    scripture: "it is no longer I who live, but Christ lives in me;",
+    summary: "The most revolutionary sentence in Scripture. Two facts: the old 'I' no longer lives, and Christ now lives in its place. This is not improvement of the old life. It is replacement. A completely different person is now the operating life within you."
+  },
+  {
+    num: 3, title: "THE VESSEL", verse: "Galatians 2:20c", cls: "gold",
+    hinge: true, hingeText: "HOW YOU LIVE",
+    scripture: "and the life which I now live in the flesh I live by faith in the Son of God,",
+    summary: "You still live in a body. You still go to work, raise kids, ride the train. But the life powering all of it is no longer yours — it is His, accessed by faith. Faith is the only instrument. Not effort, not discipline, not willpower. Faith."
+  },
+  {
+    num: 4, title: "THE MOTIVATION", verse: "Galatians 2:20d", cls: "purple",
+    scripture: "who loved me and gave Himself for me.",
+    summary: "The fuel of faith is not duty — it is love received. He loved you. He gave Himself. Not for humanity in the abstract. For you. The one personally seen, known, and loved by Him. This is personal."
+  },
+  {
+    num: 5, title: "THE NON-NULLIFICATION", verse: "Galatians 2:21", cls: "red",
+    scripture: "I do not set aside the grace of God; for if righteousness comes through the law, then Christ died in vain.",
+    summary: "Every time you try to produce righteousness by your own effort — moral performance, religious duty, willpower against sin — you are implicitly saying the cross wasn't necessary. If you could have done it yourself, why did He have to die? Self-effort nullifies grace."
+  },
+  {
+    num: 6, title: "THE REBUKE", verse: "Galatians 3:1", cls: "red",
+    scripture: "O foolish Galatians! Who has bewitched you... before whose eyes Jesus Christ was publicly portrayed as crucified?",
+    summary: "Paul is astonished. They saw the crucified Christ. They understood. And then they went back to self-effort. He calls it bewitchment — a spell, a deception that pulls you away from what you already saw clearly. Sound familiar?"
+  },
+  {
+    num: 7, title: "THE QUESTION", verse: "Galatians 3:2", cls: "blue",
+    scripture: "Did you receive the Spirit by the works of the law, or by the hearing of faith?",
+    summary: "How did your Christian life begin? By performing? By earning? No — by hearing and believing. Faith was the door in. The Spirit came by faith, not by works. You already know how this works. You've done it before."
+  },
+  {
+    num: 8, title: "THE CONFRONTATION", verse: "Galatians 3:3", cls: "red",
+    hinge: true, hingeText: "THE CORE ISSUE",
+    scripture: "Are you so foolish? Having begun in the Spirit, are you now being made perfect by the flesh?",
+    summary: "This is the question that exposes everything. You began by the Spirit — by faith, by grace, by receiving. Why are you now trying to be perfected by flesh — by effort, by law, by performance? The source that started your life in Christ is the same source that sustains it. You cannot switch engines mid-flight. Spirit started it. Spirit finishes it. Flesh — whether it produces 'good' works or 'bad' sins — is the wrong tree entirely."
+  },
+];
+
+const arrowConfig = [
+  { cls: "purple", label: "THEREFORE" },
+  { cls: "green", label: "HOW?" },
+  { cls: "gold", label: "WHY?" },
+  { cls: "transition", label: "BECAUSE" },
+  { cls: "red", label: "" },
+  { cls: "blue", label: "" },
+  { cls: "red", label: "THEREFORE" },
+];
+
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls}`;
+  div.onclick = () => {
+    const isActive = div.classList.contains('active');
+    document.querySelectorAll('.node').forEach(el => el.classList.remove('active'));
+    if (!isActive) div.classList.add('active');
+  };
+
+  let html = '';
+  if (n.hinge) html += `<div class="hinge-badge">${n.hingeText}</div>`;
+
+  html += '<div class="node-header">';
+  html += `<span class="node-number">${n.num}</span>`;
+  html += '<div>';
+  html += `<h3 class="node-title">${n.title}</h3>`;
+  html += `<span class="node-verse">${n.verse}</span>`;
+  html += '</div></div>';
+
+  html += `<div class="node-scripture">"${n.scripture}"</div>`;
+  html += `<div class="node-summary">${n.summary}</div>`;
+  html += `<div class="node-tap">Tap to expand</div>`;
+
+  div.innerHTML = html;
+  return div;
+}
+
+function buildArrow(cfg) {
+  const div = document.createElement('div');
+  div.className = `arrow ${cfg.cls}`;
+  const lineH = cfg.label ? '16px' : '22px';
+  let html = `<div class="arrow-line" style="height:${lineH}"></div>`;
+  if (cfg.label) html += `<span class="arrow-label">${cfg.label}</span>`;
+  html += '<div class="arrow-head"></div>';
+  div.innerHTML = html;
+  return div;
+}
+
+const mainFlow = document.getElementById('main-flow');
+nodes.forEach((n, i) => {
+  mainFlow.appendChild(buildNode(n));
+  if (i < nodes.length - 1) {
+    mainFlow.appendChild(buildArrow(arrowConfig[i]));
+  }
+});
+</script>
+</body>
+</html>

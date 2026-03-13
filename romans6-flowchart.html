@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Romans 6 — The Logic of Freedom</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: #0f0f17;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: #e6c068;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #e6c068, transparent);
+    margin: 8px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #888070;
+    font-style: italic;
+  }
+
+  /* Three Stages */
+  .stages {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 32px;
+    padding: 14px 0;
+    border-top: 1px solid rgba(230, 192, 104, 0.08);
+    border-bottom: 1px solid rgba(230, 192, 104, 0.08);
+  }
+  .stage-item { text-align: center; }
+  .stage-label {
+    font-size: 10px; font-weight: 800;
+    letter-spacing: 2px; color: #e6c068;
+    margin-bottom: 2px;
+  }
+  .stage-desc {
+    font-size: 11px; color: #888070;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* Node Cards */
+  .node {
+    border-radius: 10px;
+    padding: 18px 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1.5px solid;
+  }
+  .node.gold {
+    background: rgba(26, 26, 46, 0.8);
+    border-color: rgba(230, 192, 104, 0.25);
+  }
+  .node.gold.active {
+    background: #1a1a2e;
+    border-color: #e6c068;
+    box-shadow: 0 0 30px rgba(230, 192, 104, 0.12), 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .node.hinge {
+    background: rgba(45, 24, 16, 0.8);
+    border-color: rgba(230, 192, 104, 0.25);
+  }
+  .node.hinge.active {
+    background: #2d1810;
+    border-color: #e6c068;
+    box-shadow: 0 0 30px rgba(230, 192, 104, 0.12), 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .node.hinge { box-shadow: 0 0 20px rgba(230, 192, 104, 0.06), 0 2px 10px rgba(0,0,0,0.2); }
+  .node.result-node {
+    background: rgba(13, 40, 24, 0.8);
+    border-color: rgba(104, 230, 160, 0.25);
+  }
+  .node.result-node.active {
+    background: #0d2818;
+    border-color: #68e6a0;
+    box-shadow: 0 0 30px rgba(104, 230, 160, 0.12), 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .node.failure {
+    background: rgba(46, 26, 26, 0.8);
+    border-color: rgba(230, 104, 104, 0.25);
+    padding: 14px 16px;
+  }
+  .node.failure.active {
+    background: #2e1a1a;
+    border-color: #e66868;
+    box-shadow: 0 0 20px rgba(230, 104, 104, 0.1), 0 4px 16px rgba(0,0,0,0.3);
+  }
+
+  .node.active { transform: scale(1.02); }
+
+  .hinge-badge {
+    position: absolute;
+    top: -10px; right: 16px;
+    background: #e6c068;
+    color: #1a1a2e;
+    font-size: 9px; font-weight: 800;
+    letter-spacing: 1.5px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .node-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .node.active .node-header { margin-bottom: 10px; }
+
+  .node-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300;
+    color: #e6c068; line-height: 1;
+    opacity: 0.5;
+  }
+  .result-node .node-number { color: #68e6a0; }
+
+  .node-title {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0;
+  }
+  .gold .node-title, .hinge .node-title { color: #e6c068; }
+  .result-node .node-title { color: #68e6a0; }
+  .failure .node-title { color: #e66868; font-size: 11px; }
+
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+  }
+  .gold .node-verse, .hinge .node-verse { color: rgba(230, 192, 104, 0.56); }
+  .result-node .node-verse { color: rgba(104, 230, 160, 0.56); }
+
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; line-height: 1.6;
+    color: #d4c5a0;
+    margin: 8px 0;
+    font-style: italic;
+    border-left: 2px solid rgba(230, 192, 104, 0.25);
+    padding-left: 14px;
+    display: none;
+  }
+  .result-node .node-scripture { border-left-color: rgba(104, 230, 160, 0.25); }
+  .node.active .node-scripture { display: block; }
+
+  .node-summary {
+    font-size: 13.5px; line-height: 1.65;
+    color: #b8b0a0;
+    margin: 8px 0 0 0;
+    display: none;
+  }
+  .result-node .node-summary { color: #a0c4b0; }
+  .node.active .node-summary { display: block; }
+
+  .node-tap {
+    font-size: 12px;
+    color: #888070;
+    margin-left: 38px;
+  }
+  .failure .node-tap { margin-left: 0; color: #886060; }
+  .node.active .node-tap { display: none; }
+
+  .failure-text {
+    font-size: 12px;
+    color: #886060;
+    margin-top: 4px;
+    display: block;
+  }
+  .failure.active .failure-text { display: none; }
+  .failure .node-scripture {
+    border-left-color: rgba(230, 104, 104, 0.25);
+  }
+
+  /* Arrows */
+  .arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0;
+  }
+  .arrow-line {
+    width: 1.5px;
+    background: linear-gradient(to bottom, rgba(230, 192, 104, 0.37), rgba(230, 192, 104, 0.19));
+  }
+  .arrow-label {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    color: rgba(230, 192, 104, 0.5);
+    padding: 2px 0;
+  }
+  .arrow-head {
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid rgba(230, 192, 104, 0.31);
+  }
+  .arrow.red .arrow-line { background: linear-gradient(to bottom, rgba(230, 104, 104, 0.37), rgba(230, 104, 104, 0.19)); }
+  .arrow.red .arrow-head { border-top-color: rgba(230, 104, 104, 0.31); }
+
+  /* Galatians callout */
+  .callout {
+    margin: 32px 0;
+    padding: 18px 20px;
+    background: #1a1a2e;
+    border: 1px solid rgba(230, 192, 104, 0.19);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .callout-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #e6c068;
+    font-style: italic;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .callout-ref {
+    font-size: 11px;
+    color: #888070;
+    letter-spacing: 1.5px;
+  }
+
+  /* Failure toggle */
+  .failure-toggle {
+    text-align: center;
+    margin-top: 16px;
+  }
+  .failure-toggle button {
+    background: transparent;
+    border: 1px solid rgba(230, 104, 104, 0.19);
+    border-radius: 6px;
+    color: #e66868;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 10px 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .failure-toggle button:hover, .failure-toggle button.open {
+    border-color: rgba(230, 104, 104, 0.37);
+  }
+
+  /* Failure section */
+  .failure-section {
+    margin-top: 24px;
+    padding: 24px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(230, 104, 104, 0.12);
+    display: none;
+  }
+  .failure-section.visible { display: block; }
+
+  .failure-header { text-align: center; margin-bottom: 20px; }
+  .failure-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300;
+    color: #e66868; letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .failure-header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; color: #886060;
+    font-style: italic;
+  }
+
+  .cycle-repeats {
+    text-align: center;
+    padding: 6px 16px;
+    border: 1px dashed rgba(230, 104, 104, 0.25);
+    border-radius: 6px;
+    margin: 0 20px;
+  }
+  .cycle-repeats span {
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 1.5px; color: #e66868;
+  }
+
+  .exit-point {
+    margin-top: 20px;
+    padding: 16px 18px;
+    background: #0d2818;
+    border: 1px solid rgba(104, 230, 160, 0.25);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .exit-label {
+    font-size: 9px; font-weight: 800;
+    letter-spacing: 2px; color: #68e6a0;
+    margin-bottom: 6px;
+  }
+  .exit-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #a0d4b0;
+    font-style: italic;
+    margin-bottom: 4px;
+  }
+  .exit-sub {
+    font-size: 12px; color: #688070;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #888070;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .footer-line {
+    width: 20px; height: 1px;
+    background: rgba(230, 192, 104, 0.25);
+    margin: 0 auto;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>ROMANS 6</h1>
+    <div class="header-line"></div>
+    <p>The Logic of Freedom</p>
+  </div>
+
+  <!-- Three Stages -->
+  <div class="stages">
+    <div class="stage-item">
+      <div class="stage-label">FACT</div>
+      <div class="stage-desc">What happened</div>
+    </div>
+    <div class="stage-item">
+      <div class="stage-label">FAITH</div>
+      <div class="stage-desc">What you reckon</div>
+    </div>
+    <div class="stage-item">
+      <div class="stage-label">FRUIT</div>
+      <div class="stage-desc">What flows</div>
+    </div>
+  </div>
+
+  <!-- Main Flow -->
+  <div id="main-flow"></div>
+
+  <!-- Galatians Callout -->
+  <div class="callout">
+    <div class="callout-text">"The life which I now live in the flesh I live by faith in the Son of God, who loved me and gave Himself for me."</div>
+    <div class="callout-ref">GALATIANS 2:20</div>
+  </div>
+
+  <!-- Failure Toggle -->
+  <div class="failure-toggle">
+    <button id="failure-btn" onclick="toggleFailure()">VIEW THE FAILURE CYCLE</button>
+  </div>
+
+  <!-- Failure Section -->
+  <div class="failure-section" id="failure-section">
+    <div class="failure-header">
+      <h2>THE FAILURE CYCLE</h2>
+      <p>What happens when you forget the reckoning</p>
+    </div>
+    <div id="failure-flow"></div>
+
+    <div style="display:flex;justify-content:center;padding:8px 0 4px">
+      <div style="width:1.5px;height:12px;background:rgba(230,104,104,0.25)"></div>
+    </div>
+    <div class="cycle-repeats"><span>↻ CYCLE REPEATS</span></div>
+
+    <div class="exit-point">
+      <div class="exit-label">✦ THE EXIT POINT IS ALWAYS THE SAME ✦</div>
+      <div class="exit-text">Return to Romans 6:11. Reckon again.</div>
+      <div class="exit-sub">Not new effort. Not self-repair. Just eyes back on what is already true.</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>The road hasn't moved.<br>You've walked it before.<br>Reckon it true again — tomorrow morning.</p>
+    <div class="footer-line"></div>
+  </div>
+
+</div>
+
+<script>
+const mainNodes = [
+  {
+    num: 1, title: "THE FACT", verse: "Romans 6:6", cls: "gold",
+    scripture: "Our old man was crucified with Him, that the body of sin might be done away with, that we should no longer be slaves of sin.",
+    summary: "This already happened. It is finished. Your old man died with Christ on the cross."
+  },
+  {
+    num: 2, title: "THE PRINCIPLE", verse: "Romans 6:7", cls: "gold",
+    scripture: "For he who has died has been freed from sin.",
+    summary: "Death breaks every chain. A dead man cannot respond to temptation. This is your legal position."
+  },
+  {
+    num: 3, title: "THE KNOWLEDGE", verse: "Romans 6:9", cls: "gold",
+    scripture: "Knowing that Christ, having been raised from the dead, dies no more. Death no longer has dominion over Him.",
+    summary: "His resurrection is permanent and irreversible. The life He now lives, He lives to God. And you are in Him."
+  },
+  {
+    num: 4, title: "THE RECKONING", verse: "Romans 6:11", cls: "hinge", hinge: true,
+    scripture: "Likewise you also, reckon yourselves to be dead indeed to sin, but alive to God in Christ Jesus our Lord.",
+    summary: "This is where faith acts. Not making it true — counting as true what already is. This is the hinge point of everything."
+  },
+  {
+    num: 5, title: "THE PRESENTING", verse: "Romans 6:13", cls: "gold",
+    scripture: "Present yourselves to God as being alive from the dead, and your members as instruments of righteousness to God.",
+    summary: "Yield. Not effort, but surrender. Present your body to the One whose life now operates through it."
+  },
+  {
+    num: 6, title: "THE PROMISE", verse: "Romans 6:14", cls: "gold",
+    scripture: "For sin shall not have dominion over you, for you are not under law but under grace.",
+    summary: "Sin's power is broken — not by your effort but by grace. Law strengthens sin. Grace empowers life."
+  },
+  {
+    num: 7, title: "THE RESULT", verse: "Romans 6:18, 22", cls: "result-node",
+    scripture: "Having been set free from sin, you became slaves of righteousness... you have your fruit to holiness, and the end, everlasting life.",
+    summary: "Freedom. Fruit. Not produced by effort but flowing from the resurrection life of Christ within you."
+  }
+];
+
+const failureNodesData = [
+  { title: "TEMPTATION COMES", text: "The lure appeals to desires" },
+  { title: "FORGET THE RECKONING", text: "You engage as though the old man is still alive to respond" },
+  { title: "THE FALL", text: "Sin acted through the body you presented to it" },
+  { title: "SHAME & SELF-CONDEMNATION", text: "You judge yourself — implying the blood wasn't enough" },
+  { title: "SELF-EFFORT TO FIX", text: "You try harder — putting yourself back under law" },
+  { title: "SIN STRENGTHENED", text: "\"The strength of sin is the law\" — 1 Cor 15:56" },
+];
+
+const arrowLabels = { 3: "THEREFORE", 4: "THEN", 5: "BECAUSE" };
+
+function buildNode(n, isFailure) {
+  const div = document.createElement('div');
+  const cls = isFailure ? 'failure' : n.cls;
+  div.className = `node ${cls}`;
+  div.onclick = () => {
+    const isActive = div.classList.contains('active');
+    document.querySelectorAll(`.node.${cls}`).forEach(el => el.classList.remove('active'));
+    if (!isActive) div.classList.add('active');
+  };
+
+  let html = '';
+  if (n.hinge) html += '<div class="hinge-badge">HINGE POINT</div>';
+
+  html += '<div class="node-header">';
+  if (!isFailure) html += `<span class="node-number">${n.num}</span>`;
+  html += '<div>';
+  html += `<h3 class="node-title">${n.title}</h3>`;
+  if (n.verse) html += `<span class="node-verse">${n.verse}</span>`;
+  html += '</div></div>';
+
+  if (n.scripture) {
+    html += `<div class="node-scripture">"${n.scripture}"</div>`;
+    html += `<div class="node-summary">${n.summary}</div>`;
+  }
+
+  if (isFailure) {
+    html += `<div class="failure-text">${n.text}</div>`;
+    html += `<div class="node-scripture">"${n.text}"</div>`;
+  }
+
+  if (!isFailure) html += `<div class="node-tap">Tap to expand</div>`;
+
+  div.innerHTML = html;
+  return div;
+}
+
+function buildArrow(label, red) {
+  const div = document.createElement('div');
+  div.className = `arrow${red ? ' red' : ''}`;
+  const lineH = label ? '16px' : '22px';
+  let html = `<div class="arrow-line" style="height:${lineH}"></div>`;
+  if (label) html += `<span class="arrow-label">${label}</span>`;
+  html += '<div class="arrow-head"></div>';
+  div.innerHTML = html;
+  return div;
+}
+
+// Build main flow
+const mainFlow = document.getElementById('main-flow');
+mainNodes.forEach((n, i) => {
+  mainFlow.appendChild(buildNode(n, false));
+  if (i < mainNodes.length - 1) {
+    mainFlow.appendChild(buildArrow(arrowLabels[i + 1], false));
+  }
+});
+
+// Build failure flow
+const failureFlow = document.getElementById('failure-flow');
+failureNodesData.forEach((n, i) => {
+  failureFlow.appendChild(buildNode(n, true));
+  if (i < failureNodesData.length - 1) {
+    failureFlow.appendChild(buildArrow(null, true));
+  }
+});
+
+function toggleFailure() {
+  const section = document.getElementById('failure-section');
+  const btn = document.getElementById('failure-btn');
+  const visible = section.classList.toggle('visible');
+  btn.textContent = visible ? 'HIDE FAILURE CYCLE' : 'VIEW THE FAILURE CYCLE';
+  btn.classList.toggle('open', visible);
+  if (visible) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>

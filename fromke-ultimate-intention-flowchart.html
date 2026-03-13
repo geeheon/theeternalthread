@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>The Ultimate Intention — Fromke's Framework</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: #0a0a10;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .container { max-width: 460px; margin: 0 auto; padding: 40px 20px 60px; }
+
+  .header { text-align: center; margin-bottom: 32px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 300;
+    color: #f0d080; letter-spacing: 3px;
+  }
+  .header .author {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; color: #807060; letter-spacing: 2px;
+    margin-top: 4px; font-weight: 700;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #f0d080, transparent);
+    margin: 10px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; color: #888070; font-style: italic;
+  }
+
+  /* The Paradigm Shift Box */
+  .paradigm {
+    margin: 0 0 28px 0; padding: 20px;
+    border-radius: 10px;
+    background: rgba(32,26,14,0.4);
+    border: 1px solid rgba(240,208,128,0.12);
+  }
+  .paradigm-header {
+    text-align: center; margin-bottom: 14px;
+  }
+  .paradigm-header span {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #f0d080;
+  }
+  .paradigm-row {
+    display: flex; gap: 12px;
+  }
+  .paradigm-col {
+    flex: 1; padding: 14px; border-radius: 8px; text-align: center;
+  }
+  .paradigm-col.man {
+    background: rgba(230,104,104,0.06);
+    border: 1px solid rgba(230,104,104,0.12);
+  }
+  .paradigm-col.god {
+    background: rgba(104,230,160,0.06);
+    border: 1px solid rgba(104,230,160,0.12);
+  }
+  .paradigm-col-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .paradigm-col.man .paradigm-col-label { color: #e66868; }
+  .paradigm-col.god .paradigm-col-label { color: #68e6a0; }
+  .paradigm-col-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; font-style: italic; line-height: 1.6;
+  }
+  .paradigm-col.man .paradigm-col-text { color: #a08080; }
+  .paradigm-col.god .paradigm-col-text { color: #80a090; }
+
+  /* Visual Diagram */
+  .diagram {
+    margin: 28px 0; padding: 24px 16px;
+    border-radius: 10px;
+    background: rgba(14,14,22,0.8);
+    border: 1px solid rgba(240,208,128,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  .diagram-title {
+    text-align: center; margin-bottom: 16px;
+  }
+  .diagram-title span {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #f0d080;
+  }
+  .diagram canvas {
+    width: 100%; height: auto; display: block;
+  }
+
+  /* Section labels */
+  .section {
+    text-align: center; padding: 20px 0 10px;
+  }
+  .section-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 3px;
+    padding: 5px 14px; border-radius: 4px; display: inline-block;
+  }
+  .section-label.gold { color: #f0d080; background: rgba(240,208,128,0.08); border: 1px solid rgba(240,208,128,0.15); }
+  .section-label.red { color: #e66868; background: rgba(230,104,104,0.06); border: 1px solid rgba(230,104,104,0.12); }
+  .section-label.blue { color: #68a0e6; background: rgba(104,160,230,0.06); border: 1px solid rgba(104,160,230,0.12); }
+  .section-label.green { color: #68e6a0; background: rgba(104,230,160,0.06); border: 1px solid rgba(104,230,160,0.12); }
+  .section-label.bright { color: #f0d080; background: rgba(240,208,128,0.1); border: 1px solid rgba(240,208,128,0.2); }
+  .section-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px; color: #606060; font-style: italic; margin-top: 4px;
+  }
+
+  /* Nodes */
+  .node {
+    border-radius: 10px; padding: 18px 22px;
+    cursor: pointer; transition: all 0.3s ease;
+    position: relative; border: 1.5px solid;
+  }
+  .node.active { transform: scale(1.02); }
+
+  .node.gold { background: rgba(32,26,14,0.8); border-color: rgba(240,208,128,0.25); }
+  .node.gold.active { background: #201a0e; border-color: #f0d080; box-shadow: 0 0 30px rgba(240,208,128,0.1), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.red { background: rgba(46,26,26,0.8); border-color: rgba(230,104,104,0.25); }
+  .node.red.active { background: #2e1a1a; border-color: #e66868; box-shadow: 0 0 20px rgba(230,104,104,0.1), 0 4px 16px rgba(0,0,0,0.3); }
+  .node.blue { background: rgba(14,20,36,0.8); border-color: rgba(104,160,230,0.25); }
+  .node.blue.active { background: #0e1424; border-color: #68a0e6; box-shadow: 0 0 30px rgba(104,160,230,0.1), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.green { background: rgba(13,28,20,0.8); border-color: rgba(104,230,160,0.25); }
+  .node.green.active { background: #0d2818; border-color: #68e6a0; box-shadow: 0 0 30px rgba(104,230,160,0.1), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.bright { background: rgba(36,30,14,0.9); border-color: rgba(240,208,128,0.35); }
+  .node.bright.active { background: #24200e; border-color: #f0d080; box-shadow: 0 0 40px rgba(240,208,128,0.15), 0 4px 20px rgba(0,0,0,0.3); }
+
+  .badge {
+    position: absolute; top: -10px; right: 16px;
+    font-size: 9px; font-weight: 800; letter-spacing: 1.5px;
+    padding: 3px 10px; border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .gold .badge { background: #f0d080; color: #201a0e; }
+  .red .badge { background: #e66868; color: #2e1a1a; }
+  .blue .badge { background: #68a0e6; color: #0e1424; }
+  .green .badge { background: #68e6a0; color: #0d2818; }
+  .bright .badge { background: #f0d080; color: #24200e; }
+
+  .node-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .node.active .node-header { margin-bottom: 10px; }
+  .node-number { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; line-height: 1; opacity: 0.4; }
+  .gold .node-number { color: #f0d080; }
+  .red .node-number { color: #e66868; }
+  .blue .node-number { color: #68a0e6; }
+  .green .node-number { color: #68e6a0; }
+  .bright .node-number { color: #f0d080; }
+
+  .node-title { font-size: 12px; font-weight: 700; letter-spacing: 2px; margin: 0; }
+  .gold .node-title { color: #f0d080; }
+  .red .node-title { color: #e66868; }
+  .blue .node-title { color: #68a0e6; }
+  .green .node-title { color: #68e6a0; }
+  .bright .node-title { color: #f0d080; }
+
+  .node-verse { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; }
+  .gold .node-verse { color: rgba(240,208,128,0.5); }
+  .red .node-verse { color: rgba(230,104,104,0.5); }
+  .blue .node-verse { color: rgba(104,160,230,0.5); }
+  .green .node-verse { color: rgba(104,230,160,0.5); }
+  .bright .node-verse { color: rgba(240,208,128,0.5); }
+
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; line-height: 1.6; color: #d4c5a0;
+    margin: 8px 0; font-style: italic;
+    border-left: 2px solid; padding-left: 14px; display: none;
+  }
+  .node.active .node-scripture { display: block; }
+  .gold .node-scripture { border-left-color: rgba(240,208,128,0.25); }
+  .red .node-scripture { border-left-color: rgba(230,104,104,0.25); }
+  .blue .node-scripture { border-left-color: rgba(104,160,230,0.25); }
+  .green .node-scripture { border-left-color: rgba(104,230,160,0.25); }
+  .bright .node-scripture { border-left-color: rgba(240,208,128,0.3); }
+
+  .node-summary { font-size: 13.5px; line-height: 1.65; color: #b8b0a0; margin: 8px 0 0 0; display: none; }
+  .node.active .node-summary { display: block; }
+  .node-tap { font-size: 12px; color: #606060; margin-left: 36px; }
+  .node.active .node-tap { display: none; }
+
+  /* Arrows */
+  .arrow { display: flex; flex-direction: column; align-items: center; padding: 4px 0; }
+  .arrow-line { width: 1.5px; }
+  .arrow-label { font-size: 9px; letter-spacing: 1.5px; font-weight: 700; padding: 2px 0; }
+  .arrow-head { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; }
+  .arrow.gold .arrow-line { background: linear-gradient(to bottom, rgba(240,208,128,0.3), rgba(240,208,128,0.15)); }
+  .arrow.gold .arrow-head { border-top: 6px solid rgba(240,208,128,0.25); }
+  .arrow.gold .arrow-label { color: rgba(240,208,128,0.35); }
+  .arrow.red .arrow-line { background: linear-gradient(to bottom, rgba(230,104,104,0.3), rgba(230,104,104,0.15)); }
+  .arrow.red .arrow-head { border-top: 6px solid rgba(230,104,104,0.25); }
+  .arrow.red .arrow-label { color: rgba(230,104,104,0.35); }
+  .arrow.blue .arrow-line { background: linear-gradient(to bottom, rgba(104,160,230,0.3), rgba(104,160,230,0.15)); }
+  .arrow.blue .arrow-head { border-top: 6px solid rgba(104,160,230,0.25); }
+  .arrow.blue .arrow-label { color: rgba(104,160,230,0.35); }
+  .arrow.green .arrow-line { background: linear-gradient(to bottom, rgba(104,230,160,0.3), rgba(104,230,160,0.15)); }
+  .arrow.green .arrow-head { border-top: 6px solid rgba(104,230,160,0.25); }
+  .arrow.green .arrow-label { color: rgba(104,230,160,0.35); }
+  .arrow.bright .arrow-line { background: linear-gradient(to bottom, rgba(240,208,128,0.4), rgba(240,208,128,0.2)); }
+  .arrow.bright .arrow-head { border-top: 6px solid rgba(240,208,128,0.35); }
+  .arrow.bright .arrow-label { color: rgba(240,208,128,0.4); }
+
+  /* Analogy box */
+  .analogy {
+    margin: 24px 0; padding: 20px;
+    border-radius: 10px;
+    background: rgba(14,20,36,0.5);
+    border: 1px solid rgba(104,160,230,0.12);
+    text-align: center;
+  }
+  .analogy-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px;
+    color: #68a0e6; margin-bottom: 12px;
+  }
+  .analogy-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #90a0b8; font-style: italic; line-height: 1.7;
+  }
+  .analogy-text em { color: #68a0e6; font-style: italic; }
+
+  /* Key insight */
+  .insight {
+    margin: 24px 0; padding: 20px;
+    border-radius: 10px;
+    background: rgba(46,26,26,0.3);
+    border: 1px solid rgba(230,104,104,0.12);
+  }
+  .insight-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px;
+    color: #e66868; margin-bottom: 10px; text-align: center;
+  }
+  .insight-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #b89090; font-style: italic; line-height: 1.7;
+    text-align: center;
+  }
+
+  /* Callout */
+  .callout {
+    margin: 24px 0; padding: 18px 20px;
+    border-radius: 8px; text-align: center;
+    background: rgba(32,26,14,0.5);
+    border: 1px solid rgba(240,208,128,0.15);
+  }
+  .callout-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-style: italic; line-height: 1.5;
+    color: #f0d080; margin-bottom: 6px;
+  }
+  .callout-ref { font-size: 11px; letter-spacing: 1.5px; color: #807060; }
+
+  .footer {
+    margin-top: 40px; text-align: center; padding: 20px 0;
+    border-top: 1px solid rgba(240,208,128,0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #888070; font-style: italic; line-height: 1.7; margin-bottom: 12px;
+  }
+  .footer-line { width: 20px; height: 1px; background: rgba(240,208,128,0.25); margin: 0 auto; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>THE ULTIMATE INTENTION</h1>
+    <div class="author">AFTER DEVERN FROMKE</div>
+    <div class="header-line"></div>
+    <p>Redemption is not the destination — it is the road back</p>
+  </div>
+
+  <!-- Paradigm Shift -->
+  <div class="paradigm">
+    <div class="paradigm-header"><span>THE PARADIGM SHIFT</span></div>
+    <div class="paradigm-row">
+      <div class="paradigm-col man">
+        <div class="paradigm-col-label">MAN-CENTRED VIEW</div>
+        <div class="paradigm-col-text">
+          God created man<br>
+          Man sinned<br>
+          God redeemed man<br>
+          Man goes to heaven<br><br>
+          <span style="color:#886060;font-size:12px;">Redemption is the goal.<br>The story is about us.</span>
+        </div>
+      </div>
+      <div class="paradigm-col god">
+        <div class="paradigm-col-label">GOD-CENTRED VIEW</div>
+        <div class="paradigm-col-text">
+          God purposed a Bride<br>
+          He created man as a vessel<br>
+          Man deviated<br>
+          The cross restored the path<br>
+          God continues toward His goal<br><br>
+          <span style="color:#508060;font-size:12px;">Redemption is remedial.<br>The story is about Him.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Visual Line Diagram -->
+  <div class="diagram">
+    <div class="diagram-title"><span>THE TWO LINES</span></div>
+    <canvas id="lineCanvas" height="260"></canvas>
+    <div style="display:flex;justify-content:space-between;padding:8px 4px 0;font-size:9px;letter-spacing:1px;font-weight:700;">
+      <span style="color:#f0d08080;">ETERNITY PAST</span>
+      <span style="color:#f0d08080;">ETERNITY FUTURE</span>
+    </div>
+    <div style="text-align:center;margin-top:12px;">
+      <div style="display:inline-flex;align-items:center;gap:8px;margin-right:18px;">
+        <div style="width:20px;height:2px;background:#f0d080;"></div>
+        <span style="font-size:10px;color:#f0d08090;letter-spacing:1px;">GOD'S INTENTION</span>
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:8px;">
+        <div style="width:20px;height:2px;background:#e66868;border-bottom:1px dashed #e66868;"></div>
+        <span style="font-size:10px;color:#e6686890;letter-spacing:1px;">MAN'S DEVIATION</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Analogy -->
+  <div class="analogy">
+    <div class="analogy-label">THE ANALOGY</div>
+    <div class="analogy-text">
+      A father plans to take his son to a grand celebration.<br><br>
+      On the way, the boy runs off the path and falls into <em>mud</em>.<br><br>
+      The father <em>cleans him up</em> — but the cleaning is not the celebration.<br>
+      It is what was <em>necessary</em> to get back on the road <em>to</em> the celebration.<br><br>
+      Most Christians mistake the <em>shower</em> for the <em>destination</em>.
+    </div>
+  </div>
+
+  <!-- Flow nodes -->
+  <div id="flow"></div>
+
+  <!-- Key Insight -->
+  <div class="insight">
+    <div class="insight-label">WHERE MOST CHRISTIANS STOP</div>
+    <div class="insight-text">
+      Most of Christianity is camped at the cross — endlessly focused on forgiveness, redemption, and what God has done <em>for</em> us. This is glorious and necessary. But it is not the goal.<br><br>
+      It is as if the boy, having been cleaned, sits in the bathroom admiring how clean he is — and never gets to the celebration his father planned all along.<br><br>
+      Fromke's challenge: <em>move beyond the remedial and into the ultimate.</em>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-text">"It is imperative that we direct every believer to develop a truly God-centred philosophy of life — this means we must see all things as properly related to God and His ultimate intention."</div>
+    <div class="callout-ref">DEVERN FROMKE</div>
+  </div>
+
+  <div class="footer">
+    <p>The cross is not the finish line.<br>It is the road back to the road.<br>The destination was always<br>the Father's eternal purpose:<br>a vast family of sons,<br>conformed to the image of His Son,<br>for His glory, forever.</p>
+    <div class="footer-line"></div>
+  </div>
+
+</div>
+
+<script>
+// Draw the line diagram
+const canvas = document.getElementById('lineCanvas');
+const ctx = canvas.getContext('2d');
+
+function draw() {
+  const W = canvas.offsetWidth;
+  canvas.width = W * 2;
+  canvas.height = 260 * 2;
+  canvas.style.height = '260px';
+  ctx.scale(2, 2);
+
+  const pad = 20;
+  const w = W - pad * 2;
+  const midY = 100;
+
+  // God's straight line (gold)
+  ctx.beginPath();
+  ctx.moveTo(pad, midY);
+  ctx.lineTo(pad + w, midY);
+  ctx.strokeStyle = '#f0d080';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([]);
+  ctx.stroke();
+
+  // Deviation arc (red dashed)
+  const fallX = pad + w * 0.22;
+  const crossX = pad + w * 0.58;
+  const lowestY = midY + 90;
+
+  ctx.beginPath();
+  ctx.moveTo(fallX, midY);
+  // Curve down
+  ctx.quadraticCurveTo(
+    fallX + (crossX - fallX) * 0.35, lowestY + 10,
+    crossX, midY
+  );
+  ctx.strokeStyle = '#e66868';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([6, 4]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Labels
+  ctx.font = '600 9px "DM Sans", sans-serif';
+  ctx.textAlign = 'center';
+
+  // Eternity past purpose dot
+  ctx.beginPath();
+  ctx.arc(pad + 10, midY, 4, 0, Math.PI * 2);
+  ctx.fillStyle = '#f0d080';
+  ctx.fill();
+  ctx.fillStyle = '#f0d08090';
+  ctx.fillText('PURPOSE', pad + 10, midY - 14);
+
+  // Creation dot
+  const createX = pad + w * 0.15;
+  ctx.beginPath();
+  ctx.arc(createX, midY, 4, 0, Math.PI * 2);
+  ctx.fillStyle = '#80d0f0';
+  ctx.fill();
+  ctx.fillStyle = '#80d0f090';
+  ctx.fillText('CREATION', createX, midY - 14);
+  ctx.font = '400 8px "Cormorant Garamond", serif';
+  ctx.fillStyle = '#80d0f060';
+  ctx.fillText('vessel formed', createX, midY - 4);
+
+  ctx.font = '600 9px "DM Sans", sans-serif';
+
+  // Fall dot
+  ctx.beginPath();
+  ctx.arc(fallX, midY, 4, 0, Math.PI * 2);
+  ctx.fillStyle = '#e66868';
+  ctx.fill();
+  ctx.fillStyle = '#e6686890';
+  ctx.fillText('FALL', fallX, midY - 14);
+  ctx.font = '400 8px "Cormorant Garamond", serif';
+  ctx.fillStyle = '#e6686860';
+  ctx.fillText('deviation', fallX, midY + 20);
+
+  ctx.font = '600 9px "DM Sans", sans-serif';
+
+  // Lowest point label
+  const lowMidX = fallX + (crossX - fallX) * 0.4;
+  ctx.fillStyle = '#e6686870';
+  ctx.fillText('MAN OFF THE PATH', lowMidX, lowestY + 6);
+
+  // Cross dot (on the gold line where red returns)
+  ctx.beginPath();
+  ctx.arc(crossX, midY, 5, 0, Math.PI * 2);
+  ctx.fillStyle = '#68a0e6';
+  ctx.fill();
+  ctx.fillStyle = '#68a0e690';
+  ctx.fillText('CROSS', crossX, midY - 16);
+  ctx.font = '400 8px "Cormorant Garamond", serif';
+  ctx.fillStyle = '#68a0e660';
+  ctx.fillText('remedial — back', crossX, midY - 6);
+  ctx.fillText('on the line', crossX, midY + 18);
+
+  ctx.font = '600 9px "DM Sans", sans-serif';
+
+  // Sonship / maturity
+  const sonX = pad + w * 0.75;
+  ctx.beginPath();
+  ctx.arc(sonX, midY, 4, 0, Math.PI * 2);
+  ctx.fillStyle = '#68e6a0';
+  ctx.fill();
+  ctx.fillStyle = '#68e6a090';
+  ctx.fillText('SONSHIP', sonX, midY - 14);
+  ctx.font = '400 8px "Cormorant Garamond", serif';
+  ctx.fillStyle = '#68e6a060';
+  ctx.fillText('growth into', sonX, midY - 4);
+  ctx.fillText('the ultimate', sonX, midY + 18);
+
+  ctx.font = '600 9px "DM Sans", sans-serif';
+
+  // Ultimate intention dot
+  const ultX = pad + w - 10;
+  ctx.beginPath();
+  ctx.arc(ultX, midY, 5, 0, Math.PI * 2);
+  ctx.fillStyle = '#f0d080';
+  ctx.fill();
+  ctx.fillStyle = '#f0d080';
+  ctx.fillText('ULTIMATE', ultX, midY - 16);
+  ctx.fillText('INTENTION', ultX, midY - 6);
+  ctx.font = '400 8px "Cormorant Garamond", serif';
+  ctx.fillStyle = '#f0d08060';
+  ctx.fillText('sons in glory', ultX, midY + 18);
+
+  // Arrow on gold line showing direction
+  const arrowX = pad + w * 0.68;
+  ctx.beginPath();
+  ctx.moveTo(arrowX - 6, midY - 4);
+  ctx.lineTo(arrowX, midY);
+  ctx.lineTo(arrowX - 6, midY + 4);
+  ctx.strokeStyle = '#f0d08060';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+}
+
+draw();
+window.addEventListener('resize', draw);
+
+// Flow nodes
+const data = [
+  { section: "gold", sectionLabel: "GOD'S ORIGINAL LINE", sectionSub: "The straight path — before the fall was ever in view" },
+  {
+    num: 1, title: "THE ETERNAL PURPOSE", verse: "Ephesians 1:4–5, 3:11", cls: "gold",
+    badge: "THE GOAL",
+    scripture: "He chose us in Him before the foundation of the world... according to the eternal purpose which He accomplished in Christ Jesus our Lord.",
+    summary: "Before creation, God had a positive purpose — not a rescue plan, but a desire. He wanted a vast family of sons, conformed to the image of His Son, sharing His life, expressing His nature, reigning with Him. This purpose existed before sin, before the fall, before any need for redemption. It is the straight line — the trajectory God always intended."
+  },
+  { arrow: "gold" },
+  {
+    num: 2, title: "MAN CREATED AS VESSEL", verse: "Genesis 1:26–27, 2:7, Romans 9:23", cls: "gold",
+    scripture: "Let Us make man in Our image, according to Our likeness... vessels of mercy, which He had prepared beforehand for glory.",
+    summary: "Man was created in God's image — meaning he had the capacity to contain and express God. But at creation, man had natural life (bios/psuche), not divine life (zoe). He was like a glove shaped for a hand that hadn't yet entered. The tree of life stood waiting — God's own uncreated life, offered for man to receive. The intention was always that man would eat from the tree of life and be filled with God."
+  },
+  { arrow: "gold", label: "THE INTENTION WAS" },
+  {
+    num: 3, title: "DIVINE LIFE RECEIVED", verse: "Genesis 2:9, John 10:10, 2 Peter 1:4", cls: "gold",
+    scripture: "The tree of life also in the midst of the garden... I have come that they may have life, and have it abundantly.",
+    summary: "God's original intention was for man to receive divine, uncreated life — God's own life — by eating from the tree of life. This was not about moral improvement or religious education. It was about a creature being filled with the Creator's life and thereby becoming a partaker of the divine nature. This is what Fromke calls 'begetting' as distinct from 'creating.' God created man; He intended to beget sons. Creation makes a vessel; begetting fills it."
+  },
+  { arrow: "gold", label: "LEADING TO" },
+  {
+    num: 4, title: "MATURE SONSHIP", verse: "Romans 8:29, Ephesians 4:13, Hebrews 2:10", cls: "gold",
+    scripture: "For whom He foreknew, He also predestined to be conformed to the image of His Son, that He might be the firstborn among many brethren.",
+    summary: "The goal was never just 'saved' people. It was mature sons — grown up into the full measure of Christ. Not children forever, but heirs who share the Father's nature, understand His heart, and express His character. This is the 'ultimate intention' — not redemption, not forgiveness, not heaven when you die, but a corporate company of sons brought to glory, conformed to the image of the firstborn Son."
+  },
+
+  { section: "red", sectionLabel: "THE DEVIATION", sectionSub: "Man leaves the straight line" },
+  { arrow: "red", label: "BUT" },
+  {
+    num: 5, title: "THE WRONG TREE CHOSEN", verse: "Genesis 3:6, Romans 5:12", cls: "red",
+    badge: "THE DETOUR",
+    scripture: "When the woman saw that the tree was good for food, that it was pleasant to the eyes, and desirable to make one wise, she took of its fruit and ate.",
+    summary: "Instead of eating from the tree of life (receiving God's life by dependence), man ate from the tree of knowledge (choosing independence, self-sourced living). This was not just disobedience — it was a deviation from the entire trajectory. Man stepped off the straight line. He didn't just break a rule; he missed the purpose. He chose to know good and evil rather than to receive divine life. The entire human race was now off the path."
+  },
+  { arrow: "red" },
+  {
+    num: 6, title: "MAN UNDER SIN'S NATURE", verse: "Romans 3:23, 5:19, Ephesians 2:1–3", cls: "red",
+    scripture: "For all have sinned and fall short of the glory of God... you were dead in trespasses and sins.",
+    summary: "The deviation wasn't just a single act — it became a condition. Sin entered as a nature, not just behaviour. Man was now constitutionally unable to get back on the straight line by his own effort. He wasn't just dirty; he was dead. He wasn't just off the path; he had no capacity to find it again. Something would have to be done for him that he could not do for himself. Enter the cross — but understand its purpose correctly."
+  },
+
+  { section: "blue", sectionLabel: "THE REMEDIAL WORK", sectionSub: "The cross brings man back to the line — not to the finish" },
+  { arrow: "blue", label: "THEREFORE" },
+  {
+    num: 7, title: "THE WORK OF THE CROSS", verse: "Romans 6:6, 2 Corinthians 5:21, Colossians 2:14", cls: "blue",
+    badge: "REMEDIAL",
+    scripture: "Our old man was crucified with Him, that the body of sin might be done away with, that we should no longer be slaves of sin.",
+    summary: "The cross deals with the deviation. It removes sin's penalty (justification), sin's power (sanctification), and sin's nature (the old man crucified). It is absolutely essential, utterly glorious, and the centrepiece of God's redemptive work. But — and this is Fromke's crucial insight — it is remedial, not ultimate. The cross solves the problem that man created by leaving the path. It brings man back to the straight line. But the straight line was heading somewhere before the fall, and it's still heading there after the cross."
+  },
+  { arrow: "blue" },
+  {
+    num: 8, title: "THE WAY OF THE CROSS", verse: "Luke 9:23, Philippians 3:10, Galatians 2:20", cls: "blue",
+    scripture: "If anyone desires to come after Me, let him deny himself, and take up his cross daily, and follow Me.",
+    summary: "Fromke distinguishes the 'work' of the cross from the 'way' of the cross. The work is what Christ accomplished objectively — once for all, finished at Calvary. The way is the ongoing subjective application — the daily dying to self, the continuous reckoning, the life of surrender that keeps you walking on the straight line rather than drifting off again. The work gets you back on the path. The way keeps you moving forward on it."
+  },
+
+  { section: "green", sectionLabel: "BACK ON THE LINE", sectionSub: "The journey toward the ultimate resumes" },
+  { arrow: "green", label: "NOW" },
+  {
+    num: 9, title: "DIVINE LIFE RECEIVED", verse: "John 3:16, 1 John 5:11–12, Colossians 1:27", cls: "green",
+    badge: "BACK ON TRACK",
+    scripture: "God has given us eternal life, and this life is in His Son. He who has the Son has life.",
+    summary: "Through the cross and resurrection, what Adam missed in the garden is now available. The tree of life — God's own uncreated life — is received by the believer through the indwelling Spirit. Christ in you, the hope of glory. The vessel is finally filled. What was intended from before the foundation of the world is now happening — God dwelling in man, man partaking of divine life. The straight line resumes."
+  },
+  { arrow: "green" },
+  {
+    num: 10, title: "GROWTH INTO SONSHIP", verse: "Ephesians 4:13–15, Hebrews 5:14–6:1", cls: "green",
+    scripture: "Till we all come to the unity of the faith and of the knowledge of the Son of God, to a perfect man, to the measure of the stature of the fullness of Christ.",
+    summary: "Having been restored to the straight line, the journey now continues toward the original goal — mature sonship. This is not just moral improvement. It is growing up into Christ in all things. Moving beyond spiritual infancy (endlessly focused on personal salvation and blessing) into maturity (living for the Father's purpose, expressing Christ corporately, understanding God's eternal intention). Most Christians never make this transition. They camp at the cross and never walk the line."
+  },
+  { arrow: "bright", label: "ARRIVING AT" },
+
+  { section: "bright", sectionLabel: "THE ULTIMATE INTENTION", sectionSub: "Where the line was always heading" },
+  {
+    num: 11, title: "SONS BROUGHT TO GLORY", verse: "Hebrews 2:10, Romans 8:19, Revelation 21:2–3", cls: "bright",
+    badge: "THE DESTINATION",
+    scripture: "For it was fitting for Him, for whom are all things and by whom are all things, in bringing many sons to glory, to make the captain of their salvation perfect through sufferings.",
+    summary: "The ultimate intention is not redeemed sinners in heaven. It is sons brought to glory — a corporate company, the Bride, the Body, the New Jerusalem — fully conformed to the image of the Son, expressing the Father's nature, reigning with Christ, displaying God's wisdom to the universe for all eternity. This was the goal before the fall. The fall didn't change the goal — it just required a detour through the cross to get back on track. Redemption was the shower. This is the celebration."
+  },
+];
+
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls}`;
+  div.onclick = () => {
+    const was = div.classList.contains('active');
+    document.querySelectorAll('.node').forEach(el => el.classList.remove('active'));
+    if (!was) div.classList.add('active');
+  };
+  let h = '';
+  if (n.badge) h += `<div class="badge">${n.badge}</div>`;
+  h += `<div class="node-header"><span class="node-number">${n.num}</span><div>`;
+  h += `<h3 class="node-title">${n.title}</h3>`;
+  h += `<span class="node-verse">${n.verse}</span></div></div>`;
+  h += `<div class="node-scripture">"${n.scripture}"</div>`;
+  h += `<div class="node-summary">${n.summary}</div>`;
+  h += `<div class="node-tap">Tap to expand</div>`;
+  div.innerHTML = h;
+  return div;
+}
+
+function buildArrow(cfg) {
+  const div = document.createElement('div');
+  div.className = `arrow ${cfg.cls}`;
+  const lh = cfg.label ? '16px' : '22px';
+  let h = `<div class="arrow-line" style="height:${lh}"></div>`;
+  if (cfg.label) h += `<span class="arrow-label">${cfg.label}</span>`;
+  h += '<div class="arrow-head"></div>';
+  div.innerHTML = h;
+  return div;
+}
+
+function buildSection(s) {
+  const div = document.createElement('div');
+  div.className = 'section';
+  let h = `<span class="section-label ${s.section}">${s.sectionLabel}</span>`;
+  if (s.sectionSub) h += `<div class="section-sub">${s.sectionSub}</div>`;
+  div.innerHTML = h;
+  return div;
+}
+
+const flow = document.getElementById('flow');
+data.forEach(item => {
+  if (item.section) flow.appendChild(buildSection(item));
+  else if (item.arrow) flow.appendChild(buildArrow({ cls: item.arrow, label: item.label }));
+  else flow.appendChild(buildNode(item));
+});
+</script>
+</body>
+</html>

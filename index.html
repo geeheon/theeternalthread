@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>The ETERNAL Thread</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: #08080e;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .container { max-width: 500px; margin: 0 auto; padding: 50px 20px 60px; }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 40px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px; font-weight: 300;
+    color: #e8d8b0; letter-spacing: 4px;
+    line-height: 1.2;
+  }
+  .header-line {
+    width: 50px; height: 1px;
+    background: linear-gradient(to right, transparent, #e8d8b040, transparent);
+    margin: 14px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; color: #706858; font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* Intro */
+  .intro {
+    text-align: center;
+    margin-bottom: 36px;
+    padding: 0 10px;
+  }
+  .intro p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #908878; font-style: italic;
+    line-height: 1.7;
+  }
+
+  /* Cards */
+  .card {
+    display: block;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 14px;
+    border: 1.5px solid;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .card:active { transform: scale(0.98); }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .card:hover::before { opacity: 1; }
+
+  .card-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 300;
+    position: absolute; right: 20px; top: 14px;
+    opacity: 0.08; line-height: 1;
+  }
+
+  .card-category {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px;
+    margin-bottom: 6px;
+    display: inline-block;
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px; font-weight: 400;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .card-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-style: italic;
+    margin-bottom: 8px;
+    opacity: 0.5;
+  }
+
+  .card-desc {
+    font-size: 12.5px; line-height: 1.55;
+    opacity: 0.6;
+  }
+
+  .card-arrow {
+    position: absolute; right: 20px; bottom: 20px;
+    font-size: 16px; opacity: 0.3;
+    transition: all 0.3s ease;
+  }
+  .card:hover .card-arrow { opacity: 0.6; transform: translateX(3px); }
+
+  /* Card themes */
+  .card.gold {
+    background: rgba(32,26,14,0.6);
+    border-color: rgba(240,208,128,0.15);
+  }
+  .card.gold:hover { border-color: rgba(240,208,128,0.3); box-shadow: 0 0 30px rgba(240,208,128,0.05); }
+  .card.gold .card-number, .card.gold .card-title { color: #f0d080; }
+  .card.gold .card-category { color: #f0d08090; }
+  .card.gold .card-verse { color: #f0d080; }
+  .card.gold .card-desc { color: #b8a878; }
+  .card.gold .card-arrow { color: #f0d080; }
+
+  .card.purple {
+    background: rgba(26,18,34,0.6);
+    border-color: rgba(212,160,240,0.15);
+  }
+  .card.purple:hover { border-color: rgba(212,160,240,0.3); box-shadow: 0 0 30px rgba(212,160,240,0.05); }
+  .card.purple .card-number, .card.purple .card-title { color: #d4a0f0; }
+  .card.purple .card-category { color: #d4a0f090; }
+  .card.purple .card-verse { color: #d4a0f0; }
+  .card.purple .card-desc { color: #a890b8; }
+  .card.purple .card-arrow { color: #d4a0f0; }
+
+  .card.green {
+    background: rgba(13,28,20,0.6);
+    border-color: rgba(104,230,160,0.15);
+  }
+  .card.green:hover { border-color: rgba(104,230,160,0.3); box-shadow: 0 0 30px rgba(104,230,160,0.05); }
+  .card.green .card-number, .card.green .card-title { color: #68e6a0; }
+  .card.green .card-category { color: #68e6a090; }
+  .card.green .card-verse { color: #68e6a0; }
+  .card.green .card-desc { color: #80a890; }
+  .card.green .card-arrow { color: #68e6a0; }
+
+  .card.silver {
+    background: rgba(18,18,26,0.6);
+    border-color: rgba(160,160,192,0.15);
+  }
+  .card.silver:hover { border-color: rgba(160,160,192,0.3); box-shadow: 0 0 30px rgba(160,160,192,0.05); }
+  .card.silver .card-number, .card.silver .card-title { color: #c0c0d8; }
+  .card.silver .card-category { color: #c0c0d890; }
+  .card.silver .card-verse { color: #c0c0d8; }
+  .card.silver .card-desc { color: #9090a0; }
+  .card.silver .card-arrow { color: #c0c0d8; }
+
+  .card.blue {
+    background: rgba(14,20,36,0.6);
+    border-color: rgba(104,160,230,0.15);
+  }
+  .card.blue:hover { border-color: rgba(104,160,230,0.3); box-shadow: 0 0 30px rgba(104,160,230,0.05); }
+  .card.blue .card-number, .card.blue .card-title { color: #68a0e6; }
+  .card.blue .card-category { color: #68a0e690; }
+  .card.blue .card-verse { color: #68a0e6; }
+  .card.blue .card-desc { color: #7890a8; }
+  .card.blue .card-arrow { color: #68a0e6; }
+
+  .card.warm {
+    background: rgba(36,24,14,0.6);
+    border-color: rgba(230,168,104,0.15);
+  }
+  .card.warm:hover { border-color: rgba(230,168,104,0.3); box-shadow: 0 0 30px rgba(230,168,104,0.05); }
+  .card.warm .card-number, .card.warm .card-title { color: #e6a868; }
+  .card.warm .card-category { color: #e6a86890; }
+  .card.warm .card-verse { color: #e6a868; }
+  .card.warm .card-desc { color: #b89878; }
+  .card.warm .card-arrow { color: #e6a868; }
+
+  /* Divider between sections */
+  .section-divider {
+    text-align: center;
+    padding: 24px 0 16px;
+  }
+  .section-divider span {
+    font-size: 9px; font-weight: 800; letter-spacing: 3px;
+    color: #50484080;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 40px; text-align: center; padding: 24px 0;
+    border-top: 1px solid rgba(232,216,176,0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; color: #504840; font-style: italic;
+    line-height: 1.7;
+  }
+  .footer .count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; color: #403830; letter-spacing: 2px;
+    font-weight: 700; font-style: normal;
+    margin-top: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>THE ETERNAL<br>THREAD</h1>
+    <div class="header-line"></div>
+    <p>One purpose. One thread. One Person.<br>The structural logic of Scripture, made visible.</p>
+  </div>
+
+  <div class="intro">
+    <p>Interactive flowcharts tracing the thread of God's eternal purpose through Scripture — not commentaries, not devotionals, but structural maps of how the Bible's great themes connect from eternity past to eternity future.</p>
+  </div>
+
+  <!-- ====== CARDS ====== -->
+  <!-- 
+    TO ADD A NEW FLOWCHART:
+    1. Create your new HTML flowchart file
+    2. Copy one of the card blocks below
+    3. Update: href, card number, category, title, verse, description, and colour theme
+    4. That's it.
+    
+    Available themes: gold, purple, green, silver, blue, warm
+  -->
+
+  <div class="section-divider"><span>THE CHRISTIAN LIFE</span></div>
+
+  <a class="card gold" href="romans6-flowchart.html">
+    <span class="card-number">01</span>
+    <div class="card-category">FREEDOM FROM SIN</div>
+    <div class="card-title">Romans 6 — The Logic of Freedom</div>
+    <div class="card-verse">Romans 6:1–14</div>
+    <div class="card-desc">Fact, faith, fruit. The reckoning that breaks sin's power — mapped step by step with the failure cycle and exit point.</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card purple" href="galatians-flowchart.html">
+    <span class="card-number">02</span>
+    <div class="card-category">THE EXCHANGED LIFE</div>
+    <div class="card-title">Galatians 2:20–3:3 — No Longer I</div>
+    <div class="card-verse">Galatians 2:20 – 3:3</div>
+    <div class="card-desc">Crucified with Christ. The flesh/Spirit binary. Why self-effort — even "good" self-effort — is the wrong tree entirely.</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card warm" href="all-things-good-flowchart.html">
+    <span class="card-number">03</span>
+    <div class="card-category">THE MOST MISQUOTED VERSE</div>
+    <div class="card-title">All Things Work Together — But for What?</div>
+    <div class="card-verse">Romans 8:28–30</div>
+    <div class="card-desc">The "good" isn't comfort, prosperity, or things working out. It's conformity to the image of His Son. Five common twistings exposed. The golden chain that cannot break.</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card blue" href="to-will-is-present-flowchart.html">
+    <span class="card-number">04</span>
+    <div class="card-category">THE PERFORMING BELONGS TO GOD</div>
+    <div class="card-title">To Will Is Present — But How to Perform?</div>
+    <div class="card-verse">Romans 7:18, Philippians 2:13</div>
+    <div class="card-desc">You were never meant to perform — only to will. God does the working. Enter the stream of His will and watch Him transform your marriage, your parenting, and everything you tried to fix yourself.</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <div class="section-divider"><span>GOD'S GRAND NARRATIVE</span></div>
+
+  <a class="card green" href="eternal-purpose-flowchart.html">
+    <span class="card-number">05</span>
+    <div class="card-category">THE ETERNAL THREAD</div>
+    <div class="card-title">God's Eternal Purpose</div>
+    <div class="card-verse">Ephesians 1:4–5, 3:11</div>
+    <div class="card-desc">From before the foundation of the world to the New Jerusalem — 14 nodes tracing the one purpose through every epoch of history.</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card silver" href="mystery-flowchart.html">
+    <span class="card-number">06</span>
+    <div class="card-category">HIDDEN AND REVEALED</div>
+    <div class="card-title">The Mystery</div>
+    <div class="card-verse">Colossians 1:26–27, Ephesians 3:3–10</div>
+    <div class="card-desc">God's secret — concealed for ages, hinted in shadows, unveiled in Christ, deposited in the ekklesia. Five layers unpacked.</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card warm" href="fromke-ultimate-intention-flowchart.html">
+    <span class="card-number">07</span>
+    <div class="card-category">AFTER DEVERN FROMKE</div>
+    <div class="card-title">The Ultimate Intention</div>
+    <div class="card-verse">Ephesians 1:4–5, Hebrews 2:10</div>
+    <div class="card-desc">The cross is not the destination — it is the road back to the road. The straight line of God's purpose, the deviation at the fall, and the remedial work that restores the trajectory.</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card blue" href="kingdom-of-god-flowchart.html">
+    <span class="card-number">08</span>
+    <div class="card-category">NOT A PLACE — A REIGN</div>
+    <div class="card-title">The Kingdom of God</div>
+    <div class="card-verse">Matthew 6:33, Romans 14:17</div>
+    <div class="card-desc">What the Kingdom actually is, how it's entered, where it's expressed, and why most people misunderstand it. The already/not yet tension mapped.</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <div class="section-divider"><span>SPIRITUAL GROWTH</span></div>
+
+  <a class="card warm" href="children-youngmen-fathers-flowchart.html">
+    <span class="card-number">09</span>
+    <div class="card-category">STAGES OF MATURITY</div>
+    <div class="card-title">Children · Young Men · Fathers</div>
+    <div class="card-verse">1 John 2:12–14</div>
+    <div class="card-desc">Three stages of spiritual growth read through Fromke's lens. From what God has done for me, to what God is doing in me, to what God is after for Himself. Where most Christians get stuck — and what fatherhood actually looks like.</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card gold" href="two-operating-systems-flowchart.html">
+    <span class="card-number">10</span>
+    <div class="card-category">FLESH VS SPIRIT</div>
+    <div class="card-title">The Two Operating Systems</div>
+    <div class="card-verse">Romans 3:23, 8:8, 14:23</div>
+    <div class="card-desc">Why everything from the flesh misses the mark — even the "good" things. Hamartia exposed. The bicycle and the self-driving car. One question that cuts through everything: am I pedalling, or am I seated?</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card purple" href="soul-vs-spirit-flowchart.html">
+    <span class="card-number">11</span>
+    <div class="card-category">AFTER WATCHMAN NEE</div>
+    <div class="card-title">Soul vs Spirit</div>
+    <div class="card-verse">1 Thessalonians 5:23, Hebrews 4:12</div>
+    <div class="card-desc">Most Christians use "soul" and "spirit" interchangeably. Scripture says they're different — and confusing them is the root of most spiritual dysfunction. The three-part nature of man mapped from design to fall to restoration.</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a class="card warm" href="three-kinds-of-man-flowchart.html">
+    <span class="card-number">12</span>
+    <div class="card-category">AFTER WATCHMAN NEE</div>
+    <div class="card-title">Three Kinds of Man — Natural, Carnal, Spiritual</div>
+    <div class="card-verse">1 Corinthians 2:14–3:3</div>
+    <div class="card-desc">The natural man has no spiritual life. The carnal man is born again but soul-governed. The spiritual man lives from the spirit. Most Christians are carnal — genuinely saved but functionally on the bicycle. The jump to spiritual isn't more effort. It's a change of source.</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <div class="section-divider"><span>CHURCH & CULTURE</span></div>
+
+  <a class="card purple" href="addon-vs-operating-system-flowchart.html">
+    <span class="card-number">13</span>
+    <div class="card-category">CONSUMERISTIC CHRISTIANITY</div>
+    <div class="card-title">Add-On Feature or Operating System?</div>
+    <div class="card-verse">Philippians 1:21, Acts 2:42–47</div>
+    <div class="card-desc">How Christianity became a compartmentalised module bolted onto the Australian dream — and what Paul actually had. The drift from ekklesia to franchise. Why Sunday feels disconnected from Monday.</div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <!-- 
+    FUTURE FLOWCHARTS — uncomment and fill in when ready:
+
+  <div class="section-divider"><span>THE BODY</span></div>
+
+  <a class="card blue" href="your-file.html">
+    <span class="card-number">14</span>
+    <div class="card-category">CATEGORY</div>
+    <div class="card-title">Title</div>
+    <div class="card-verse">Verse Reference</div>
+    <div class="card-desc">Description.</div>
+    <span class="card-arrow">→</span>
+  </a>
+  -->
+
+  <div class="footer">
+    <p>One purpose. One thread. One Person.<br>From before the foundation of the world<br>to the New Jerusalem —<br>the thread has never broken.</p>
+    <div class="count" id="count"></div>
+  </div>
+
+</div>
+
+<script>
+  // Auto-count flowcharts
+  const cards = document.querySelectorAll('.card');
+  document.getElementById('count').textContent = cards.length + ' BLUEPRINTS';
+</script>
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>The Kingdom of God</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: #090910;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .container { max-width: 460px; margin: 0 auto; padding: 40px 20px 60px; }
+
+  .header { text-align: center; margin-bottom: 32px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 300;
+    color: #d4a0f0; letter-spacing: 3px;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #d4a0f0, transparent);
+    margin: 10px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; color: #888090; font-style: italic;
+  }
+  .header .greek {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; color: #606070; letter-spacing: 2px; margin-top: 4px;
+  }
+
+  /* Definition box */
+  .def-box {
+    margin: 0 0 24px; padding: 20px;
+    border-radius: 10px; text-align: center;
+    background: rgba(22,16,30,0.6);
+    border: 1px solid rgba(212,160,240,0.12);
+  }
+  .def-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px;
+    color: #d4a0f0; margin-bottom: 10px;
+  }
+  .def-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #a090b0; font-style: italic; line-height: 1.7;
+  }
+  .def-text em { color: #d4a0f0; }
+
+  /* Not/Is contrast */
+  .contrast {
+    margin: 0 0 28px; border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(212,160,240,0.1);
+  }
+  .contrast-header {
+    text-align: center; padding: 12px;
+    background: rgba(22,16,30,0.5);
+    border-bottom: 1px solid rgba(212,160,240,0.06);
+  }
+  .contrast-header span {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #d4a0f0;
+  }
+  .contrast-row { display: flex; }
+  .contrast-cell { flex: 1; padding: 16px; }
+  .contrast-cell.not {
+    background: rgba(46,26,26,0.2);
+    border-right: 1px solid rgba(212,160,240,0.06);
+  }
+  .contrast-cell.is { background: rgba(13,28,20,0.2); }
+  .contrast-cell-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 1.5px;
+    margin-bottom: 10px; text-align: center;
+  }
+  .contrast-cell.not .contrast-cell-label { color: #e66868; }
+  .contrast-cell.is .contrast-cell-label { color: #68e6a0; }
+  .contrast-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13.5px; line-height: 2; font-style: italic;
+  }
+  .contrast-cell.not .contrast-item { color: #a08080; }
+  .contrast-cell.is .contrast-item { color: #80a090; }
+
+  /* Section */
+  .section { text-align: center; padding: 22px 0 10px; }
+  .section-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 3px;
+    padding: 5px 14px; border-radius: 4px; display: inline-block;
+  }
+  .section-label.purple { color: #d4a0f0; background: rgba(212,160,240,0.06); border: 1px solid rgba(212,160,240,0.12); }
+  .section-label.gold { color: #f0d080; background: rgba(240,208,128,0.08); border: 1px solid rgba(240,208,128,0.15); }
+  .section-label.green { color: #68e6a0; background: rgba(104,230,160,0.06); border: 1px solid rgba(104,230,160,0.12); }
+  .section-label.blue { color: #68a0e6; background: rgba(104,160,230,0.06); border: 1px solid rgba(104,160,230,0.12); }
+  .section-label.bright { color: #f0d080; background: rgba(240,208,128,0.1); border: 1px solid rgba(240,208,128,0.2); }
+  .section-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px; color: #606060; font-style: italic; margin-top: 4px;
+  }
+
+  /* Nodes */
+  .node {
+    border-radius: 10px; padding: 18px 22px;
+    cursor: pointer; transition: all 0.3s ease;
+    position: relative; border: 1.5px solid;
+  }
+  .node.active { transform: scale(1.02); }
+  .node.purple { background: rgba(26,18,34,0.8); border-color: rgba(212,160,240,0.25); }
+  .node.purple.active { background: #1a1222; border-color: #d4a0f0; box-shadow: 0 0 30px rgba(212,160,240,0.1), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.gold { background: rgba(32,26,14,0.8); border-color: rgba(240,208,128,0.25); }
+  .node.gold.active { background: #201a0e; border-color: #f0d080; box-shadow: 0 0 30px rgba(240,208,128,0.1), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.green { background: rgba(13,28,20,0.8); border-color: rgba(104,230,160,0.25); }
+  .node.green.active { background: #0d2818; border-color: #68e6a0; box-shadow: 0 0 30px rgba(104,230,160,0.1), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.blue { background: rgba(14,20,36,0.8); border-color: rgba(104,160,230,0.25); }
+  .node.blue.active { background: #0e1424; border-color: #68a0e6; box-shadow: 0 0 30px rgba(104,160,230,0.1), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.bright { background: rgba(36,30,14,0.9); border-color: rgba(240,208,128,0.35); }
+  .node.bright.active { background: #24200e; border-color: #f0d080; box-shadow: 0 0 40px rgba(240,208,128,0.15), 0 4px 20px rgba(0,0,0,0.3); }
+
+  .badge {
+    position: absolute; top: -10px; right: 16px;
+    font-size: 9px; font-weight: 800; letter-spacing: 1.5px;
+    padding: 3px 10px; border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .purple .badge { background: #d4a0f0; color: #1a1222; }
+  .gold .badge { background: #f0d080; color: #201a0e; }
+  .green .badge { background: #68e6a0; color: #0d2818; }
+  .blue .badge { background: #68a0e6; color: #0e1424; }
+  .bright .badge { background: #f0d080; color: #24200e; }
+
+  .node-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .node.active .node-header { margin-bottom: 10px; }
+  .node-number { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; line-height: 1; opacity: 0.4; }
+  .purple .node-number { color: #d4a0f0; }
+  .gold .node-number { color: #f0d080; }
+  .green .node-number { color: #68e6a0; }
+  .blue .node-number { color: #68a0e6; }
+  .bright .node-number { color: #f0d080; }
+  .node-title { font-size: 12px; font-weight: 700; letter-spacing: 2px; margin: 0; }
+  .purple .node-title { color: #d4a0f0; }
+  .gold .node-title { color: #f0d080; }
+  .green .node-title { color: #68e6a0; }
+  .blue .node-title { color: #68a0e6; }
+  .bright .node-title { color: #f0d080; }
+  .node-verse { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; }
+  .purple .node-verse { color: rgba(212,160,240,0.5); }
+  .gold .node-verse { color: rgba(240,208,128,0.5); }
+  .green .node-verse { color: rgba(104,230,160,0.5); }
+  .blue .node-verse { color: rgba(104,160,230,0.5); }
+  .bright .node-verse { color: rgba(240,208,128,0.5); }
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; line-height: 1.6; color: #d4c5a0;
+    margin: 8px 0; font-style: italic;
+    border-left: 2px solid; padding-left: 14px; display: none;
+  }
+  .node.active .node-scripture { display: block; }
+  .purple .node-scripture { border-left-color: rgba(212,160,240,0.25); }
+  .gold .node-scripture { border-left-color: rgba(240,208,128,0.25); }
+  .green .node-scripture { border-left-color: rgba(104,230,160,0.25); }
+  .blue .node-scripture { border-left-color: rgba(104,160,230,0.25); }
+  .bright .node-scripture { border-left-color: rgba(240,208,128,0.3); }
+  .node-summary { font-size: 13.5px; line-height: 1.65; color: #b8b0a0; margin: 8px 0 0 0; display: none; }
+  .node.active .node-summary { display: block; }
+  .node-tap { font-size: 12px; color: #606060; margin-left: 36px; }
+  .node.active .node-tap { display: none; }
+
+  /* Arrows */
+  .arrow { display: flex; flex-direction: column; align-items: center; padding: 4px 0; }
+  .arrow-line { width: 1.5px; }
+  .arrow-label { font-size: 9px; letter-spacing: 1.5px; font-weight: 700; padding: 2px 0; }
+  .arrow-head { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; }
+  .arrow.purple .arrow-line { background: linear-gradient(to bottom, rgba(212,160,240,0.3), rgba(212,160,240,0.15)); }
+  .arrow.purple .arrow-head { border-top: 6px solid rgba(212,160,240,0.25); }
+  .arrow.purple .arrow-label { color: rgba(212,160,240,0.35); }
+  .arrow.gold .arrow-line { background: linear-gradient(to bottom, rgba(240,208,128,0.3), rgba(240,208,128,0.15)); }
+  .arrow.gold .arrow-head { border-top: 6px solid rgba(240,208,128,0.25); }
+  .arrow.gold .arrow-label { color: rgba(240,208,128,0.35); }
+  .arrow.green .arrow-line { background: linear-gradient(to bottom, rgba(104,230,160,0.3), rgba(104,230,160,0.15)); }
+  .arrow.green .arrow-head { border-top: 6px solid rgba(104,230,160,0.25); }
+  .arrow.green .arrow-label { color: rgba(104,230,160,0.35); }
+  .arrow.blue .arrow-line { background: linear-gradient(to bottom, rgba(104,160,230,0.3), rgba(104,160,230,0.15)); }
+  .arrow.blue .arrow-head { border-top: 6px solid rgba(104,160,230,0.25); }
+  .arrow.blue .arrow-label { color: rgba(104,160,230,0.35); }
+  .arrow.bright .arrow-line { background: linear-gradient(to bottom, rgba(240,208,128,0.4), rgba(240,208,128,0.2)); }
+  .arrow.bright .arrow-head { border-top: 6px solid rgba(240,208,128,0.35); }
+  .arrow.bright .arrow-label { color: rgba(240,208,128,0.4); }
+
+  /* Tension box */
+  .tension {
+    margin: 24px 0; padding: 20px;
+    border-radius: 10px;
+    background: rgba(14,20,36,0.5);
+    border: 1px solid rgba(104,160,230,0.12);
+  }
+  .tension-header { text-align: center; margin-bottom: 14px; }
+  .tension-header span { font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #68a0e6; }
+  .tension-row { display: flex; gap: 12px; margin-bottom: 12px; }
+  .tension-col { flex: 1; text-align: center; padding: 12px; border-radius: 8px; }
+  .tension-col.already {
+    background: rgba(104,230,160,0.06);
+    border: 1px solid rgba(104,230,160,0.1);
+  }
+  .tension-col.notyet {
+    background: rgba(240,208,128,0.06);
+    border: 1px solid rgba(240,208,128,0.1);
+  }
+  .tension-col-label { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 6px; }
+  .tension-col.already .tension-col-label { color: #68e6a0; }
+  .tension-col.notyet .tension-col-label { color: #f0d080; }
+  .tension-col-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-style: italic; line-height: 1.6;
+  }
+  .tension-col.already .tension-col-text { color: #80a090; }
+  .tension-col.notyet .tension-col-text { color: #a09070; }
+  .tension-foot {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; color: #8090a0; font-style: italic;
+  }
+
+  /* Callout */
+  .callout {
+    margin: 24px 0; padding: 18px 20px;
+    border-radius: 8px; text-align: center;
+    background: rgba(22,16,30,0.5);
+    border: 1px solid rgba(212,160,240,0.15);
+  }
+  .callout-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-style: italic; line-height: 1.5;
+    color: #d4a0f0; margin-bottom: 6px;
+  }
+  .callout-ref { font-size: 11px; letter-spacing: 1.5px; color: #706080; }
+
+  .footer {
+    margin-top: 40px; text-align: center; padding: 20px 0;
+    border-top: 1px solid rgba(212,160,240,0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #888090; font-style: italic; line-height: 1.7; margin-bottom: 12px;
+  }
+  .footer-line { width: 20px; height: 1px; background: rgba(212,160,240,0.25); margin: 0 auto; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>THE KINGDOM OF GOD</h1>
+    <div class="header-line"></div>
+    <p>Not a place. Not a programme. A reign.</p>
+    <div class="greek">βασιλεία τοῦ θεοῦ — basileia tou theou</div>
+  </div>
+
+  <!-- Definition -->
+  <div class="def-box">
+    <div class="def-label">WHAT IS THE KINGDOM?</div>
+    <div class="def-text">
+      The Kingdom of God is not primarily a <em>location</em> — it is the <em>active reign of God</em> through Christ. Wherever Christ is Lord — actually governing, actually obeyed, actually expressed — there the Kingdom is present. It is not a place you go to. It is a reality that <em>comes to you</em> when the King takes His rightful place.
+    </div>
+  </div>
+
+  <!-- What it's not / what it is -->
+  <div class="contrast">
+    <div class="contrast-header"><span>COMMON MISUNDERSTANDINGS VS REALITY</span></div>
+    <div class="contrast-row">
+      <div class="contrast-cell not">
+        <div class="contrast-cell-label">IT IS NOT</div>
+        <div class="contrast-item">Heaven when you die</div>
+        <div class="contrast-item">A political system</div>
+        <div class="contrast-item">The institutional church</div>
+        <div class="contrast-item">A denomination</div>
+        <div class="contrast-item">Social justice alone</div>
+        <div class="contrast-item">A future-only reality</div>
+        <div class="contrast-item">A territory on a map</div>
+      </div>
+      <div class="contrast-cell is">
+        <div class="contrast-cell-label">IT IS</div>
+        <div class="contrast-item">God's active reign now</div>
+        <div class="contrast-item">Christ as actual Lord</div>
+        <div class="contrast-item">Righteousness, peace, joy</div>
+        <div class="contrast-item">Within you / among you</div>
+        <div class="contrast-item">Present and coming</div>
+        <div class="contrast-item">Both now and not yet</div>
+        <div class="contrast-item">Wherever the King rules</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="flow"></div>
+
+  <!-- Already / Not Yet tension -->
+  <div class="tension">
+    <div class="tension-header"><span>THE ALREADY / NOT YET TENSION</span></div>
+    <div class="tension-row">
+      <div class="tension-col already">
+        <div class="tension-col-label">ALREADY</div>
+        <div class="tension-col-text">
+          The King has come<br>
+          The Spirit indwells<br>
+          Sin's power broken<br>
+          New creation begun<br>
+          Kingdom entered at new birth<br>
+          Christ reigns in believers
+        </div>
+      </div>
+      <div class="tension-col notyet">
+        <div class="tension-col-label">NOT YET</div>
+        <div class="tension-col-text">
+          The King will return<br>
+          All enemies under His feet<br>
+          Death destroyed<br>
+          Creation fully renewed<br>
+          Kingdom manifested visibly<br>
+          Every knee bows
+        </div>
+      </div>
+    </div>
+    <div class="tension-foot">We live in the overlap — the Kingdom is here but not yet fully here.<br>This tension is where faith operates.</div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-text">"For the kingdom of God is not eating and drinking, but righteousness and peace and joy in the Holy Spirit."</div>
+    <div class="callout-ref">ROMANS 14:17</div>
+  </div>
+
+  <div class="footer">
+    <p>The Kingdom is not a thing you build.<br>It is a Person whose reign you submit to.<br>Wherever He is Lord — in a heart,<br>in a home, in a gathering —<br>the Kingdom is present.<br><br>Seek first this Kingdom.<br>Everything else follows.</p>
+    <div class="footer-line"></div>
+  </div>
+
+</div>
+
+<script>
+const data = [
+  { section: "purple", sectionLabel: "THE ESSENCE", sectionSub: "What the Kingdom actually is at its core" },
+  {
+    num: 1, title: "A KING AND HIS REIGN", verse: "Psalm 103:19, Daniel 4:34–35", cls: "purple",
+    badge: "FOUNDATION",
+    scripture: "The Lord has established His throne in heaven, and His Kingdom rules over all.",
+    summary: "At its most fundamental level, a kingdom requires a king who reigns. The Kingdom of God is not an institution, a programme, or a geographical territory. It is the active exercise of God's sovereign rule. Where God reigns — where His will is done, where His authority is acknowledged, where His life is expressed — there the Kingdom exists. It is as present as the King is present."
+  },
+  { arrow: "purple" },
+  {
+    num: 2, title: "THE KINGDOM IS A PERSON", verse: "Luke 17:21, Colossians 1:13, Matthew 12:28", cls: "purple",
+    scripture: "The kingdom of God does not come with observation; nor will they say, 'See here!' or 'See there!' For indeed, the kingdom of God is in your midst.",
+    summary: "When Jesus walked the earth, the Kingdom walked with Him. He didn't just preach about the Kingdom — He was the Kingdom in person. Where He was, the Kingdom was. The sick were healed, demons fled, sins were forgiven — not because a system had arrived but because the King had. This is why Jesus could say the Kingdom was 'in your midst' — they were looking at it. The Kingdom is inseparable from the Person of Christ."
+  },
+  { arrow: "gold", label: "ANNOUNCED BY" },
+
+  { section: "gold", sectionLabel: "THE ANNOUNCEMENT", sectionSub: "The Kingdom proclaimed in history" },
+  {
+    num: 3, title: "JOHN: THE KINGDOM IS NEAR", verse: "Matthew 3:1–2", cls: "gold",
+    scripture: "Repent, for the kingdom of heaven is at hand!",
+    summary: "John the Baptist was the herald — announcing that something was about to break into human history. 'At hand' means imminent, approaching, about to arrive. The Kingdom wasn't a new idea — the Old Testament was full of it. But John announced that the long-awaited reign of God was about to become present in a new way. The King was coming. Preparation was required: repentance. Turning from self-rule to God-rule."
+  },
+  { arrow: "gold" },
+  {
+    num: 4, title: "JESUS: THE KINGDOM HAS COME", verse: "Mark 1:15, Matthew 12:28", cls: "gold",
+    badge: "THE ARRIVAL",
+    scripture: "The time is fulfilled, and the kingdom of God is at hand. Repent, and believe in the gospel... But if I cast out demons by the Spirit of God, surely the kingdom of God has come upon you.",
+    summary: "Jesus shifted the tense. John said 'near.' Jesus said 'here.' In His person, His works, His authority — the Kingdom had arrived. When He cast out demons, He said it explicitly: the Kingdom has come upon you. Not will come someday. Has come. The reign of God was breaking into the present through the person of the King. But it came in an unexpected form — not as a political overthrow of Rome, but as a Servant washing feet, eating with sinners, and dying on a cross."
+  },
+  { arrow: "gold" },
+  {
+    num: 5, title: "THE UNEXPECTED FORM", verse: "Mark 4:30–32, Luke 13:20–21, John 18:36", cls: "gold",
+    scripture: "My kingdom is not of this world. If My kingdom were of this world, My servants would fight... but now My kingdom is not from here.",
+    summary: "The Kingdom came in parables — a mustard seed, leaven, a treasure hidden in a field. Small, hidden, seemingly insignificant, but carrying within it the power of unstoppable growth. This was the scandal. Israel expected a conquering Messiah who would establish a visible political kingdom. Instead they got a carpenter from Nazareth who said His Kingdom was 'not of this world.' Not meaning it has nothing to do with this world — but that its source, its power, its nature come from another realm entirely. It operates by different laws."
+  },
+  { arrow: "green", label: "ENTERED THROUGH" },
+
+  { section: "green", sectionLabel: "THE ENTRANCE", sectionSub: "How the Kingdom is entered and experienced" },
+  {
+    num: 6, title: "BORN INTO THE KINGDOM", verse: "John 3:3–5, Colossians 1:13", cls: "green",
+    badge: "THE DOOR",
+    scripture: "Unless one is born again, he cannot see the kingdom of God... unless one is born of water and the Spirit, he cannot enter the kingdom of God.",
+    summary: "You don't join the Kingdom by signing up. You don't earn it by moral performance. You don't vote for it or build it by social activism. You are born into it. New birth — the Spirit of God imparting divine life to a dead human spirit — is the only entrance. This is why Jesus told Nicodemus, the most religious man in Israel, that he had to be born again. All his religion, all his knowledge, all his moral effort couldn't get him in. Only life from above could. The Kingdom is entered by receiving, not achieving."
+  },
+  { arrow: "green" },
+  {
+    num: 7, title: "RIGHTEOUSNESS, PEACE, JOY", verse: "Romans 14:17", cls: "green",
+    scripture: "For the kingdom of God is not eating and drinking, but righteousness and peace and joy in the Holy Spirit.",
+    summary: "Paul gives the most concise description of Kingdom life: righteousness, peace, and joy — in the Holy Spirit. Not righteousness by law-keeping but by Christ's life within. Not peace by circumstances but by His presence. Not joy by entertainment but by the Spirit. These three are the evidence of the Kingdom operating in a person's life. They are not produced by effort — they are the fruit of the King reigning. When Christ is actually Lord of your Monday morning, your marriage, your finances, your thought life — the result is righteousness, peace, and joy. Not as goals to strive for, but as realities that flow from submission."
+  },
+  { arrow: "green" },
+  {
+    num: 8, title: "SEEK FIRST", verse: "Matthew 6:33", cls: "green",
+    scripture: "But seek first the kingdom of God and His righteousness, and all these things shall be added to you.",
+    summary: "The Kingdom is not an add-on to your existing life. It is the reorientation of your entire life around the King's rule. Seek it first — not alongside everything else, not after your plans feel secure and your responsibilities feel under control. First. And the promise is that everything else — the practical needs, the provision, the security you were anxious about — gets handled as a consequence. This is the great inversion: stop chasing the things and chase the King, and the things follow. This is the opposite of the Australian dream, where you chase the things and hope meaning follows."
+  },
+  { arrow: "blue", label: "EXPRESSED THROUGH" },
+
+  { section: "blue", sectionLabel: "THE EXPRESSION", sectionSub: "The Kingdom made visible in community" },
+  {
+    num: 9, title: "THE EKKLESIA AND THE KINGDOM", verse: "Matthew 16:18–19, Acts 2:42–47", cls: "blue",
+    badge: "THE CONNECTION",
+    scripture: "I will build My church, and the gates of Hades shall not prevail against it. And I will give you the keys of the kingdom of heaven.",
+    summary: "The ekklesia and the Kingdom are closely related but not identical. The Kingdom is the reign; the ekklesia is the community that lives under that reign. The Kingdom is broader — God reigns over all things. But the ekklesia is the voluntary, gathered expression of people who have submitted to the King and are learning to live under His rule together. Jesus gave the keys of the Kingdom to the ekklesia. The gathered community of believers — sharing life, breaking bread, functioning under Christ's headship — is the primary visible demonstration of the Kingdom on earth. Not the only one, but the primary one."
+  },
+  { arrow: "blue" },
+  {
+    num: 10, title: "KINGDOM LIFE IN PRACTICE", verse: "Matthew 5–7, Acts 2:42–47", cls: "blue",
+    scripture: "Your kingdom come. Your will be done on earth as it is in heaven.",
+    summary: "The Sermon on the Mount is the constitution of Kingdom life — not rules to be obeyed by willpower, but the description of what life looks like when the King is actually reigning. Blessed are the poor in spirit (those who've given up self-rule). Turn the other cheek (operating by different laws than the world). Don't worry about tomorrow (the King provides). Love your enemies (the King's nature flowing through you). In Acts 2, we see this lived out: shared possessions, daily fellowship, breaking bread from house to house, gladness, generosity. Not a programme. The natural overflow of people under the King's rule."
+  },
+  { arrow: "bright", label: "CULMINATING IN" },
+
+  { section: "bright", sectionLabel: "THE CONSUMMATION", sectionSub: "The Kingdom fully manifested" },
+  {
+    num: 11, title: "THE KINGDOM DELIVERED TO THE FATHER", verse: "1 Corinthians 15:24–28, Revelation 11:15", cls: "bright",
+    badge: "THE GOAL",
+    scripture: "Then comes the end, when He delivers the kingdom to God the Father, when He puts an end to all rule and all authority and power... that God may be all in all.",
+    summary: "The Kingdom story ends with everything the Father intended. Every enemy defeated. Death itself destroyed. All things subjected to Christ. And then the Son delivers the Kingdom to the Father — not because He loses it, but because the purpose is complete. God is all in all. His reign is total, uncontested, and expressed through a vast company of sons in whom He dwells. The Kingdom was always heading here — not to a political utopia on earth, not to an escape to heaven, but to the full, unhindered, eternal reign of God in and through His people. Revelation 11:15 declares it: the kingdoms of this world have become the Kingdom of our Lord and of His Christ, and He shall reign forever."
+  },
+];
+
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls}`;
+  div.onclick = () => {
+    const was = div.classList.contains('active');
+    document.querySelectorAll('.node').forEach(el => el.classList.remove('active'));
+    if (!was) div.classList.add('active');
+  };
+  let h = '';
+  if (n.badge) h += `<div class="badge">${n.badge}</div>`;
+  h += `<div class="node-header"><span class="node-number">${n.num}</span><div>`;
+  h += `<h3 class="node-title">${n.title}</h3>`;
+  h += `<span class="node-verse">${n.verse}</span></div></div>`;
+  h += `<div class="node-scripture">"${n.scripture}"</div>`;
+  h += `<div class="node-summary">${n.summary}</div>`;
+  h += `<div class="node-tap">Tap to expand</div>`;
+  div.innerHTML = h;
+  return div;
+}
+function buildArrow(cfg) {
+  const div = document.createElement('div');
+  div.className = `arrow ${cfg.cls}`;
+  const lh = cfg.label ? '16px' : '22px';
+  let h = `<div class="arrow-line" style="height:${lh}"></div>`;
+  if (cfg.label) h += `<span class="arrow-label">${cfg.label}</span>`;
+  h += '<div class="arrow-head"></div>';
+  div.innerHTML = h;
+  return div;
+}
+function buildSection(s) {
+  const div = document.createElement('div');
+  div.className = 'section';
+  let h = `<span class="section-label ${s.section}">${s.sectionLabel}</span>`;
+  if (s.sectionSub) h += `<div class="section-sub">${s.sectionSub}</div>`;
+  div.innerHTML = h;
+  return div;
+}
+const flow = document.getElementById('flow');
+data.forEach(item => {
+  if (item.section) flow.appendChild(buildSection(item));
+  else if (item.arrow) flow.appendChild(buildArrow({ cls: item.arrow, label: item.label }));
+  else flow.appendChild(buildNode(item));
+});
+</script>
+</body>
+</html>

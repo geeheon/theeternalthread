@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>The Mystery — Hidden and Revealed</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: #08080f;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .container { max-width: 460px; margin: 0 auto; padding: 40px 20px 60px; }
+
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300;
+    color: #e0e0f0; letter-spacing: 4px;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #e0e0f0, transparent);
+    margin: 10px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; color: #888090; font-style: italic;
+  }
+  .header .greek {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; color: #606070; letter-spacing: 2px;
+    margin-top: 4px;
+  }
+
+  /* Phase banners */
+  .phase {
+    text-align: center; padding: 20px 0 10px;
+  }
+  .phase-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 3px;
+    padding: 5px 14px; border-radius: 4px;
+    display: inline-block;
+  }
+  .phase-label.hidden { color: #a0a0c0; background: rgba(160,160,192,0.06); border: 1px solid rgba(160,160,192,0.12); }
+  .phase-label.hinted { color: #c9a0e6; background: rgba(201,160,230,0.06); border: 1px solid rgba(201,160,230,0.12); }
+  .phase-label.revealed { color: #f0d080; background: rgba(240,208,128,0.08); border: 1px solid rgba(240,208,128,0.15); }
+  .phase-label.content { color: #68e6a0; background: rgba(104,230,160,0.06); border: 1px solid rgba(104,230,160,0.12); }
+  .phase-label.deposited { color: #68a0e6; background: rgba(104,160,230,0.06); border: 1px solid rgba(104,160,230,0.12); }
+  .phase-label.consummated { color: #f0d080; background: rgba(240,208,128,0.1); border: 1px solid rgba(240,208,128,0.2); }
+  .phase-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px; color: #606060; font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* Nodes */
+  .node {
+    border-radius: 10px; padding: 18px 22px;
+    cursor: pointer; transition: all 0.3s ease;
+    position: relative; border: 1.5px solid;
+  }
+  .node.active { transform: scale(1.02); }
+
+  .node.silver { background: rgba(18,18,26,0.9); border-color: rgba(160,160,192,0.25); }
+  .node.silver.active { background: #12121a; border-color: #a0a0c0; box-shadow: 0 0 25px rgba(160,160,192,0.08), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.purple { background: rgba(26,18,32,0.8); border-color: rgba(201,160,230,0.25); }
+  .node.purple.active { background: #1a1220; border-color: #c9a0e6; box-shadow: 0 0 30px rgba(201,160,230,0.1), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.gold { background: rgba(32,26,14,0.8); border-color: rgba(240,208,128,0.25); }
+  .node.gold.active { background: #201a0e; border-color: #f0d080; box-shadow: 0 0 30px rgba(240,208,128,0.1), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.green { background: rgba(13,28,20,0.8); border-color: rgba(104,230,160,0.25); }
+  .node.green.active { background: #0d2818; border-color: #68e6a0; box-shadow: 0 0 30px rgba(104,230,160,0.1), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.blue { background: rgba(14,20,36,0.8); border-color: rgba(104,160,230,0.25); }
+  .node.blue.active { background: #0e1424; border-color: #68a0e6; box-shadow: 0 0 30px rgba(104,160,230,0.1), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.bright { background: rgba(36,30,14,0.9); border-color: rgba(240,208,128,0.35); }
+  .node.bright.active { background: #24200e; border-color: #f0d080; box-shadow: 0 0 40px rgba(240,208,128,0.15), 0 4px 20px rgba(0,0,0,0.3); }
+
+  .badge {
+    position: absolute; top: -10px; right: 16px;
+    font-size: 9px; font-weight: 800; letter-spacing: 1.5px;
+    padding: 3px 10px; border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .silver .badge { background: #a0a0c0; color: #12121a; }
+  .purple .badge { background: #c9a0e6; color: #1a1220; }
+  .gold .badge { background: #f0d080; color: #201a0e; }
+  .green .badge { background: #68e6a0; color: #0d2818; }
+  .blue .badge { background: #68a0e6; color: #0e1424; }
+  .bright .badge { background: #f0d080; color: #24200e; }
+
+  .node-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .node.active .node-header { margin-bottom: 10px; }
+
+  .node-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 300; line-height: 1; opacity: 0.4;
+  }
+  .silver .node-number { color: #a0a0c0; }
+  .purple .node-number { color: #c9a0e6; }
+  .gold .node-number { color: #f0d080; }
+  .green .node-number { color: #68e6a0; }
+  .blue .node-number { color: #68a0e6; }
+  .bright .node-number { color: #f0d080; }
+
+  .node-title { font-size: 12px; font-weight: 700; letter-spacing: 2px; margin: 0; }
+  .silver .node-title { color: #a0a0c0; }
+  .purple .node-title { color: #c9a0e6; }
+  .gold .node-title { color: #f0d080; }
+  .green .node-title { color: #68e6a0; }
+  .blue .node-title { color: #68a0e6; }
+  .bright .node-title { color: #f0d080; }
+
+  .node-verse { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; }
+  .silver .node-verse { color: rgba(160,160,192,0.5); }
+  .purple .node-verse { color: rgba(201,160,230,0.5); }
+  .gold .node-verse { color: rgba(240,208,128,0.5); }
+  .green .node-verse { color: rgba(104,230,160,0.5); }
+  .blue .node-verse { color: rgba(104,160,230,0.5); }
+  .bright .node-verse { color: rgba(240,208,128,0.5); }
+
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; line-height: 1.6; color: #d4c5a0;
+    margin: 8px 0; font-style: italic;
+    border-left: 2px solid; padding-left: 14px; display: none;
+  }
+  .node.active .node-scripture { display: block; }
+  .silver .node-scripture { border-left-color: rgba(160,160,192,0.25); }
+  .purple .node-scripture { border-left-color: rgba(201,160,230,0.25); }
+  .gold .node-scripture { border-left-color: rgba(240,208,128,0.25); }
+  .green .node-scripture { border-left-color: rgba(104,230,160,0.25); }
+  .blue .node-scripture { border-left-color: rgba(104,160,230,0.25); }
+  .bright .node-scripture { border-left-color: rgba(240,208,128,0.3); }
+
+  .node-summary {
+    font-size: 13.5px; line-height: 1.65; color: #b8b0a0;
+    margin: 8px 0 0 0; display: none;
+  }
+  .node.active .node-summary { display: block; }
+
+  .node-tap { font-size: 12px; color: #606060; margin-left: 36px; }
+  .node.active .node-tap { display: none; }
+
+  /* Arrows */
+  .arrow { display: flex; flex-direction: column; align-items: center; padding: 4px 0; }
+  .arrow-line { width: 1.5px; }
+  .arrow-label { font-size: 9px; letter-spacing: 1.5px; font-weight: 700; padding: 2px 0; }
+  .arrow-head { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; }
+
+  .arrow.silver .arrow-line { background: linear-gradient(to bottom, rgba(160,160,192,0.3), rgba(160,160,192,0.15)); }
+  .arrow.silver .arrow-head { border-top: 6px solid rgba(160,160,192,0.25); }
+  .arrow.silver .arrow-label { color: rgba(160,160,192,0.35); }
+  .arrow.purple .arrow-line { background: linear-gradient(to bottom, rgba(201,160,230,0.3), rgba(201,160,230,0.15)); }
+  .arrow.purple .arrow-head { border-top: 6px solid rgba(201,160,230,0.25); }
+  .arrow.purple .arrow-label { color: rgba(201,160,230,0.35); }
+  .arrow.gold .arrow-line { background: linear-gradient(to bottom, rgba(240,208,128,0.3), rgba(240,208,128,0.15)); }
+  .arrow.gold .arrow-head { border-top: 6px solid rgba(240,208,128,0.25); }
+  .arrow.gold .arrow-label { color: rgba(240,208,128,0.35); }
+  .arrow.green .arrow-line { background: linear-gradient(to bottom, rgba(104,230,160,0.3), rgba(104,230,160,0.15)); }
+  .arrow.green .arrow-head { border-top: 6px solid rgba(104,230,160,0.25); }
+  .arrow.green .arrow-label { color: rgba(104,230,160,0.35); }
+  .arrow.blue .arrow-line { background: linear-gradient(to bottom, rgba(104,160,230,0.3), rgba(104,160,230,0.15)); }
+  .arrow.blue .arrow-head { border-top: 6px solid rgba(104,160,230,0.25); }
+  .arrow.blue .arrow-label { color: rgba(104,160,230,0.35); }
+  .arrow.bright .arrow-line { background: linear-gradient(to bottom, rgba(240,208,128,0.4), rgba(240,208,128,0.2)); }
+  .arrow.bright .arrow-head { border-top: 6px solid rgba(240,208,128,0.35); }
+  .arrow.bright .arrow-label { color: rgba(240,208,128,0.4); }
+
+  /* Mystery definition box */
+  .mystery-box {
+    margin: 0 0 24px 0; padding: 16px 20px;
+    border-radius: 8px; text-align: center;
+    background: rgba(18,18,26,0.6);
+    border: 1px solid rgba(160,160,192,0.12);
+  }
+  .mystery-box .def-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px;
+    color: #a0a0c0; margin-bottom: 8px;
+  }
+  .mystery-box .def-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #909098; font-style: italic; line-height: 1.6;
+  }
+
+  /* Layers box */
+  .layers-box {
+    margin: 24px 0; padding: 20px;
+    border-radius: 10px;
+    background: rgba(13,28,20,0.4);
+    border: 1px solid rgba(104,230,160,0.12);
+  }
+  .layers-header {
+    text-align: center; margin-bottom: 14px;
+  }
+  .layers-header span {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #68e6a0;
+  }
+  .layer {
+    padding: 10px 14px;
+    border-left: 2px solid rgba(104,230,160,0.2);
+    margin-bottom: 10px;
+  }
+  .layer:last-child { margin-bottom: 0; }
+  .layer-title {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    color: #68e6a0; margin-bottom: 3px;
+  }
+  .layer-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; color: #80a090; font-style: italic; line-height: 1.5;
+  }
+  .layer-ref {
+    font-size: 11px; color: #506050; margin-top: 2px;
+  }
+
+  /* Callout */
+  .callout {
+    margin: 24px 0; padding: 18px 20px;
+    border-radius: 8px; text-align: center;
+  }
+  .callout.silver-theme { background: rgba(18,18,26,0.5); border: 1px solid rgba(160,160,192,0.12); }
+  .callout.gold-theme { background: rgba(32,26,14,0.5); border: 1px solid rgba(240,208,128,0.15); }
+  .callout-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-style: italic; line-height: 1.5; margin-bottom: 6px;
+  }
+  .callout.silver-theme .callout-text { color: #a0a0c0; }
+  .callout.gold-theme .callout-text { color: #f0d080; }
+  .callout-ref { font-size: 11px; letter-spacing: 1.5px; }
+  .callout.silver-theme .callout-ref { color: #606070; }
+  .callout.gold-theme .callout-ref { color: #807060; }
+
+  .footer {
+    margin-top: 40px; text-align: center; padding: 20px 0;
+    border-top: 1px solid rgba(160,160,192,0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #888090; font-style: italic; line-height: 1.7; margin-bottom: 12px;
+  }
+  .footer-line { width: 20px; height: 1px; background: rgba(160,160,192,0.25); margin: 0 auto; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>THE MYSTERY</h1>
+    <div class="header-line"></div>
+    <p>Hidden in ages past, revealed in Christ</p>
+    <div class="greek">μυστήριον — mystērion</div>
+  </div>
+
+  <!-- Definition -->
+  <div class="mystery-box">
+    <div class="def-label">WHAT IS "THE MYSTERY"?</div>
+    <div class="def-text">In Paul's letters, "mystery" does not mean something mysterious or puzzling. It means something that was hidden in God's heart from eternity, concealed throughout the ages, and has now been unveiled in Christ and made known to His people. It is God's secret — now told.</div>
+  </div>
+
+  <div id="flow"></div>
+
+  <!-- Layers of the Mystery -->
+  <div class="layers-box">
+    <div class="layers-header">
+      <span>THE LAYERS OF THE MYSTERY — UNPACKED</span>
+    </div>
+    <div class="layer">
+      <div class="layer-title">LAYER 1: CHRIST IN YOU</div>
+      <div class="layer-text">The individual indwelling. God's life in a human vessel. The hope of glory residing in ordinary people.</div>
+      <div class="layer-ref">Colossians 1:27</div>
+    </div>
+    <div class="layer">
+      <div class="layer-title">LAYER 2: JEW AND GENTILE ONE BODY</div>
+      <div class="layer-text">The dividing wall abolished. Two peoples made into one new man. An utterly new entity that never existed before.</div>
+      <div class="layer-ref">Ephesians 3:6</div>
+    </div>
+    <div class="layer">
+      <div class="layer-title">LAYER 3: CHRIST AND THE CHURCH</div>
+      <div class="layer-text">The great mystery. Head and body. Bridegroom and bride. Two becoming one flesh — not just metaphor but spiritual reality.</div>
+      <div class="layer-ref">Ephesians 5:32</div>
+    </div>
+    <div class="layer">
+      <div class="layer-title">LAYER 4: GOD'S WISDOM DISPLAYED</div>
+      <div class="layer-text">Through the ekklesia, the manifold wisdom of God is made known to principalities and powers. The church is the demonstration to the cosmos.</div>
+      <div class="layer-ref">Ephesians 3:10</div>
+    </div>
+    <div class="layer">
+      <div class="layer-title">LAYER 5: ALL THINGS SUMMED UP IN CHRIST</div>
+      <div class="layer-text">The final layer. Everything in heaven and on earth gathered together under one head — Christ. The mystery is ultimately about the supremacy and centrality of one Person.</div>
+      <div class="layer-ref">Ephesians 1:9–10</div>
+    </div>
+  </div>
+
+  <div class="callout gold-theme">
+    <div class="callout-text">"To me, who am less than the least of all the saints, this grace was given, that I should preach among the Gentiles the unsearchable riches of Christ, and to make all see what is the fellowship of the mystery."</div>
+    <div class="callout-ref">EPHESIANS 3:8–9</div>
+  </div>
+
+  <div class="footer">
+    <p>The mystery was hidden for ages.<br>It was revealed in one Person.<br>It is deposited in one Body.<br>It will be displayed for eternity.<br><br>And you have been let in on the secret.</p>
+    <div class="footer-line"></div>
+  </div>
+
+</div>
+
+<script>
+const data = [
+  { phase: "hidden", phaseLabel: "HIDDEN", phaseSub: "Concealed in God before the ages" },
+  {
+    num: 1, title: "HIDDEN BEFORE TIME", verse: "1 Corinthians 2:7, Ephesians 3:9", cls: "silver",
+    badge: "THE SECRET",
+    scripture: "We speak the wisdom of God in a mystery, the hidden wisdom which God ordained before the ages for our glory.",
+    summary: "Before creation, God had a secret. A plan conceived in His own heart, shared with no one — not angels, not prophets, not principalities. This wasn't a reaction to the fall. It was a positive intention, purposed in Himself before time began. The mystery predates everything."
+  },
+  { arrow: "silver" },
+  {
+    num: 2, title: "CONCEALED FROM AGES", verse: "Colossians 1:26, Romans 16:25", cls: "silver",
+    scripture: "The mystery which has been hidden from ages and from generations, but now has been revealed to His saints.",
+    summary: "Throughout the Old Testament, the mystery remained veiled. The prophets spoke of it without fully understanding it. Angels longed to look into it (1 Peter 1:12). The law, the tabernacle, the sacrifices, the kings and prophets — all of it was pointing toward something none of them could see clearly. The secret was kept."
+  },
+  { arrow: "purple", label: "BUT HINTED AT" },
+
+  { phase: "hinted", phaseLabel: "HINTED", phaseSub: "Shadows and whispers in the Old Testament" },
+  {
+    num: 3, title: "EVE FROM ADAM'S SIDE", verse: "Genesis 2:21–23, cf. Ephesians 5:30–32", cls: "purple",
+    scripture: "And the Lord God caused a deep sleep to fall on Adam... He took one of his ribs, and closed up the flesh in its place. Then the rib which the Lord God had taken from man He made into a woman.",
+    summary: "Adam falls into a deep sleep — a picture of death. From his opened side, a bride is formed. She is bone of his bone, flesh of his flesh. Paul explicitly connects this to Christ and the church in Ephesians 5:32 — 'This is a great mystery, and I am speaking of Christ and the church.' The mystery was hidden in the first pages of Scripture, but no one could see it until Paul unveiled it."
+  },
+  { arrow: "purple" },
+  {
+    num: 4, title: "WHISPERS IN THE PROPHETS", verse: "Isaiah 49:6, 54:5, Hosea 2:19–20", cls: "purple",
+    scripture: "I will also give You as a light to the Gentiles, that You should be My salvation to the ends of the earth.",
+    summary: "Scattered throughout the prophets are hints that God's plan extended beyond Israel. A light to the Gentiles. A husband to a bride. A new covenant written on hearts. A temple not made with hands. The prophets saw fragments but couldn't assemble the full picture. They were describing a puzzle they couldn't solve. The key was Christ — and He hadn't come yet."
+  },
+  { arrow: "gold", label: "UNTIL" },
+
+  { phase: "revealed", phaseLabel: "REVEALED", phaseSub: "The veil is lifted in Christ" },
+  {
+    num: 5, title: "REVEALED IN THE SON", verse: "Ephesians 1:9–10, 3:3–5", cls: "gold",
+    badge: "THE UNVEILING",
+    scripture: "Having made known to us the mystery of His will, according to His good pleasure which He purposed in Himself, that in the dispensation of the fullness of the times He might gather together in one all things in Christ.",
+    summary: "In Christ, the secret is out. What was hidden for ages is now unveiled. And the content of the mystery is breathtaking — God's plan is to sum up all things in Christ. Everything in heaven and on earth, gathered under one head. The mystery isn't just about personal salvation. It's about cosmic reconciliation and unification in one Person."
+  },
+  { arrow: "gold" },
+  {
+    num: 6, title: "ENTRUSTED TO PAUL", verse: "Ephesians 3:2–3, Colossians 1:25–26", cls: "gold",
+    scripture: "If indeed you have heard of the dispensation of the grace of God which was given to me for you, how that by revelation He made known to me the mystery.",
+    summary: "Paul received a specific stewardship — to make the mystery known. This wasn't something he deduced from the Old Testament. It was given to him by direct revelation. Other apostles carried other aspects of the gospel, but the mystery in its fullness — Christ and the church, Jew and Gentile in one body, God's eternal purpose — was Paul's unique commission to unfold. This is why his letters carry a dimension the other epistles don't."
+  },
+  { arrow: "green", label: "AND ITS CONTENT IS" },
+
+  { phase: "content", phaseLabel: "THE CONTENT", phaseSub: "What the mystery actually is" },
+  {
+    num: 7, title: "CHRIST IN YOU", verse: "Colossians 1:27", cls: "green",
+    badge: "LAYER 1",
+    scripture: "To them God willed to make known what are the riches of the glory of this mystery among the Gentiles: which is Christ in you, the hope of glory.",
+    summary: "The first layer of the mystery: God living inside human beings. Not God far away. Not God in a temple. Not God demanding obedience from the outside. God in you. The Creator taking up residence in the creature. The life that was with the Father from eternity is now dwelling in ordinary people — including Gentiles, which was unthinkable. This is the hope of glory. Not a distant heaven, but an indwelling Person."
+  },
+  { arrow: "green" },
+  {
+    num: 8, title: "ONE NEW MAN", verse: "Ephesians 3:6, 2:14–16", cls: "green",
+    badge: "LAYER 2",
+    scripture: "That the Gentiles should be fellow heirs, of the same body, and partakers of His promise in Christ through the gospel.",
+    summary: "The second layer: Jew and Gentile — the most fundamental division in the ancient world — made into one body. Not Gentiles becoming Jews. Not Jews becoming Gentiles. Both becoming something entirely new. A new humanity. A new man. The dividing wall abolished in Christ's flesh. This was the scandal that got Paul arrested. The mystery creates an entity that never existed before — not an improved version of Israel, but the body of Christ."
+  },
+  { arrow: "green" },
+  {
+    num: 9, title: "CHRIST AND THE CHURCH", verse: "Ephesians 5:31–32", cls: "green",
+    badge: "LAYER 3",
+    scripture: "For this reason a man shall leave his father and mother and be joined to his wife, and the two shall become one flesh. This is a great mystery, but I speak concerning Christ and the church.",
+    summary: "The third layer — and Paul calls this one 'great.' The union between Christ and the church is so profound that it mirrors the one-flesh union of marriage. Head and body. Bridegroom and bride. He gave Himself for her to make her holy. She is His fullness, His expression, His complement. This is what Genesis 2 was really about all along — not just human marriage, but the divine romance between Christ and His people."
+  },
+  { arrow: "blue", label: "DEPOSITED IN" },
+
+  { phase: "deposited", phaseLabel: "DEPOSITED", phaseSub: "The mystery entrusted to the ekklesia" },
+  {
+    num: 10, title: "THE EKKLESIA AS STEWARD", verse: "Ephesians 3:10, 1 Timothy 3:15–16", cls: "blue",
+    badge: "THE STEWARDSHIP",
+    scripture: "To the intent that now the manifold wisdom of God might be made known by the church to the principalities and powers in the heavenly places.",
+    summary: "The mystery isn't just revealed to the church — it's demonstrated through the church. The ekklesia is the vessel through which God's multi-faceted wisdom is displayed to the cosmos. Angels look at the gathered body and see the mystery enacted. When believers meet together under Christ's headship, each one contributing from His indwelling life, the mystery becomes visible. The church doesn't just believe the mystery. The church is the mystery made manifest."
+  },
+  { arrow: "blue" },
+  {
+    num: 11, title: "GOD MANIFESTED IN THE FLESH", verse: "1 Timothy 3:16", cls: "blue",
+    scripture: "And without controversy great is the mystery of godliness: God was manifested in the flesh, justified in the Spirit, seen by angels, preached among the Gentiles, believed on in the world, received up in glory.",
+    summary: "Paul compresses the entire mystery into one statement. God manifested in the flesh — first in Christ personally, now in Christ corporately through His body. The mystery of godliness is God becoming visible through human vessels. Christ was God manifested in one body. The church is Christ manifested in many bodies. The same mystery, expanding outward from one to many."
+  },
+  { arrow: "bright", label: "CULMINATING IN" },
+
+  { phase: "consummated", phaseLabel: "CONSUMMATED", phaseSub: "The mystery completed" },
+  {
+    num: 12, title: "ALL THINGS IN CHRIST", verse: "Ephesians 1:10, Revelation 21:2–3", cls: "bright",
+    badge: "THE GOAL",
+    scripture: "That in the dispensation of the fullness of the times He might gather together in one all things in Christ, both which are in heaven and which are on earth — in Him.",
+    summary: "The mystery ends where it began — in Christ. Everything summed up in Him. Heaven and earth united. God dwelling with man forever. The New Jerusalem descending as a bride adorned for her husband. The secret God held in His heart before the foundation of the world is fully, finally, eternally realised. And you — an ordinary believer with everyday responsibilities — have been let in on the secret of the ages. Not as a spectator. As a participant. As a living stone in the very building the mystery describes."
+  },
+];
+
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls}`;
+  div.onclick = () => {
+    const was = div.classList.contains('active');
+    document.querySelectorAll('.node').forEach(el => el.classList.remove('active'));
+    if (!was) div.classList.add('active');
+  };
+  let h = '';
+  if (n.badge) h += `<div class="badge">${n.badge}</div>`;
+  h += `<div class="node-header"><span class="node-number">${n.num}</span><div>`;
+  h += `<h3 class="node-title">${n.title}</h3>`;
+  h += `<span class="node-verse">${n.verse}</span></div></div>`;
+  h += `<div class="node-scripture">"${n.scripture}"</div>`;
+  h += `<div class="node-summary">${n.summary}</div>`;
+  h += `<div class="node-tap">Tap to expand</div>`;
+  div.innerHTML = h;
+  return div;
+}
+
+function buildArrow(cfg) {
+  const div = document.createElement('div');
+  div.className = `arrow ${cfg.cls}`;
+  const lh = cfg.label ? '16px' : '22px';
+  let h = `<div class="arrow-line" style="height:${lh}"></div>`;
+  if (cfg.label) h += `<span class="arrow-label">${cfg.label}</span>`;
+  h += '<div class="arrow-head"></div>';
+  div.innerHTML = h;
+  return div;
+}
+
+function buildPhase(p) {
+  const div = document.createElement('div');
+  div.className = 'phase';
+  let h = `<span class="phase-label ${p.phase}">${p.phaseLabel}</span>`;
+  if (p.phaseSub) h += `<div class="phase-sub">${p.phaseSub}</div>`;
+  div.innerHTML = h;
+  return div;
+}
+
+const flow = document.getElementById('flow');
+data.forEach(item => {
+  if (item.phase) flow.appendChild(buildPhase(item));
+  else if (item.arrow) flow.appendChild(buildArrow({ cls: item.arrow, label: item.label }));
+  else flow.appendChild(buildNode(item));
+});
+</script>
+</body>
+</html>

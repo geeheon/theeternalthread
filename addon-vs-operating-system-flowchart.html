@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Add-On Feature or Operating System?</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: #08080e;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .container { max-width: 460px; margin: 0 auto; padding: 40px 20px 60px; }
+
+  .header { text-align: center; margin-bottom: 32px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 300;
+    color: #e0c0a0; letter-spacing: 3px;
+    line-height: 1.3;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #e0c0a0, transparent);
+    margin: 10px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; color: #888070; font-style: italic;
+  }
+
+  /* Architecture diagrams */
+  .arch {
+    margin: 24px 0; padding: 22px 16px;
+    border-radius: 12px;
+    position: relative;
+  }
+  .arch.modern {
+    background: rgba(46,30,30,0.25);
+    border: 1.5px solid rgba(230,120,104,0.15);
+  }
+  .arch.pauline {
+    background: rgba(13,28,20,0.25);
+    border: 1.5px solid rgba(104,230,160,0.15);
+  }
+
+  .arch-label {
+    text-align: center; margin-bottom: 14px;
+  }
+  .arch-label-text {
+    font-size: 10px; font-weight: 800; letter-spacing: 2px;
+  }
+  .arch.modern .arch-label-text { color: #e67868; }
+  .arch.pauline .arch-label-text { color: #68e6a0; }
+  .arch-label-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-style: italic; margin-top: 2px;
+  }
+  .arch.modern .arch-label-sub { color: #a08070; }
+  .arch.pauline .arch-label-sub { color: #70a080; }
+
+  /* Ring diagram */
+  .ring-diagram { text-align: center; margin: 10px 0 16px; }
+  .ring-diagram canvas { display: inline-block; }
+
+  /* Module pills */
+  .modules {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    justify-content: center; margin: 10px 0;
+  }
+  .module-pill {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+    padding: 5px 10px; border-radius: 20px;
+  }
+  .arch.modern .module-pill {
+    background: rgba(230,120,104,0.08);
+    border: 1px solid rgba(230,120,104,0.15);
+    color: #c09080;
+  }
+  .arch.pauline .module-pill {
+    background: rgba(104,230,160,0.08);
+    border: 1px solid rgba(104,230,160,0.15);
+    color: #80b090;
+  }
+
+  .arch-foot {
+    text-align: center; margin-top: 14px;
+    padding-top: 12px;
+  }
+  .arch.modern .arch-foot { border-top: 1px solid rgba(230,120,104,0.08); }
+  .arch.pauline .arch-foot { border-top: 1px solid rgba(104,230,160,0.08); }
+  .arch-foot-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; font-style: italic; line-height: 1.6;
+  }
+  .arch.modern .arch-foot-text { color: #a08070; }
+  .arch.pauline .arch-foot-text { color: #70a080; }
+  .arch-foot-text em { font-style: italic; }
+  .arch.modern .arch-foot-text em { color: #e67868; }
+  .arch.pauline .arch-foot-text em { color: #68e6a0; }
+
+  /* VS divider */
+  .vs {
+    text-align: center; padding: 6px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; color: #504840; font-style: italic;
+  }
+
+  /* Symptoms section */
+  .symptoms {
+    margin: 28px 0; padding: 20px;
+    border-radius: 10px;
+    background: rgba(46,30,30,0.15);
+    border: 1px solid rgba(230,120,104,0.1);
+  }
+  .symptoms-header {
+    text-align: center; margin-bottom: 16px;
+  }
+  .symptoms-header span {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #e67868;
+  }
+  .symptom {
+    padding: 14px 16px; border-radius: 8px; margin-bottom: 10px;
+    background: rgba(46,30,30,0.2);
+    border: 1px solid transparent;
+    cursor: pointer; transition: all 0.3s ease;
+  }
+  .symptom:last-child { margin-bottom: 0; }
+  .symptom.active {
+    background: rgba(46,30,30,0.4);
+    border-color: rgba(230,120,104,0.15);
+  }
+  .symptom-q {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #c09080; font-style: italic;
+  }
+  .symptom-a {
+    font-size: 13px; line-height: 1.65; color: #a09080;
+    margin-top: 8px; display: none;
+  }
+  .symptom.active .symptom-a { display: block; }
+  .symptom-tap { font-size: 11px; color: #605850; margin-top: 4px; }
+  .symptom.active .symptom-tap { display: none; }
+
+  /* Flow nodes */
+  .section { text-align: center; padding: 22px 0 10px; }
+  .section-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 3px;
+    padding: 5px 14px; border-radius: 4px; display: inline-block;
+  }
+  .section-label.red { color: #e67868; background: rgba(230,120,104,0.06); border: 1px solid rgba(230,120,104,0.12); }
+  .section-label.green { color: #68e6a0; background: rgba(104,230,160,0.06); border: 1px solid rgba(104,230,160,0.12); }
+  .section-label.gold { color: #f0d080; background: rgba(240,208,128,0.08); border: 1px solid rgba(240,208,128,0.15); }
+  .section-sub { font-family: 'Cormorant Garamond', serif; font-size: 12px; color: #606058; font-style: italic; margin-top: 4px; }
+
+  .node {
+    border-radius: 10px; padding: 18px 22px;
+    cursor: pointer; transition: all 0.3s ease;
+    position: relative; border: 1.5px solid;
+  }
+  .node.active { transform: scale(1.02); }
+  .node.red { background: rgba(46,30,30,0.6); border-color: rgba(230,120,104,0.2); }
+  .node.red.active { background: rgba(46,30,30,0.9); border-color: #e67868; box-shadow: 0 0 25px rgba(230,120,104,0.08), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.green { background: rgba(13,28,20,0.6); border-color: rgba(104,230,160,0.2); }
+  .node.green.active { background: #0d2818; border-color: #68e6a0; box-shadow: 0 0 25px rgba(104,230,160,0.08), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.gold { background: rgba(32,26,14,0.6); border-color: rgba(240,208,128,0.2); }
+  .node.gold.active { background: #201a0e; border-color: #f0d080; box-shadow: 0 0 25px rgba(240,208,128,0.08), 0 4px 20px rgba(0,0,0,0.3); }
+
+  .badge { position: absolute; top: -10px; right: 16px; font-size: 9px; font-weight: 800; letter-spacing: 1.5px; padding: 3px 10px; border-radius: 3px; font-family: 'DM Sans', sans-serif; }
+  .red .badge { background: #e67868; color: #2e1a1a; }
+  .green .badge { background: #68e6a0; color: #0d2818; }
+  .gold .badge { background: #f0d080; color: #201a0e; }
+
+  .node-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .node.active .node-header { margin-bottom: 10px; }
+  .node-number { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; line-height: 1; opacity: 0.4; }
+  .red .node-number { color: #e67868; }
+  .green .node-number { color: #68e6a0; }
+  .gold .node-number { color: #f0d080; }
+  .node-title { font-size: 12px; font-weight: 700; letter-spacing: 2px; margin: 0; }
+  .red .node-title { color: #e67868; }
+  .green .node-title { color: #68e6a0; }
+  .gold .node-title { color: #f0d080; }
+  .node-verse { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; }
+  .red .node-verse { color: rgba(230,120,104,0.5); }
+  .green .node-verse { color: rgba(104,230,160,0.5); }
+  .gold .node-verse { color: rgba(240,208,128,0.5); }
+  .node-scripture { font-family: 'Cormorant Garamond', serif; font-size: 16px; line-height: 1.6; color: #d4c5a0; margin: 8px 0; font-style: italic; border-left: 2px solid; padding-left: 14px; display: none; }
+  .node.active .node-scripture { display: block; }
+  .red .node-scripture { border-left-color: rgba(230,120,104,0.25); }
+  .green .node-scripture { border-left-color: rgba(104,230,160,0.25); }
+  .gold .node-scripture { border-left-color: rgba(240,208,128,0.25); }
+  .node-summary { font-size: 13.5px; line-height: 1.65; color: #b8b0a0; margin: 8px 0 0; display: none; }
+  .node.active .node-summary { display: block; }
+  .node-tap { font-size: 12px; color: #606058; margin-left: 36px; }
+  .node.active .node-tap { display: none; }
+
+  .arrow { display: flex; flex-direction: column; align-items: center; padding: 4px 0; }
+  .arrow-line { width: 1.5px; }
+  .arrow-label { font-size: 9px; letter-spacing: 1.5px; font-weight: 700; padding: 2px 0; }
+  .arrow-head { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; }
+  .arrow.red .arrow-line { background: linear-gradient(to bottom, rgba(230,120,104,0.3), rgba(230,120,104,0.15)); }
+  .arrow.red .arrow-head { border-top: 6px solid rgba(230,120,104,0.25); }
+  .arrow.red .arrow-label { color: rgba(230,120,104,0.35); }
+  .arrow.green .arrow-line { background: linear-gradient(to bottom, rgba(104,230,160,0.3), rgba(104,230,160,0.15)); }
+  .arrow.green .arrow-head { border-top: 6px solid rgba(104,230,160,0.25); }
+  .arrow.green .arrow-label { color: rgba(104,230,160,0.35); }
+  .arrow.gold .arrow-line { background: linear-gradient(to bottom, rgba(240,208,128,0.3), rgba(240,208,128,0.15)); }
+  .arrow.gold .arrow-head { border-top: 6px solid rgba(240,208,128,0.25); }
+  .arrow.gold .arrow-label { color: rgba(240,208,128,0.35); }
+
+  .callout {
+    margin: 24px 0; padding: 18px 20px;
+    border-radius: 8px; text-align: center;
+    background: rgba(32,26,14,0.4);
+    border: 1px solid rgba(240,208,128,0.12);
+  }
+  .callout-text { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-style: italic; line-height: 1.5; color: #f0d080; margin-bottom: 6px; }
+  .callout-ref { font-size: 11px; letter-spacing: 1.5px; color: #807060; }
+
+  .footer {
+    margin-top: 40px; text-align: center; padding: 20px 0;
+    border-top: 1px solid rgba(224,200,160,0.06);
+  }
+  .footer p { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: #888070; font-style: italic; line-height: 1.7; margin-bottom: 12px; }
+  .footer-line { width: 20px; height: 1px; background: rgba(224,200,160,0.25); margin: 0 auto; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>ADD-ON FEATURE<br>OR OPERATING SYSTEM?</h1>
+    <div class="header-line"></div>
+    <p>How Christianity became a module — and what Paul actually had</p>
+  </div>
+
+  <!-- Modern Architecture -->
+  <div class="arch modern">
+    <div class="arch-label">
+      <div class="arch-label-text">THE MODERN MODEL</div>
+      <div class="arch-label-sub">Christianity as compartmentalised add-on</div>
+    </div>
+    <div class="ring-diagram"><canvas id="modernRing" width="320" height="250"></canvas></div>
+    <div class="modules">
+      <span class="module-pill">Sunday service</span>
+      <span class="module-pill">Small group</span>
+      <span class="module-pill">Devotional app</span>
+      <span class="module-pill">Prayer in crisis</span>
+      <span class="module-pill">Tithe</span>
+      <span class="module-pill">Worship playlist</span>
+    </div>
+    <div class="arch-foot">
+      <div class="arch-foot-text"><em>My life</em> is the operating system.<br>Christianity is a set of <em>plug-ins</em><br>activated at scheduled intervals.</div>
+    </div>
+  </div>
+
+  <div class="vs">vs</div>
+
+  <!-- Pauline Architecture -->
+  <div class="arch pauline">
+    <div class="arch-label">
+      <div class="arch-label-text">THE PAULINE MODEL</div>
+      <div class="arch-label-sub">Christ as the actual operating life</div>
+    </div>
+    <div class="ring-diagram"><canvas id="paulineRing" width="320" height="250"></canvas></div>
+    <div class="modules">
+      <span class="module-pill">Work as unto the Lord</span>
+      <span class="module-pill">Family as ekklesia</span>
+      <span class="module-pill">Daily shared life</span>
+      <span class="module-pill">All things under His rule</span>
+    </div>
+    <div class="arch-foot">
+      <div class="arch-foot-text"><em>Christ</em> is the operating system.<br>Everything else — work, family, rest —<br>runs <em>under His lordship</em>.</div>
+    </div>
+  </div>
+
+  <!-- Symptoms -->
+  <div class="symptoms">
+    <div class="symptoms-header"><span>SYMPTOMS OF THE ADD-ON MODEL</span></div>
+    <div class="symptom" onclick="toggleS(this)">
+      <div class="symptom-q">Why does Sunday feel disconnected from Monday?</div>
+      <div class="symptom-tap">Tap to expand</div>
+      <div class="symptom-a">Because Christianity is a module that activates on Sunday and hibernates the rest of the week. When Christ is the operating system, there's no disconnect — Monday and Sunday run on the same source. When He's an add-on, Sunday is religious and Monday is secular. Two different operating systems sharing one life.</div>
+    </div>
+    <div class="symptom" onclick="toggleS(this)">
+      <div class="symptom-q">Why do Christians burn out from serving?</div>
+      <div class="symptom-tap">Tap to expand</div>
+      <div class="symptom-a">Because the institutional model runs on human effort. It needs volunteers the way a business needs employees. The rosters, the programmes, the events — they all require flesh to function. When the flesh runs out of fuel, the person collapses. In the Pauline model, ministry flows from Christ's life within — it energises rather than depletes, because the source is infinite.</div>
+    </div>
+    <div class="symptom" onclick="toggleS(this)">
+      <div class="symptom-q">Why does church feel shallow?</div>
+      <div class="symptom-tap">Tap to expand</div>
+      <div class="symptom-a">Because a 90-minute consumer experience cannot produce the depth that daily shared life produces. You can't microwave what requires a slow cooker. The Pauline ekklesia wasn't a weekly event — it was a daily reality. They broke bread from house to house. They shared possessions. They bore one another's burdens. Depth comes from sustained proximity under Christ's headship, not from a polished Sunday production.</div>
+    </div>
+    <div class="symptom" onclick="toggleS(this)">
+      <div class="symptom-q">Why do people church-hop?</div>
+      <div class="symptom-tap">Tap to expand</div>
+      <div class="symptom-a">Because when faith is a product, you shop for the best one. The worship isn't to your taste? Switch. The sermon doesn't feed you? Move on. The kids' programme isn't good enough? Try the church down the road. Consumer logic applied to the body of Christ. In the Pauline model, you don't consume the ekklesia — you are the ekklesia. You don't leave a body. You are a member of it.</div>
+    </div>
+    <div class="symptom" onclick="toggleS(this)">
+      <div class="symptom-q">Why is there so little genuine transformation?</div>
+      <div class="symptom-tap">Tap to expand</div>
+      <div class="symptom-a">Because transformation requires the operating system to change, not just the modules. You can add a prayer module and a Bible reading module and a church attendance module to a life that's still fundamentally centred on self — and nothing changes at the core. The bicycle gets religious accessories bolted onto it. It's still a bicycle. Transformation happens when Christ becomes the actual source — when the operating system itself is replaced.</div>
+    </div>
+    <div class="symptom" onclick="toggleS(this)">
+      <div class="symptom-q">Why do most Christians look identical to non-Christians?</div>
+      <div class="symptom-tap">Tap to expand</div>
+      <div class="symptom-a">Because they are running the same operating system. Same career ambitions. Same consumer habits. Same entertainment. Same anxiety about money. Same parenting driven by performance. The only visible difference is that they attend a building on Sunday and use religious vocabulary occasionally. When Christ is genuinely the operating life, the difference isn't subtle — it's unmistakable. Paul's life was so radically different that it got him arrested, beaten, and eventually killed. Nobody arrests you for attending a Sunday service.</div>
+    </div>
+  </div>
+
+  <!-- Flow: How we got here -->
+  <div class="section"><span class="section-label red">HOW WE GOT HERE</span><div class="section-sub">The drift from operating system to add-on</div></div>
+
+  <div id="flow"></div>
+
+  <!-- The alternative -->
+  <div class="section"><span class="section-label green">THE ALTERNATIVE</span><div class="section-sub">What Paul actually had — and what's still available</div></div>
+
+  <div id="flow2"></div>
+
+  <div class="callout">
+    <div class="callout-text">"For to me, to live is Christ, and to die is gain."</div>
+    <div class="callout-ref">PHILIPPIANS 1:21</div>
+  </div>
+
+  <div class="footer">
+    <p>Not: to me, to live is my career<br>with Christ on Sunday.<br><br>Not: to me, to live is my family<br>with Christ as a value we hold.<br><br>To me, to live <em>is</em> Christ.<br>Operating system. Not add-on.<br>Source. Not supplement.<br><br>That's what was lost.<br>That's what the ekklesia recovers.</p>
+    <div class="footer-line"></div>
+  </div>
+
+</div>
+
+<script>
+// Modern ring diagram - self at centre, Christianity as orbiting modules
+function drawModern() {
+  const c = document.getElementById('modernRing');
+  const ctx = c.getContext('2d');
+  const W = 320, H = 250;
+  c.width = W; c.height = H;
+  const cX = W/2, cY = 124;
+  ctx.clearRect(0, 0, W, H);
+
+  // Centre: MY LIFE
+  ctx.beginPath();
+  ctx.arc(cX, cY, 40, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(230,120,104,0.12)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(230,120,104,0.3)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  ctx.font = '800 12px "DM Sans", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#e67868';
+  ctx.fillText('MY LIFE', cX, cY - 4);
+  ctx.font = '400 10px "Cormorant Garamond", serif';
+  ctx.fillStyle = '#d7a091';
+  ctx.fillText('career · family', cX, cY + 10);
+  ctx.fillText('lifestyle · status', cX, cY + 22);
+
+  // Orbiting modules
+  const mods = ['SUNDAY', 'SMALL\nGROUP', 'PRAYER', 'TITHE', 'DEVO\nAPP'];
+  const r = 96;
+  mods.forEach((m, i) => {
+    const angle = (i / mods.length) * Math.PI * 2 - Math.PI/2;
+    const x = cX + r * Math.cos(angle);
+    const y = cY + r * Math.sin(angle);
+
+    // Dashed orbit line
+    ctx.beginPath();
+    ctx.setLineDash([3, 4]);
+    ctx.arc(cX, cY, r, angle - 0.15, angle + 0.15);
+    ctx.strokeStyle = 'rgba(230,120,104,0.1)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Module dot
+    ctx.beginPath();
+    ctx.arc(x, y, 18, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(230,120,104,0.08)';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(230,120,104,0.2)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    ctx.font = '700 7px "DM Sans", sans-serif';
+    ctx.fillStyle = '#d3a090';
+    ctx.textAlign = 'center';
+    const lines = m.split('\n');
+    lines.forEach((l, li) => {
+      ctx.fillText(l, x, y + (li - (lines.length-1)/2) * 9 + 2);
+    });
+  });
+
+  // Orbit circle
+  ctx.beginPath();
+  ctx.setLineDash([4, 6]);
+  ctx.arc(cX, cY, r, 0, Math.PI*2);
+  ctx.strokeStyle = 'rgba(230,120,104,0.08)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+// Pauline ring diagram - Christ at centre, everything under His rule
+function drawPauline() {
+  const c = document.getElementById('paulineRing');
+  const ctx = c.getContext('2d');
+  const W = 320, H = 250;
+  c.width = W; c.height = H;
+  const cX = W/2, cY = 124;
+  ctx.clearRect(0, 0, W, H);
+
+  // Large encompassing circle
+  ctx.beginPath();
+  ctx.arc(cX, cY, 96, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(104,230,160,0.03)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(104,230,160,0.15)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Label on circle
+  ctx.font = '700 8px "DM Sans", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(104,230,160,0.42)';
+  ctx.fillText('EVERYTHING UNDER HIS LORDSHIP', cX, cY - 100);
+
+  // Centre: CHRIST
+  ctx.beginPath();
+  ctx.arc(cX, cY, 34, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(104,230,160,0.15)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(104,230,160,0.4)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  ctx.font = '800 12px "DM Sans", sans-serif';
+  ctx.fillStyle = '#68e6a0';
+  ctx.fillText('CHRIST', cX, cY + 4);
+
+  // Radiating lines to life areas (inside the circle)
+  const areas = ['WORK', 'FAMILY', 'REST', 'FINANCES', 'COMMUNITY', 'MISSION'];
+  const r = 72;
+  areas.forEach((a, i) => {
+    const angle = (i / areas.length) * Math.PI * 2 - Math.PI/2;
+    const x = cX + r * Math.cos(angle);
+    const y = cY + r * Math.sin(angle);
+
+    // Line from centre
+    ctx.beginPath();
+    ctx.moveTo(cX + 34 * Math.cos(angle), cY + 34 * Math.sin(angle));
+    ctx.lineTo(x, y);
+    ctx.strokeStyle = 'rgba(104,230,160,0.12)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    ctx.font = '700 8px "DM Sans", sans-serif';
+    ctx.fillStyle = '#9ed3b0';
+    ctx.textAlign = 'center';
+    ctx.fillText(a, x, y + 3);
+  });
+}
+
+drawModern();
+drawPauline();
+
+// Symptom toggle
+function toggleS(el) {
+  const was = el.classList.contains('active');
+  el.parentElement.querySelectorAll('.symptom').forEach(s => s.classList.remove('active'));
+  if (!was) el.classList.add('active');
+}
+
+// Flow nodes
+const flow1Data = [
+  {
+    num: 1, title: "CONSTANTINE'S SHIFT", verse: "313 AD onward", cls: "red",
+    badge: "THE TURN",
+    scripture: "Christianity becomes the official religion of the Roman Empire.",
+    summary: "When Christianity went from persecuted minority to state religion, everything changed. Buildings replaced homes. Clergy replaced participatory gatherings. Attendance replaced shared life. The ekklesia — a living organism — was institutionalised into the church — an organisation. What was once the operating system of believers' lives became a religious department within the empire's structure. The compartmentalisation began here."
+  },
+  { arrow: "red" },
+  {
+    num: 2, title: "THE CLERGY-LAITY DIVIDE", verse: "cf. Revelation 2:6 — Nicolaitans", cls: "red",
+    scripture: "The rise of a professional class who \"do\" Christianity on behalf of the people.",
+    summary: "A class emerged who were paid to be spiritual so that everyone else didn't have to be. The pastor preaches, the congregation listens. The priest administers, the laity receives. Ministry became a spectator sport. The body of Christ — where every member functions — was reduced to an audience watching professionals perform. This created the consumer dynamic: I pay my tithe, you deliver the product. Church became a service I attend, not a life I share."
+  },
+  { arrow: "red" },
+  {
+    num: 3, title: "THE SACRED-SECULAR SPLIT", verse: "cf. Colossians 3:17, 1 Corinthians 10:31", cls: "red",
+    scripture: "Sunday is sacred. Monday is secular. Church is spiritual. Work is worldly.",
+    summary: "Life got divided into compartments. Church, prayer, Bible reading — sacred. Work, finances, entertainment, relationships — secular. This split is completely foreign to the New Testament. Paul said \"whatever you do, in word or deed, do everything in the name of the Lord Jesus.\" Everything. There was no secular compartment. But the institutional model needed boundaries — it couldn't run your whole life, only your Sunday — so the split became normalised. Christianity retreated to its allocated timeslot."
+  },
+  { arrow: "red", label: "PRODUCING" },
+  {
+    num: 4, title: "CHRISTIANITY AS CONSUMER PRODUCT", verse: "cf. 2 Timothy 4:3", cls: "red",
+    scripture: "They will accumulate for themselves teachers to suit their own passions.",
+    summary: "The logical endpoint: church as a product competing in a marketplace. Worship quality, sermon delivery, kids' programmes, parking convenience, coffee bar, online giving — all optimised for the consumer. The question shifted from 'is Christ the head here?' to 'does this meet my needs?' Church growth strategies borrowed from corporate marketing. Branding. Target demographics. Customer satisfaction. The ekklesia became a franchise. And the believer became a customer who could take their business elsewhere."
+  },
+];
+
+const flow2Data = [
+  {
+    num: 5, title: "CHRIST AS ACTUAL LORD", verse: "Philippians 1:21, Colossians 1:18", cls: "green",
+    badge: "THE RECOVERY",
+    scripture: "For to me, to live is Christ... that in all things He may have the preeminence.",
+    summary: "The recovery starts not with a better church model but with a person surrendering their operating system. Christ doesn't want a timeslot in your week. He wants the throne of your life. Not as a demanding tyrant — as the source of everything. When He is genuinely Lord of your Monday morning, your marriage, your finances, your ambitions — then the compartments collapse. There's no sacred-secular split because everything is under His rule. Church isn't something you attend — it's something you are, every day, in every context."
+  },
+  { arrow: "green" },
+  {
+    num: 6, title: "THE EKKLESIA AS SHARED LIFE", verse: "Acts 2:42–47", cls: "green",
+    scripture: "They continued steadfastly in the apostles' doctrine and fellowship, in the breaking of bread, and in prayers... they had all things in common.",
+    summary: "The Acts 2 community wasn't a Sunday service with midweek small groups bolted on. It was a daily, all-of-life, integrated reality. They ate together. They shared possessions. They met in homes. They were together daily. The ekklesia wasn't a department of their lives — it was the fabric of their lives. This isn't idealism. It's what happens naturally when a group of people are all running on the same operating system — Christ as the indwelling life — and they live in proximity."
+  },
+  { arrow: "green" },
+  {
+    num: 7, title: "EVERY MEMBER FUNCTIONING", verse: "1 Corinthians 14:26, Ephesians 4:16", cls: "green",
+    scripture: "When you come together, each one has a hymn, a lesson, a revelation, a tongue, or an interpretation.",
+    summary: "In the Pauline ekklesia, there was no audience. Every member contributed. Not because they were rostered on, but because Christ's life in each one had something to express. The gathering wasn't a performance by professionals — it was a body functioning under the headship of Christ. This is what happens when a group gathers without a scripted programme: people contribute, Christ is expressed through many members, and a unified theme can emerge organically. That's not a consumer product. That's a living organism. And it's what the add-on model can never produce."
+  },
+  { arrow: "gold", label: "RESULTING IN" },
+  {
+    num: 8, title: "A LIFE THAT DOESN'T MAKE SENSE", verse: "Matthew 5:16, Acts 17:6", cls: "gold",
+    badge: "THE EVIDENCE",
+    scripture: "These who have turned the world upside down have come here too.",
+    summary: "When Christ is the operating system — not the add-on — the result is a life that baffles the watching world. A person who chooses simplicity instead of constant lifestyle upgrades. A family that refuses to be driven by status. A community that shares meals instead of consuming entertainment. People who have peace without circumstances being perfect. Joy without everything going right. Generosity without calculating return. The world can't explain it. That's the point. A life indistinguishable from the culture proves nothing. A life that doesn't make sense by the world's logic — that's the Kingdom made visible."
+  },
+];
+
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls}`;
+  div.onclick = () => {
+    const was = div.classList.contains('active');
+    document.querySelectorAll('.node').forEach(el => el.classList.remove('active'));
+    if (!was) div.classList.add('active');
+  };
+  let h = '';
+  if (n.badge) h += `<div class="badge">${n.badge}</div>`;
+  h += `<div class="node-header"><span class="node-number">${n.num}</span><div>`;
+  h += `<h3 class="node-title">${n.title}</h3>`;
+  h += `<span class="node-verse">${n.verse}</span></div></div>`;
+  h += `<div class="node-scripture">"${n.scripture}"</div>`;
+  h += `<div class="node-summary">${n.summary}</div>`;
+  h += `<div class="node-tap">Tap to expand</div>`;
+  div.innerHTML = h;
+  return div;
+}
+function buildArrow(cfg) {
+  const div = document.createElement('div');
+  div.className = `arrow ${cfg.cls}`;
+  const lh = cfg.label ? '16px' : '22px';
+  let h = `<div class="arrow-line" style="height:${lh}"></div>`;
+  if (cfg.label) h += `<span class="arrow-label">${cfg.label}</span>`;
+  h += '<div class="arrow-head"></div>';
+  div.innerHTML = h;
+  return div;
+}
+
+const f1 = document.getElementById('flow');
+flow1Data.forEach(item => {
+  if (item.arrow !== undefined) f1.appendChild(buildArrow({ cls: item.arrow, label: item.label }));
+  else f1.appendChild(buildNode(item));
+});
+const f2 = document.getElementById('flow2');
+flow2Data.forEach(item => {
+  if (item.arrow !== undefined) f2.appendChild(buildArrow({ cls: item.arrow, label: item.label }));
+  else f2.appendChild(buildNode(item));
+});
+</script>
+</body>
+</html>

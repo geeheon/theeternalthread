@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Three Kinds of Man — Natural, Carnal, Spiritual</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{background:#0a0a10;color:#d4c5a0;font-family:'DM Sans',sans-serif;min-height:100vh}.container{max-width:460px;margin:0 auto;padding:40px 20px 60px}.header{text-align:center;margin-bottom:32px}.header h1{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#d0c0a0;letter-spacing:3px;line-height:1.3}.header-line{width:40px;height:1.5px;background:linear-gradient(to right,transparent,#d0c0a0,transparent);margin:10px auto}.header p{font-family:'Cormorant Garamond',serif;font-size:16px;color:#888078;font-style:italic}.header .author{font-family:'DM Sans',sans-serif;font-size:10px;color:#606058;letter-spacing:2px;margin-top:6px;font-weight:700}
+.verse-box{margin:0 0 24px;padding:20px;border-radius:10px;text-align:center}.verse-box.main{background:rgba(20,18,14,0.5);border:1px solid rgba(208,192,160,0.12)}.verse-text{font-family:'Cormorant Garamond',serif;font-size:16px;color:#d0c0a0;font-style:italic;line-height:1.6}.verse-text em{color:#e8d8b8}.verse-ref{font-size:11px;letter-spacing:1.5px;color:#706858;margin-top:8px}
+.overview{margin:0 0 28px;padding:20px;border-radius:10px;text-align:center;background:rgba(16,14,18,0.5);border:1px solid rgba(208,192,160,0.08)}.overview-label{font-size:9px;font-weight:800;letter-spacing:2px;color:#d0c0a0;margin-bottom:10px}.overview-text{font-family:'Cormorant Garamond',serif;font-size:15px;color:#a09888;font-style:italic;line-height:1.7}.overview-text em{color:#d0c0a0}
+
+/* Three states visual */
+.three-states{margin:0 0 28px;border-radius:10px;overflow:hidden;border:1px solid rgba(208,192,160,0.1)}
+.three-states-header{text-align:center;padding:12px;background:rgba(20,18,14,0.4);border-bottom:1px solid rgba(208,192,160,0.06)}.three-states-header span{font-size:9px;font-weight:800;letter-spacing:2px;color:#d0c0a0}
+.state-card{padding:20px 18px;border-bottom:1px solid rgba(208,192,160,0.04);cursor:pointer;transition:all 0.3s ease}.state-card:last-child{border-bottom:none}.state-card.active{padding-bottom:22px}
+.state-top{display:flex;align-items:center;gap:14px}
+.state-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
+.state-icon canvas{position:absolute;top:0;left:0}
+.state-info{flex:1}
+.state-title{font-size:12px;font-weight:700;letter-spacing:2px}.state-greek{font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;margin-top:1px}.state-oneliner{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;margin-top:4px}
+
+.state-card.natural{background:rgba(36,30,30,0.25)}.state-card.natural .state-title{color:#c08080}.state-card.natural .state-greek{color:rgba(192,128,128,0.5)}.state-card.natural .state-oneliner{color:#907070}
+.state-card.carnal{background:rgba(36,32,20,0.25)}.state-card.carnal .state-title{color:#d0a860}.state-card.carnal .state-greek{color:rgba(208,168,96,0.5)}.state-card.carnal .state-oneliner{color:#908060}
+.state-card.spiritual{background:rgba(16,30,22,0.25)}.state-card.spiritual .state-title{color:#68d8a0}.state-card.spiritual .state-greek{color:rgba(104,216,160,0.5)}.state-card.spiritual .state-oneliner{color:#609878}
+
+.state-detail{font-size:13.5px;line-height:1.65;color:#b8b0a0;margin-top:12px;display:none}.state-card.active .state-detail{display:block}
+.state-tap{font-size:11px;color:#605850;margin-top:6px}.state-card.active .state-tap{display:none}
+
+.state-traits{margin-top:10px;display:flex;flex-wrap:wrap;gap:5px}.state-trait{font-size:10px;font-weight:600;padding:4px 10px;border-radius:20px}
+.state-card.natural .state-trait{background:rgba(192,128,128,0.08);border:1px solid rgba(192,128,128,0.15);color:#b09090}
+.state-card.carnal .state-trait{background:rgba(208,168,96,0.08);border:1px solid rgba(208,168,96,0.15);color:#b0a070}
+.state-card.spiritual .state-trait{background:rgba(104,216,160,0.08);border:1px solid rgba(104,216,160,0.15);color:#80b890}
+
+/* Key insight */
+.insight{margin:24px 0;padding:20px;border-radius:10px;text-align:center}.insight.warning{background:rgba(46,36,20,0.3);border:1px solid rgba(208,168,96,0.12)}.insight-label{font-size:9px;font-weight:800;letter-spacing:2px;margin-bottom:10px}.insight.warning .insight-label{color:#d0a860}.insight-text{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;line-height:1.7}.insight.warning .insight-text{color:#b0a070}.insight-text em{font-style:italic}.insight.warning .insight-text em{color:#d0a860}
+
+/* Section */
+.section{text-align:center;padding:22px 0 10px}.section-label{font-size:9px;font-weight:800;letter-spacing:3px;padding:5px 14px;border-radius:4px;display:inline-block}
+.section-label.red{color:#c08080;background:rgba(192,128,128,0.06);border:1px solid rgba(192,128,128,0.12)}
+.section-label.gold{color:#d0a860;background:rgba(208,168,96,0.06);border:1px solid rgba(208,168,96,0.12)}
+.section-label.green{color:#68d8a0;background:rgba(104,216,160,0.06);border:1px solid rgba(104,216,160,0.12)}
+.section-label.blue{color:#80b0d8;background:rgba(128,176,216,0.06);border:1px solid rgba(128,176,216,0.12)}
+.section-sub{font-family:'Cormorant Garamond',serif;font-size:12px;color:#606058;font-style:italic;margin-top:4px}
+
+/* Nodes */
+.node{border-radius:10px;padding:18px 22px;cursor:pointer;transition:all 0.3s ease;position:relative;border:1.5px solid}.node.active{transform:scale(1.02)}
+.node.red{background:rgba(40,26,26,0.6);border-color:rgba(192,128,128,0.2)}.node.red.active{background:rgba(40,26,26,0.9);border-color:#c08080;box-shadow:0 0 25px rgba(192,128,128,0.08),0 4px 20px rgba(0,0,0,0.3)}
+.node.gold{background:rgba(36,30,16,0.6);border-color:rgba(208,168,96,0.2)}.node.gold.active{background:rgba(36,30,16,0.9);border-color:#d0a860;box-shadow:0 0 25px rgba(208,168,96,0.08),0 4px 20px rgba(0,0,0,0.3)}
+.node.green{background:rgba(13,28,20,0.6);border-color:rgba(104,216,160,0.2)}.node.green.active{background:#0d2818;border-color:#68d8a0;box-shadow:0 0 25px rgba(104,216,160,0.08),0 4px 20px rgba(0,0,0,0.3)}
+.node.blue{background:rgba(14,20,34,0.6);border-color:rgba(128,176,216,0.2)}.node.blue.active{background:rgba(14,20,34,0.9);border-color:#80b0d8;box-shadow:0 0 25px rgba(128,176,216,0.08),0 4px 20px rgba(0,0,0,0.3)}
+
+.badge{position:absolute;top:-10px;right:16px;font-size:9px;font-weight:800;letter-spacing:1.5px;padding:3px 10px;border-radius:3px;font-family:'DM Sans',sans-serif}
+.red .badge{background:#c08080;color:#2e1a1a}.gold .badge{background:#d0a860;color:#2e2410}.green .badge{background:#68d8a0;color:#0d2818}.blue .badge{background:#80b0d8;color:#0e1422}
+
+.node-header{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}.node.active .node-header{margin-bottom:10px}
+.node-number{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;line-height:1;opacity:0.4}
+.red .node-number{color:#c08080}.gold .node-number{color:#d0a860}.green .node-number{color:#68d8a0}.blue .node-number{color:#80b0d8}
+.node-title{font-size:12px;font-weight:700;letter-spacing:2px;margin:0}
+.red .node-title{color:#c08080}.gold .node-title{color:#d0a860}.green .node-title{color:#68d8a0}.blue .node-title{color:#80b0d8}
+.node-verse{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic}
+.red .node-verse{color:rgba(192,128,128,0.5)}.gold .node-verse{color:rgba(208,168,96,0.5)}.green .node-verse{color:rgba(104,216,160,0.5)}.blue .node-verse{color:rgba(128,176,216,0.5)}
+.node-scripture{font-family:'Cormorant Garamond',serif;font-size:16px;line-height:1.6;color:#d4c5a0;margin:8px 0;font-style:italic;border-left:2px solid;padding-left:14px;display:none}.node.active .node-scripture{display:block}
+.red .node-scripture{border-left-color:rgba(192,128,128,0.25)}.gold .node-scripture{border-left-color:rgba(208,168,96,0.25)}.green .node-scripture{border-left-color:rgba(104,216,160,0.25)}.blue .node-scripture{border-left-color:rgba(128,176,216,0.25)}
+.node-summary{font-size:13.5px;line-height:1.65;color:#b8b0a0;margin:8px 0 0;display:none}.node.active .node-summary{display:block}
+.node-tap{font-size:12px;color:#606058;margin-left:36px}.node.active .node-tap{display:none}
+
+.arrow{display:flex;flex-direction:column;align-items:center;padding:4px 0}.arrow-line{width:1.5px}.arrow-label{font-size:9px;letter-spacing:1.5px;font-weight:700;padding:2px 0}.arrow-head{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent}
+.arrow.red .arrow-line{background:linear-gradient(to bottom,rgba(192,128,128,0.3),rgba(192,128,128,0.15))}.arrow.red .arrow-head{border-top:6px solid rgba(192,128,128,0.25)}.arrow.red .arrow-label{color:rgba(192,128,128,0.35)}
+.arrow.gold .arrow-line{background:linear-gradient(to bottom,rgba(208,168,96,0.3),rgba(208,168,96,0.15))}.arrow.gold .arrow-head{border-top:6px solid rgba(208,168,96,0.25)}.arrow.gold .arrow-label{color:rgba(208,168,96,0.35)}
+.arrow.green .arrow-line{background:linear-gradient(to bottom,rgba(104,216,160,0.3),rgba(104,216,160,0.15))}.arrow.green .arrow-head{border-top:6px solid rgba(104,216,160,0.25)}.arrow.green .arrow-label{color:rgba(104,216,160,0.35)}
+.arrow.blue .arrow-line{background:linear-gradient(to bottom,rgba(128,176,216,0.3),rgba(128,176,216,0.15))}.arrow.blue .arrow-head{border-top:6px solid rgba(128,176,216,0.25)}.arrow.blue .arrow-label{color:rgba(128,176,216,0.35)}
+
+.callout{margin:24px 0;padding:18px 20px;border-radius:8px;text-align:center;background:rgba(16,28,22,0.4);border:1px solid rgba(104,216,160,0.12)}.callout-text{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;line-height:1.5;color:#68d8a0;margin-bottom:6px}.callout-ref{font-size:11px;letter-spacing:1.5px;color:#507060}
+.footer{margin-top:40px;text-align:center;padding:20px 0;border-top:1px solid rgba(208,192,160,0.06)}.footer p{font-family:'Cormorant Garamond',serif;font-size:15px;color:#888078;font-style:italic;line-height:1.7;margin-bottom:12px}.footer-line{width:20px;height:1px;background:rgba(208,192,160,0.25);margin:0 auto}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<h1>THREE KINDS OF MAN</h1>
+<div class="header-line"></div>
+<p>Natural · Carnal · Spiritual — which one are you living as?</p>
+<div class="author">1 CORINTHIANS 2:14–3:3 · AFTER WATCHMAN NEE</div>
+</div>
+
+<div class="verse-box main">
+<div class="verse-text">"But the <em>natural man</em> does not receive the things of the Spirit of God... And I, brethren, could not speak to you as to <em>spiritual</em> people but as to <em>carnal</em>, as to babes in Christ."</div>
+<div class="verse-ref">1 CORINTHIANS 2:14, 3:1</div>
+</div>
+
+<div class="overview">
+<div class="overview-label">THE UNCOMFORTABLE REALITY</div>
+<div class="overview-text">Paul identifies three categories of human beings — not based on moral behaviour, but based on <em>which part of them is governing</em>. The natural man is governed by the flesh with no spiritual life. The carnal man has been born again but is still governed by the soul. The spiritual man is governed by the spirit where Christ dwells. Most Christians assume they are spiritual because they are saved. Paul says the Corinthians were saved — and carnal. <em>Birth determines category one. Source determines the other two.</em></div>
+</div>
+
+<!-- Three States -->
+<div class="three-states">
+<div class="three-states-header"><span>THE THREE STATES — TAP TO EXPLORE</span></div>
+
+<div class="state-card natural" onclick="toggleS(this)">
+<div class="state-top">
+<div class="state-icon" style="background:rgba(192,128,128,0.1);border:1.5px solid rgba(192,128,128,0.3);">
+<span style="font-size:16px;color:#c08080;font-weight:300;font-family:'Cormorant Garamond',serif;">ψ</span>
+</div>
+<div class="state-info">
+<div class="state-title">THE NATURAL MAN</div>
+<div class="state-greek">ψυχικός — psuchikos — "soulish"</div>
+<div class="state-oneliner">Unregenerate. The spirit is dead to God.</div>
+</div>
+</div>
+<div class="state-tap">Tap to expand</div>
+<div class="state-detail">
+The natural man has no spiritual life. His human spirit — the organ that contacts God — is dead, darkened, cut off since the fall. He operates entirely from the soul: mind, will, and emotions. This doesn't mean he's necessarily immoral. He can be highly intelligent, deeply cultured, emotionally sensitive, and morally upright. He can be religious, philosophical, and charitable. But everything he does originates from the soul — human capacity operating without God's life. He cannot receive the things of the Spirit because he lacks the organ to perceive them. It's not that spiritual truth is too complicated — it's that he doesn't have the antenna. A radio with no receiver can't pick up a signal no matter how powerful the broadcast.
+<div class="state-traits">
+<span class="state-trait">No spiritual life</span>
+<span class="state-trait">Soul-governed</span>
+<span class="state-trait">Can be moral</span>
+<span class="state-trait">Can be religious</span>
+<span class="state-trait">Cannot perceive spiritual reality</span>
+</div>
+</div>
+</div>
+
+<div class="state-card carnal" onclick="toggleS(this)">
+<div class="state-top">
+<div class="state-icon" style="background:rgba(208,168,96,0.1);border:1.5px solid rgba(208,168,96,0.3);">
+<span style="font-size:16px;color:#d0a860;font-weight:300;font-family:'Cormorant Garamond',serif;">σ</span>
+</div>
+<div class="state-info">
+<div class="state-title">THE CARNAL MAN</div>
+<div class="state-greek">σαρκικός — sarkikos — "fleshly"</div>
+<div class="state-oneliner">Born again — but still soul-governed.</div>
+</div>
+</div>
+<div class="state-tap">Tap to expand</div>
+<div class="state-detail">
+This is the category most Christians don't want to hear about. The carnal man is genuinely saved — born again, indwelt by the Holy Spirit, a real child of God. Paul calls the Corinthians "brethren" and "babes in Christ" — they're in the family. But they're living as though they aren't. Their spirit has been regenerated, but their soul is still running the show. They're driven by their own reasoning rather than the Spirit's leading. They're moved by emotions rather than spiritual intuition. They make decisions by willpower rather than dependence. The result looks like the world: jealousy, strife, divisions (1 Cor 3:3). Not because they lack the Spirit — but because they're not living from the Spirit. The car has been given to them. They're still pedalling the bicycle.
+<div class="state-traits">
+<span class="state-trait">Genuinely saved</span>
+<span class="state-trait">Spirit alive but not governing</span>
+<span class="state-trait">Soul still on the throne</span>
+<span class="state-trait">Jealousy & strife</span>
+<span class="state-trait">Spiritual infants</span>
+<span class="state-trait">Can only digest milk</span>
+</div>
+</div>
+</div>
+
+<div class="state-card spiritual" onclick="toggleS(this)">
+<div class="state-top">
+<div class="state-icon" style="background:rgba(104,216,160,0.1);border:1.5px solid rgba(104,216,160,0.3);">
+<span style="font-size:16px;color:#68d8a0;font-weight:300;font-family:'Cormorant Garamond',serif;">π</span>
+</div>
+<div class="state-info">
+<div class="state-title">THE SPIRITUAL MAN</div>
+<div class="state-greek">πνευματικός — pneumatikos — "spirit-governed"</div>
+<div class="state-oneliner">Born again — and living from the spirit.</div>
+</div>
+</div>
+<div class="state-tap">Tap to expand</div>
+<div class="state-detail">
+The spiritual man is not someone with more Bible knowledge, stronger willpower, or deeper emotional experiences. He is someone whose regenerated spirit — indwelt by the Holy Spirit — has become the governing centre of his life. His mind is renewed by the Spirit rather than operating independently. His emotions are calibrated by spiritual reality rather than circumstances. His will is submitted to God's will rather than asserting its own agenda. He "judges all things" (1 Cor 2:15) — not because he's smarter, but because the Spirit gives discernment that the soul alone cannot access. He feeds on solid food, not just milk. He sees what God is doing, not just what he wants God to do for him. This is the self-driving car — the Spirit governing, Christ expressing Himself through a yielded human vessel.
+<div class="state-traits">
+<span class="state-trait">Spirit governing</span>
+<span class="state-trait">Soul submitted</span>
+<span class="state-trait">Discerns spiritual reality</span>
+<span class="state-trait">Feeds on solid food</span>
+<span class="state-trait">Christ expressed</span>
+<span class="state-trait">Bears lasting fruit</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Key insight -->
+<div class="insight warning">
+<div class="insight-label">THE UNCOMFORTABLE QUESTION</div>
+<div class="insight-text">The Corinthians were saved. They spoke in tongues. They had spiritual gifts. They attended gatherings. And Paul called them <em>carnal</em>.<br><br>Spiritual gifts do not prove spiritual maturity. Church attendance does not prove spiritual life. Biblical knowledge does not prove the spirit is governing.<br><br>The only evidence of the spiritual man is <em>the fruit of a life governed by the Spirit</em> — not the activity of a soul decorated with religious accessories.</div>
+</div>
+
+<!-- Main flow -->
+<div class="section"><span class="section-label red">THE NATURAL MAN — NO LIFE</span><div class="section-sub">Dead in spirit, living entirely from soul</div></div>
+
+<div id="flow1"></div>
+
+<div class="section"><span class="section-label gold">THE CARNAL MAN — LIFE BUT WRONG GOVERNOR</span><div class="section-sub">Born again but soul still on the throne</div></div>
+
+<div id="flow2"></div>
+
+<div class="section"><span class="section-label green">THE SPIRITUAL MAN — LIFE UNDER RIGHT GOVERNANCE</span><div class="section-sub">The spirit governing through the soul and body</div></div>
+
+<div id="flow3"></div>
+
+<div class="section"><span class="section-label blue">THE TRANSITION</span><div class="section-sub">How to move from carnal to spiritual</div></div>
+
+<div id="flow4"></div>
+
+<div class="callout">
+<div class="callout-text">"If we live in the Spirit, let us also walk in the Spirit."</div>
+<div class="callout-ref">GALATIANS 5:25</div>
+</div>
+
+<div class="footer">
+<p>The question is not:<br>Are you saved?<br><br>The question is:<br>What is governing your life?<br><br>The soul — your own mind, will, emotions —<br>producing religious activity from human effort?<br><br>Or the spirit — where Christ dwells —<br>producing His life through a yielded vessel?<br><br>The jump from carnal to spiritual<br>is not more effort. It is a change of source.<br>Get off the bicycle. Get in the car.<br>The Spirit is already there.</p>
+<div class="footer-line"></div>
+</div>
+
+</div>
+
+<script>
+function toggleS(el){const w=el.classList.contains('active');el.parentElement.querySelectorAll('.state-card').forEach(s=>s.classList.remove('active'));if(!w)el.classList.add('active')}
+
+const f1=[
+{num:1,title:"SPIRIT DEAD TO GOD",verse:"Ephesians 2:1, 4:18",cls:"red",badge:"THE CONDITION",
+scripture:"And you He made alive, who were dead in trespasses and sins... having their understanding darkened, being alienated from the life of God.",
+summary:"The natural man's spirit is not absent — it's dead. Dead not in the sense of non-existent but in the sense of non-functional toward God. A dead radio still has all its components. It just has no power. The natural man's spirit cannot receive God's signals. He's alienated from the life of God — not from the knowledge of God (he can study theology brilliantly) but from the life. This is why highly educated, morally upright people can be utterly blind to spiritual reality. Their antenna is dead."},
+{arrow:"red"},
+{num:2,title:"CANNOT RECEIVE SPIRITUAL THINGS",verse:"1 Corinthians 2:14",cls:"red",
+scripture:"But the natural man does not receive the things of the Spirit of God, for they are foolishness to him; nor can he know them, because they are spiritually discerned.",
+summary:"'Foolishness' — not complicated, not offensive, but foolish. Nonsensical. The natural man looks at dependence on an invisible God and it makes no sense to him because he doesn't have the faculty to perceive spiritual reality. He evaluates everything through the soul — reason, logic, emotion — and spiritual truth doesn't compute on that frequency. This is why you can't argue someone into the Kingdom. The issue isn't their intellect. The issue is their receiver. They need life, not logic."},
+];
+
+const f2=[
+{num:3,title:"BORN AGAIN — BUT STILL A BABE",verse:"1 Corinthians 3:1",cls:"gold",badge:"THE TRAGEDY",
+scripture:"And I, brethren, could not speak to you as to spiritual people but as to carnal, as to babes in Christ.",
+summary:"Paul calls them brethren — they're saved. He calls them 'in Christ' — they're genuinely united with Him. But he calls them carnal and babes. They have the Spirit but they're not living from the Spirit. They have the car but they're still pedalling the bicycle. This is the condition of the vast majority of Christians throughout history: genuinely born again, possessing everything they need for life and godliness, yet functionally operating from soul — their own reasoning, their own emotions, their own willpower — rather than from the spirit where Christ dwells."},
+{arrow:"gold"},
+{num:4,title:"THE EVIDENCE: WORLDLY BEHAVIOUR",verse:"1 Corinthians 3:3",cls:"gold",
+scripture:"For where there are envy, strife, and divisions among you, are you not carnal and behaving like mere men?",
+summary:"The proof of carnality isn't spectacular sin — it's ordinary human behaviour in a Christian context. Envy. Strife. Divisions. Taking sides. 'I follow Paul, I follow Apollos.' This is the soul in action: the mind forming opinions and allegiances, the emotions creating preferences and offences, the will asserting itself against others. It looks like normal church life in most congregations — which is exactly Paul's point. If your church experience is characterised by personality-driven loyalty, relational friction, and factional thinking, that's not a leadership problem. It's a governance problem. The soul is on the throne where the spirit should be."},
+{arrow:"gold"},
+{num:5,title:"CAN ONLY DIGEST MILK",verse:"1 Corinthians 3:2, Hebrews 5:12–13",cls:"gold",
+scripture:"I fed you with milk and not with solid food; for until now you were not able to receive it, and even now you are still not able.",
+summary:"Milk is pre-digested truth — simple, basic, easy to absorb. The carnal Christian can handle 'God loves you,' 'your sins are forgiven,' 'Jesus is coming back.' But solid food — God's eternal purpose, the mystery, the deeper workings of the cross, the headship of Christ over His body — they can't receive it. Not because it's too complex for their intellect, but because their spirit isn't governing. Solid food requires spiritual digestion. A soul-governed believer can memorise the entire Bible and still be unable to receive the solid food it contains, because receiving spiritual truth requires the spirit, not just the mind."},
+];
+
+const f3=[
+{num:6,title:"THE SPIRIT GOVERNS",verse:"1 Corinthians 2:15, Romans 8:14",cls:"green",badge:"THE REALITY",
+scripture:"But he who is spiritual judges all things, yet he himself is rightly judged by no one... For as many as are led by the Spirit of God, these are sons of God.",
+summary:"The spiritual man has the same human spirit, soul, and body as everyone else. The difference is governance. His regenerated spirit — indwelt by the Holy Spirit — sits on the throne of his inner life. His mind thinks, but under the Spirit's illumination. His emotions feel, but calibrated by spiritual reality rather than circumstances. His will chooses, but in submission to God's will perceived through the spirit. He 'judges all things' — he has discernment that the carnal man lacks, not because he's smarter but because his governing centre has access to God's perspective."},
+{arrow:"green"},
+{num:7,title:"FEEDS ON SOLID FOOD",verse:"Hebrews 5:14",cls:"green",
+scripture:"But solid food belongs to those who are of full age, who by reason of use have their senses trained to discern both good and evil.",
+summary:"The spiritual man can digest what the carnal man cannot. God's eternal purpose. The mystery of Christ and the church. The deeper workings of the cross — not just forgiveness but co-crucifixion, not just salvation but conformity. These truths come alive to the spiritual man because his spirit receives them directly from God, and his renewed mind is able to process what the spirit perceives. His 'senses are trained' — not his physical senses or his emotional senses, but his spiritual senses. The spirit has its own faculty of perception, and in the spiritual man, that faculty is exercised and mature."},
+{arrow:"green"},
+{num:8,title:"CHRIST EXPRESSED THROUGH THE VESSEL",verse:"2 Corinthians 4:7, Galatians 2:20",cls:"green",
+scripture:"But we have this treasure in earthen vessels, that the excellence of the power may be of God and not of us.",
+summary:"The end result of spirit-governance is not a more impressive human being. It's Christ visible through a human vessel. The spiritual man doesn't draw attention to himself — he draws attention to Christ. His patience isn't admirable willpower — it's Christ's patience flowing through him. His love isn't emotional warmth — it's Christ's agape expressed through a submitted soul. His wisdom isn't sharp intellect — it's Christ's mind made available through a spirit-governed mind. The treasure is in an earthen vessel precisely so that everyone can see: this isn't coming from the vessel. This is coming from what's inside."},
+];
+
+const f4=[
+{num:9,title:"NOT MORE EFFORT — A DIFFERENT SOURCE",verse:"Romans 8:5-6, Galatians 5:16",cls:"blue",badge:"THE KEY",
+scripture:"For those who live according to the flesh set their minds on the things of the flesh, but those who live according to the Spirit, the things of the Spirit.",
+summary:"The transition from carnal to spiritual is not about trying harder. That's the soul attempting to fix the soul — the bicycle trying to become a car by pedalling faster. The transition is a shift in source. It begins with seeing that the soul has been governing and choosing to yield that governance to the spirit. This is what 'setting the mind on the Spirit' means — not forcing spiritual thoughts into your head, but turning your attention toward the spirit where Christ dwells and allowing His life to flow outward through your soul and body. It's the reckoning of Romans 6 applied to the governance question."},
+{arrow:"blue"},
+{num:10,title:"THE CROSS APPLIED TO THE SOUL",verse:"Matthew 16:24-25, Luke 9:23",cls:"blue",
+scripture:"If anyone desires to come after Me, let him deny himself, and take up his cross daily, and follow Me.",
+summary:"'Deny yourself' — deny the psuche, the soul-life. Not suppress your personality. Not become emotionless or mindless. But dethrone the soul as governor. The mind still thinks — but under the spirit. The emotions still feel — but calibrated by the spirit. The will still chooses — but in submission to the spirit. This is the daily cross: the soul yielding its stolen throne back to the spirit, again and again, moment by moment. It's not a one-time event. The soul is persistent. It will reassert itself constantly. The cross must be applied daily — not as punishment, but as the ongoing choice to let the right governor govern."},
+{arrow:"blue"},
+{num:11,title:"LEARNING TO DISCERN",verse:"Hebrews 4:12, 5:14",cls:"blue",
+scripture:"For the word of God is living and powerful... piercing even to the division of soul and spirit.",
+summary:"The most practical skill for the journey from carnal to spiritual is learning to discern the difference between soul and spirit in real time. Is this impression coming from my emotions or from the Spirit's intuition? Is this decision my will asserting itself or the Spirit leading? Is this insight my intellect analysing or the Spirit revealing? The word of God is the sword that divides. As you dwell in Scripture — not just studying it with the mind but receiving it in the spirit — it trains your senses to distinguish between what is soulish and what is spiritual. Over time, the difference becomes clearer. And as it becomes clearer, the choice becomes simpler: yield the soul, follow the spirit."},
+];
+
+function buildNode(n){const d=document.createElement('div');d.className=`node ${n.cls}`;d.onclick=()=>{const w=d.classList.contains('active');document.querySelectorAll('.node').forEach(e=>e.classList.remove('active'));if(!w)d.classList.add('active')};let h='';if(n.badge)h+=`<div class="badge">${n.badge}</div>`;h+=`<div class="node-header"><span class="node-number">${n.num}</span><div><h3 class="node-title">${n.title}</h3><span class="node-verse">${n.verse}</span></div></div>`;h+=`<div class="node-scripture">"${n.scripture}"</div>`;h+=`<div class="node-summary">${n.summary}</div>`;h+=`<div class="node-tap">Tap to expand</div>`;d.innerHTML=h;return d}
+function buildArrow(c){const d=document.createElement('div');d.className=`arrow ${c.cls}`;const l=c.label?'16px':'22px';let h=`<div class="arrow-line" style="height:${l}"></div>`;if(c.label)h+=`<span class="arrow-label">${c.label}</span>`;h+='<div class="arrow-head"></div>';d.innerHTML=h;return d}
+
+[{el:'flow1',data:f1},{el:'flow2',data:f2},{el:'flow3',data:f3},{el:'flow4',data:f4}].forEach(({el,data})=>{
+const flow=document.getElementById(el);
+data.forEach(i=>{if(i.arrow!==undefined)flow.appendChild(buildArrow({cls:i.arrow,label:i.label}));else flow.appendChild(buildNode(i))});
+});
+</script>
+</body>
+</html>
