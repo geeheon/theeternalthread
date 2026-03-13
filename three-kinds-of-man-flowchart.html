@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>Three Kinds of Man — Natural, Carnal, Spiritual</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -74,6 +74,361 @@
 
 .callout{margin:24px 0;padding:18px 20px;border-radius:8px;text-align:center;background:rgba(16,28,22,0.4);border:1px solid rgba(104,216,160,0.12)}.callout-text{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;line-height:1.5;color:#68d8a0;margin-bottom:6px}.callout-ref{font-size:11px;letter-spacing:1.5px;color:#507060}
 .footer{margin-top:40px;text-align:center;padding:20px 0;border-top:1px solid rgba(208,192,160,0.06)}.footer p{font-family:'Cormorant Garamond',serif;font-size:15px;color:#888078;font-style:italic;line-height:1.7;margin-bottom:12px}.footer-line{width:20px;height:1px;background:rgba(208,192,160,0.25);margin:0 auto}
+
+  /* === MOBILE READABILITY FIXES === */
+  @media (max-width: 600px) {
+
+    /* ── HEADER AREA ── */
+    .header p {
+      font-size: 17px;
+      color: #a89a80;
+    }
+    .author, .header .author {
+      font-size: 11px;
+      color: #8a7e6e;
+    }
+
+    /* ── OVERVIEW / SCRIPTURE BOXES ── */
+    .overview-text {
+      font-size: 17px;
+      color: #c8bca4;
+    }
+    .overview-ref {
+      font-size: 12px;
+      color: #8a7e6e;
+    }
+    .verse-text {
+      font-size: 19px;
+    }
+    .verse-ref {
+      font-size: 12px;
+      color: #8a7e70;
+    }
+    .verse-box .verse-text {
+      font-size: 19px;
+    }
+
+    /* ── PROBLEM / CHALLENGE BOXES ── */
+    .problem-text {
+      font-size: 17px;
+      color: #ccacac;
+    }
+    .problem-label {
+      font-size: 10px;
+    }
+
+    /* ── SECTION LABELS & SUBS ── */
+    .section-label {
+      font-size: 10px;
+    }
+    .section-sub {
+      font-size: 14px;
+      color: #8a8278;
+    }
+    .section-divider-label {
+      font-size: 10px;
+    }
+
+    /* ── NODE CARDS ── */
+    .node-title {
+      font-size: 13px;
+    }
+    .node-verse {
+      font-size: 15px;
+    }
+    .node-scripture {
+      font-size: 18px;
+      color: #ddd0b4;
+    }
+    .node-summary {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .node-tap {
+      font-size: 13px;
+      color: #8a8278;
+    }
+
+    /* ── STAGE SECTIONS (children/youngmen/fathers) ── */
+    .stage-verse {
+      font-size: 15px;
+    }
+    .children .stage-verse { color: rgba(104,230,160,0.7); }
+    .youngmen .stage-verse { color: rgba(104,160,230,0.7); }
+    .fathers .stage-verse { color: rgba(240,208,128,0.7); }
+    .stage-scripture {
+      font-size: 18px;
+      color: #ddd0b4;
+    }
+    .stage-badge, .badge {
+      font-size: 10px;
+    }
+    .stage-desc {
+      font-size: 13px;
+      color: #a09080;
+    }
+    .stage-title {
+      font-size: 15px;
+    }
+    .stage-label {
+      font-size: 11px;
+    }
+
+    /* ── EXPANDABLE DETAIL ITEMS ── */
+    .detail-content {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #ccc4b4;
+    }
+    .detail-tap {
+      font-size: 12px;
+      color: #807870;
+    }
+    .detail-title {
+      font-size: 12px;
+    }
+
+    /* ── ARROWS BETWEEN SECTIONS ── */
+    .stage-arrow-label {
+      font-size: 10px;
+      color: rgba(232,216,176,0.4);
+    }
+    .arrow-label {
+      font-size: 10px;
+    }
+
+    /* ── FROMKE / INSIGHT / CALLOUT BOXES ── */
+    .fromke-text {
+      font-size: 17px;
+      color: #c8b89c;
+    }
+    .fromke-label {
+      font-size: 10px;
+    }
+    .insight-text {
+      font-size: 17px;
+      color: #c8b89c;
+    }
+    .insight-label {
+      font-size: 10px;
+    }
+    .callout-text {
+      font-size: 19px;
+    }
+    .callout-ref {
+      font-size: 12px;
+      color: #8a8278;
+    }
+
+    /* ── WHERE / REFLECTION BOXES ── */
+    .where-text {
+      font-size: 17px;
+      color: #aa9c8a;
+    }
+    .where-label {
+      font-size: 10px;
+    }
+
+    /* ── FOOTER ── */
+    .footer p {
+      font-size: 17px;
+      color: #a09080;
+    }
+
+    /* ── DEFINITION BOXES ── */
+    .def-text {
+      font-size: 17px;
+      color: #b8a8c0;
+    }
+    .def-label {
+      font-size: 10px;
+    }
+
+    /* ── GREEK / REFERENCE TEXT ── */
+    .greek, .part-greek, .state-greek {
+      font-size: 14px;
+      color: #8a8278;
+    }
+
+    /* ── ANALOGY / DISCOVERY / STREAM TEXT ── */
+    .analogy-text, .discovery-text, .stream-text, .exit-text {
+      font-size: 17px;
+    }
+    .analogy-label, .discovery-label, .stream-label {
+      font-size: 10px;
+    }
+
+    /* ── BINARY / CONTRAST / PARADIGM COMPARISONS ── */
+    .binary-desc {
+      font-size: 13px;
+    }
+    .binary-label {
+      font-size: 11px;
+    }
+    .contrast-item, .paradigm-col-text, .tension-col-text {
+      font-size: 15px;
+      color: #98b0a0;
+    }
+    .contrast-cell-label, .paradigm-col-label, .tension-col-label {
+      font-size: 10px;
+    }
+    .tension-foot {
+      font-size: 16px;
+      color: #98a8b4;
+    }
+    .vs {
+      font-size: 16px;
+      color: #6a6058;
+    }
+
+    /* ── TWO OPERATING SYSTEMS TABLE ── */
+    .two-os-item {
+      font-size: 15px;
+      color: #98b0a0;
+    }
+    .two-os-col-label {
+      font-size: 10px;
+    }
+    .two-os-footer {
+      font-size: 11px;
+    }
+
+    /* ── SOUL VS SPIRIT SPECIFICS ── */
+    .part-title, .state-title {
+      font-size: 13px;
+    }
+    .part-tap, .state-tap {
+      font-size: 12px;
+      color: #807870;
+    }
+    .state-oneliner {
+      font-size: 15px;
+    }
+    .state-trait {
+      font-size: 11px;
+    }
+    .part-circle {
+      font-size: 11px;
+    }
+
+    /* ── CHAIN / CC ITEMS ── */
+    .cc-item {
+      font-size: 15px;
+      color: #98b0a0;
+    }
+    .cc-label {
+      font-size: 10px;
+    }
+    .ss-col-label {
+      font-size: 10px;
+    }
+    .ss-col-text {
+      font-size: 15px;
+    }
+
+    /* ── MISREAD / SYMPTOM / DIAGNOSTIC ── */
+    .misread-q, .symptom-q, .diagnostic-question {
+      font-size: 17px;
+    }
+    .misread-a, .symptom-a, .diagnostic-sub {
+      font-size: 15px;
+    }
+    .misread-tap, .symptom-tap, .phrase-tap {
+      font-size: 12px;
+      color: #807870;
+    }
+    .misread-label, .diagnostic-label {
+      font-size: 10px;
+    }
+    .phrase-meaning {
+      font-size: 15px;
+    }
+
+    /* ── APPLICATION ITEMS ── */
+    .app-content {
+      font-size: 15px;
+    }
+    .app-tap {
+      font-size: 12px;
+      color: #6a7a6a;
+    }
+    .app-title {
+      font-size: 12px;
+    }
+    .ap-item {
+      font-size: 15px;
+      color: #98b0a0;
+    }
+    .ap-label {
+      font-size: 10px;
+    }
+
+    /* ── ARCHITECTURE / LAYER TEXT ── */
+    .arch-label-text {
+      font-size: 11px;
+    }
+    .arch-label-sub, .arch-foot-text {
+      font-size: 15px;
+      color: #88b098;
+    }
+    .layer-text {
+      font-size: 16px;
+      color: #98b0a0;
+    }
+    .layer-title {
+      font-size: 11px;
+    }
+    .layer-ref {
+      font-size: 12px;
+      color: #6a7a6a;
+    }
+
+    /* ── EPOCH / PHASE LABELS ── */
+    .epoch-label {
+      font-size: 10px;
+    }
+    .epoch-sub, .phase-sub {
+      font-size: 14px;
+      color: #8a8278;
+    }
+    .phase-label {
+      font-size: 10px;
+    }
+
+    /* ── FAILURE / EXIT / HINGE ── */
+    .failure-text {
+      font-size: 14px;
+      color: #a07878;
+    }
+    .exit-label {
+      font-size: 10px;
+    }
+    .exit-sub {
+      font-size: 14px;
+      color: #88a098;
+    }
+    .hinge-badge {
+      font-size: 10px;
+    }
+    .breakdown-label {
+      font-size: 10px;
+    }
+
+    /* ── MODULE / MARK / REF ── */
+    .module-pill {
+      font-size: 11px;
+      color: #98c8a8;
+    }
+    .mark-legend-item {
+      font-size: 11px;
+    }
+    .ref {
+      font-size: 17px;
+    }
+    .sub {
+      font-size: 16px;
+    }
+  }
 </style>
 </head>
 <body>

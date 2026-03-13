@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>The ETERNAL Thread</title>
@@ -205,6 +205,41 @@
     font-size: 10px; color: #403830; letter-spacing: 2px;
     font-weight: 700; font-style: normal;
     margin-top: 12px;
+  }
+
+  /* === MOBILE READABILITY FIXES === */
+  @media (max-width: 600px) {
+    .header p {
+      font-size: 18px;
+      color: #a89a80;
+    }
+    .intro p {
+      font-size: 17px;
+      color: #aa9c8a;
+    }
+    .card-desc {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+    .card-verse {
+      font-size: 15px;
+      opacity: 0.7;
+    }
+    .card-category {
+      font-size: 10px;
+    }
+    .section-divider span {
+      font-size: 10px;
+      color: #68605a;
+    }
+    .footer p {
+      font-size: 16px;
+      color: #706860;
+    }
+    .footer .count {
+      font-size: 11px;
+      color: #5e5448;
+    }
   }
 </style>
 </head>
