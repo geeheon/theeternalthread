@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>The Vine and the Branches — John 15</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: #0a100e;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: #68e6a0;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #68e6a0, transparent);
+    margin: 8px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #888070;
+    font-style: italic;
+  }
+
+  /* ─── Source: Christ the Vine ─── */
+  .source-block {
+    text-align: center;
+    margin-bottom: 28px;
+    padding: 24px 20px;
+    border-radius: 10px;
+    background: rgba(13, 40, 24, 0.5);
+    border: 1px solid rgba(104, 230, 160, 0.15);
+  }
+  .source-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: #68e6a0;
+    margin-bottom: 12px;
+  }
+  .source-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #c8d8c0;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .source-ref {
+    font-size: 11px;
+    color: #688070;
+    letter-spacing: 1.5px;
+  }
+
+  /* ─── Flow indicators ─── */
+  .flow-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0;
+  }
+  .flow-line {
+    width: 1.5px;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(104, 230, 160, 0.35), rgba(104, 230, 160, 0.12));
+  }
+  .flow-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: rgba(104, 230, 160, 0.45);
+    padding: 3px 0;
+  }
+  .flow-head {
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid rgba(104, 230, 160, 0.25);
+  }
+
+  /* ─── The Key Principle block ─── */
+  .principle-block {
+    text-align: center;
+    margin: 20px 0 28px;
+    padding: 18px 20px;
+    border-radius: 10px;
+    background: rgba(13, 40, 24, 0.3);
+    border: 1px solid rgba(104, 230, 160, 0.1);
+  }
+  .principle-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(104, 230, 160, 0.5);
+    margin-bottom: 10px;
+  }
+  .principle-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #a0c4b0;
+    font-style: italic;
+    line-height: 1.7;
+  }
+  .principle-text em {
+    color: #68e6a0;
+    font-style: italic;
+  }
+
+  /* ─── Two-column contrast ─── */
+  .contrast {
+    margin: 0 0 24px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(104, 230, 160, 0.1);
+  }
+  .contrast-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(13, 20, 16, 0.5);
+    border-bottom: 1px solid rgba(104, 230, 160, 0.06);
+  }
+  .contrast-header span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(104, 230, 160, 0.5);
+  }
+  .contrast-row { display: flex; }
+  .contrast-col { flex: 1; padding: 18px 16px; }
+  .contrast-col.abiding {
+    background: rgba(13, 28, 20, 0.3);
+    border-right: 1px solid rgba(104, 230, 160, 0.04);
+  }
+  .contrast-col.striving {
+    background: rgba(46, 26, 26, 0.2);
+  }
+  .contrast-col-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .contrast-col.abiding .contrast-col-label { color: #68e6a0; }
+  .contrast-col.striving .contrast-col-label { color: #e66868; }
+  .contrast-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    line-height: 1.9;
+    font-style: italic;
+    text-align: center;
+  }
+  .contrast-col.abiding .contrast-item { color: #80a090; }
+  .contrast-col.striving .contrast-item { color: #a08080; }
+  .contrast-footer {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-top: 12px;
+    padding-top: 10px;
+  }
+  .contrast-col.abiding .contrast-footer {
+    color: rgba(104, 230, 160, 0.45);
+    border-top: 1px solid rgba(104, 230, 160, 0.1);
+  }
+  .contrast-col.striving .contrast-footer {
+    color: rgba(230, 104, 104, 0.45);
+    border-top: 1px solid rgba(230, 104, 104, 0.1);
+  }
+
+  /* ─── Summary burden ─── */
+  .burden {
+    text-align: center;
+    margin: 24px 0 28px;
+    padding: 18px 20px;
+    border-radius: 10px;
+    background: rgba(13, 40, 24, 0.25);
+    border: 1px solid rgba(104, 230, 160, 0.1);
+  }
+  .burden p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #a0c4b0;
+    font-style: italic;
+    line-height: 1.7;
+  }
+  .burden p em { color: #68e6a0; font-style: italic; }
+
+  /* ─── Supporting Verses Section ─── */
+  .supporting-label {
+    text-align: center;
+    margin: 32px 0 16px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(104, 230, 160, 0.08);
+  }
+  .supporting-label span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(104, 230, 160, 0.3);
+  }
+
+  .verse-group-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 18px 0 8px;
+    padding-left: 4px;
+  }
+  .verse-group-label.vine { color: rgba(104, 230, 160, 0.4); }
+  .verse-group-label.warning { color: rgba(230, 168, 104, 0.4); }
+  .verse-group-label.fruit { color: rgba(104, 160, 230, 0.4); }
+
+  /* ─── Node cards ─── */
+  .node {
+    border-radius: 10px;
+    padding: 18px 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1.5px solid;
+    margin-bottom: 10px;
+  }
+  .node.vine-node {
+    background: rgba(13, 28, 20, 0.6);
+    border-color: rgba(104, 230, 160, 0.18);
+  }
+  .node.vine-node.active {
+    background: rgba(13, 28, 20, 0.9);
+    border-color: rgba(104, 230, 160, 0.45);
+    box-shadow: 0 0 24px rgba(104, 230, 160, 0.08), 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .node.warning-node {
+    background: rgba(36, 24, 14, 0.5);
+    border-color: rgba(230, 168, 104, 0.18);
+  }
+  .node.warning-node.active {
+    background: rgba(36, 24, 14, 0.8);
+    border-color: rgba(230, 168, 104, 0.45);
+    box-shadow: 0 0 24px rgba(230, 168, 104, 0.08), 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .node.fruit-node {
+    background: rgba(14, 20, 36, 0.6);
+    border-color: rgba(104, 160, 230, 0.18);
+  }
+  .node.fruit-node.active {
+    background: rgba(14, 20, 36, 0.9);
+    border-color: rgba(104, 160, 230, 0.45);
+    box-shadow: 0 0 24px rgba(104, 160, 230, 0.08), 0 4px 16px rgba(0,0,0,0.3);
+  }
+
+  .node.active { transform: scale(1.02); }
+
+  .node-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .node.active .node-header { margin-bottom: 10px; }
+
+  .node-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0;
+  }
+  .vine-node .node-title { color: #68e6a0; }
+  .warning-node .node-title { color: #e6a868; }
+  .fruit-node .node-title { color: #68a0e6; }
+
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+  }
+  .vine-node .node-verse { color: rgba(104, 230, 160, 0.5); }
+  .warning-node .node-verse { color: rgba(230, 168, 104, 0.5); }
+  .fruit-node .node-verse { color: rgba(104, 160, 230, 0.5); }
+
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #d4c5a0;
+    margin: 8px 0;
+    font-style: italic;
+    padding-left: 14px;
+    display: none;
+  }
+  .vine-node .node-scripture { border-left: 2px solid rgba(104, 230, 160, 0.25); }
+  .warning-node .node-scripture { border-left: 2px solid rgba(230, 168, 104, 0.25); }
+  .fruit-node .node-scripture { border-left: 2px solid rgba(104, 160, 230, 0.25); }
+  .node.active .node-scripture { display: block; }
+
+  .node-summary {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #b8b0a0;
+    margin: 8px 0 0 0;
+    display: none;
+  }
+  .vine-node .node-summary { color: #a0c4b0; }
+  .warning-node .node-summary { color: #b8a890; }
+  .fruit-node .node-summary { color: #90a8c0; }
+  .node.active .node-summary { display: block; }
+
+  .node-tap {
+    font-size: 12px;
+    color: #888070;
+  }
+  .node.active .node-tap { display: none; }
+
+  /* ─── Bottom Note ─── */
+  .bottom-note {
+    text-align: center;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(104, 230, 160, 0.08);
+  }
+  .bottom-note p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: #908878;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 6px;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(104, 230, 160, 0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: #888070;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .footer-line {
+    width: 20px; height: 1px;
+    background: rgba(104, 230, 160, 0.25);
+    margin: 0 auto;
+  }
+
+  /* === MOBILE READABILITY FIXES === */
+  @media (max-width: 600px) {
+    .header p {
+      font-size: 17px;
+      color: #a89a80;
+    }
+    .source-scripture {
+      font-size: 19px;
+    }
+    .source-ref {
+      font-size: 12px;
+      color: #7a9088;
+    }
+    .principle-text {
+      font-size: 17px;
+    }
+    .contrast-item {
+      font-size: 14px;
+    }
+    .contrast-col.abiding .contrast-item { color: #90b8a0; }
+    .contrast-col.striving .contrast-item { color: #b09090; }
+    .contrast-footer {
+      font-size: 11px;
+    }
+    .burden p {
+      font-size: 17px;
+    }
+    .node-title {
+      font-size: 13px;
+    }
+    .node-verse {
+      font-size: 15px;
+    }
+    .node-scripture {
+      font-size: 18px;
+      color: #ddd0b4;
+    }
+    .node-summary {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .node-tap {
+      font-size: 13px;
+      color: #8a8278;
+    }
+    .bottom-note p {
+      font-size: 15px;
+      color: #a09080;
+    }
+    .footer p {
+      font-size: 16px;
+      color: #706860;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>THE VINE &amp; THE BRANCHES</h1>
+    <div class="header-line"></div>
+    <p>John 15:1–8</p>
+  </div>
+
+  <!-- ─── Source: Christ the Vine ─── -->
+  <div class="source-block">
+    <div class="source-label">THE SOURCE</div>
+    <div class="source-scripture">"I am the vine, you are the branches. He who abides in Me, and I in him, bears much fruit; for without Me you can do nothing."</div>
+    <div class="source-ref">JOHN 15:5</div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">LIFE FLOWS</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ─── The Key Principle ─── -->
+  <div class="principle-block">
+    <div class="principle-label">THE KEY</div>
+    <div class="principle-text">A branch does not <em>try</em> to abide.<br>It simply <em>remains</em> where it already is.<br>The life flows. The fruit comes.<br>Not from the branch — <em>through</em> the branch.</div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">BUT WHAT DOES ABIDING LOOK LIKE?</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ─── Two-Column Contrast ─── -->
+  <div class="contrast">
+    <div class="contrast-header">
+      <span>TWO UNDERSTANDINGS OF ABIDING</span>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-col abiding">
+        <div class="contrast-col-label">TRUE ABIDING</div>
+        <div class="contrast-item">Remain</div>
+        <div class="contrast-item">Rest</div>
+        <div class="contrast-item">Depend</div>
+        <div class="contrast-item">Receive</div>
+        <div class="contrast-item">Respond</div>
+        <div class="contrast-item">Fruit borne through union</div>
+        <div class="contrast-footer">THE VINE PRODUCES</div>
+      </div>
+      <div class="contrast-col striving">
+        <div class="contrast-col-label">THE COMMON MISTAKE</div>
+        <div class="contrast-item">Try harder</div>
+        <div class="contrast-item">Maintain by effort</div>
+        <div class="contrast-item">More devotions as technique</div>
+        <div class="contrast-item">More prayer as strain</div>
+        <div class="contrast-item">Self-discipline</div>
+        <div class="contrast-item">Trying to produce from self</div>
+        <div class="contrast-footer">THE BRANCH STRAINS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Summary Burden ─── -->
+  <div class="burden">
+    <p>The branch does not produce fruit <em>for</em> the vine.</p>
+    <p>The vine produces fruit <em>through</em> the branch.</p>
+  </div>
+
+  <!-- ─── Supporting Verses ─── -->
+  <div class="supporting-label"><span>SUPPORTING VERSES</span></div>
+
+  <div class="verse-group-label vine">THE VINE AND ABIDING</div>
+  <div id="vine-verses"></div>
+
+  <div class="verse-group-label warning">THE WARNING</div>
+  <div id="warning-verses"></div>
+
+  <div class="verse-group-label fruit">THE FRUIT</div>
+  <div id="fruit-verses"></div>
+
+  <!-- ─── Bottom Note ─── -->
+  <div class="bottom-note">
+    <p>Abiding is not anxious self-maintenance. It is the branch's natural posture — remaining in the vine, receiving life, bearing what the vine produces.</p>
+    <p>The moment you begin striving to abide, you have already stopped abiding.</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>A branch attached to the vine<br>does not worry about fruit.<br>It simply stays.<br>The life does the rest.</p>
+    <div class="footer-line"></div>
+  </div>
+
+</div>
+
+<script>
+const vineVerses = [
+  {
+    title: "I AM THE TRUE VINE",
+    verse: "John 15:1",
+    cls: "vine-node",
+    scripture: "I am the true vine, and My Father is the vinedresser.",
+    summary: "Christ does not say He is the gardener, the teacher, or the helper. He is the vine — the source of life itself. The Father is the vinedresser, the one who cultivates. The branch's role is neither to tend nor to produce, but to bear."
+  },
+  {
+    title: "ABIDE IN ME",
+    verse: "John 15:4",
+    cls: "vine-node",
+    scripture: "Abide in Me, and I in you. As the branch cannot bear fruit of itself, unless it abides in the vine, neither can you, unless you abide in Me.",
+    summary: "The Greek word is menō — remain, stay, dwell. It is not an action word of straining or achieving. It is a word of staying put. The branch does not attach itself to the vine by effort. It was grafted in. Now it simply remains. The moment it tries to produce fruit independently, it has already detached in practice — even if still physically connected."
+  },
+  {
+    title: "WITHOUT ME — NOTHING",
+    verse: "John 15:5",
+    cls: "vine-node",
+    scripture: "I am the vine, you are the branches. He who abides in Me, and I in him, bears much fruit; for without Me you can do nothing.",
+    summary: "Not \"without Me you can do less\" or \"without Me it's harder.\" Nothing. Zero. The branch severed from the vine's life-flow produces exactly nothing of spiritual value — no matter how impressive the external effort looks. This is the death-blow to self-effort religion."
+  },
+  {
+    title: "ABIDE IN MY LOVE",
+    verse: "John 15:9–10",
+    cls: "vine-node",
+    scripture: "As the Father loved Me, I also have loved you; abide in My love. If you keep My commandments, you will abide in My love, just as I have kept My Father's commandments and abide in His love.",
+    summary: "Abiding is not cold or mechanical. Its atmosphere is love — His love received and rested in. The keeping of commandments flows from love, not toward it. You do not obey in order to earn love. You obey because you are already in it."
+  }
+];
+
+const warningVerses = [
+  {
+    title: "EVERY BRANCH IN ME",
+    verse: "John 15:2",
+    cls: "warning-node",
+    scripture: "Every branch in Me that does not bear fruit He takes away; and every branch that bears fruit He prunes, that it may bear more fruit.",
+    summary: "The Father's pruning is not punishment — it is cultivation. The fruitless branch is removed; the fruitful branch is cut back so that more life flows through less wood. Pruning feels like loss. It is actually the vinedresser's vote of confidence."
+  },
+  {
+    title: "CAST OUT AND WITHERED",
+    verse: "John 15:6",
+    cls: "warning-node",
+    scripture: "If anyone does not abide in Me, he is cast out as a branch and is withered; and they gather them and throw them into the fire, and they are burned.",
+    summary: "A branch disconnected from the vine does not slowly decline. It withers. It becomes fuel, not fruit. The language is severe because the reality is absolute: apart from the vine's life there is no life. There is no middle ground between abiding and withering."
+  }
+];
+
+const fruitVerses = [
+  {
+    title: "MUCH FRUIT — GLORIFYING THE FATHER",
+    verse: "John 15:8",
+    cls: "fruit-node",
+    scripture: "By this My Father is glorified, that you bear much fruit; so you will be My disciples.",
+    summary: "The fruit glorifies the Father, not the branch. The branch that abides does not draw attention to its own productivity. The fruit points back to the vine, and through the vine, to the vinedresser. This is the opposite of religious performance."
+  },
+  {
+    title: "THE FRUIT IS NOT SELF-GENERATED",
+    verse: "Galatians 5:22–23",
+    cls: "fruit-node",
+    scripture: "But the fruit of the Spirit is love, joy, peace, longsuffering, kindness, goodness, faithfulness, gentleness, self-control.",
+    summary: "Paul calls it the fruit of the Spirit — not the fruit of effort, discipline, or the Christian. It is produced by the Spirit's life flowing through you, exactly as the vine's life produces grapes through the branch. You cannot manufacture love. You can only bear what the vine produces."
+  },
+  {
+    title: "HE WHO BEGAN A GOOD WORK",
+    verse: "Philippians 1:6",
+    cls: "fruit-node",
+    scripture: "Being confident of this very thing, that He who has begun a good work in you will complete it until the day of Jesus Christ.",
+    summary: "He began it. He completes it. The entire work — from first fruit to final harvest — is His. The branch's confidence is not in its own grip on the vine, but in the vine's grip on the branch."
+  }
+];
+
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls}`;
+  div.onclick = () => {
+    const isActive = div.classList.contains('active');
+    document.querySelectorAll(`.node.${n.cls}`).forEach(el => el.classList.remove('active'));
+    if (!isActive) div.classList.add('active');
+  };
+
+  let html = '<div class="node-header"><div>';
+  html += `<h3 class="node-title">${n.title}</h3>`;
+  html += `<span class="node-verse">${n.verse}</span>`;
+  html += '</div></div>';
+  html += `<div class="node-scripture">"${n.scripture}"</div>`;
+  html += `<div class="node-summary">${n.summary}</div>`;
+  html += '<div class="node-tap">Tap to expand</div>';
+
+  div.innerHTML = html;
+  return div;
+}
+
+document.getElementById('vine-verses').append(...vineVerses.map(n => buildNode(n)));
+document.getElementById('warning-verses').append(...warningVerses.map(n => buildNode(n)));
+document.getElementById('fruit-verses').append(...fruitVerses.map(n => buildNode(n)));
+</script>
+</body>
+</html>
