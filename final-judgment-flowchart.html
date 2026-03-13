@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>What Does Scripture Mean by "Destruction"? — The Eternal Thread</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: #0f0f17;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .container { max-width: 460px; margin: 0 auto; padding: 50px 20px 60px; }
+
+  /* Back link */
+  .back {
+    display: inline-block;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    color: #c0c0d8;
+    text-decoration: none;
+    margin-bottom: 28px;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+  }
+  .back:hover { opacity: 0.8; }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 32px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 300;
+    color: #c0c0d8;
+    letter-spacing: 2px;
+    line-height: 1.3;
+  }
+  .header-line {
+    width: 50px; height: 1px;
+    background: linear-gradient(to right, transparent, #c0c0d840, transparent);
+    margin: 14px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #706870; font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* Intro quote block */
+  .intro-quote {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px 16px;
+    border-top: 1px solid rgba(192,192,216,0.08);
+    border-bottom: 1px solid rgba(192,192,216,0.08);
+  }
+  .intro-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-style: italic;
+    color: #c0c0d8;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  .intro-quote .ref {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; letter-spacing: 1.5px;
+    color: #706870;
+    font-style: normal;
+  }
+
+  /* Context block */
+  .context-block {
+    text-align: center;
+    margin-bottom: 28px;
+    padding: 0 8px;
+  }
+  .context-block p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: #908888;
+    line-height: 1.7;
+  }
+  .context-block p strong {
+    color: #b0a8b8;
+    font-weight: 500;
+  }
+
+  /* === TWO-COLUMN CONTRAST DIAGRAM === */
+  .contrast-label {
+    text-align: center;
+    font-size: 9px; font-weight: 800; letter-spacing: 3px;
+    color: #50485080;
+    margin-bottom: 16px;
+    margin-top: 28px;
+  }
+
+  .contrast-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .col-header {
+    text-align: center;
+    padding: 14px 8px;
+    border-radius: 10px;
+  }
+  .col-header .col-label {
+    font-size: 8px; font-weight: 800; letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .col-header .col-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-weight: 400;
+    line-height: 1.3;
+  }
+  .col-header .col-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px; font-style: italic;
+    margin-top: 3px;
+    opacity: 0.6;
+  }
+
+  /* Left column — warm/fire */
+  .col-left {
+    background: rgba(36,20,20,0.5);
+    border: 1px solid rgba(230,120,104,0.12);
+  }
+  .col-left .col-label { color: #e6786890; }
+  .col-left .col-title { color: #e67868; }
+  .col-left .col-sub { color: #e67868; }
+
+  /* Right column — silver/cool */
+  .col-right {
+    background: rgba(18,18,28,0.5);
+    border: 1px solid rgba(192,192,216,0.12);
+  }
+  .col-right .col-label { color: #c0c0d890; }
+  .col-right .col-title { color: #c0c0d8; }
+  .col-right .col-sub { color: #c0c0d8; }
+
+  /* Contrast row items */
+  .contrast-item {
+    padding: 12px 10px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .contrast-item .item-label {
+    font-size: 8px; font-weight: 800; letter-spacing: 1.5px;
+    margin-bottom: 4px;
+  }
+  .contrast-item .item-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-weight: 400;
+    line-height: 1.35;
+  }
+  .contrast-item .item-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    line-height: 1.5;
+    margin-top: 5px;
+    opacity: 0.55;
+  }
+
+  .item-left {
+    background: rgba(36,20,20,0.35);
+    border: 1px solid rgba(230,120,104,0.08);
+  }
+  .item-left .item-label { color: #e6786860; }
+  .item-left .item-text { color: #e6a898; }
+  .item-left .item-note { color: #c09888; }
+
+  .item-right {
+    background: rgba(18,18,28,0.35);
+    border: 1px solid rgba(192,192,216,0.08);
+  }
+  .item-right .item-label { color: #c0c0d860; }
+  .item-right .item-text { color: #d0d0e8; }
+  .item-right .item-note { color: #9898b0; }
+
+  /* Centre connector / burden */
+  .centre-burden {
+    text-align: center;
+    padding: 18px 14px;
+    margin: 20px 0;
+    border-radius: 10px;
+    background: rgba(24,22,30,0.6);
+    border: 1px solid rgba(192,192,216,0.1);
+  }
+  .centre-burden .burden-label {
+    font-size: 8px; font-weight: 800; letter-spacing: 2px;
+    color: #c0c0d860;
+    margin-bottom: 6px;
+  }
+  .centre-burden p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-style: italic;
+    color: #b0b0c8;
+    line-height: 1.65;
+  }
+
+  /* Divider */
+  .section-divider {
+    text-align: center;
+    padding: 22px 0 14px;
+  }
+  .section-divider span {
+    font-size: 9px; font-weight: 800; letter-spacing: 3px;
+    color: #50485080;
+  }
+
+  /* === EXPANDABLE NODES === */
+  .node {
+    background: rgba(18,18,26,0.6);
+    border: 1px solid rgba(192,192,216,0.1);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .node:hover {
+    border-color: rgba(192,192,216,0.2);
+  }
+  .node.active {
+    border-color: rgba(192,192,216,0.25);
+    background: rgba(18,18,26,0.8);
+  }
+
+  .node-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #c0c0d8;
+  }
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-style: italic;
+    color: #c0c0d8;
+    opacity: 0.5;
+    margin-top: 2px;
+  }
+  .node-scripture {
+    display: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-style: italic;
+    color: #b0b0c8;
+    line-height: 1.7;
+    margin-top: 12px;
+    padding-left: 14px;
+    border-left: 2px solid rgba(192,192,216,0.15);
+  }
+  .node-summary {
+    display: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    color: #908898;
+    line-height: 1.65;
+    margin-top: 10px;
+  }
+  .node-tap {
+    font-size: 11px;
+    color: #605868;
+    margin-top: 6px;
+  }
+  .node.active .node-scripture,
+  .node.active .node-summary { display: block; }
+  .node.active .node-tap { display: none; }
+
+  /* Node colour variants */
+  .node.silver .node-title { color: #c0c0d8; }
+  .node.silver .node-verse { color: #c0c0d8; }
+  .node.silver .node-scripture { color: #b0b0c8; border-left-color: rgba(192,192,216,0.15); }
+  .node.silver .node-summary { color: #908898; }
+
+  .node.warm {
+    background: rgba(36,24,14,0.4);
+    border-color: rgba(230,168,104,0.1);
+  }
+  .node.warm:hover { border-color: rgba(230,168,104,0.2); }
+  .node.warm.active { border-color: rgba(230,168,104,0.25); background: rgba(36,24,14,0.6); }
+  .node.warm .node-title { color: #e6a868; }
+  .node.warm .node-verse { color: #e6a868; }
+  .node.warm .node-scripture { color: #d8b888; border-left-color: rgba(230,168,104,0.15); }
+  .node.warm .node-summary { color: #a09078; }
+
+  .node.gold {
+    background: rgba(32,26,14,0.4);
+    border-color: rgba(240,208,128,0.1);
+  }
+  .node.gold:hover { border-color: rgba(240,208,128,0.2); }
+  .node.gold.active { border-color: rgba(240,208,128,0.25); background: rgba(32,26,14,0.6); }
+  .node.gold .node-title { color: #e6c068; }
+  .node.gold .node-verse { color: #e6c068; }
+  .node.gold .node-scripture { color: #d8c088; border-left-color: rgba(240,208,128,0.15); }
+  .node.gold .node-summary { color: #a09870; }
+
+  .node.blue {
+    background: rgba(14,20,36,0.4);
+    border-color: rgba(104,160,230,0.1);
+  }
+  .node.blue:hover { border-color: rgba(104,160,230,0.2); }
+  .node.blue.active { border-color: rgba(104,160,230,0.25); background: rgba(14,20,36,0.6); }
+  .node.blue .node-title { color: #68a0e6; }
+  .node.blue .node-verse { color: #68a0e6; }
+  .node.blue .node-scripture { color: #88b0d8; border-left-color: rgba(104,160,230,0.15); }
+  .node.blue .node-summary { color: #7088a0; }
+
+  .node.green {
+    background: rgba(13,28,20,0.4);
+    border-color: rgba(104,230,160,0.1);
+  }
+  .node.green:hover { border-color: rgba(104,230,160,0.2); }
+  .node.green.active { border-color: rgba(104,230,160,0.25); background: rgba(13,28,20,0.6); }
+  .node.green .node-title { color: #68e6a0; }
+  .node.green .node-verse { color: #68e6a0; }
+  .node.green .node-scripture { color: #88d8a8; border-left-color: rgba(104,230,160,0.15); }
+  .node.green .node-summary { color: #70a088; }
+
+  .node.purple {
+    background: rgba(26,18,34,0.4);
+    border-color: rgba(212,160,240,0.1);
+  }
+  .node.purple:hover { border-color: rgba(212,160,240,0.2); }
+  .node.purple.active { border-color: rgba(212,160,240,0.25); background: rgba(26,18,34,0.6); }
+  .node.purple .node-title { color: #d4a0f0; }
+  .node.purple .node-verse { color: #d4a0f0; }
+  .node.purple .node-scripture { color: #c8a8e0; border-left-color: rgba(212,160,240,0.15); }
+  .node.purple .node-summary { color: #9880a8; }
+
+  /* Footer */
+  .footer {
+    margin-top: 36px; text-align: center; padding: 20px 0;
+    border-top: 1px solid rgba(192,192,216,0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; color: #504858; font-style: italic;
+    line-height: 1.7;
+  }
+  .footer a {
+    color: #c0c0d8;
+    text-decoration: none;
+    font-style: normal;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: inline-block;
+    margin-top: 12px;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+  }
+  .footer a:hover { opacity: 0.7; }
+
+  /* === MOBILE READABILITY === */
+  @media (max-width: 600px) {
+    .header p { font-size: 17px; color: #8a8090; }
+    .intro-quote p { font-size: 18px; }
+    .intro-quote .ref { font-size: 11px; }
+    .context-block p { font-size: 14.5px; color: #a09898; }
+    .col-header .col-title { font-size: 18px; }
+    .contrast-item .item-text { font-size: 16px; }
+    .contrast-item .item-note { font-size: 12px; }
+    .centre-burden p { font-size: 17px; }
+    .node-scripture { font-size: 18px; }
+    .node-summary { font-size: 15px; }
+    .node-tap { font-size: 13px; }
+    .node-verse { font-size: 15px; opacity: 0.7; }
+    .section-divider span { font-size: 10px; color: #68605a; }
+    .footer p { font-size: 16px; color: #706868; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a class="back" href="index.html">← BACK</a>
+
+  <div class="header">
+    <h1>WHAT DOES SCRIPTURE<br>MEAN BY "DESTRUCTION"?</h1>
+    <div class="header-line"></div>
+    <p>The nature of final judgment — eternal conscious torment<br>or irreversible destruction?</p>
+  </div>
+
+  <!-- Central quote -->
+  <div class="intro-quote">
+    <p>"For God so loved the world, that He gave His only begotten Son, that whoever believes in Him should not perish, but have eternal life."</p>
+    <div class="ref">JOHN 3:16</div>
+  </div>
+
+  <div class="context-block">
+    <p>The question is not <strong>whether judgment is real</strong> — Scripture is unambiguous that it is. The question is <strong>what Scripture means</strong> when it speaks of death, destruction, perishing, and the second death. Two readings have existed throughout church history. This figure maps both.</p>
+  </div>
+
+  <!-- ===== TWO-COLUMN CONTRAST ===== -->
+  <div class="contrast-label">TWO READINGS OF FINAL JUDGMENT</div>
+
+  <div class="contrast-grid">
+    <div class="col-header col-left">
+      <div class="col-label">TRADITIONAL VIEW</div>
+      <div class="col-title">Eternal Conscious Torment</div>
+      <div class="col-sub">Augustine · Medieval consensus</div>
+    </div>
+    <div class="col-header col-right">
+      <div class="col-label">CONDITIONALIST VIEW</div>
+      <div class="col-title">Final Destruction</div>
+      <div class="col-sub">Arnobius · Irenaeus · revived</div>
+    </div>
+  </div>
+
+  <div class="contrast-grid">
+    <div class="contrast-item item-left">
+      <div class="item-label">THE OUTCOME</div>
+      <div class="item-text">Unending conscious suffering</div>
+      <div class="item-note">The lost exist forever in torment, aware and without relief</div>
+    </div>
+    <div class="contrast-item item-right">
+      <div class="item-label">THE OUTCOME</div>
+      <div class="item-text">Irreversible death and destruction</div>
+      <div class="item-note">The lost perish — they cease to exist, not continue in agony</div>
+    </div>
+  </div>
+
+  <div class="contrast-grid">
+    <div class="contrast-item item-left">
+      <div class="item-label">PUNISHMENT</div>
+      <div class="item-text">An ongoing process</div>
+      <div class="item-note">"Eternal punishment" = an unending experience of being punished</div>
+    </div>
+    <div class="contrast-item item-right">
+      <div class="item-label">PUNISHMENT</div>
+      <div class="item-text">An irreversible result</div>
+      <div class="item-note">"Eternal punishment" = a punishment whose consequence is permanent — like "eternal redemption" (Heb 9:12) is a result, not an ongoing process</div>
+    </div>
+  </div>
+
+  <div class="contrast-grid">
+    <div class="contrast-item item-left">
+      <div class="item-label">IMMORTALITY</div>
+      <div class="item-text">Assumed for all humans</div>
+      <div class="item-note">The soul is inherently immortal — it cannot be destroyed, only relocated</div>
+    </div>
+    <div class="contrast-item item-right">
+      <div class="item-label">IMMORTALITY</div>
+      <div class="item-text">Belongs to God, given in Christ</div>
+      <div class="item-note">Only God has immortality (1 Tim 6:16). Immortality is granted to believers at resurrection (1 Cor 15:53–54)</div>
+    </div>
+  </div>
+
+  <div class="contrast-grid">
+    <div class="contrast-item item-left">
+      <div class="item-label">"DEATH" MEANS</div>
+      <div class="item-text">Separation, not cessation</div>
+      <div class="item-note">Spiritual death = eternal separation from God while conscious existence continues</div>
+    </div>
+    <div class="contrast-item item-right">
+      <div class="item-label">"DEATH" MEANS</div>
+      <div class="item-text">Actual death — the end of life</div>
+      <div class="item-note">"The wages of sin is death" (Rom 6:23). Death as the opposite of life, not a different kind of life</div>
+    </div>
+  </div>
+
+  <div class="contrast-grid">
+    <div class="contrast-item item-left">
+      <div class="item-label">"DESTROY" MEANS</div>
+      <div class="item-text">Ruin, not annihilation</div>
+      <div class="item-note">apollymi read as "ruin" — the person continues to exist in a ruined state</div>
+    </div>
+    <div class="contrast-item item-right">
+      <div class="item-label">"DESTROY" MEANS</div>
+      <div class="item-text">Destroy — to kill both body and soul</div>
+      <div class="item-note">"Fear Him who is able to destroy both soul and body in Gehenna" (Matt 10:28). apollymi = to bring to total ruin, to cause to perish</div>
+    </div>
+  </div>
+
+  <div class="contrast-grid">
+    <div class="contrast-item item-left">
+      <div class="item-label">ETERNAL LIFE MEANS</div>
+      <div class="item-text">Conscious existence with God forever</div>
+      <div class="item-note">Life as duration — endless, conscious, blissful existence in God's presence</div>
+    </div>
+    <div class="contrast-item item-right">
+      <div class="item-label">ETERNAL LIFE MEANS</div>
+      <div class="item-text">Christ Himself — "He who has the Son has life"</div>
+      <div class="item-note">Eternal life is not longevity — it is a Person. "This is eternal life, that they may know You" (John 17:3). He who does not have the Son does not have life (1 John 5:12)</div>
+    </div>
+  </div>
+
+  <!-- Central burden -->
+  <div class="centre-burden">
+    <div class="burden-label">THE REAL QUESTION</div>
+    <p>The severity of judgment is not in dispute. What is in dispute is what Scripture means by death, destruction, perishing, and the second death — and whether the lost exist forever or are finally, irreversibly destroyed.</p>
+  </div>
+
+  <!-- ===== SUPPORTING SCRIPTURE ===== -->
+  <div class="section-divider"><span>SCRIPTURE'S OWN LANGUAGE</span></div>
+
+  <div class="node silver" data-group="scripture" onclick="toggleNode(this)">
+    <div class="node-title">Perish</div>
+    <div class="node-verse">John 3:16</div>
+    <div class="node-scripture">"For God so loved the world, that He gave His only begotten Son, that whoever believes in Him should not perish, but have eternal life."</div>
+    <div class="node-summary">The contrast is between perishing and having eternal life. Not between two forms of eternal existence — one pleasant, one tormented — but between life and its absence. The Greek apollymi means to destroy utterly, to bring to nothing, to cause to cease.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <div class="node silver" data-group="scripture" onclick="toggleNode(this)">
+    <div class="node-title">Destruction</div>
+    <div class="node-verse">Matthew 10:28</div>
+    <div class="node-scripture">"Do not fear those who kill the body but are unable to kill the soul; but rather fear Him who is able to destroy both soul and body in Gehenna."</div>
+    <div class="node-summary">Jesus does not say fear Him who can torment the soul forever. He says fear Him who can destroy both soul and body. The word is apollesai — to destroy, to cause to perish entirely. If the soul is inherently indestructible, this warning makes no sense.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <div class="node silver" data-group="scripture" onclick="toggleNode(this)">
+    <div class="node-title">Death</div>
+    <div class="node-verse">Romans 6:23</div>
+    <div class="node-scripture">"For the wages of sin is death, but the free gift of God is eternal life in Christ Jesus our Lord."</div>
+    <div class="node-summary">The wages of sin is death — not eternal conscious torment. Paul sets death against life. If the punishment were endless suffering, the natural word would be torment, not death. Death means the end of life, just as life means its presence.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <div class="node silver" data-group="scripture" onclick="toggleNode(this)">
+    <div class="node-title">The Second Death</div>
+    <div class="node-verse">Revelation 20:14–15</div>
+    <div class="node-scripture">"Then death and Hades were thrown into the lake of fire. This is the second death, the lake of fire. And if anyone's name was not found written in the book of life, he was thrown into the lake of fire."</div>
+    <div class="node-summary">Revelation itself names the lake of fire: it is "the second death." Not "the second life in torment" — the second death. Death and Hades themselves are destroyed in it. The emphasis is on finality, not on perpetuity of suffering.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <div class="node silver" data-group="scripture" onclick="toggleNode(this)">
+    <div class="node-title">Only God Has Immortality</div>
+    <div class="node-verse">1 Timothy 6:15–16</div>
+    <div class="node-scripture">"He who is the blessed and only Sovereign, the King of kings and Lord of lords, who alone possesses immortality and dwells in unapproachable light."</div>
+    <div class="node-summary">Immortality is not an inherent human property. God alone possesses it. If the soul were naturally immortal and indestructible, Paul's statement here would be false. Immortality is something believers receive as a gift at the resurrection (1 Cor 15:53–54), not something all humans possess by nature.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <div class="node silver" data-group="scripture" onclick="toggleNode(this)">
+    <div class="node-title">Immortality as Gift</div>
+    <div class="node-verse">1 Corinthians 15:53–54</div>
+    <div class="node-scripture">"For this perishable must put on the imperishable, and this mortal must put on immortality. But when this perishable will have put on the imperishable, and this mortal will have put on immortality, then will come about the saying that is written, 'Death is swallowed up in victory.'"</div>
+    <div class="node-summary">Immortality is something that must be "put on" — it is not already possessed. It is a gift granted to the redeemed at resurrection. The unredeemed, who do not receive this gift, remain mortal — and mortal beings can die. The whole passage assumes that death is the natural outcome apart from God's gift of life.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <!-- ===== ETERNAL LIFE AS A PERSON ===== -->
+  <div class="section-divider"><span>ETERNAL LIFE IS A PERSON</span></div>
+
+  <div class="node green" data-group="life" onclick="toggleNode(this)">
+    <div class="node-title">This Is Eternal Life</div>
+    <div class="node-verse">John 17:3</div>
+    <div class="node-scripture">"This is eternal life, that they may know You, the only true God, and Jesus Christ whom You have sent."</div>
+    <div class="node-summary">Eternal life is not defined as duration — it is defined as knowing God and Christ. It is relational and personal, not merely temporal. A person does not "have eternal life" by possessing an immortal soul — they have it by having Christ. If they do not have Christ, they do not have life at all.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <div class="node green" data-group="life" onclick="toggleNode(this)">
+    <div class="node-title">He Who Has the Son Has Life</div>
+    <div class="node-verse">1 John 5:11–12</div>
+    <div class="node-scripture">"And the testimony is this, that God has given us eternal life, and this life is in His Son. He who has the Son has the life; he who does not have the Son of God does not have the life."</div>
+    <div class="node-summary">Life is located in a Person, not in a quality of the human soul. He who has the Son has life. He who does not have the Son does not have life. The logic is simple and devastating: without Christ, there is no life — not "life in torment," but no life at all. This is why the alternative to eternal life is perishing, not eternal suffering.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <div class="node green" data-group="life" onclick="toggleNode(this)">
+    <div class="node-title">Christ Is the Life</div>
+    <div class="node-verse">John 14:6, Colossians 3:4</div>
+    <div class="node-scripture">"I am the way, and the truth, and the life." — "When Christ, who is our life, is revealed, then you also will be revealed with Him in glory."</div>
+    <div class="node-summary">Christ does not merely give life as a commodity. He is the life. Eternal life is not a substance God distributes — it is participation in a Person. Without Him there is no life to participate in. The question of what happens to those outside of Christ is therefore a question about what happens to those who have no life — and the scriptural answer is: they perish.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <!-- ===== THE PARABLE ===== -->
+  <div class="section-divider"><span>THE WEDDING BANQUET</span></div>
+
+  <div class="node warm" data-group="parable" onclick="toggleNode(this)">
+    <div class="node-title">The King's Invitation</div>
+    <div class="node-verse">Matthew 22:1–14</div>
+    <div class="node-scripture">"The kingdom of heaven may be compared to a king who gave a wedding feast for his son. And he sent out his slaves to call those who had been invited to the wedding feast, and they were unwilling to come."</div>
+    <div class="node-summary">The parable reveals God's posture: invitation, not threat. The king prepares the feast and sends out the call — not once but repeatedly. The invitation goes to everyone, even those society counted as unworthy. The heart of God in this parable is generosity, not retribution. The feast was prepared. The table was set. The door was open.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <div class="node warm" data-group="parable" onclick="toggleNode(this)">
+    <div class="node-title">Those Who Refused</div>
+    <div class="node-verse">Matthew 22:3–6</div>
+    <div class="node-scripture">"They were unwilling to come. … But they paid no attention and went their way, one to his own farm, another to his business."</div>
+    <div class="node-summary">The invited guests are not tortured for refusing. They simply miss the feast. They chose their own farms, their own businesses, their own lives — and in doing so, they excluded themselves from the celebration. The consequence of refusal is absence, not ongoing torture. They are outside the feast — and outside the feast there is nothing.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <div class="node warm" data-group="parable" onclick="toggleNode(this)">
+    <div class="node-title">The Outer Darkness</div>
+    <div class="node-verse">Matthew 22:13</div>
+    <div class="node-scripture">"Bind him hand and foot, and throw him into the outer darkness; in that place there will be weeping and gnashing of teeth."</div>
+    <div class="node-summary">The "outer darkness" is the place that is not the feast. The weeping and gnashing of teeth express the anguish of realising what has been lost — not an eternal sentence of torture, but the horror of having refused the invitation and finding oneself excluded from life itself. The loss is real. The grief is real. But the emphasis is on exclusion from life, not on perpetual conscious suffering.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <!-- ===== HOW THE TRADITIONAL VIEW DEVELOPED ===== -->
+  <div class="section-divider"><span>HOW THE TRADITIONAL VIEW DEVELOPED</span></div>
+
+  <div class="node purple" data-group="history" onclick="toggleNode(this)">
+    <div class="node-title">Greek Philosophy, Not Scripture</div>
+    <div class="node-verse">Plato · Phaedo, c. 380 BC</div>
+    <div class="node-scripture">"The soul is immortal and imperishable, and our souls will truly exist in another world."</div>
+    <div class="node-summary">The idea that the soul is inherently immortal and indestructible comes from Plato, not from Moses or Paul. Greek philosophy assumed the soul could never cease to exist. When this assumption was imported into Christian theology, it made annihilation logically impossible — if the soul cannot be destroyed, the only options are eternal bliss or eternal torment. But Scripture never makes this assumption. Scripture says God alone has immortality (1 Tim 6:16).</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <div class="node purple" data-group="history" onclick="toggleNode(this)">
+    <div class="node-title">Augustine's Codification</div>
+    <div class="node-verse">5th century AD</div>
+    <div class="node-scripture">"The City of God" — Book XXI</div>
+    <div class="node-summary">Augustine systematised the doctrine of eternal conscious torment and made it the dominant position in Western Christianity. He argued extensively against annihilationism. His influence on subsequent theology was enormous — but his framework rested on the Platonic assumption of innate soul immortality. Before Augustine, conditionalist views were held by figures like Arnobius and Irenaeus without being treated as heresy.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <div class="node purple" data-group="history" onclick="toggleNode(this)">
+    <div class="node-title">Verses Used to Support Eternal Torment</div>
+    <div class="node-verse">Matthew 25:46, Mark 9:48, Revelation 14:11</div>
+    <div class="node-scripture">"These will go away into eternal punishment, but the righteous into eternal life."</div>
+    <div class="node-summary">Matthew 25:46 is the most cited verse. But "eternal punishment" can mean a punishment that is eternal in its result — permanent and irreversible — not necessarily eternal in its duration as a conscious experience. Compare "eternal redemption" (Heb 9:12) and "eternal judgment" (Heb 6:2): the redemption is not an ongoing process, nor is the judgment. They are settled, final acts with permanent results. Mark 9:48 ("the worm does not die, the fire is not quenched") echoes Isaiah 66:24, which describes corpses, not living persons. Revelation 14:11 uses apocalyptic imagery — the same language used of Edom's destruction in Isaiah 34:10 ("its smoke goes up forever"), yet Edom is not still burning.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <div class="node purple" data-group="history" onclick="toggleNode(this)">
+    <div class="node-title">The Rich Man and Lazarus</div>
+    <div class="node-verse">Luke 16:19–31</div>
+    <div class="node-scripture">"In Hades he lifted up his eyes, being in torment, and saw Abraham far away and Lazarus in his bosom."</div>
+    <div class="node-summary">This passage is often used to prove eternal conscious torment, but several things must be noted. First, it describes Hades — the intermediate state — not Gehenna or the lake of fire, which is the final judgment. Second, it is a parable, using imagery familiar to Jewish listeners from intertestamental literature. Third, the point of the parable is about the sufficiency of Moses and the prophets, not about the architecture of the afterlife. Building a doctrine of eternal torment on a parable about the intermediate state conflates two distinct categories in biblical eschatology.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <!-- ===== VOICES IN HISTORY ===== -->
+  <div class="section-divider"><span>CONDITIONALIST VOICES</span></div>
+
+  <div class="node blue" data-group="voices" onclick="toggleNode(this)">
+    <div class="node-title">Early Church</div>
+    <div class="node-verse">Arnobius, Irenaeus, Ignatius</div>
+    <div class="node-scripture">"For if He had not been made flesh, how could we have been saved? Or how could we, being mortal, attain immortality?" — Irenaeus</div>
+    <div class="node-summary">Several early church fathers held that immortality was conditional — something granted by God, not inherent to the human soul. Arnobius of Sicca (d. c. 330) explicitly taught that the wicked are annihilated. Irenaeus of Lyon (d. c. 202) argued that only God is inherently immortal, and that humans receive immortality through union with Christ. This was not considered heretical in the early church.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <div class="node blue" data-group="voices" onclick="toggleNode(this)">
+    <div class="node-title">Reformation and Modern</div>
+    <div class="node-verse">Luther · Tyndale · Stott · Fudge · Wright</div>
+    <div class="node-scripture"></div>
+    <div class="node-summary">Martin Luther questioned the innate immortality of the soul, calling it one of the "endless monstrosities in the Roman dunghill of decretals." William Tyndale likewise rejected it. In the 20th century, John Stott — one of the most respected evangelical leaders — publicly stated that he found the conditionalist reading of Scripture more persuasive than the traditional view. Edward Fudge's "The Fire That Consumes" is the most thorough biblical case. N.T. Wright has spoken of the final state of the wicked as a loss of genuine humanness rather than eternal conscious torment.</div>
+    <div class="node-tap">tap to expand</div>
+  </div>
+
+  <!-- ===== BOTTOM BURDEN ===== -->
+  <div class="centre-burden" style="margin-top: 28px;">
+    <div class="burden-label">THE INVITATION STANDS</div>
+    <p>God's primary posture toward the world is invitation, not threat. "God did not send the Son into the world to judge the world, but that the world might be saved through Him" (John 3:17). The feast is prepared. The table is set. The question has never been whether the door is open — it is whether we will walk through it. Those who refuse do not receive a lesser form of life. They receive no life at all. The Son is the life. He who has the Son has life. He who does not have the Son of God does not have life.</p>
+  </div>
+
+  <div class="footer">
+    <p>Judgment is real. The question is<br>what Scripture means by destruction —<br>and whether the alternative to life<br>is a different kind of life,<br>or the absence of it entirely.</p>
+    <a href="index.html">← THE ETERNAL THREAD</a>
+  </div>
+
+</div>
+
+<script>
+function toggleNode(el) {
+  const group = el.getAttribute('data-group');
+  const wasActive = el.classList.contains('active');
+  // Close others in same group
+  document.querySelectorAll('.node[data-group="' + group + '"]').forEach(n => n.classList.remove('active'));
+  if (!wasActive) el.classList.add('active');
+}
+</script>
+</body>
+</html>
