@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>The Two Adams — Romans 5:12–21</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: #0f0f17;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 300;
+    color: #c0c0d8;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #c0c0d8, transparent);
+    margin: 8px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #888070;
+    font-style: italic;
+  }
+
+  /* Two-column diagram area */
+  .diagram {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Column labels */
+  .col-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+  .col-adam .col-label { color: rgba(160, 160, 192, 0.6); }
+  .col-christ .col-label { color: rgba(160, 160, 192, 0.6); }
+
+  /* Head names */
+  .head-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+  .col-adam .head-name { color: #a0a0b8; }
+  .col-christ .head-name { color: #c0c0d8; }
+
+  /* Connector lines */
+  .connector {
+    width: 1px;
+    height: 18px;
+    margin: 0 auto;
+  }
+  .col-adam .connector { background: rgba(160, 160, 192, 0.2); }
+  .col-christ .connector { background: rgba(160, 160, 192, 0.25); }
+
+  /* Inheritance items */
+  .inherit-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    padding: 4px 0;
+  }
+  .col-adam .inherit-item { color: #9090a0; }
+  .col-christ .inherit-item { color: #b0b0c8; }
+
+  /* Birth label (italic, slightly smaller) */
+  .birth-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    text-align: center;
+    padding: 2px 0;
+  }
+  .col-adam .birth-label { color: rgba(160, 160, 192, 0.55); }
+  .col-christ .birth-label { color: rgba(160, 160, 192, 0.6); }
+
+  /* Column annotation */
+  .col-annotation {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12.5px;
+    font-style: italic;
+    text-align: center;
+    margin-top: 14px;
+    padding: 0 4px;
+  }
+  .col-adam .col-annotation { color: #706858; }
+  .col-christ .col-annotation { color: #706858; }
+
+  /* Central divider */
+  .diagram-divider {
+    width: 1px;
+    background: rgba(160, 160, 192, 0.1);
+    margin: 30px 0 20px;
+    flex-shrink: 0;
+  }
+
+  /* ─── Supporting Verses Section ─── */
+  .supporting-label {
+    text-align: center;
+    margin: 32px 0 16px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(160, 160, 192, 0.08);
+  }
+  .supporting-label span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(160, 160, 192, 0.35);
+  }
+
+  /* Node cards — reuses site pattern */
+  .node {
+    border-radius: 10px;
+    padding: 18px 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1.5px solid;
+    margin-bottom: 10px;
+  }
+  .node.adam-node {
+    background: rgba(18, 18, 26, 0.6);
+    border-color: rgba(160, 160, 192, 0.18);
+  }
+  .node.adam-node.active {
+    background: rgba(18, 18, 26, 0.9);
+    border-color: rgba(160, 160, 192, 0.45);
+    box-shadow: 0 0 24px rgba(160, 160, 192, 0.06), 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .node.christ-node {
+    background: rgba(18, 18, 30, 0.6);
+    border-color: rgba(160, 180, 220, 0.18);
+  }
+  .node.christ-node.active {
+    background: rgba(18, 18, 30, 0.9);
+    border-color: rgba(160, 180, 220, 0.45);
+    box-shadow: 0 0 24px rgba(160, 180, 220, 0.06), 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .node.reckoning-node {
+    background: rgba(13, 40, 24, 0.6);
+    border-color: rgba(104, 230, 160, 0.18);
+  }
+  .node.reckoning-node.active {
+    background: rgba(13, 40, 24, 0.9);
+    border-color: rgba(104, 230, 160, 0.45);
+    box-shadow: 0 0 24px rgba(104, 230, 160, 0.08), 0 4px 16px rgba(0,0,0,0.3);
+  }
+
+  .node.active { transform: scale(1.02); }
+
+  .node-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .node.active .node-header { margin-bottom: 10px; }
+
+  .node-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0;
+  }
+  .adam-node .node-title { color: #a0a0b8; }
+  .christ-node .node-title { color: #a0b0d0; }
+  .reckoning-node .node-title { color: #68e6a0; }
+
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+  }
+  .adam-node .node-verse { color: rgba(160, 160, 192, 0.5); }
+  .christ-node .node-verse { color: rgba(160, 180, 220, 0.5); }
+  .reckoning-node .node-verse { color: rgba(104, 230, 160, 0.5); }
+
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #d4c5a0;
+    margin: 8px 0;
+    font-style: italic;
+    border-left: 2px solid rgba(160, 160, 192, 0.2);
+    padding-left: 14px;
+    display: none;
+  }
+  .christ-node .node-scripture { border-left-color: rgba(160, 180, 220, 0.25); }
+  .reckoning-node .node-scripture { border-left-color: rgba(104, 230, 160, 0.25); }
+  .node.active .node-scripture { display: block; }
+
+  .node-summary {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #b8b0a0;
+    margin: 8px 0 0 0;
+    display: none;
+  }
+  .reckoning-node .node-summary { color: #a0c4b0; }
+  .node.active .node-summary { display: block; }
+
+  .node-tap {
+    font-size: 12px;
+    color: #888070;
+  }
+  .node.active .node-tap { display: none; }
+
+  /* Section sub-labels within supporting verses */
+  .verse-group-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 18px 0 8px;
+    padding-left: 4px;
+  }
+  .verse-group-label.adam { color: rgba(160, 160, 192, 0.4); }
+  .verse-group-label.christ { color: rgba(160, 180, 220, 0.4); }
+  .verse-group-label.reckoning { color: rgba(104, 230, 160, 0.4); }
+
+  /* ─── Bottom Note ─── */
+  .bottom-note {
+    text-align: center;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(160, 160, 192, 0.08);
+  }
+  .bottom-note p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: #908878;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 6px;
+  }
+  .bottom-note .reckoning-ref {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: #605850;
+    letter-spacing: 1px;
+    margin-top: 8px;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(160, 160, 192, 0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: #888070;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .footer-line {
+    width: 20px; height: 1px;
+    background: rgba(160, 160, 192, 0.25);
+    margin: 0 auto;
+  }
+
+  /* === MOBILE READABILITY FIXES === */
+  @media (max-width: 600px) {
+    .header p {
+      font-size: 17px;
+      color: #a89a80;
+    }
+    .head-name {
+      font-size: 24px;
+    }
+    .inherit-item {
+      font-size: 17px;
+    }
+    .birth-label {
+      font-size: 15px;
+    }
+    .col-annotation {
+      font-size: 13px;
+      color: #807870;
+    }
+    .node-title {
+      font-size: 13px;
+    }
+    .node-verse {
+      font-size: 15px;
+    }
+    .node-scripture {
+      font-size: 18px;
+      color: #ddd0b4;
+    }
+    .node-summary {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .node-tap {
+      font-size: 13px;
+      color: #8a8278;
+    }
+    .bottom-note p {
+      font-size: 15px;
+      color: #a09080;
+    }
+    .bottom-note .reckoning-ref {
+      font-size: 12px;
+      color: #706860;
+    }
+    .footer p {
+      font-size: 16px;
+      color: #706860;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>THE TWO ADAMS</h1>
+    <div class="header-line"></div>
+    <p>Romans 5:12–21</p>
+  </div>
+
+  <!-- ─── Two-Column Diagram ─── -->
+  <div class="diagram">
+
+    <!-- Left: In Adam -->
+    <div class="column col-adam">
+      <div class="col-label">IN ADAM</div>
+      <div class="head-name">Adam</div>
+      <div class="connector"></div>
+      <div class="birth-label">Natural Birth</div>
+      <div class="connector"></div>
+      <div class="inherit-item">Sin</div>
+      <div class="connector"></div>
+      <div class="inherit-item">Condemnation</div>
+      <div class="connector"></div>
+      <div class="inherit-item">Death</div>
+      <div class="col-annotation">Inherited by birth — not by choice</div>
+    </div>
+
+    <!-- Divider -->
+    <div class="diagram-divider"></div>
+
+    <!-- Right: In Christ -->
+    <div class="column col-christ">
+      <div class="col-label">IN CHRIST</div>
+      <div class="head-name">The Last Adam</div>
+      <div class="connector"></div>
+      <div class="birth-label">New Birth</div>
+      <div class="connector"></div>
+      <div class="inherit-item">Righteousness</div>
+      <div class="connector"></div>
+      <div class="inherit-item">Justification</div>
+      <div class="connector"></div>
+      <div class="inherit-item">Life</div>
+      <div class="col-annotation">Received by new birth — not by merit</div>
+    </div>
+
+  </div>
+
+  <!-- ─── Supporting Verses ─── -->
+  <div class="supporting-label"><span>SUPPORTING VERSES</span></div>
+
+  <div class="verse-group-label adam">IN ADAM</div>
+  <div id="adam-verses"></div>
+
+  <div class="verse-group-label christ">IN CHRIST</div>
+  <div id="christ-verses"></div>
+
+  <div class="verse-group-label reckoning">THE GROUND OF RECKONING</div>
+  <div id="reckoning-verses"></div>
+
+  <!-- ─── Bottom Note ─── -->
+  <div class="bottom-note">
+    <p>The Christian life does not begin by effort from Adam toward Christ, but from the reality of already being in Christ by new birth.</p>
+    <p>Reckoning is not making something true. It is counting as true what already is.</p>
+    <div class="reckoning-ref">ROMANS 6:11 RESTS ON ROMANS 5:12–21</div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>You did not choose to be born in Adam.<br>You cannot earn your way into Christ.<br>One birth placed you. Another birth transferred you.<br>Now — reckon it true.</p>
+    <div class="footer-line"></div>
+  </div>
+
+</div>
+
+<script>
+const adamVerses = [
+  {
+    title: "ONE TRESPASS — ALL CONDEMNED",
+    verse: "Romans 5:12",
+    cls: "adam-node",
+    scripture: "Therefore, just as through one man sin entered the world, and death through sin, and thus death spread to all men, because all sinned —",
+    summary: "Sin's entry was corporate, not individual. One man sinned; all were constituted sinners. No one chose this inheritance — it came by birth under Adam's headship."
+  },
+  {
+    title: "ONE OFFENCE — JUDGEMENT TO ALL",
+    verse: "Romans 5:18a",
+    cls: "adam-node",
+    scripture: "Through one man's offence judgement came to all men, resulting in condemnation —",
+    summary: "Condemnation was not assigned person by person on the basis of personal sins. It came wholesale, through one man's offence, to all who share his nature by birth."
+  },
+  {
+    title: "ONE MAN'S DISOBEDIENCE — MANY MADE SINNERS",
+    verse: "Romans 5:19a",
+    cls: "adam-node",
+    scripture: "For as by one man's disobedience many were made sinners —",
+    summary: "\"Made sinners\" — not merely declared guilty, but constituted as sinners. Adam's disobedience imparted a sinful nature to all his descendants. This is what you were born into."
+  }
+];
+
+const christVerses = [
+  {
+    title: "ONE ACT — JUSTIFICATION OF LIFE",
+    verse: "Romans 5:18b",
+    cls: "christ-node",
+    scripture: "— even so through one Man's righteous act the free gift came to all men, resulting in justification of life.",
+    summary: "The parallel is exact. One act of righteousness — Christ's obedience unto death — opened the way to justification and life for all who are in Him. Received, not achieved."
+  },
+  {
+    title: "ONE MAN'S OBEDIENCE — MANY MADE RIGHTEOUS",
+    verse: "Romans 5:19b",
+    cls: "christ-node",
+    scripture: "— so also by one Man's obedience many will be made righteous.",
+    summary: "\"Made righteous\" — constituted as righteous, just as Adam's line were constituted sinners. His obedience is your standing. Not your performance, but His, credited to you by new birth."
+  },
+  {
+    title: "GRACE REIGNS THROUGH RIGHTEOUSNESS",
+    verse: "Romans 5:17",
+    cls: "christ-node",
+    scripture: "For if by the one man's offence death reigned through the one, much more those who receive abundance of grace and of the gift of righteousness will reign in life through the One, Jesus Christ.",
+    summary: "Death reigned through Adam. Life reigns through Christ — and not merely as a counterbalance. \"Much more.\" The gift overflows the damage. Those who receive it do not merely survive; they reign."
+  }
+];
+
+const reckoningVerses = [
+  {
+    title: "RECKON YOURSELVES",
+    verse: "Romans 6:11",
+    cls: "reckoning-node",
+    scripture: "Likewise you also, reckon yourselves to be dead indeed to sin, but alive to God in Christ Jesus our Lord.",
+    summary: "This is the practical hinge. Romans 5 established the positional transfer — out of Adam, into Christ. Romans 6 says: now count it as true. Reckoning does not create the reality. It stands on a reality already accomplished by the two headships."
+  },
+  {
+    title: "OUR OLD MAN WAS CRUCIFIED",
+    verse: "Romans 6:6",
+    cls: "reckoning-node",
+    scripture: "Knowing this, that our old man was crucified with Him, that the body of sin might be done away with, that we should no longer be slaves of sin.",
+    summary: "The old man — your identity in Adam — was crucified with Christ. Past tense. Not a goal to achieve but a fact to know. The body of sin has been rendered powerless. You are no longer a slave."
+  }
+];
+
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls}`;
+  div.onclick = () => {
+    const isActive = div.classList.contains('active');
+    document.querySelectorAll(`.node.${n.cls}`).forEach(el => el.classList.remove('active'));
+    if (!isActive) div.classList.add('active');
+  };
+
+  let html = '<div class="node-header"><div>';
+  html += `<h3 class="node-title">${n.title}</h3>`;
+  html += `<span class="node-verse">${n.verse}</span>`;
+  html += '</div></div>';
+  html += `<div class="node-scripture">"${n.scripture}"</div>`;
+  html += `<div class="node-summary">${n.summary}</div>`;
+  html += '<div class="node-tap">Tap to expand</div>';
+
+  div.innerHTML = html;
+  return div;
+}
+
+// Build verse groups
+const adamFlow = document.getElementById('adam-verses');
+adamVerses.forEach(n => adamFlow.appendChild(buildNode(n)));
+
+const christFlow = document.getElementById('christ-verses');
+christVerses.forEach(n => christFlow.appendChild(buildNode(n)));
+
+const reckoningFlow = document.getElementById('reckoning-verses');
+reckoningVerses.forEach(n => reckoningFlow.appendChild(buildNode(n)));
+</script>
+</body>
+</html>
