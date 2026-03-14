@@ -1,0 +1,160 @@
+{
+  "sections": [
+    {
+      "title": "The Christian Life",
+      "pages": [
+        {
+          "file": "romans6-flowchart.html",
+          "theme": "gold",
+          "category": "Positional Truth",
+          "title": "Romans 6 — Reckoning",
+          "verse": "Romans 6:1–14",
+          "desc": "Dead to sin, alive to God — not by effort, but by position."
+        },
+        {
+          "file": "galatians-flowchart.html",
+          "theme": "gold",
+          "category": "Law and Grace",
+          "title": "Galatians — The Whole Letter",
+          "verse": "Galatians 1–6",
+          "desc": "Why Paul was so alarmed — and what the Galatians were actually doing."
+        },
+        {
+          "file": "all-things-good-flowchart.html",
+          "theme": "gold",
+          "category": "Sovereignty",
+          "title": "All Things Work Together for Good",
+          "verse": "Romans 8:28–30",
+          "desc": "What \"good\" actually means — and what it doesn't."
+        },
+        {
+          "file": "to-will-is-present-flowchart.html",
+          "theme": "gold",
+          "category": "The Inner Struggle",
+          "title": "To Will Is Present with Me",
+          "verse": "Romans 7:14–25",
+          "desc": "The wretched man — and why Romans 7 is not the end of the story."
+        },
+        {
+          "file": "two-adams-figure.html",
+          "theme": "gold",
+          "category": "Headship and Inheritance",
+          "title": "The Two Adams",
+          "verse": "Romans 5:12–21 · 1 Corinthians 15:45–49",
+          "desc": "Two representative heads. Two inheritances. Not by effort — by birth."
+        },
+        {
+          "file": "vine-and-branches-flowchart.html",
+          "theme": "green",
+          "category": "Abiding, Not Striving",
+          "title": "The Vine and the Branches",
+          "verse": "John 15:1–11",
+          "desc": "A branch does not try to abide — it simply remains."
+        }
+      ]
+    },
+    {
+      "title": "God's Grand Narrative",
+      "pages": [
+        {
+          "file": "eternal-purpose-flowchart.html",
+          "theme": "purple",
+          "category": "The Eternal Purpose",
+          "title": "God's Eternal Purpose",
+          "verse": "Ephesians 1–3",
+          "desc": "Before the foundation of the world — what God was after."
+        },
+        {
+          "file": "mystery-flowchart.html",
+          "theme": "purple",
+          "category": "Hidden Wisdom",
+          "title": "The Mystery",
+          "verse": "Ephesians 3 · Colossians 1:26–27",
+          "desc": "Christ in you — the mystery hidden for ages."
+        },
+        {
+          "file": "fromke-ultimate-intention-flowchart.html",
+          "theme": "purple",
+          "category": "Fromke's Framework",
+          "title": "The Ultimate Intention",
+          "verse": "Ephesians 1:9–10",
+          "desc": "God's intention before, through, and beyond the fall."
+        },
+        {
+          "file": "kingdom-of-god-flowchart.html",
+          "theme": "purple",
+          "category": "The Kingdom",
+          "title": "The Kingdom of God",
+          "verse": "Matthew–Revelation",
+          "desc": "Not a place — a reign. Not future only — present and coming."
+        },
+        {
+          "file": "final-judgment-flowchart.html",
+          "theme": "purple",
+          "category": "Final Things",
+          "title": "Final Judgment",
+          "verse": "John 3:16–17 · 2 Thessalonians 1:9",
+          "desc": "Torment or destruction — and what Scripture means by death."
+        }
+      ]
+    },
+    {
+      "title": "Spiritual Growth",
+      "pages": [
+        {
+          "file": "children-youngmen-fathers-flowchart.html",
+          "theme": "silver",
+          "category": "Stages of Growth",
+          "title": "Children, Young Men, Fathers",
+          "verse": "1 John 2:12–14",
+          "desc": "Three stages — and what marks each one."
+        },
+        {
+          "file": "two-operating-systems-flowchart.html",
+          "theme": "silver",
+          "category": "Flesh and Spirit",
+          "title": "Two Operating Systems",
+          "verse": "Galatians 5:16–25",
+          "desc": "The flesh and the Spirit — two systems, one choice."
+        },
+        {
+          "file": "soul-vs-spirit-flowchart.html",
+          "theme": "silver",
+          "category": "Inner Anatomy",
+          "title": "Soul vs Spirit",
+          "verse": "Hebrews 4:12 · 1 Thessalonians 5:23",
+          "desc": "The division Scripture makes — and why it matters."
+        },
+        {
+          "file": "three-kinds-of-man-flowchart.html",
+          "theme": "silver",
+          "category": "Spiritual Discernment",
+          "title": "Three Kinds of Man",
+          "verse": "1 Corinthians 2:14–3:3",
+          "desc": "Natural, carnal, spiritual — Paul's three categories."
+        },
+        {
+          "file": "addon-vs-operating-system-flowchart.html",
+          "theme": "silver",
+          "category": "Christ-as-Life",
+          "title": "Add-On vs Operating System",
+          "verse": "Galatians 2:20 · Colossians 3:4",
+          "desc": "Christ as addition to your life — or Christ as your life."
+        }
+      ]
+    },
+    {
+      "title": "Church & Culture",
+      "pages": [
+        {
+          "file": "head-and-body-flowchart.html",
+          "theme": "warm",
+          "category": "Organism, Not Organisation",
+          "title": "The Head and the Body",
+          "verse": "1 Corinthians 12 · Ephesians 4:15–16 · Colossians 1:18",
+          "desc": "Christ as actual head — every member functioning, none expendable."
+        }
+      ]
+    }
+  ]
+}

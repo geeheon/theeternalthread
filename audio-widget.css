@@ -1,0 +1,126 @@
+/* ─── Audio Widget ─── */
+.audio-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  z-index: 9998;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(192, 192, 216, 0.15);
+  background: rgba(15, 15, 23, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s, background 0.3s;
+}
+.audio-toggle:hover {
+  border-color: rgba(192, 192, 216, 0.3);
+  background: rgba(15, 15, 23, 0.96);
+}
+.audio-toggle svg {
+  width: 18px;
+  height: 18px;
+  stroke: #908880;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.3s;
+}
+.audio-toggle:hover svg { stroke: #c0c0d8; }
+
+/* Playing state */
+.audio-toggle.playing {
+  border-color: rgba(104, 230, 160, 0.25);
+}
+.audio-toggle.playing svg {
+  stroke: #68e6a0;
+}
+
+/* Progress ring */
+.audio-progress-ring {
+  position: absolute;
+  inset: -1px;
+  width: 46px;
+  height: 46px;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+.audio-progress-ring circle {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+.audio-progress-track {
+  stroke: transparent;
+}
+.audio-progress-fill {
+  stroke: rgba(104, 230, 160, 0.35);
+  stroke-dasharray: 138.23;
+  stroke-dashoffset: 138.23;
+  transition: stroke-dashoffset 0.3s linear;
+}
+
+/* Hidden when no audio */
+.audio-toggle.hidden {
+  display: none;
+}
+
+/* Speed indicator (shows on long press or second tap while playing) */
+.audio-speed {
+  position: fixed;
+  bottom: 74px;
+  right: 14px;
+  z-index: 9998;
+  background: rgba(15, 15, 23, 0.94);
+  border: 1px solid rgba(192, 192, 216, 0.1);
+  border-radius: 8px;
+  padding: 6px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.25s, visibility 0.25s, transform 0.25s;
+}
+.audio-speed.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.audio-speed-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  color: #706860;
+  padding: 5px 12px;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.audio-speed-btn:hover { background: rgba(192, 192, 216, 0.06); color: #c0c0d8; }
+.audio-speed-btn.active { color: #68e6a0; }
+
+@media (max-width: 600px) {
+  .audio-toggle {
+    bottom: 20px;
+    right: 16px;
+    width: 42px;
+    height: 42px;
+  }
+  .audio-progress-ring {
+    width: 44px;
+    height: 44px;
+  }
+  .audio-speed {
+    bottom: 68px;
+    right: 10px;
+  }
+}

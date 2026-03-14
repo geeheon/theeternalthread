@@ -1,0 +1,230 @@
+/* ─── Navigation Widget ─── */
+.nav-toggle {
+  position: fixed;
+  bottom: 24px;
+  left: 20px;
+  z-index: 9998;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(192, 192, 216, 0.15);
+  background: rgba(15, 15, 23, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s, background 0.3s;
+}
+.nav-toggle:hover {
+  border-color: rgba(192, 192, 216, 0.3);
+  background: rgba(15, 15, 23, 0.96);
+}
+.nav-toggle svg {
+  width: 18px;
+  height: 18px;
+  stroke: #908880;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  transition: stroke 0.3s;
+}
+.nav-toggle:hover svg { stroke: #c0c0d8; }
+
+/* Overlay */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+.nav-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Panel */
+.nav-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 10000;
+  width: 300px;
+  max-width: 85vw;
+  background: #111119;
+  border-right: 1px solid rgba(192, 192, 216, 0.06);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 28px 0 40px;
+}
+.nav-overlay.open .nav-panel {
+  transform: translateX(0);
+}
+
+/* Panel header */
+.nav-panel-header {
+  padding: 0 20px 20px;
+  border-bottom: 1px solid rgba(192, 192, 216, 0.06);
+  margin-bottom: 8px;
+}
+.nav-panel-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #e8e0d8;
+  letter-spacing: 0.5px;
+}
+.nav-panel-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: #605850;
+  margin-top: 4px;
+}
+.nav-close {
+  position: absolute;
+  top: 24px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-close svg {
+  width: 16px;
+  height: 16px;
+  stroke: #605850;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  transition: stroke 0.2s;
+}
+.nav-close:hover svg { stroke: #c0c0d8; }
+
+/* Section groups */
+.nav-section {
+  padding: 0 12px;
+  margin-top: 4px;
+}
+.nav-section-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #504840;
+  padding: 12px 8px 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: color 0.2s;
+  user-select: none;
+}
+.nav-section-title:hover { color: #908880; }
+.nav-section-title .chevron {
+  width: 10px;
+  height: 10px;
+  stroke: #504840;
+  fill: none;
+  stroke-width: 1.5;
+  transition: transform 0.25s, stroke 0.2s;
+}
+.nav-section.expanded .nav-section-title .chevron {
+  transform: rotate(90deg);
+}
+.nav-section-title:hover .chevron { stroke: #908880; }
+
+/* Page links */
+.nav-pages {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-section.expanded .nav-pages {
+  max-height: 800px;
+}
+
+.nav-page-link {
+  display: block;
+  text-decoration: none;
+  padding: 8px 8px 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 1px;
+  transition: background 0.2s;
+}
+.nav-page-link:hover {
+  background: rgba(192, 192, 216, 0.04);
+}
+.nav-page-link.active {
+  background: rgba(192, 192, 216, 0.06);
+}
+
+.nav-page-num {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px;
+  color: #404040;
+  margin-bottom: 1px;
+}
+.nav-page-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #d0c8c0;
+  line-height: 1.3;
+}
+.nav-page-verse {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: #605850;
+  margin-top: 1px;
+}
+
+/* Theme accent for active page */
+.nav-page-link.active[data-theme="gold"]   .nav-page-title { color: #e6c068; }
+.nav-page-link.active[data-theme="purple"] .nav-page-title { color: #d4a0f0; }
+.nav-page-link.active[data-theme="green"]  .nav-page-title { color: #68e6a0; }
+.nav-page-link.active[data-theme="silver"] .nav-page-title { color: #c0c0d8; }
+.nav-page-link.active[data-theme="blue"]   .nav-page-title { color: #68a0e6; }
+.nav-page-link.active[data-theme="warm"]   .nav-page-title { color: #e6a868; }
+
+/* Home link at bottom */
+.nav-home {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #504840;
+  margin-top: 20px;
+  padding: 16px 20px;
+  border-top: 1px solid rgba(192, 192, 216, 0.06);
+  transition: color 0.2s;
+}
+.nav-home:hover { color: #908880; }
+
+@media (max-width: 600px) {
+  .nav-toggle {
+    bottom: 20px;
+    left: 16px;
+    width: 42px;
+    height: 42px;
+  }
+  .nav-page-title { font-size: 17px; }
+  .nav-page-verse { font-size: 12px; color: #706860; }
+}
