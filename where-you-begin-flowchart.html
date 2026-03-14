@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Where You Begin — The Eternal Thread</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: #0f0f17;
+      color: #e8e0d8;
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 48px 20px 64px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 460px;
+      width: 100%;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 26px;
+      color: #d4a0f0;
+      letter-spacing: 0.5px;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .header-line {
+      width: 50px;
+      height: 1px;
+      margin: 10px auto 14px;
+      background: linear-gradient(90deg, transparent, #d4a0f0, transparent);
+    }
+
+    .header p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: #908880;
+      line-height: 1.5;
+    }
+
+    .header .author {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #605850;
+      margin-top: 8px;
+    }
+
+    /* ===== CONCENTRIC DIAGRAM ===== */
+    .diagram-box {
+      margin: 0 0 32px 0;
+      padding: 24px 12px 20px;
+      border-radius: 10px;
+      background: rgba(14, 14, 22, 0.6);
+      border: 1px solid rgba(212, 160, 240, 0.06);
+    }
+
+    .diagram-label {
+      text-align: center;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #d4a0f0;
+      margin-bottom: 16px;
+    }
+
+    .rings-svg {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .rings-svg circle {
+      cursor: pointer;
+      transition: all 0.35s ease;
+    }
+
+    .rings-svg .ring-hit:hover + circle { stroke-opacity: 0.35; }
+    .rings-svg circle.glow-a { stroke: rgba(212,160,240,0.5); filter: drop-shadow(0 0 12px rgba(212,160,240,0.15)); }
+    .rings-svg circle.glow-b { stroke: rgba(104,160,230,0.5); filter: drop-shadow(0 0 10px rgba(104,160,230,0.15)); }
+    .rings-svg circle.glow-c { stroke: rgba(104,230,160,0.5); filter: drop-shadow(0 0 8px rgba(104,230,160,0.15)); }
+    .rings-svg circle.glow-d { stroke: rgba(230,168,104,0.6); filter: drop-shadow(0 0 8px rgba(230,168,104,0.15)); }
+
+    .diagram-hint {
+      text-align: center;
+      margin-top: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      color: #504840;
+    }
+
+    /* ===== ARROW CONNECTORS ===== */
+    .arrow-down {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 6px 0;
+    }
+    .arrow-down .line {
+      width: 1px;
+      height: 14px;
+    }
+    .arrow-down .head {
+      width: 0; height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+    }
+    .arrow-down .label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin: 4px 0;
+    }
+
+    .arrow-purple .line { background: rgba(212,160,240,0.2); }
+    .arrow-purple .head { border-top: 5px solid rgba(212,160,240,0.3); }
+    .arrow-purple .label { color: rgba(212,160,240,0.35); }
+
+    /* ===== SECTION LABELS ===== */
+    .section-header {
+      text-align: center;
+      margin: 28px 0 14px;
+    }
+
+    .section-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 4px;
+    }
+
+    .section-tag.narrow {
+      color: #e6a868;
+      background: rgba(230,168,104,0.06);
+      border: 1px solid rgba(230,168,104,0.12);
+    }
+
+    .section-tag.wider {
+      color: #68e6a0;
+      background: rgba(104,230,160,0.06);
+      border: 1px solid rgba(104,230,160,0.12);
+    }
+
+    .section-tag.broad {
+      color: #68a0e6;
+      background: rgba(104,160,230,0.06);
+      border: 1px solid rgba(104,160,230,0.12);
+    }
+
+    .section-tag.ultimate {
+      color: #d4a0f0;
+      background: rgba(212,160,240,0.06);
+      border: 1px solid rgba(212,160,240,0.12);
+    }
+
+    /* ===== NODES ===== */
+    .node {
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      border: 1.5px solid;
+    }
+
+    .node.warm {
+      background: rgba(40, 30, 18, 0.6);
+      border-color: rgba(230, 168, 104, 0.2);
+    }
+    .node.warm.active {
+      background: rgba(40, 30, 18, 0.9);
+      border-color: #e6a868;
+      box-shadow: 0 0 25px rgba(230, 168, 104, 0.08), 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    .node.green {
+      background: rgba(13, 28, 20, 0.6);
+      border-color: rgba(104, 230, 160, 0.2);
+    }
+    .node.green.active {
+      background: rgba(13, 28, 20, 0.9);
+      border-color: #68e6a0;
+      box-shadow: 0 0 25px rgba(104, 230, 160, 0.08), 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    .node.blue {
+      background: rgba(14, 20, 36, 0.6);
+      border-color: rgba(104, 160, 230, 0.2);
+    }
+    .node.blue.active {
+      background: rgba(14, 20, 36, 0.9);
+      border-color: #68a0e6;
+      box-shadow: 0 0 25px rgba(104, 160, 230, 0.08), 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    .node.purple {
+      background: rgba(28, 18, 36, 0.6);
+      border-color: rgba(212, 160, 240, 0.2);
+    }
+    .node.purple.active {
+      background: rgba(28, 18, 36, 0.9);
+      border-color: #d4a0f0;
+      box-shadow: 0 0 25px rgba(212, 160, 240, 0.08), 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    .node-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .node.warm .node-title { color: #e6a868; }
+    .node.green .node-title { color: #68e6a0; }
+    .node.blue .node-title { color: #68a0e6; }
+    .node.purple .node-title { color: #d4a0f0; }
+
+    .node-verse {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: #807870;
+    }
+
+    .node-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: #e0d8d0;
+      margin-top: 6px;
+      line-height: 1.3;
+    }
+
+    .node-scripture {
+      display: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #a89880;
+      margin-top: 14px;
+      padding-left: 14px;
+      border-left: 2px solid rgba(160, 140, 120, 0.2);
+    }
+
+    .node-summary {
+      display: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: #a09890;
+      margin-top: 12px;
+    }
+
+    .node-tap {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      color: #504840;
+      margin-top: 8px;
+    }
+
+    .node.active .node-scripture,
+    .node.active .node-summary { display: block; }
+    .node.active .node-tap { display: none; }
+
+    /* ===== EMPHASIS CARD ===== */
+    .emphasis {
+      margin: 24px 0;
+      padding: 18px 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .emphasis.purple {
+      background: rgba(212,160,240,0.04);
+      border: 1px solid rgba(212,160,240,0.10);
+    }
+
+    .emphasis-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #d4a0f0;
+      margin-bottom: 10px;
+    }
+
+    .emphasis p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 17px;
+      line-height: 1.6;
+      color: #a09080;
+    }
+
+    .emphasis p strong {
+      color: #c8b8a8;
+      font-weight: 400;
+    }
+
+    /* ===== SUMMARY CARDS ===== */
+    .summary-section {
+      margin-top: 28px;
+    }
+
+    .summary-label {
+      text-align: center;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #504840;
+      margin-bottom: 14px;
+    }
+
+    .summary-card {
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      background: rgba(212,160,240,0.03);
+      border: 1px solid rgba(212,160,240,0.06);
+    }
+
+    .summary-card p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #908880;
+    }
+
+    .summary-card p em {
+      color: #b8a898;
+      font-style: italic;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(212,160,240,0.06);
+    }
+
+    .footer p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: #807870;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .footer a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #605850;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer a:hover { color: #d4a0f0; }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 600px) {
+      .node-scripture { font-size: 18px; }
+      .node-summary { font-size: 15px; }
+      .node-tap { font-size: 13px; }
+      .header p { font-size: 17px; }
+      .node-verse { color: #a09888; }
+      .footer p { font-size: 15px; color: #908880; }
+      .emphasis p { font-size: 19px; }
+      .ring-letter { font-size: 12px; }
+      .ring-name { font-size: 7px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+      <h1>Where You Begin</h1>
+      <div class="header-line"></div>
+      <p>Where you begin determines<br>what you think the gospel is about</p>
+      <div class="author">Fromke's Framework</div>
+    </div>
+
+    <!-- ===== CONCENTRIC DIAGRAM ===== -->
+    <div class="diagram-box">
+      <div class="diagram-label">Four Starting Points</div>
+      <svg class="rings-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <!-- Ring A — Fatherhood (outermost) -->
+        <circle cx="200" cy="200" r="190" fill="rgba(212,160,240,0.03)" stroke="rgba(212,160,240,0.12)" stroke-width="1" />
+        <circle cx="200" cy="200" r="190" fill="transparent" stroke="transparent" stroke-width="30" class="ring-hit" data-target="node-a" id="hit-a" />
+        <circle cx="200" cy="200" r="190" fill="none" stroke="rgba(212,160,240,0.12)" stroke-width="1" id="vis-a" />
+        <text x="200" y="34" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="16" font-weight="600" fill="#d4a0f0" letter-spacing="1">A</text>
+        <text x="200" y="50" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(212,160,240,0.5)" letter-spacing="1.5" text-transform="uppercase" style="text-transform:uppercase">FATHERHOOD</text>
+
+        <!-- Ring B — Creation -->
+        <circle cx="200" cy="200" r="142" fill="rgba(104,160,230,0.03)" stroke="rgba(104,160,230,0.12)" stroke-width="1" />
+        <circle cx="200" cy="200" r="142" fill="transparent" stroke="transparent" stroke-width="28" class="ring-hit" data-target="node-b" id="hit-b" />
+        <circle cx="200" cy="200" r="142" fill="none" stroke="rgba(104,160,230,0.12)" stroke-width="1" id="vis-b" />
+        <text x="200" y="78" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="14" font-weight="600" fill="#68a0e6" letter-spacing="1">B</text>
+        <text x="200" y="93" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(104,160,230,0.5)" letter-spacing="1.5" style="text-transform:uppercase">CREATION</text>
+
+        <!-- Ring C — Commission -->
+        <circle cx="200" cy="200" r="96" fill="rgba(104,230,160,0.03)" stroke="rgba(104,230,160,0.12)" stroke-width="1" />
+        <circle cx="200" cy="200" r="96" fill="transparent" stroke="transparent" stroke-width="24" class="ring-hit" data-target="node-c" id="hit-c" />
+        <circle cx="200" cy="200" r="96" fill="none" stroke="rgba(104,230,160,0.12)" stroke-width="1" id="vis-c" />
+        <text x="200" y="122" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="13" font-weight="600" fill="#68e6a0" letter-spacing="1">C</text>
+        <text x="200" y="136" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(104,230,160,0.5)" letter-spacing="1.5" style="text-transform:uppercase">COMMISSION</text>
+
+        <!-- Ring D — The Fall (innermost) -->
+        <circle cx="200" cy="200" r="52" fill="rgba(230,168,104,0.04)" stroke="rgba(230,168,104,0.14)" stroke-width="1" />
+        <circle cx="200" cy="200" r="52" fill="transparent" stroke="transparent" stroke-width="20" class="ring-hit" data-target="node-d" id="hit-d" />
+        <circle cx="200" cy="200" r="52" fill="none" stroke="rgba(230,168,104,0.14)" stroke-width="1" id="vis-d" />
+        <text x="200" y="165" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="13" font-weight="600" fill="#e6a868" letter-spacing="1">D</text>
+        <text x="200" y="179" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="7.5" fill="rgba(230,168,104,0.6)" letter-spacing="1.5" style="text-transform:uppercase">THE FALL</text>
+
+        <!-- Subtle axis labels -->
+        <text x="200" y="214" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="7" fill="rgba(96,88,80,0.6)" letter-spacing="1" style="text-transform:uppercase">NARROWEST</text>
+        <text x="200" y="390" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="7" fill="rgba(96,88,80,0.4)" letter-spacing="1.5" style="text-transform:uppercase">MOST ULTIMATE ←  → MOST ULTIMATE</text>
+      </svg>
+      <div class="diagram-hint">Tap a ring — or scroll down</div>
+    </div>
+
+    <!-- ===== NODE D — THE FALL ===== -->
+    <div class="section-header">
+      <span class="section-tag narrow">Narrowest Reading</span>
+    </div>
+
+    <div class="node warm" id="node-d" data-group="main">
+      <div class="node-title">D — Man's Fall</div>
+      <div class="node-verse">Genesis 3 · Romans 5:12</div>
+      <div class="node-heading">Starting with the Problem</div>
+      <div class="node-scripture">"Through one man sin entered the world, and death through sin, and so death spread to all men."</div>
+      <div class="node-summary">If you begin the story here, history is read mainly in remedial terms. Man's need becomes central — sin, guilt, forgiveness, rescue. The gospel becomes a salvation plan: God fixing what went wrong. Christ is understood primarily as Redeemer, related to man's crisis. This is true — but it is not the whole story. It is entering the drama halfway through, and mistaking the crisis for the plot.</div>
+      <div class="node-tap">Tap to expand</div>
+    </div>
+
+    <div class="arrow-down arrow-purple">
+      <div class="line"></div>
+      <div class="label">Begin earlier</div>
+      <div class="head"></div>
+    </div>
+
+    <!-- ===== NODE C — COMMISSION ===== -->
+    <div class="section-header">
+      <span class="section-tag wider">Wider</span>
+    </div>
+
+    <div class="node green" id="node-c" data-group="main">
+      <div class="node-title">C — God's Commission to Man</div>
+      <div class="node-verse">Genesis 1:28</div>
+      <div class="node-heading">Starting with Dominion</div>
+      <div class="node-scripture">"Be fruitful and multiply; fill the earth and subdue it; have dominion over the fish of the sea, over the birds of the air, and over every living thing."</div>
+      <div class="node-summary">Here the story begins before the fall — with God's charge to man. History is read in kingdom and governmental terms. Man was given vocation, stewardship, and authority. The gospel becomes about restoring that dominion. This is broader than the fall, and rightly emphasises purpose over problem. But it is still centred on man's commission — what God told man to do. It does not yet reach what God Himself was after.</div>
+      <div class="node-tap">Tap to expand</div>
+    </div>
+
+    <div class="arrow-down arrow-purple">
+      <div class="line"></div>
+      <div class="label">Begin earlier</div>
+      <div class="head"></div>
+    </div>
+
+    <!-- ===== NODE B — CREATION ===== -->
+    <div class="section-header">
+      <span class="section-tag broad">Broader</span>
+    </div>
+
+    <div class="node blue" id="node-b" data-group="main">
+      <div class="node-title">B — God's Creation</div>
+      <div class="node-verse">Genesis 1:1 · Colossians 1:16</div>
+      <div class="node-heading">Starting with the Creator</div>
+      <div class="node-scripture">"In the beginning God created the heavens and the earth… All things were created through Him and for Him."</div>
+      <div class="node-summary">Now the focus shifts decidedly toward God. History is read in terms of God's sovereignty, design, and order. The gospel concerns the one who made all things and is moving all things toward a goal. This is more God-centred than either of the previous starting points. But it is still not ultimate. Creation itself was the means — not the end. God was Creator, yes, but what was He creating for?</div>
+      <div class="node-tap">Tap to expand</div>
+    </div>
+
+    <div class="arrow-down arrow-purple">
+      <div class="line"></div>
+      <div class="label">Begin earlier still</div>
+      <div class="head"></div>
+    </div>
+
+    <!-- ===== NODE A — FATHERHOOD ===== -->
+    <div class="section-header">
+      <span class="section-tag ultimate">The Most Ultimate</span>
+    </div>
+
+    <div class="node purple" id="node-a" data-group="main">
+      <div class="node-title">A — God's Fatherhood</div>
+      <div class="node-verse">Ephesians 1:4–5 · Ephesians 3:11</div>
+      <div class="node-heading">Starting with the Father's Eternal Desire</div>
+      <div class="node-scripture">"He chose us in Him before the foundation of the world… having predestined us to adoption as sons by Jesus Christ to Himself, according to the good pleasure of His will."</div>
+      <div class="node-summary">This is the most ultimate starting point. Before creation, before commission, before any fall — there was a Father with a desire. God's primary identity in relation to His purpose is not Judge, not Lawgiver, not even Creator — but Father. His deepest intention was paternal: to have many sons, conformed to the image of His Son, sharing His life. Everything else — creation, commission, fall, redemption — finds its meaning within this. Christ is related not primarily to man's need, but to the Father's eternal purpose.</div>
+      <div class="node-tap">Tap to expand</div>
+    </div>
+
+    <!-- ===== EMPHASIS ===== -->
+    <div class="emphasis purple">
+      <div class="emphasis-label">The Principle</div>
+      <p>The fall is a crisis <strong>within</strong> the story —<br>not the beginning of the story.<br><br>Redemption is not the end,<br>but a recovery programme incorporated<br>into the <strong>main theme</strong>.</p>
+    </div>
+
+    <!-- ===== SUMMARY ===== -->
+    <div class="summary-section">
+      <div class="summary-label">What Each Starting Point Produces</div>
+
+      <div class="summary-card">
+        <p><em>D</em> — A gospel about rescue. Christ as solution to man's problem.</p>
+      </div>
+      <div class="summary-card">
+        <p><em>C</em> — A gospel about kingdom. Christ as restorer of man's vocation.</p>
+      </div>
+      <div class="summary-card">
+        <p><em>B</em> — A gospel about design. Christ as agent of God's creative order.</p>
+      </div>
+      <div class="summary-card">
+        <p><em>A</em> — A gospel about sonship. Christ as the Father's beloved — and we in Him.</p>
+      </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+      <p>Where you begin<br>determines where you end.<br>Begin with the Father —<br>and everything finds its place.</p>
+      <a href="index.html">← THE ETERNAL THREAD</a>
+    </div>
+
+  </div>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // Node expand/collapse
+    document.querySelectorAll('.node').forEach(function(node) {
+      node.addEventListener('click', function() {
+        var group = this.getAttribute('data-group');
+        document.querySelectorAll('.node[data-group="' + group + '"]').forEach(function(n) {
+          if (n !== node) n.classList.remove('active');
+        });
+        this.classList.toggle('active');
+      });
+    });
+
+    // Ring click → scroll to node
+    document.querySelectorAll('.ring-hit').forEach(function(hit) {
+      hit.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var targetId = this.getAttribute('data-target');
+        var target = document.getElementById(targetId);
+        if (target) {
+          // Remove glow from all vis circles, add to matching one
+          document.querySelectorAll('.rings-svg circle[id^="vis-"]').forEach(function(c) {
+            c.className.baseVal = '';
+          });
+          var letter = this.id.replace('hit-', '');
+          var vis = document.getElementById('vis-' + letter);
+          if (vis) vis.className.baseVal = 'glow-' + letter;
+
+          // Scroll to node
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          // Expand node after brief delay
+          setTimeout(function() {
+            var group = target.getAttribute('data-group');
+            document.querySelectorAll('.node[data-group="' + group + '"]').forEach(function(n) {
+              if (n !== target) n.classList.remove('active');
+            });
+            target.classList.add('active');
+          }, 400);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
