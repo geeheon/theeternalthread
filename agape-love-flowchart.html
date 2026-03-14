@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Agape — Love from a Different Source — The Eternal Thread</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,500&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: #0f0f17;
+    color: #e8e0d8;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 48px 20px 64px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 460px;
+    width: 100%;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 26px;
+    color: #68a0e6;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .header-line {
+    width: 50px;
+    height: 1px;
+    margin: 10px auto 14px;
+    background: linear-gradient(90deg, transparent, #68a0e6, transparent);
+  }
+
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #888070;
+  }
+
+  /* ===== SOURCE BLOCK ===== */
+  .source-block {
+    text-align: center;
+    margin-bottom: 28px;
+    padding: 24px 20px;
+    border-radius: 10px;
+    background: rgba(104,160,230,0.04);
+    border: 1px solid rgba(104,160,230,0.12);
+  }
+
+  .source-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: #68a0e6;
+    margin-bottom: 12px;
+  }
+
+  .source-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: #c0c8d8;
+    font-style: italic;
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+
+  .source-ref {
+    font-size: 11px;
+    color: #607080;
+    letter-spacing: 1.5px;
+  }
+
+  /* ===== FLOW INDICATORS ===== */
+  .flow-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0;
+  }
+
+  .flow-line {
+    width: 1.5px;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(104,160,230,0.35), rgba(104,160,230,0.12));
+  }
+
+  .flow-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: rgba(104,160,230,0.45);
+    padding: 3px 0;
+  }
+
+  .flow-head {
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid rgba(104,160,230,0.25);
+  }
+
+  /* ===== KEY DISTINCTION BLOCK ===== */
+  .key-block {
+    text-align: center;
+    margin: 20px 0 28px;
+    padding: 18px 20px;
+    border-radius: 10px;
+    background: rgba(104,160,230,0.04);
+    border: 1px solid rgba(104,160,230,0.1);
+  }
+
+  .key-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(104,160,230,0.5);
+    margin-bottom: 10px;
+  }
+
+  .key-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #a0b4c8;
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  .key-text em {
+    color: #68a0e6;
+    font-style: italic;
+  }
+
+  /* ===== TWO-COLUMN CONTRAST ===== */
+  .contrast {
+    margin: 0 0 24px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(104,160,230,0.1);
+  }
+
+  .contrast-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(13,16,20,0.5);
+    border-bottom: 1px solid rgba(104,160,230,0.06);
+  }
+
+  .contrast-header span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(104,160,230,0.5);
+  }
+
+  .contrast-row { display: flex; }
+  .contrast-col { flex: 1; padding: 18px 14px; }
+
+  .contrast-col.natural {
+    background: rgba(46,30,26,0.2);
+    border-right: 1px solid rgba(104,160,230,0.04);
+  }
+
+  .contrast-col.agape {
+    background: rgba(13,20,36,0.3);
+  }
+
+  .contrast-col-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .contrast-col.natural .contrast-col-label { color: #c8a070; }
+  .contrast-col.agape .contrast-col-label { color: #68a0e6; }
+
+  .contrast-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    line-height: 1.9;
+    font-style: italic;
+    text-align: center;
+  }
+
+  .contrast-col.natural .contrast-item { color: #a09080; }
+  .contrast-col.agape .contrast-item { color: #8098b0; }
+
+  .contrast-footer {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-top: 12px;
+    padding-top: 10px;
+  }
+
+  .contrast-col.natural .contrast-footer {
+    color: rgba(200,160,112,0.45);
+    border-top: 1px solid rgba(200,160,112,0.1);
+  }
+
+  .contrast-col.agape .contrast-footer {
+    color: rgba(104,160,230,0.45);
+    border-top: 1px solid rgba(104,160,230,0.1);
+  }
+
+  /* ===== APPLICATION: MARRIAGE VOWS ===== */
+  .application {
+    margin: 0 0 24px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(104,160,230,0.08);
+  }
+
+  .application-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(13,16,20,0.5);
+    border-bottom: 1px solid rgba(104,160,230,0.06);
+  }
+
+  .application-header span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(104,160,230,0.4);
+  }
+
+  .application-row { display: flex; }
+  .application-col { flex: 1; padding: 16px 14px; }
+
+  .application-col.vow-natural {
+    background: rgba(46,30,26,0.15);
+    border-right: 1px solid rgba(104,160,230,0.04);
+  }
+
+  .application-col.vow-agape {
+    background: rgba(13,20,36,0.2);
+  }
+
+  .application-col-label {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .application-col.vow-natural .application-col-label { color: #c8a070; }
+  .application-col.vow-agape .application-col-label { color: #68a0e6; }
+
+  .application-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12.5px;
+    line-height: 1.8;
+    font-style: italic;
+    text-align: center;
+  }
+
+  .application-col.vow-natural .application-item { color: #908070; }
+  .application-col.vow-agape .application-item { color: #7090a8; }
+
+  .application-result {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-top: 10px;
+    padding-top: 8px;
+  }
+
+  .application-col.vow-natural .application-result {
+    color: rgba(200,160,112,0.4);
+    border-top: 1px solid rgba(200,160,112,0.08);
+  }
+
+  .application-col.vow-agape .application-result {
+    color: rgba(104,160,230,0.4);
+    border-top: 1px solid rgba(104,160,230,0.08);
+  }
+
+  /* ===== SUMMARY BURDEN ===== */
+  .burden {
+    text-align: center;
+    margin: 24px 0 28px;
+    padding: 20px 20px;
+    border-radius: 10px;
+    background: rgba(104,160,230,0.04);
+    border: 1px solid rgba(104,160,230,0.1);
+  }
+
+  .burden p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #a0b4c8;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 4px;
+  }
+
+  .burden p:last-child { margin-bottom: 0; }
+
+  .burden p em {
+    color: #68a0e6;
+    font-style: italic;
+  }
+
+  /* ===== SUPPORTING VERSES ===== */
+  .supporting-label {
+    text-align: center;
+    margin: 32px 0 16px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(104,160,230,0.08);
+  }
+
+  .supporting-label span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(104,160,230,0.3);
+  }
+
+  .verse-group-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 18px 0 8px;
+    padding-left: 4px;
+  }
+
+  .verse-group-label.source-lbl { color: rgba(104,160,230,0.4); }
+  .verse-group-label.character-lbl { color: rgba(104,180,200,0.4); }
+  .verse-group-label.covenant-lbl { color: rgba(130,160,230,0.4); }
+
+  /* ===== NODES ===== */
+  .node {
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: background 0.25s, border-color 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .node.source-node {
+    background: rgba(104,160,230,0.04);
+    border: 1px solid rgba(104,160,230,0.08);
+  }
+  .node.source-node:hover { border-color: rgba(104,160,230,0.15); }
+  .node.source-node.active { border-color: rgba(104,160,230,0.2); background: rgba(104,160,230,0.06); }
+
+  .node.character-node {
+    background: rgba(104,180,200,0.04);
+    border: 1px solid rgba(104,180,200,0.08);
+  }
+  .node.character-node:hover { border-color: rgba(104,180,200,0.15); }
+  .node.character-node.active { border-color: rgba(104,180,200,0.2); background: rgba(104,180,200,0.06); }
+
+  .node.covenant-node {
+    background: rgba(130,160,230,0.04);
+    border: 1px solid rgba(130,160,230,0.08);
+  }
+  .node.covenant-node:hover { border-color: rgba(130,160,230,0.15); }
+  .node.covenant-node.active { border-color: rgba(130,160,230,0.2); background: rgba(130,160,230,0.06); }
+
+  .node-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #a0a098;
+  }
+
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #807870;
+    margin-top: 2px;
+  }
+
+  .node-scripture {
+    display: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #c8c0b0;
+    line-height: 1.7;
+    margin-top: 12px;
+    padding: 12px 0 12px 14px;
+    border-left: 2px solid rgba(104,160,230,0.15);
+  }
+
+  .node-summary {
+    display: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    color: #908880;
+    line-height: 1.65;
+    margin-top: 10px;
+  }
+
+  .node-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: #605850;
+    margin-top: 6px;
+    font-style: italic;
+    transition: opacity 0.2s;
+  }
+
+  .node.active .node-scripture,
+  .node.active .node-summary { display: block; }
+  .node.active .node-tap { opacity: 0; height: 0; margin: 0; overflow: hidden; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(104,160,230,0.06);
+  }
+
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #807870;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .footer-line {
+    width: 30px;
+    height: 1px;
+    background: rgba(104,160,230,0.15);
+    margin: 16px auto;
+  }
+
+  .footer a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #605850;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer a:hover { color: #68a0e6; }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 600px) {
+    .source-scripture { font-size: 18px; }
+    .key-text { font-size: 17px; }
+    .contrast-item { font-size: 14px; }
+    .contrast-col-label { font-size: 10px; }
+    .contrast-footer { font-size: 11px; }
+    .application-item { font-size: 14px; }
+    .application-col-label { font-size: 9px; }
+    .application-result { font-size: 10px; }
+    .burden p { font-size: 17px; }
+    .node-title { font-size: 13px; }
+    .node-verse { font-size: 15px; }
+    .node-scripture { font-size: 18px; color: #ddd0b4; }
+    .node-summary { font-size: 15px; line-height: 1.7; }
+    .node-tap { font-size: 13px; color: #8a8278; }
+    .footer p { font-size: 15px; color: #908880; }
+    .contrast-col.natural .contrast-item { color: #b0a090; }
+    .contrast-col.agape .contrast-item { color: #90a8c0; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== HEADER ===== -->
+  <div class="header">
+    <h1>Agape</h1>
+    <div class="header-line"></div>
+    <p>Love from a different source</p>
+  </div>
+
+  <!-- ===== SOURCE SCRIPTURE ===== -->
+  <div class="source-block">
+    <div class="source-label">THE COMMAND</div>
+    <div class="source-scripture">"A new commandment I give to you, that you love one another; as I have loved you, that you also love one another."</div>
+    <div class="source-ref">JOHN 13:34</div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">BUT WHAT KIND OF LOVE?</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ===== KEY DISTINCTION ===== -->
+  <div class="key-block">
+    <div class="key-label">THE DISTINCTION</div>
+    <div class="key-text">Agape is not human love at its <em>most intense</em>.<br>It is love from a <em>different source</em>.<br>Not the same love, only stronger —<br>a different <em>kind</em> altogether.</div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">TWO SOURCES COMPARED</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ===== TWO-COLUMN CONTRAST ===== -->
+  <div class="contrast">
+    <div class="contrast-header">
+      <span>THE SOURCE DETERMINES THE LOVE</span>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-col natural">
+        <div class="contrast-col-label">NATURAL LOVE</div>
+        <div class="contrast-item">Affection</div>
+        <div class="contrast-item">Attraction</div>
+        <div class="contrast-item">Sincerity</div>
+        <div class="contrast-item">Sentiment</div>
+        <div class="contrast-item">Duty</div>
+        <div class="contrast-item">Willpower</div>
+        <div class="contrast-item">Mixed self-interest</div>
+        <div class="contrast-footer">SOURCED IN SELF</div>
+      </div>
+      <div class="contrast-col agape">
+        <div class="contrast-col-label">AGAPE</div>
+        <div class="contrast-item">Sourced in God</div>
+        <div class="contrast-item">Self-giving</div>
+        <div class="contrast-item">Seeks the good of the other</div>
+        <div class="contrast-item">Covenantal</div>
+        <div class="contrast-item">Not ruled by mood</div>
+        <div class="contrast-item">Endures cost</div>
+        <div class="contrast-item">Flows from divine life</div>
+        <div class="contrast-footer">SOURCED IN GOD</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">TESTED IN COVENANT</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ===== APPLICATION: MARRIAGE VOWS ===== -->
+  <div class="application">
+    <div class="application-header">
+      <span>THE MARRIAGE VOW — UNDER TWO SOURCES</span>
+    </div>
+    <div class="application-row">
+      <div class="application-col vow-natural">
+        <div class="application-col-label">VOW UNDER NATURAL LOVE</div>
+        <div class="application-item">Promises much</div>
+        <div class="application-item">Relies on feeling</div>
+        <div class="application-item">Sustained by resolve</div>
+        <div class="application-item">Collapses under strain</div>
+        <div class="application-result">BREAKS WHEN THE FEELING BREAKS</div>
+      </div>
+      <div class="application-col vow-agape">
+        <div class="application-col-label">VOW UNDER AGAPE</div>
+        <div class="application-item">Rooted in a deeper source</div>
+        <div class="application-item">Not dependent on mood</div>
+        <div class="application-item">Sustained beyond emotion</div>
+        <div class="application-item">Faithfulness through divine life</div>
+        <div class="application-result">HOLDS BECAUSE THE SOURCE HOLDS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SUMMARY BURDEN ===== -->
+  <div class="burden">
+    <p>Agape is not love at its most <em>intense</em>.</p>
+    <p>It is love from a different <em>source</em>.</p>
+    <p>And only what is sourced in God<br>can do what God commands.</p>
+  </div>
+
+  <!-- ===== SUPPORTING VERSES ===== -->
+  <div class="supporting-label"><span>SUPPORTING VERSES</span></div>
+
+  <div class="verse-group-label source-lbl">THE SOURCE OF AGAPE</div>
+  <div id="source-verses"></div>
+
+  <div class="verse-group-label character-lbl">THE CHARACTER OF AGAPE</div>
+  <div id="character-verses"></div>
+
+  <div class="verse-group-label covenant-lbl">AGAPE IN COVENANT</div>
+  <div id="covenant-verses"></div>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">
+    <p>The command to love one another<br>is not a demand for stronger feeling.<br>It is a call to draw from a well<br>that is not our own.</p>
+    <div class="footer-line"></div>
+    <a href="index.html">← THE ETERNAL THREAD</a>
+  </div>
+
+</div>
+
+<script>
+var sourceVerses = [
+  {
+    title: "GOD IS LOVE",
+    verse: "1 John 4:8",
+    cls: "source-node",
+    scripture: "He who does not love does not know God, for God is love.",
+    summary: "Love is not merely something God does. It is what He is. Agape is not a human capacity that God endorses — it is a divine attribute that humans can only receive and express as they are joined to Him. The source is not the human heart. The source is God Himself."
+  },
+  {
+    title: "LOVE HAS BEEN POURED OUT",
+    verse: "Romans 5:5",
+    cls: "source-node",
+    scripture: "Now hope does not disappoint, because the love of God has been poured out in our hearts by the Holy Spirit who was given to us.",
+    summary: "Paul does not say that we have been taught to love, or inspired to love, or given a better motive for loving. He says the love of God has been poured out — deposited, supplied — by the Holy Spirit. The love is in us, but it did not originate in us. It came from outside, from above, through the Spirit."
+  },
+  {
+    title: "WE LOVE BECAUSE HE FIRST LOVED US",
+    verse: "1 John 4:19",
+    cls: "source-node",
+    scripture: "We love Him because He first loved us.",
+    summary: "The order is everything. We do not love in order to earn God's love. We love because we have already received it. The flow is from God to us, and then through us. Agape is always a response to a prior gift — never an achievement of the human will."
+  }
+];
+
+var characterVerses = [
+  {
+    title: "LOVE IS PATIENT, LOVE IS KIND",
+    verse: "1 Corinthians 13:4–7",
+    cls: "character-node",
+    scripture: "Love suffers long and is kind; love does not envy; love does not parade itself, is not puffed up; does not behave rudely, does not seek its own, is not provoked, thinks no evil; does not rejoice in iniquity, but rejoices in the truth; bears all things, believes all things, hopes all things, endures all things.",
+    summary: "Read this list honestly and ask: can any human being produce this from natural resources? This is not a description of intense human affection. This is a description of divine character. Paul is describing the nature of God's own love — the love that must be received before it can be expressed."
+  },
+  {
+    title: "THE FRUIT OF THE SPIRIT IS LOVE",
+    verse: "Galatians 5:22",
+    cls: "character-node",
+    scripture: "But the fruit of the Spirit is love, joy, peace, longsuffering, kindness, goodness, faithfulness, gentleness, self-control.",
+    summary: "Love leads the list of the Spirit's fruit — and it is the Spirit's fruit, not ours. Just as a branch does not strain to produce grapes, the believer does not manufacture agape by discipline. It is borne through the Spirit's life operating in and through the one who abides."
+  },
+  {
+    title: "GREATER LOVE HAS NO ONE THAN THIS",
+    verse: "John 15:13",
+    cls: "character-node",
+    scripture: "Greater love has no one than this, than to lay down one's life for his friends.",
+    summary: "The measure of agape is not feeling — it is cost. The willingness to lay down one's life is not the product of sentiment. It is the mark of a love that operates on a different principle entirely — self-giving rather than self-seeking, sacrifice rather than satisfaction."
+  }
+];
+
+var covenantVerses = [
+  {
+    title: "HUSBANDS, LOVE YOUR WIVES",
+    verse: "Ephesians 5:25",
+    cls: "covenant-node",
+    scripture: "Husbands, love your wives, just as Christ also loved the church and gave Himself for her.",
+    summary: "The standard for a husband's love is not romance, not compatibility, not mutual benefit. It is Christ's self-giving death. This is not a demand to feel more strongly. It is a call to love from the same source that Christ loved from — the divine life, poured out without condition."
+  },
+  {
+    title: "LOVE NEVER FAILS",
+    verse: "1 Corinthians 13:8",
+    cls: "covenant-node",
+    scripture: "Love never fails.",
+    summary: "Human love fails regularly. It fails under pressure, under disappointment, under the ordinary erosion of time. If agape never fails, it cannot be sourced in the human heart, which fails constantly. The love that never fails must come from the One who never fails."
+  },
+  {
+    title: "AS I HAVE LOVED YOU",
+    verse: "John 13:34",
+    cls: "covenant-node",
+    scripture: "A new commandment I give to you, that you love one another; as I have loved you, that you also love one another.",
+    summary: "The newness of the command is not the instruction to love — that existed already. The newness is the standard: as I have loved you. Christ's love is the measure, the model, and the source. The command presupposes a supply. You cannot obey this command from natural resources. You can only obey it by drawing from the love that has already been given."
+  }
+];
+
+function buildNode(n) {
+  var div = document.createElement('div');
+  div.className = 'node ' + n.cls;
+  div.setAttribute('data-group', n.cls);
+
+  var html = '<div class="node-title">' + n.title + '</div>';
+  html += '<div class="node-verse">' + n.verse + '</div>';
+  html += '<div class="node-scripture">"' + n.scripture + '"</div>';
+  html += '<div class="node-summary">' + n.summary + '</div>';
+  html += '<div class="node-tap">tap to expand</div>';
+
+  div.innerHTML = html;
+  return div;
+}
+
+document.getElementById('source-verses').append.apply(
+  document.getElementById('source-verses'),
+  sourceVerses.map(function(n) { return buildNode(n); })
+);
+document.getElementById('character-verses').append.apply(
+  document.getElementById('character-verses'),
+  characterVerses.map(function(n) { return buildNode(n); })
+);
+document.getElementById('covenant-verses').append.apply(
+  document.getElementById('covenant-verses'),
+  covenantVerses.map(function(n) { return buildNode(n); })
+);
+
+document.querySelectorAll('.node').forEach(function(node) {
+  node.addEventListener('click', function() {
+    var group = this.getAttribute('data-group');
+    document.querySelectorAll('.node[data-group="' + group + '"]').forEach(function(n) {
+      if (n !== node) n.classList.remove('active');
+    });
+    this.classList.toggle('active');
+  });
+});
+</script>
+</body>
+</html>
