@@ -135,22 +135,23 @@
 
 /* Skip back/forward */
 .audio-btn.skip svg {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   fill: none;
-  stroke: #908880;
+  stroke: #c0b8a8;
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.audio-btn.skip:hover svg { stroke: #c0b8a8; }
+.audio-btn.skip:hover svg { stroke: #e8e0d8; }
 .audio-btn.skip .skip-label {
   font-family: 'DM Sans', sans-serif;
-  font-size: 7px;
-  fill: #908880;
+  font-size: 8.5px;
+  font-weight: 700;
+  fill: #c0b8a8;
   stroke: none;
 }
-.audio-btn.skip:hover .skip-label { fill: #c0b8a8; }
+.audio-btn.skip:hover .skip-label { fill: #e8e0d8; }
 
 /* Play/pause in bar */
 .audio-btn.play-pause svg {
