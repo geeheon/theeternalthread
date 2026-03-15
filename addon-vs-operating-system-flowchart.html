@@ -598,6 +598,26 @@
       font-size: 16px;
     }
   }
+
+/* Metaphor key */
+.metaphor-key{margin:0 0 20px;padding:14px 16px;border-radius:8px;cursor:pointer;transition:all 0.3s ease}
+.metaphor-key .key-header{display:flex;align-items:center;justify-content:space-between}
+.metaphor-key .key-label{font-family:'DM Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.metaphor-key .key-toggle{font-size:10px;opacity:0.4;transition:transform 0.3s}
+.metaphor-key.active .key-toggle{transform:rotate(45deg)}
+.metaphor-key .key-content{display:none;margin-top:10px;font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;line-height:1.7}
+.metaphor-key.active .key-content{display:block}
+.metaphor-key .key-content a{text-decoration:none;border-bottom:1px solid;transition:color 0.2s}
+.metaphor-key .key-content strong{font-style:normal;font-weight:600}
+
+.metaphor-key{background:rgba(13,28,20,0.25);border:1px solid rgba(104,230,160,0.10)}
+.metaphor-key:hover{border-color:rgba(104,230,160,0.18)}
+.metaphor-key .key-label{color:#68e6a0}
+.metaphor-key .key-toggle{color:#68e6a0}
+.metaphor-key .key-content{color:#709080}
+.metaphor-key .key-content a{color:#68e6a0;border-bottom-color:rgba(104,230,160,0.3)}
+.metaphor-key .key-content a:hover{opacity:0.7}
+.metaphor-key .key-content strong{color:#68e6a0}
 </style>
 </head>
 <body>
@@ -609,7 +629,18 @@
     <p>How Christianity became a module — and what Paul actually had</p>
   </div>
 
-  <!-- Modern Architecture -->
+  
+<div class="metaphor-key" onclick="this.classList.toggle('active')">
+  <div class="key-header">
+    <span class="key-label">Recurring metaphor used below</span>
+    <span class="key-toggle">+</span>
+  </div>
+  <div class="key-content">
+    This figure uses an image from <a href="two-operating-systems-flowchart.html">The Two Operating Systems</a>: the <strong>bicycle</strong> = self-effort, the soul trying to produce the Christian life by its own power. The <strong>self-driving car</strong> = Christ's life operating through the believer — a different source entirely, not a faster bicycle.
+  </div>
+</div>
+
+<!-- Modern Architecture -->
   <div class="arch modern">
     <div class="arch-label">
       <div class="arch-label-text">THE MODERN MODEL</div>
