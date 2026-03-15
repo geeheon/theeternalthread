@@ -34,6 +34,9 @@
     '  <span class="audio-time">0:00 / 0:00</span>' +
     '  <span class="audio-spacer"></span>' +
     '  <button class="audio-speed-toggle" aria-label="Playback speed">1x</button>' +
+    '  <a class="audio-btn download" aria-label="Download audio" download>' +
+    '    <svg viewBox="0 0 24 24"><path d="M12 4v12m0 0l-4-4m4 4l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M5 18h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg>' +
+    '  </a>' +
     '  <button class="audio-close" aria-label="Close player">' +
     '    <svg viewBox="0 0 24 24"><line x1="7" y1="7" x2="17" y2="17"/><line x1="17" y1="7" x2="7" y2="17"/></svg>' +
     '  </button>' +
@@ -63,6 +66,7 @@
   var timeEl = bar.querySelector('.audio-time');
   var speedBtn = bar.querySelector('.audio-speed-toggle');
   var closeBtn = bar.querySelector('.audio-close');
+  var downloadBtn = bar.querySelector('.download');
   var skipBtns = bar.querySelectorAll('.skip');
 
   // ─── Audio ───
@@ -80,6 +84,7 @@
     if (req.status >= 200 && req.status < 400) {
       audio.src = audioSrc;
       toggle.classList.remove('hidden');
+      downloadBtn.href = audioSrc;
       isLoaded = true;
     }
   };

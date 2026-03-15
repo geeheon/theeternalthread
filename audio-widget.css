@@ -231,6 +231,18 @@
 .audio-speed-opt:hover { background: rgba(192, 192, 216, 0.06); color: #c0b8a8; }
 .audio-speed-opt.active { color: #c0b8a8; }
 
+/* Download button */
+.audio-btn.download {
+  text-decoration: none;
+  color: #605850;
+  transition: color 0.2s, background 0.15s;
+}
+.audio-btn.download svg {
+  width: 16px;
+  height: 16px;
+}
+.audio-btn.download:hover { color: #c0b8a8; background: rgba(192, 192, 216, 0.06); }
+
 /* Close bar */
 .audio-close {
   border: none;
