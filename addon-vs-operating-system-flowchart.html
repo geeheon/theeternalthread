@@ -71,7 +71,6 @@
 
   /* Ring diagram */
   .ring-diagram { text-align: center; margin: 10px 0 16px; }
-  .ring-diagram canvas { display: inline-block; }
 
   /* Module pills */
   .modules {
@@ -616,7 +615,34 @@
       <div class="arch-label-text">THE MODERN MODEL</div>
       <div class="arch-label-sub">Christianity as compartmentalised add-on</div>
     </div>
-    <div class="ring-diagram"><canvas id="modernRing" width="320" height="250"></canvas></div>
+    <div class="ring-diagram">
+      <svg viewBox="0 0 320 250" width="320" height="250" xmlns="http://www.w3.org/2000/svg" style="display:inline-block">
+        <!-- Orbit circle dashed -->
+        <circle cx="160" cy="124" r="96" fill="none" stroke="rgba(230,120,104,0.08)" stroke-width="1" stroke-dasharray="4 6"/>
+        <!-- Centre: MY LIFE -->
+        <circle cx="160" cy="124" r="40" fill="rgba(230,120,104,0.12)" stroke="rgba(230,120,104,0.3)" stroke-width="1.5"/>
+        <text x="160" y="120" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="800" font-size="12" fill="#e67868">MY LIFE</text>
+        <text x="160" y="134" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="10" fill="#d7a091">career · family</text>
+        <text x="160" y="146" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="10" fill="#d7a091">lifestyle · status</text>
+        <!-- SUNDAY (top) -->
+        <circle cx="160" cy="28" r="18" fill="rgba(230,120,104,0.08)" stroke="rgba(230,120,104,0.2)" stroke-width="1"/>
+        <text x="160" y="31" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="7.5" fill="#d3a090">SUNDAY</text>
+        <!-- SMALL GROUP (right) -->
+        <circle cx="251" cy="95" r="18" fill="rgba(230,120,104,0.08)" stroke="rgba(230,120,104,0.2)" stroke-width="1"/>
+        <text x="251" y="92" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="7.5" fill="#d3a090">SMALL</text>
+        <text x="251" y="101" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="7.5" fill="#d3a090">GROUP</text>
+        <!-- PRAYER (bottom-right) -->
+        <circle cx="219" cy="202" r="18" fill="rgba(230,120,104,0.08)" stroke="rgba(230,120,104,0.2)" stroke-width="1"/>
+        <text x="219" y="205" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="7.5" fill="#d3a090">PRAYER</text>
+        <!-- TITHE (bottom-left) -->
+        <circle cx="101" cy="202" r="18" fill="rgba(230,120,104,0.08)" stroke="rgba(230,120,104,0.2)" stroke-width="1"/>
+        <text x="101" y="205" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="7.5" fill="#d3a090">TITHE</text>
+        <!-- DEVO APP (left) -->
+        <circle cx="69" cy="95" r="18" fill="rgba(230,120,104,0.08)" stroke="rgba(230,120,104,0.2)" stroke-width="1"/>
+        <text x="69" y="92" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="7.5" fill="#d3a090">DEVO</text>
+        <text x="69" y="101" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="7.5" fill="#d3a090">APP</text>
+      </svg>
+    </div>
     <div class="modules">
       <span class="module-pill">Sunday service</span>
       <span class="module-pill">Small group</span>
@@ -638,7 +664,36 @@
       <div class="arch-label-text">THE PAULINE MODEL</div>
       <div class="arch-label-sub">Christ as the actual operating life</div>
     </div>
-    <div class="ring-diagram"><canvas id="paulineRing" width="320" height="250"></canvas></div>
+    <div class="ring-diagram">
+      <svg viewBox="0 0 320 250" width="320" height="250" xmlns="http://www.w3.org/2000/svg" style="display:inline-block">
+        <!-- Large encompassing circle -->
+        <circle cx="160" cy="124" r="96" fill="rgba(104,230,160,0.03)" stroke="rgba(104,230,160,0.15)" stroke-width="1.5"/>
+        <!-- Label on circle -->
+        <text x="160" y="24" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="8" fill="rgba(104,230,160,0.42)" letter-spacing="0.5">EVERYTHING UNDER HIS LORDSHIP</text>
+        <!-- Lines from centre to areas -->
+        <line x1="160" y1="90" x2="160" y2="52" stroke="rgba(104,230,160,0.12)" stroke-width="1"/>
+        <line x1="189" y1="107" x2="222" y2="88" stroke="rgba(104,230,160,0.12)" stroke-width="1"/>
+        <line x1="189" y1="141" x2="222" y2="160" stroke="rgba(104,230,160,0.12)" stroke-width="1"/>
+        <line x1="160" y1="158" x2="160" y2="196" stroke="rgba(104,230,160,0.12)" stroke-width="1"/>
+        <line x1="131" y1="141" x2="98" y2="160" stroke="rgba(104,230,160,0.12)" stroke-width="1"/>
+        <line x1="131" y1="107" x2="98" y2="88" stroke="rgba(104,230,160,0.12)" stroke-width="1"/>
+        <!-- Centre: CHRIST -->
+        <circle cx="160" cy="124" r="34" fill="rgba(104,230,160,0.15)" stroke="rgba(104,230,160,0.4)" stroke-width="2"/>
+        <text x="160" y="128" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="800" font-size="12" fill="#68e6a0">CHRIST</text>
+        <!-- WORK (top) -->
+        <text x="160" y="50" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="8.5" fill="#9ed3b0">WORK</text>
+        <!-- FAMILY (top-right) -->
+        <text x="228" y="88" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="8.5" fill="#9ed3b0">FAMILY</text>
+        <!-- REST (bottom-right) -->
+        <text x="228" y="163" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="8.5" fill="#9ed3b0">REST</text>
+        <!-- FINANCES (bottom) -->
+        <text x="160" y="200" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="8.5" fill="#9ed3b0">FINANCES</text>
+        <!-- COMMUNITY (bottom-left) -->
+        <text x="92" y="163" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="8.5" fill="#9ed3b0">COMMUNITY</text>
+        <!-- MISSION (top-left) -->
+        <text x="92" y="88" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="8.5" fill="#9ed3b0">MISSION</text>
+      </svg>
+    </div>
     <div class="modules">
       <span class="module-pill">Work as unto the Lord</span>
       <span class="module-pill">Family as ekklesia</span>
@@ -709,147 +764,6 @@
 </div>
 
 <script>
-// Modern ring diagram - self at centre, Christianity as orbiting modules
-function drawModern() {
-  const c = document.getElementById('modernRing');
-  const ctx = c.getContext('2d');
-  const dpr = window.devicePixelRatio || 1;
-  const W = 320, H = 250;
-  c.width = W * dpr; c.height = H * dpr;
-  c.style.width = W + 'px'; c.style.height = H + 'px';
-  ctx.scale(dpr, dpr);
-  const cX = W/2, cY = 124;
-  ctx.clearRect(0, 0, W, H);
-
-  // Centre: MY LIFE
-  ctx.beginPath();
-  ctx.arc(cX, cY, 40, 0, Math.PI*2);
-  ctx.fillStyle = 'rgba(230,120,104,0.12)';
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(230,120,104,0.3)';
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-
-  ctx.font = '800 12px "DM Sans", sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillStyle = '#e67868';
-  ctx.fillText('MY LIFE', cX, cY - 4);
-  ctx.font = '400 10px "Cormorant Garamond", serif';
-  ctx.fillStyle = '#d7a091';
-  ctx.fillText('career · family', cX, cY + 10);
-  ctx.fillText('lifestyle · status', cX, cY + 22);
-
-  // Orbiting modules
-  const mods = ['SUNDAY', 'SMALL\nGROUP', 'PRAYER', 'TITHE', 'DEVO\nAPP'];
-  const r = 96;
-  mods.forEach((m, i) => {
-    const angle = (i / mods.length) * Math.PI * 2 - Math.PI/2;
-    const x = cX + r * Math.cos(angle);
-    const y = cY + r * Math.sin(angle);
-
-    // Dashed orbit line
-    ctx.beginPath();
-    ctx.setLineDash([3, 4]);
-    ctx.arc(cX, cY, r, angle - 0.15, angle + 0.15);
-    ctx.strokeStyle = 'rgba(230,120,104,0.1)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    ctx.setLineDash([]);
-
-    // Module dot
-    ctx.beginPath();
-    ctx.arc(x, y, 18, 0, Math.PI*2);
-    ctx.fillStyle = 'rgba(230,120,104,0.08)';
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(230,120,104,0.2)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-
-    ctx.font = '700 7px "DM Sans", sans-serif';
-    ctx.fillStyle = '#d3a090';
-    ctx.textAlign = 'center';
-    const lines = m.split('\n');
-    lines.forEach((l, li) => {
-      ctx.fillText(l, x, y + (li - (lines.length-1)/2) * 9 + 2);
-    });
-  });
-
-  // Orbit circle
-  ctx.beginPath();
-  ctx.setLineDash([4, 6]);
-  ctx.arc(cX, cY, r, 0, Math.PI*2);
-  ctx.strokeStyle = 'rgba(230,120,104,0.08)';
-  ctx.lineWidth = 1;
-  ctx.stroke();
-  ctx.setLineDash([]);
-}
-
-// Pauline ring diagram - Christ at centre, everything under His rule
-function drawPauline() {
-  const c = document.getElementById('paulineRing');
-  const ctx = c.getContext('2d');
-  const dpr = window.devicePixelRatio || 1;
-  const W = 320, H = 250;
-  c.width = W * dpr; c.height = H * dpr;
-  c.style.width = W + 'px'; c.style.height = H + 'px';
-  ctx.scale(dpr, dpr);
-  const cX = W/2, cY = 124;
-  ctx.clearRect(0, 0, W, H);
-
-  // Large encompassing circle
-  ctx.beginPath();
-  ctx.arc(cX, cY, 96, 0, Math.PI*2);
-  ctx.fillStyle = 'rgba(104,230,160,0.03)';
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(104,230,160,0.15)';
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-
-  // Label on circle
-  ctx.font = '700 8px "DM Sans", sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillStyle = 'rgba(104,230,160,0.42)';
-  ctx.fillText('EVERYTHING UNDER HIS LORDSHIP', cX, cY - 100);
-
-  // Centre: CHRIST
-  ctx.beginPath();
-  ctx.arc(cX, cY, 34, 0, Math.PI*2);
-  ctx.fillStyle = 'rgba(104,230,160,0.15)';
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(104,230,160,0.4)';
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  ctx.font = '800 12px "DM Sans", sans-serif';
-  ctx.fillStyle = '#68e6a0';
-  ctx.fillText('CHRIST', cX, cY + 4);
-
-  // Radiating lines to life areas (inside the circle)
-  const areas = ['WORK', 'FAMILY', 'REST', 'FINANCES', 'COMMUNITY', 'MISSION'];
-  const r = 72;
-  areas.forEach((a, i) => {
-    const angle = (i / areas.length) * Math.PI * 2 - Math.PI/2;
-    const x = cX + r * Math.cos(angle);
-    const y = cY + r * Math.sin(angle);
-
-    // Line from centre
-    ctx.beginPath();
-    ctx.moveTo(cX + 34 * Math.cos(angle), cY + 34 * Math.sin(angle));
-    ctx.lineTo(x, y);
-    ctx.strokeStyle = 'rgba(104,230,160,0.12)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-
-    ctx.font = '700 8px "DM Sans", sans-serif';
-    ctx.fillStyle = '#9ed3b0';
-    ctx.textAlign = 'center';
-    ctx.fillText(a, x, y + 3);
-  });
-}
-
-drawModern();
-drawPauline();
-
 // Symptom toggle
 function toggleS(el) {
   const was = el.classList.contains('active');
