@@ -1,4 +1,6 @@
 /* ─── Audio Widget ─── */
+
+/* Floating play button — idle state */
 .audio-toggle {
   position: fixed;
   bottom: 24px;
@@ -7,7 +9,7 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid rgba(192, 192, 216, 0.15);
+  border: 1px solid rgba(192, 192, 216, 0.18);
   background: rgba(15, 15, 23, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -15,99 +17,252 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.3s, background 0.3s;
+  transition: border-color 0.3s, background 0.3s, opacity 0.3s, transform 0.3s;
 }
 .audio-toggle:hover {
-  border-color: rgba(192, 192, 216, 0.3);
+  border-color: rgba(192, 192, 216, 0.35);
   background: rgba(15, 15, 23, 0.96);
 }
-.audio-toggle svg {
+/* Play triangle — bright enough to see */
+.audio-toggle .icon-play {
+  width: 16px;
+  height: 16px;
+  color: #c0b8a8;
+  transition: color 0.3s;
+}
+.audio-toggle:hover .icon-play { color: #e8e0d8; }
+
+/* Hidden when no audio available */
+.audio-toggle.hidden { display: none; }
+
+/* Hide floating button when bar is open */
+.audio-toggle.bar-open {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+}
+
+/* ─── Bottom Bar (appears on play) ─── */
+.audio-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: rgba(12, 12, 18, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(192, 192, 216, 0.06);
+  padding: 0 16px;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+.audio-bar.open {
+  transform: translateY(0);
+}
+
+/* Scrub track — sits at very top of bar */
+.audio-scrub {
+  position: relative;
+  width: 100%;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  touch-action: none;
+}
+.audio-scrub-track {
+  width: 100%;
+  height: 2px;
+  background: rgba(192, 192, 216, 0.1);
+  border-radius: 1px;
+  position: relative;
+  overflow: visible;
+}
+.audio-scrub-fill {
+  height: 100%;
+  background: #c0b8a8;
+  border-radius: 1px;
+  width: 0%;
+  position: relative;
+}
+/* Scrub handle */
+.audio-scrub-handle {
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e8e0d8;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.audio-scrub:hover .audio-scrub-handle,
+.audio-scrub.dragging .audio-scrub-handle {
+  opacity: 1;
+}
+.audio-scrub:hover .audio-scrub-track {
+  height: 3px;
+}
+
+/* Controls row */
+.audio-controls {
+  display: flex;
+  align-items: center;
+  padding: 4px 0 10px;
+  gap: 2px;
+}
+
+/* Control buttons */
+.audio-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.audio-btn:hover { background: rgba(192, 192, 216, 0.06); }
+
+/* Skip back/forward */
+.audio-btn.skip svg {
   width: 18px;
   height: 18px;
-  stroke: #908880;
   fill: none;
+  stroke: #908880;
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: stroke 0.3s;
 }
-.audio-toggle:hover svg { stroke: #c0c0d8; }
+.audio-btn.skip:hover svg { stroke: #c0b8a8; }
+.audio-btn.skip .skip-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 7px;
+  fill: #908880;
+  stroke: none;
+}
+.audio-btn.skip:hover .skip-label { fill: #c0b8a8; }
 
-/* Playing state */
-.audio-toggle.playing {
-  border-color: rgba(104, 230, 160, 0.25);
-}
-.audio-toggle.playing svg {
-  stroke: #68e6a0;
-}
-
-/* Progress ring */
-.audio-progress-ring {
-  position: absolute;
-  inset: -1px;
-  width: 46px;
-  height: 46px;
-  transform: rotate(-90deg);
-  pointer-events: none;
-}
-.audio-progress-ring circle {
-  fill: none;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-}
-.audio-progress-track {
-  stroke: transparent;
-}
-.audio-progress-fill {
-  stroke: rgba(104, 230, 160, 0.35);
-  stroke-dasharray: 138.23;
-  stroke-dashoffset: 138.23;
-  transition: stroke-dashoffset 0.3s linear;
+/* Play/pause in bar */
+.audio-btn.play-pause svg {
+  width: 20px;
+  height: 20px;
+  color: #e8e0d8;
+  fill: currentColor;
+  stroke: none;
 }
 
-/* Hidden when no audio */
-.audio-toggle.hidden {
-  display: none;
+/* Time display */
+.audio-time {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  color: #605850;
+  letter-spacing: 0.5px;
+  margin-left: 6px;
+  white-space: nowrap;
+  min-width: 72px;
+  flex-shrink: 0;
 }
 
-/* Speed indicator (shows on long press or second tap while playing) */
-.audio-speed {
+/* Spacer */
+.audio-spacer { flex: 1; }
+
+/* Speed button in bar */
+.audio-speed-toggle {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #706860;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+.audio-speed-toggle:hover { color: #c0b8a8; background: rgba(192, 192, 216, 0.06); }
+.audio-speed-toggle.non-default { color: #c0b8a8; }
+
+/* Speed popup */
+.audio-speed-popup {
   position: fixed;
-  bottom: 74px;
-  right: 14px;
-  z-index: 9998;
-  background: rgba(15, 15, 23, 0.94);
+  bottom: 64px;
+  right: 56px;
+  z-index: 10001;
+  background: rgba(15, 15, 23, 0.96);
   border: 1px solid rgba(192, 192, 216, 0.1);
   border-radius: 8px;
-  padding: 6px 4px;
+  padding: 4px;
   display: flex;
-  flex-direction: column;
   gap: 2px;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(8px);
-  transition: opacity 0.25s, visibility 0.25s, transform 0.25s;
+  transform: translateY(6px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
 }
-.audio-speed.visible {
+.audio-speed-popup.visible {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
-.audio-speed-btn {
+.audio-speed-opt {
   border: none;
   background: none;
   cursor: pointer;
   font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   color: #706860;
-  padding: 5px 12px;
+  padding: 6px 10px;
   border-radius: 4px;
   transition: background 0.15s, color 0.15s;
   white-space: nowrap;
 }
-.audio-speed-btn:hover { background: rgba(192, 192, 216, 0.06); color: #c0c0d8; }
-.audio-speed-btn.active { color: #68e6a0; }
+.audio-speed-opt:hover { background: rgba(192, 192, 216, 0.06); color: #c0b8a8; }
+.audio-speed-opt.active { color: #c0b8a8; }
 
+/* Close bar */
+.audio-close {
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: background 0.15s;
+  flex-shrink: 0;
+  margin-left: 2px;
+}
+.audio-close:hover { background: rgba(192, 192, 216, 0.06); }
+.audio-close svg {
+  width: 14px;
+  height: 14px;
+  stroke: #605850;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+.audio-close:hover svg { stroke: #908880; }
+
+/* Lift nav button when bar is visible */
+body.audio-bar-open .nav-toggle {
+  bottom: 74px;
+  transition: bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Mobile ─── */
 @media (max-width: 600px) {
   .audio-toggle {
     bottom: 20px;
@@ -115,12 +270,14 @@
     width: 42px;
     height: 42px;
   }
-  .audio-progress-ring {
-    width: 44px;
-    height: 44px;
-  }
-  .audio-speed {
-    bottom: 68px;
-    right: 10px;
-  }
+  .audio-bar { padding: 0 10px; }
+  .audio-controls { padding: 2px 0 6px; gap: 0; }
+  .audio-time { font-size: 10px; min-width: 64px; }
+  .audio-speed-popup { bottom: 56px; right: 10px; }
+  body.audio-bar-open .nav-toggle { bottom: 66px; }
+}
+
+/* Safe area for notched phones */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .audio-bar { padding-bottom: env(safe-area-inset-bottom); }
 }
