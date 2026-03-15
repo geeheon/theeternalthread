@@ -693,6 +693,93 @@
     </div>
   </div>
 
+  <!-- Stream diagram -->
+  <div class="stream-diagram" style="margin: 28px 0 8px; padding: 0 4px;">
+    <svg viewBox="0 0 420 410" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+      <defs>
+        <linearGradient id="streamGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#a0c8e8" stop-opacity="0"/>
+          <stop offset="15%" stop-color="#a0c8e8" stop-opacity="0.07"/>
+          <stop offset="50%" stop-color="#68e6a0" stop-opacity="0.10"/>
+          <stop offset="85%" stop-color="#f0d080" stop-opacity="0.07"/>
+          <stop offset="100%" stop-color="#f0d080" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="entryGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#a0c8e8" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#68e6a0" stop-opacity="0.5"/>
+        </linearGradient>
+        <linearGradient id="currentGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#80c0e0" stop-opacity="0"/>
+          <stop offset="20%" stop-color="#80c0e0" stop-opacity="0.25"/>
+          <stop offset="80%" stop-color="#68e6a0" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#f0d080" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+
+      <!-- ═══ MAN'S PART: the entry from above ═══ -->
+
+      <!-- YOUR PART sidebar -->
+      <line x1="72" y1="30" x2="72" y2="195" stroke="#a0c8e8" stroke-width="0.5" stroke-opacity="0.18"/>
+      <text x="67" y="118" text-anchor="end" font-family="'DM Sans', sans-serif" font-size="9" fill="#506878" letter-spacing="2" transform="rotate(-90 67 118)">YOUR PART</text>
+
+      <!-- Step 1: WILL -->
+      <text x="150" y="48" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="12" font-weight="700" fill="#a0c8e8" letter-spacing="2.5">WILL</text>
+      <text x="150" y="70" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="15" fill="#808c9c" font-style="italic">"Lord, I yield."</text>
+      <text x="150" y="89" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="9.5" fill="#586878" letter-spacing="1.5">ROM. 6:13</text>
+
+      <!-- Dashed arrow down from WILL -->
+      <line x1="150" y1="100" x2="150" y2="126" stroke="#a0c8e8" stroke-width="1.2" stroke-dasharray="4 4" stroke-opacity="0.35"/>
+
+      <!-- Step 2: RECKON -->
+      <text x="150" y="148" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="12" font-weight="700" fill="#90b8d8" letter-spacing="2.5">RECKON</text>
+      <text x="150" y="170" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="15" fill="#808c9c" font-style="italic">"My old self is dead."</text>
+      <text x="150" y="189" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="9.5" fill="#586878" letter-spacing="1.5">ROM. 6:11 · GAL. 2:20</text>
+
+      <!-- Arrow down into stream -->
+      <line x1="150" y1="200" x2="150" y2="232" stroke="url(#entryGrad)" stroke-width="1.8"/>
+      <path d="M 144,227 L 150,238 L 156,227" fill="none" stroke="#68e6a0" stroke-width="1.4" stroke-opacity="0.6"/>
+
+      <!-- ═══ THE STREAM ═══ -->
+
+      <!-- Stream band — taller to fit text comfortably -->
+      <rect x="0" y="240" width="420" height="80" rx="40" fill="url(#streamGrad)"/>
+
+      <!-- Stream current lines -->
+      <line x1="25" y1="264" x2="395" y2="264" stroke="url(#currentGrad)" stroke-width="0.5" stroke-dasharray="14 10"/>
+      <line x1="15" y1="278" x2="405" y2="278" stroke="url(#currentGrad)" stroke-width="0.8"/>
+      <line x1="25" y1="292" x2="395" y2="292" stroke="url(#currentGrad)" stroke-width="0.5" stroke-dasharray="10 14"/>
+
+      <!-- Entry point glow -->
+      <circle cx="150" cy="278" r="8" fill="#68e6a0" opacity="0.10"/>
+      <circle cx="150" cy="278" r="4" fill="#68e6a0" opacity="0.22"/>
+
+      <!-- Dotted path flowing rightward through stream -->
+      <path d="M 160,278 C 200,278 220,272 260,278 C 290,282 310,278 350,278" fill="none" stroke="#68e6a0" stroke-width="1.2" stroke-dasharray="5 5" stroke-opacity="0.22"/>
+
+      <!-- GOD PERFORMS — inside the stream -->
+      <text x="270" y="271" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="12" font-weight="700" fill="#68e6a0" letter-spacing="2.5" opacity="0.7">GOD PERFORMS</text>
+      <text x="270" y="291" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="15" fill="#90b0a0" font-style="italic">"The Spirit of life carries me."</text>
+      <text x="270" y="308" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="9.5" fill="#587068" letter-spacing="1.5">ROM. 8:2 · PHIL. 2:13</text>
+
+      <!-- Flow arrow at right edge -->
+      <path d="M 385,278 L 400,278" stroke="#f0d080" stroke-width="1.2" stroke-opacity="0.3"/>
+      <path d="M 394,273 L 404,278 L 394,283" fill="none" stroke="#f0d080" stroke-width="1.2" stroke-opacity="0.3"/>
+
+      <!-- HIS PART sidebar -->
+      <line x1="370" y1="255" x2="370" y2="305" stroke="#68e6a0" stroke-width="0.5" stroke-opacity="0.18"/>
+      <text x="380" y="290" text-anchor="start" font-family="'DM Sans', sans-serif" font-size="9" fill="#507060" letter-spacing="2" transform="rotate(-90 380 290)">HIS PART</text>
+
+      <!-- Stream label below -->
+      <text x="210" y="340" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="13" fill="#80c0e0" letter-spacing="3" opacity="0.5">THE STREAM OF HIS WILL</text>
+
+      <!-- Bottom annotation -->
+      <text x="210" y="370" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="15" fill="#686878" font-style="italic">You enter. He carries.</text>
+
+      <!-- Reference -->
+      <text x="210" y="395" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="9" fill="#404850" letter-spacing="2">AFTER DEVERN FROMKE</text>
+    </svg>
+  </div>
+
   <!-- Main flow -->
   <div class="section"><span class="section-label red">THE OLD WAY</span><div class="section-sub">How flesh tries to produce change</div></div>
 

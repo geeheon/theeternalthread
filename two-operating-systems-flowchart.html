@@ -844,24 +844,25 @@ function draw() {
   const cX = W / 2;
   const cY = 108;
 
-  // Target circles
-  for (let i = 3; i >= 0; i--) {
+  // Target circles — inner ring wider so text fits
+  const radii = [32, 52, 74, 96];
+  for (let i = radii.length - 1; i >= 0; i--) {
     ctx.beginPath();
-    ctx.arc(cX, cY, 20 + i * 22, 0, Math.PI * 2);
+    ctx.arc(cX, cY, radii[i], 0, Math.PI * 2);
     ctx.strokeStyle = i === 0 ? 'rgba(104,230,160,0.4)' : 'rgba(104,230,160,' + (0.08 + i * 0.04) + ')';
     ctx.lineWidth = i === 0 ? 2 : 1;
     ctx.stroke();
   }
 
   // Centre label
-  ctx.font = '700 10px "DM Sans", sans-serif';
+  ctx.font = '700 11px "DM Sans", sans-serif';
   ctx.textAlign = 'center';
   ctx.fillStyle = '#68e6a060';
   ctx.fillText('GOD AS', cX, cY - 6);
   ctx.fillText('SOURCE', cX, cY + 8);
 
-  // Arrows missing - obvious sin (falls way short)
-  function drawArrow(startX, startY, endX, endY, color, label, labelX, labelY) {
+  // Arrow drawing helper — draws line + arrowhead
+  function drawArrow(startX, startY, endX, endY, color) {
     ctx.beginPath();
     ctx.moveTo(startX, startY);
     ctx.lineTo(endX, endY);
@@ -870,7 +871,6 @@ function draw() {
     ctx.setLineDash([]);
     ctx.stroke();
 
-    // Arrowhead
     const angle = Math.atan2(endY - startY, endX - startX);
     ctx.beginPath();
     ctx.moveTo(endX, endY);
@@ -879,32 +879,64 @@ function draw() {
     ctx.closePath();
     ctx.fillStyle = color;
     ctx.fill();
-
-    if (label) {
-      ctx.font = '700 10px "DM Sans", sans-serif';
-      ctx.fillStyle = color;
-      ctx.textAlign = 'center';
-      ctx.fillText(label, labelX, labelY);
-    }
   }
 
-  // Obvious sin arrow - falls very short
-  drawArrow(32, 182, cX - 76, cY + 56, '#e66868', 'OBVIOUS SIN', 70, 170);
+  // Arrows are relative to the outermost ring so they scale on any width
+  const outerR = 96;
 
-  // Religious flesh arrow - gets closer but still misses
-  drawArrow(W - 34, 182, cX + 44, cY + 28, '#b4a060', 'RELIGIOUS FLESH', W - 84, 170);
+  // Obvious sin — starts just outside outer ring at lower-left, aimed at centre, stops far short
+  const sinAngle = Math.PI * 0.72; // ~130° from right, lower-left
+  const sinStartX = cX + Math.cos(sinAngle) * (outerR + 60);
+  const sinStartY = cY - Math.sin(sinAngle) * (outerR + 60);
+  const sinFrac = 0.40;
+  const sinEndX = sinStartX + (cX - sinStartX) * sinFrac;
+  const sinEndY = sinStartY + (cY - sinStartY) * sinFrac;
+  drawArrow(sinStartX, sinStartY, sinEndX, sinEndY, '#e66868');
 
-  // X marks where they land
-  ctx.font = '700 15px "DM Sans", sans-serif';
+  // Religious flesh — starts outside outer ring at lower-right, gets closer
+  const fleshAngle = Math.PI * 0.28; // ~50° from right, lower-right
+  const fleshStartX = cX + Math.cos(fleshAngle) * (outerR + 60);
+  const fleshStartY = cY - Math.sin(fleshAngle) * (outerR + 60);
+  const fleshFrac = 0.58;
+  const fleshEndX = fleshStartX + (cX - fleshStartX) * fleshFrac;
+  const fleshEndY = fleshStartY + (cY - fleshStartY) * fleshFrac;
+  drawArrow(fleshStartX, fleshStartY, fleshEndX, fleshEndY, '#b4a060');
+
+  // X marks — offset past the arrowhead along the trajectory for a gap
+  const gap = 12;
+  ctx.font = '700 14px "DM Sans", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+
+  const sinA = Math.atan2(sinEndY - sinStartY, sinEndX - sinStartX);
   ctx.fillStyle = '#e66868';
-  ctx.fillText('✕', cX - 74, cY + 55);
-  ctx.fillStyle = '#b4a060';
-  ctx.fillText('✕', cX + 44, cY + 30);
+  ctx.fillText('✕', sinEndX + Math.cos(sinA) * gap, sinEndY + Math.sin(sinA) * gap);
 
-  // "Both miss" label
+  const fleshA = Math.atan2(fleshEndY - fleshStartY, fleshEndX - fleshStartX);
+  ctx.fillStyle = '#b4a060';
+  ctx.fillText('✕', fleshEndX + Math.cos(fleshA) * gap, fleshEndY + Math.sin(fleshA) * gap);
+  ctx.textBaseline = 'alphabetic';
+
+  // Store X positions for label placement
+  const sinXx = sinEndX + Math.cos(sinA) * gap;
+  const sinXy = sinEndY + Math.sin(sinA) * gap;
+  const fleshXx = fleshEndX + Math.cos(fleshA) * gap;
+  const fleshXy = fleshEndY + Math.sin(fleshA) * gap;
+
+  // Labels — below and to the outside of the X marks, clear of arrow lines
+  ctx.font = '700 10px "DM Sans", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#e66868';
+  ctx.fillText('OBVIOUS SIN', sinXx - 16, sinXy + 18);
+  ctx.fillStyle = '#b4a060';
+  ctx.textAlign = 'left';
+  ctx.fillText('RELIGIOUS FLESH', fleshXx + 14, fleshXy + 20);
+
+  // "Both miss" label — centred on canvas
   ctx.font = '400 12px "Cormorant Garamond", serif';
   ctx.fillStyle = '#90888090';
-  ctx.fillText('Both miss. Different distance. Same failure.', cX, 220);
+  ctx.textAlign = 'center';
+  ctx.fillText('Both miss. Different distance. Same failure.', cX, 228);
 }
 
 draw();

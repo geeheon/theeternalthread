@@ -85,7 +85,7 @@
 
   /* Visual Diagram */
   .diagram {
-    margin: 28px 0; padding: 24px 16px;
+    margin: 28px 0; padding: 24px 12px 16px;
     border-radius: 10px;
     background: rgba(14,14,22,0.8);
     border: 1px solid rgba(240,208,128,0.08);
@@ -93,12 +93,12 @@
     overflow: hidden;
   }
   .diagram-title {
-    text-align: center; margin-bottom: 16px;
+    text-align: center; margin-bottom: 12px;
   }
   .diagram-title span {
     font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #f0d080;
   }
-  .diagram canvas {
+  .diagram svg {
     width: 100%; height: auto; display: block;
   }
 
@@ -679,12 +679,85 @@
   <!-- Visual Line Diagram -->
   <div class="diagram">
     <div class="diagram-title"><span>THE TWO LINES</span></div>
-    <canvas id="lineCanvas" height="260"></canvas>
-    <div style="display:flex;justify-content:space-between;padding:8px 4px 0;font-size:9px;letter-spacing:1px;font-weight:700;">
-      <span style="color:#f0d08080;">ETERNITY PAST</span>
-      <span style="color:#f0d08080;">ETERNITY FUTURE</span>
-    </div>
-    <div style="text-align:center;margin-top:12px;">
+    <svg viewBox="0 0 470 310" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto;">
+      <defs>
+        <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#f0d080" stop-opacity="0.2"/>
+          <stop offset="35%" stop-color="#f0d080" stop-opacity="0.85"/>
+          <stop offset="100%" stop-color="#f0d080" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+
+      <!--
+        GEOMETRY — Gold line from (30,180) to (390,42)
+        Wider viewBox (470) gives breathing room on the right for labels.
+
+        On the line:
+          PURPOSE:     x=30   y=180
+          CREATION:    x=110  y=150
+          (return pt): x=265  y=90
+          SONSHIP:     x=320  y=70
+          ULTIMATE:    x=390  y=44
+
+        V departs at CREATION (110,150), drops to (192,265), returns at (265,90)
+      -->
+
+      <!-- God's ascending line (gold) — continuous, unbroken -->
+      <line x1="22" y1="183" x2="398" y2="41" stroke="url(#goldGrad)" stroke-width="2.2"/>
+
+      <!-- Deviation V-path (red dashed) — sharp angular departure and return -->
+      <line x1="110" y1="150" x2="192" y2="265" stroke="#e66868" stroke-width="2" stroke-dasharray="6,4" opacity="0.5"/>
+      <line x1="192" y1="265" x2="265" y2="90" stroke="#e66868" stroke-width="2" stroke-dasharray="6,4" opacity="0.5"/>
+
+      <!-- Small red dot at departure point on the gold line -->
+      <circle cx="110" cy="150" r="2.5" fill="#e66868" opacity="0.5"/>
+
+      <!-- Small blue dot at return point on the gold line -->
+      <circle cx="265" cy="90" r="2.5" fill="#68a0e6" opacity="0.4"/>
+
+
+      <!-- ===== LABELS ON THE GOLD LINE ===== -->
+
+      <!-- PURPOSE — centred over its dot -->
+      <circle cx="30" cy="180" r="4" fill="#f0d080"/>
+      <text x="30" y="168" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.8" fill="#f0d080" opacity="0.7">PURPOSE</text>
+      <!-- ETERNITY PAST — below the line -->
+      <text x="12" y="198" text-anchor="start" font-family="'DM Sans',sans-serif" font-size="6.5" font-weight="700" letter-spacing="1" fill="#f0d080" opacity="0.25">ETERNITY PAST</text>
+
+      <!-- CREATION — centred over dot, bracketed sub below title -->
+      <circle cx="110" cy="150" r="4" fill="#80d0f0"/>
+      <text x="110" y="123" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.8" fill="#80d0f0" opacity="0.7">CREATION</text>
+      <text x="110" y="135" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="9.5" font-style="italic" fill="#80d0f0" opacity="0.3">(vessel formed)</text>
+
+      <!-- SONSHIP — centred over dot -->
+      <circle cx="320" cy="70" r="4.5" fill="#68e6a0"/>
+      <text x="320" y="36" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.8" fill="#68e6a0" opacity="0.7">SONSHIP</text>
+      <text x="320" y="48" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="9.5" font-style="italic" fill="#68e6a0" opacity="0.3">(growth into the ultimate)</text>
+
+      <!-- ULTIMATE INTENTION — centred over dot -->
+      <circle cx="390" cy="44" r="5.5" fill="#f0d080"/>
+      <text x="390" y="16" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.8" fill="#f0d080" opacity="0.85">ULTIMATE INTENTION</text>
+      <text x="390" y="28" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="9.5" font-style="italic" fill="#f0d080" opacity="0.35">(sons in glory)</text>
+
+      <!-- ETERNITY FUTURE — below the line, pushed right -->
+      <text x="448" y="72" text-anchor="end" font-family="'DM Sans',sans-serif" font-size="6.5" font-weight="700" letter-spacing="1" fill="#f0d080" opacity="0.25">ETERNITY FUTURE</text>
+
+
+      <!-- ===== LABELS ON THE DEVIATION V ===== -->
+
+      <!-- FALL — left of descending leg, ~14px gap -->
+      <text x="142" y="215" text-anchor="end" font-family="'DM Sans',sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.8" fill="#e66868" opacity="0.55">FALL</text>
+      <text x="142" y="227" text-anchor="end" font-family="'Cormorant Garamond',serif" font-size="9.5" font-style="italic" fill="#e66868" opacity="0.28">(deviation)</text>
+
+      <!-- CROSS — right of ascending leg, ~14px gap -->
+      <text x="237" y="190" text-anchor="start" font-family="'DM Sans',sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.8" fill="#68a0e6" opacity="0.55">CROSS</text>
+      <text x="237" y="202" text-anchor="start" font-family="'Cormorant Garamond',serif" font-size="9.5" font-style="italic" fill="#68a0e6" opacity="0.28">(remedial)</text>
+
+      <!-- MAN OFF THE PATH — below the V bottom -->
+      <text x="192" y="286" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7" font-weight="700" letter-spacing="1.2" fill="#e66868" opacity="0.3">MAN OFF THE PATH</text>
+
+    </svg>
+    <div style="text-align:center;margin-top:10px;">
       <div style="display:inline-flex;align-items:center;gap:8px;margin-right:18px;">
         <div style="width:20px;height:2px;background:#f0d080;"></div>
         <span style="font-size:10px;color:#f0d08090;letter-spacing:1px;">GOD'S INTENTION</span>
@@ -735,148 +808,6 @@
 </div>
 
 <script>
-// Draw the line diagram
-const canvas = document.getElementById('lineCanvas');
-const ctx = canvas.getContext('2d');
-
-function draw() {
-  const W = canvas.offsetWidth;
-  canvas.width = W * 2;
-  canvas.height = 260 * 2;
-  canvas.style.height = '260px';
-  ctx.scale(2, 2);
-
-  const pad = 20;
-  const w = W - pad * 2;
-  const midY = 100;
-
-  // God's straight line (gold)
-  ctx.beginPath();
-  ctx.moveTo(pad, midY);
-  ctx.lineTo(pad + w, midY);
-  ctx.strokeStyle = '#f0d080';
-  ctx.lineWidth = 2;
-  ctx.setLineDash([]);
-  ctx.stroke();
-
-  // Deviation arc (red dashed)
-  const fallX = pad + w * 0.22;
-  const crossX = pad + w * 0.58;
-  const lowestY = midY + 90;
-
-  ctx.beginPath();
-  ctx.moveTo(fallX, midY);
-  // Curve down
-  ctx.quadraticCurveTo(
-    fallX + (crossX - fallX) * 0.35, lowestY + 10,
-    crossX, midY
-  );
-  ctx.strokeStyle = '#e66868';
-  ctx.lineWidth = 2;
-  ctx.setLineDash([6, 4]);
-  ctx.stroke();
-  ctx.setLineDash([]);
-
-  // Labels
-  ctx.font = '600 9px "DM Sans", sans-serif';
-  ctx.textAlign = 'center';
-
-  // Eternity past purpose dot
-  ctx.beginPath();
-  ctx.arc(pad + 10, midY, 4, 0, Math.PI * 2);
-  ctx.fillStyle = '#f0d080';
-  ctx.fill();
-  ctx.fillStyle = '#f0d08090';
-  ctx.fillText('PURPOSE', pad + 10, midY - 14);
-
-  // Creation dot
-  const createX = pad + w * 0.15;
-  ctx.beginPath();
-  ctx.arc(createX, midY, 4, 0, Math.PI * 2);
-  ctx.fillStyle = '#80d0f0';
-  ctx.fill();
-  ctx.fillStyle = '#80d0f090';
-  ctx.fillText('CREATION', createX, midY - 14);
-  ctx.font = '400 8px "Cormorant Garamond", serif';
-  ctx.fillStyle = '#80d0f060';
-  ctx.fillText('vessel formed', createX, midY - 4);
-
-  ctx.font = '600 9px "DM Sans", sans-serif';
-
-  // Fall dot
-  ctx.beginPath();
-  ctx.arc(fallX, midY, 4, 0, Math.PI * 2);
-  ctx.fillStyle = '#e66868';
-  ctx.fill();
-  ctx.fillStyle = '#e6686890';
-  ctx.fillText('FALL', fallX, midY - 14);
-  ctx.font = '400 8px "Cormorant Garamond", serif';
-  ctx.fillStyle = '#e6686860';
-  ctx.fillText('deviation', fallX, midY + 20);
-
-  ctx.font = '600 9px "DM Sans", sans-serif';
-
-  // Lowest point label
-  const lowMidX = fallX + (crossX - fallX) * 0.4;
-  ctx.fillStyle = '#e6686870';
-  ctx.fillText('MAN OFF THE PATH', lowMidX, lowestY + 6);
-
-  // Cross dot (on the gold line where red returns)
-  ctx.beginPath();
-  ctx.arc(crossX, midY, 5, 0, Math.PI * 2);
-  ctx.fillStyle = '#68a0e6';
-  ctx.fill();
-  ctx.fillStyle = '#68a0e690';
-  ctx.fillText('CROSS', crossX, midY - 16);
-  ctx.font = '400 8px "Cormorant Garamond", serif';
-  ctx.fillStyle = '#68a0e660';
-  ctx.fillText('remedial — back', crossX, midY - 6);
-  ctx.fillText('on the line', crossX, midY + 18);
-
-  ctx.font = '600 9px "DM Sans", sans-serif';
-
-  // Sonship / maturity
-  const sonX = pad + w * 0.75;
-  ctx.beginPath();
-  ctx.arc(sonX, midY, 4, 0, Math.PI * 2);
-  ctx.fillStyle = '#68e6a0';
-  ctx.fill();
-  ctx.fillStyle = '#68e6a090';
-  ctx.fillText('SONSHIP', sonX, midY - 14);
-  ctx.font = '400 8px "Cormorant Garamond", serif';
-  ctx.fillStyle = '#68e6a060';
-  ctx.fillText('growth into', sonX, midY - 4);
-  ctx.fillText('the ultimate', sonX, midY + 18);
-
-  ctx.font = '600 9px "DM Sans", sans-serif';
-
-  // Ultimate intention dot
-  const ultX = pad + w - 10;
-  ctx.beginPath();
-  ctx.arc(ultX, midY, 5, 0, Math.PI * 2);
-  ctx.fillStyle = '#f0d080';
-  ctx.fill();
-  ctx.fillStyle = '#f0d080';
-  ctx.fillText('ULTIMATE', ultX, midY - 16);
-  ctx.fillText('INTENTION', ultX, midY - 6);
-  ctx.font = '400 8px "Cormorant Garamond", serif';
-  ctx.fillStyle = '#f0d08060';
-  ctx.fillText('sons in glory', ultX, midY + 18);
-
-  // Arrow on gold line showing direction
-  const arrowX = pad + w * 0.68;
-  ctx.beginPath();
-  ctx.moveTo(arrowX - 6, midY - 4);
-  ctx.lineTo(arrowX, midY);
-  ctx.lineTo(arrowX - 6, midY + 4);
-  ctx.strokeStyle = '#f0d08060';
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-}
-
-draw();
-window.addEventListener('resize', draw);
-
 // Flow nodes
 const data = [
   { section: "gold", sectionLabel: "GOD'S ORIGINAL LINE", sectionSub: "The straight path — before the fall was ever in view" },

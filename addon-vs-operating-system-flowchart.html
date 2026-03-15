@@ -713,8 +713,11 @@
 function drawModern() {
   const c = document.getElementById('modernRing');
   const ctx = c.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
   const W = 320, H = 250;
-  c.width = W; c.height = H;
+  c.width = W * dpr; c.height = H * dpr;
+  c.style.width = W + 'px'; c.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
   const cX = W/2, cY = 124;
   ctx.clearRect(0, 0, W, H);
 
@@ -785,8 +788,11 @@ function drawModern() {
 function drawPauline() {
   const c = document.getElementById('paulineRing');
   const ctx = c.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
   const W = 320, H = 250;
-  c.width = W; c.height = H;
+  c.width = W * dpr; c.height = H * dpr;
+  c.style.width = W + 'px'; c.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
   const cX = W/2, cY = 124;
   ctx.clearRect(0, 0, W, H);
 
