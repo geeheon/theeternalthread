@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="nav-widget.css">
+<link rel="stylesheet" href="audio-widget.css">
+<script defer src="nav-widget.js"></script>
+<script defer src="audio-widget.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Fact, Faith, and Experience — What Faith Actually Is</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: #0f0f17;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: #e6c068;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #e6c068, transparent);
+    margin: 8px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #888070;
+    font-style: italic;
+  }
+
+  /* ─── The Triad diagram ─── */
+  .triad {
+    margin: 0 0 28px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(230, 192, 104, 0.12);
+  }
+  .triad-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(26, 22, 14, 0.5);
+    border-bottom: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .triad-header span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(230, 192, 104, 0.5);
+  }
+  .triad-row { display: flex; }
+  .triad-col {
+    flex: 1;
+    padding: 20px 14px;
+    text-align: center;
+    background: rgba(26, 22, 14, 0.3);
+  }
+  .triad-col + .triad-col {
+    border-left: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .triad-col-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #e6c068;
+    margin-bottom: 10px;
+  }
+  .triad-col-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: #c8b888;
+    margin-bottom: 8px;
+  }
+  .triad-col-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: #a09880;
+    font-style: italic;
+    line-height: 1.6;
+  }
+  .triad-col-text em {
+    color: #e6c068;
+    font-style: italic;
+  }
+  .triad-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    flex: 0 0 20px;
+    background: rgba(26, 22, 14, 0.3);
+    color: rgba(230, 192, 104, 0.25);
+    font-size: 14px;
+  }
+
+  /* ─── Nee quote block ─── */
+  .nee-block {
+    text-align: center;
+    margin: 0 0 28px;
+    padding: 22px 20px;
+    border-radius: 10px;
+    background: rgba(26, 22, 14, 0.35);
+    border: 1px solid rgba(230, 192, 104, 0.1);
+  }
+  .nee-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(230, 192, 104, 0.45);
+    margin-bottom: 12px;
+  }
+  .nee-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: #c8b888;
+    font-style: italic;
+    line-height: 1.65;
+  }
+  .nee-text em {
+    color: #e6c068;
+    font-style: italic;
+  }
+  .nee-source {
+    font-size: 10px;
+    color: #706858;
+    letter-spacing: 1.5px;
+    margin-top: 12px;
+  }
+
+  /* ─── Flow indicators ─── */
+  .flow-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0;
+  }
+  .flow-line {
+    width: 1.5px;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(230, 192, 104, 0.35), rgba(230, 192, 104, 0.12));
+  }
+  .flow-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: rgba(230, 192, 104, 0.45);
+    padding: 3px 0;
+    text-align: center;
+  }
+  .flow-head {
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid rgba(230, 192, 104, 0.25);
+  }
+
+  /* ─── The banking metaphor ─── */
+  .metaphor-block {
+    margin: 0 0 28px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(230, 192, 104, 0.12);
+  }
+  .metaphor-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(26, 22, 14, 0.5);
+    border-bottom: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .metaphor-header span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(230, 192, 104, 0.5);
+  }
+  .metaphor-row { display: flex; }
+  .metaphor-col {
+    flex: 1;
+    padding: 18px 14px;
+    text-align: center;
+    background: rgba(26, 22, 14, 0.3);
+  }
+  .metaphor-col + .metaphor-col {
+    border-left: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .metaphor-col-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: rgba(230, 192, 104, 0.55);
+    margin-bottom: 8px;
+  }
+  .metaphor-col-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: #a09880;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* ─── Two-column contrast ─── */
+  .contrast {
+    margin: 0 0 24px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(230, 192, 104, 0.1);
+  }
+  .contrast-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(26, 22, 14, 0.5);
+    border-bottom: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .contrast-header span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(230, 192, 104, 0.5);
+  }
+  .contrast-row { display: flex; }
+  .contrast-col { flex: 1; padding: 18px 16px; }
+  .contrast-col.faith {
+    background: rgba(26, 22, 14, 0.3);
+    border-right: 1px solid rgba(230, 192, 104, 0.04);
+  }
+  .contrast-col.counterfeit {
+    background: rgba(46, 26, 26, 0.2);
+  }
+  .contrast-col-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .contrast-col.faith .contrast-col-label { color: #e6c068; }
+  .contrast-col.counterfeit .contrast-col-label { color: #e66868; }
+  .contrast-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    line-height: 1.9;
+    font-style: italic;
+    text-align: center;
+  }
+  .contrast-col.faith .contrast-item { color: #b0a888; }
+  .contrast-col.counterfeit .contrast-item { color: #a08080; }
+  .contrast-footer {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-top: 12px;
+    padding-top: 10px;
+  }
+  .contrast-col.faith .contrast-footer {
+    color: rgba(230, 192, 104, 0.45);
+    border-top: 1px solid rgba(230, 192, 104, 0.1);
+  }
+  .contrast-col.counterfeit .contrast-footer {
+    color: rgba(230, 104, 104, 0.45);
+    border-top: 1px solid rgba(230, 104, 104, 0.1);
+  }
+
+  /* ─── Burden block ─── */
+  .burden {
+    text-align: center;
+    margin: 24px 0 28px;
+    padding: 18px 20px;
+    border-radius: 10px;
+    background: rgba(26, 22, 14, 0.25);
+    border: 1px solid rgba(230, 192, 104, 0.1);
+  }
+  .burden p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #b8a880;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 6px;
+  }
+  .burden p:last-child { margin-bottom: 0; }
+  .burden p em { color: #e6c068; font-style: italic; }
+
+  /* ─── Supporting Verses Section ─── */
+  .supporting-label {
+    text-align: center;
+    margin: 32px 0 16px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(230, 192, 104, 0.08);
+  }
+  .supporting-label span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(230, 192, 104, 0.3);
+  }
+
+  .verse-group-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 18px 0 8px;
+    padding-left: 4px;
+  }
+  .verse-group-label.fact { color: rgba(230, 192, 104, 0.4); }
+  .verse-group-label.faith-grp { color: rgba(160, 200, 230, 0.4); }
+  .verse-group-label.warning { color: rgba(230, 130, 104, 0.4); }
+
+  /* ─── Node cards ─── */
+  .node {
+    border-radius: 10px;
+    padding: 18px 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1.5px solid;
+    margin-bottom: 10px;
+  }
+  .node.fact-node {
+    background: rgba(26, 22, 14, 0.5);
+    border-color: rgba(230, 192, 104, 0.18);
+  }
+  .node.fact-node.active {
+    background: rgba(26, 22, 14, 0.85);
+    border-color: rgba(230, 192, 104, 0.45);
+    box-shadow: 0 0 24px rgba(230, 192, 104, 0.08), 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .node.faith-node {
+    background: rgba(14, 18, 30, 0.5);
+    border-color: rgba(160, 200, 230, 0.18);
+  }
+  .node.faith-node.active {
+    background: rgba(14, 18, 30, 0.85);
+    border-color: rgba(160, 200, 230, 0.45);
+    box-shadow: 0 0 24px rgba(160, 200, 230, 0.08), 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .node.warning-node {
+    background: rgba(36, 24, 14, 0.5);
+    border-color: rgba(230, 130, 104, 0.18);
+  }
+  .node.warning-node.active {
+    background: rgba(36, 24, 14, 0.8);
+    border-color: rgba(230, 130, 104, 0.45);
+    box-shadow: 0 0 24px rgba(230, 130, 104, 0.08), 0 4px 16px rgba(0,0,0,0.3);
+  }
+
+  .node.active { transform: scale(1.02); }
+
+  .node-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .node.active .node-header { margin-bottom: 10px; }
+
+  .node-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0;
+  }
+  .fact-node .node-title { color: #e6c068; }
+  .faith-node .node-title { color: #a0c8e6; }
+  .warning-node .node-title { color: #e68268; }
+
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+  }
+  .fact-node .node-verse { color: rgba(230, 192, 104, 0.5); }
+  .faith-node .node-verse { color: rgba(160, 200, 230, 0.5); }
+  .warning-node .node-verse { color: rgba(230, 130, 104, 0.5); }
+
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #d4c5a0;
+    margin: 8px 0;
+    font-style: italic;
+    padding-left: 14px;
+    display: none;
+  }
+  .fact-node .node-scripture { border-left: 2px solid rgba(230, 192, 104, 0.25); }
+  .faith-node .node-scripture { border-left: 2px solid rgba(160, 200, 230, 0.25); }
+  .warning-node .node-scripture { border-left: 2px solid rgba(230, 130, 104, 0.25); }
+  .node.active .node-scripture { display: block; }
+
+  .node-summary {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #b8b0a0;
+    margin: 8px 0 0 0;
+    display: none;
+  }
+  .fact-node .node-summary { color: #b8a890; }
+  .faith-node .node-summary { color: #90a8c0; }
+  .warning-node .node-summary { color: #b8a090; }
+  .node.active .node-summary { display: block; }
+
+  .node-tap {
+    font-size: 12px;
+    color: #888070;
+  }
+  .node.active .node-tap { display: none; }
+
+  /* ─── Bottom Note ─── */
+  .bottom-note {
+    text-align: center;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(230, 192, 104, 0.08);
+  }
+  .bottom-note p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: #908878;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 6px;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: #888070;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .footer-line {
+    width: 20px; height: 1px;
+    background: rgba(230, 192, 104, 0.25);
+    margin: 0 auto;
+  }
+  .footer a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #605850;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer a:hover { color: #e6c068; }
+
+  /* === MOBILE READABILITY FIXES === */
+  @media (max-width: 600px) {
+    .header p {
+      font-size: 17px;
+      color: #a89a80;
+    }
+    .nee-text {
+      font-size: 18px;
+    }
+    .triad-col-text {
+      font-size: 14px;
+    }
+    .metaphor-col-text {
+      font-size: 15px;
+    }
+    .contrast-item {
+      font-size: 14px;
+    }
+    .contrast-col.faith .contrast-item { color: #c0b898; }
+    .contrast-col.counterfeit .contrast-item { color: #b09090; }
+    .contrast-footer {
+      font-size: 11px;
+    }
+    .burden p {
+      font-size: 17px;
+    }
+    .node-title {
+      font-size: 13px;
+    }
+    .node-verse {
+      font-size: 15px;
+    }
+    .node-scripture {
+      font-size: 18px;
+      color: #ddd0b4;
+    }
+    .node-summary {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .node-tap {
+      font-size: 13px;
+      color: #8a8278;
+    }
+    .bottom-note p {
+      font-size: 15px;
+      color: #a09080;
+    }
+    .footer p {
+      font-size: 16px;
+      color: #706860;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>FACT, FAITH &amp; EXPERIENCE</h1>
+    <div class="header-line"></div>
+    <p>Hebrews 11:1 · Romans 10:17</p>
+  </div>
+
+  <!-- ─── Nee's Definition ─── -->
+  <div class="nee-block">
+    <div class="nee-label">WATCHMAN NEE</div>
+    <div class="nee-text">"Faith is to acknowledge that what God has said and done is <em>true</em>. Faith is to accept the facts — that is, to acknowledge them <em>as facts</em>."</div>
+    <div class="nee-source">THE CHRISTIAN LIFE AND WARFARE</div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">THE STRUCTURE</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ─── The Triad ─── -->
+  <div class="triad">
+    <div class="triad-header">
+      <span>GOD'S ORDER</span>
+    </div>
+    <div class="triad-row">
+      <div class="triad-col">
+        <div class="triad-col-label">FACT</div>
+        <div class="triad-col-icon">⬤</div>
+        <div class="triad-col-text">What God has <em>accomplished</em></div>
+      </div>
+      <div class="triad-arrow">→</div>
+      <div class="triad-col">
+        <div class="triad-col-label">FAITH</div>
+        <div class="triad-col-icon">◉</div>
+        <div class="triad-col-text">What I <em>acknowledge</em> as true</div>
+      </div>
+      <div class="triad-arrow">→</div>
+      <div class="triad-col">
+        <div class="triad-col-label">EXPERIENCE</div>
+        <div class="triad-col-icon">○</div>
+        <div class="triad-col-text">What becomes <em>real</em> in my life</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">NEE'S ILLUSTRATION</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ─── Banking Metaphor ─── -->
+  <div class="metaphor-block">
+    <div class="metaphor-header">
+      <span>THE CHEQUE METAPHOR</span>
+    </div>
+    <div class="metaphor-row">
+      <div class="metaphor-col">
+        <div class="metaphor-col-label">FACT</div>
+        <div class="metaphor-col-text">The money is in the bank</div>
+      </div>
+      <div class="metaphor-col">
+        <div class="metaphor-col-label">FAITH</div>
+        <div class="metaphor-col-text">Cashing the cheque</div>
+      </div>
+      <div class="metaphor-col">
+        <div class="metaphor-col-label">EXPERIENCE</div>
+        <div class="metaphor-col-text">Spending the money</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">HEBREWS 11:1</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ─── Substantiation block ─── -->
+  <div class="nee-block">
+    <div class="nee-label">SUBSTANTIATION — NOT WISHFUL THINKING</div>
+    <div class="nee-text">The Greek word in Hebrews 11:1 is <em>hypostasis</em> — not "confidence" in the devotional sense, but <em>substantiation</em>: the capacity to make something real in experience.<br><br>Eyes substantiate colour. Ears substantiate sound.<br><em>Faith substantiates God's facts.</em></div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">BUT WHAT PASSES FOR FAITH?</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ─── Two-Column Contrast ─── -->
+  <div class="contrast">
+    <div class="contrast-header">
+      <span>TRUE FAITH VS THE COUNTERFEIT</span>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-col faith">
+        <div class="contrast-col-label">FAITH</div>
+        <div class="contrast-item">Begins with God's fact</div>
+        <div class="contrast-item">Acknowledges what is done</div>
+        <div class="contrast-item">Rests on a finished work</div>
+        <div class="contrast-item">Based on promise</div>
+        <div class="contrast-item">Independent of feeling</div>
+        <div class="contrast-item">Cashing a cheque</div>
+        <div class="contrast-footer">RECEIVING</div>
+      </div>
+      <div class="contrast-col counterfeit">
+        <div class="contrast-col-label">THE COUNTERFEIT</div>
+        <div class="contrast-item">Begins with my desire</div>
+        <div class="contrast-item">Hopes something will happen</div>
+        <div class="contrast-item">Strains toward an outcome</div>
+        <div class="contrast-item">Based on imagination</div>
+        <div class="contrast-item">Dependent on intensity</div>
+        <div class="contrast-item">Writing yourself a cheque</div>
+        <div class="contrast-footer">MANUFACTURING</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── The Nee warning ─── -->
+  <div class="burden">
+    <p>"If my father has not promised me anything, but I force myself to believe that he will give me something, then I am not believing but <em>dreaming</em> — because I believe in something that is not factual but my own imagination."</p>
+    <p style="font-size: 11px; color: #706858; letter-spacing: 1.5px; font-family: 'DM Sans', sans-serif; font-style: normal; margin-top: 8px;">— WATCHMAN NEE</p>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">THE SOURCE OF FAITH</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ─── Source of faith block ─── -->
+  <div class="nee-block">
+    <div class="nee-label">NOT MORE FAITH — A BIGGER GOD</div>
+    <div class="nee-text">Faith is not produced from within. It is a trust that arises from the <em>character of the One trusted</em>.<br><br>We do not ask, "Is my faith sufficient?"<br>We ask, "<em>Is God reliable?</em>"<br><br>What is lacking is not greater faith — but a <em>greater God</em>.</div>
+    <div class="nee-source">WATCHMAN NEE · THE CHRISTIAN VOL. 6</div>
+  </div>
+
+  <!-- ─── Supporting Verses ─── -->
+  <div class="supporting-label"><span>SUPPORTING VERSES</span></div>
+
+  <div class="verse-group-label fact">GOD'S ACCOMPLISHED FACTS</div>
+  <div id="fact-verses"></div>
+
+  <div class="verse-group-label faith-grp">THE NATURE OF FAITH</div>
+  <div id="faith-verses"></div>
+
+  <div class="verse-group-label warning">FAITH WITHOUT A BASIS</div>
+  <div id="warning-verses"></div>
+
+  <!-- ─── Bottom Note ─── -->
+  <div class="bottom-note">
+    <p>Faith does not make God's facts true. They are true whether you believe them or not.</p>
+    <p>Faith simply makes them real — in you.</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>The facts belong to God.<br>The experience belongs to man.<br>Faith is God's facts becoming<br>man's experience.</p>
+    <div class="footer-line"></div>
+    <a href="index.html">← THE ETERNAL THREAD</a>
+  </div>
+
+</div>
+
+<script>
+const factVerses = [
+  {
+    title: "IT IS FINISHED",
+    verse: "John 19:30",
+    cls: "fact-node",
+    scripture: "So when Jesus had received the sour wine, He said, 'It is finished!' And bowing His head, He gave up His spirit.",
+    summary: "Not 'it is begun' or 'it is underway.' Finished. The redemptive work of God is a completed fact — accomplished before you were born, before you believed, before you felt anything. Faith does not complete what Christ left incomplete. It acknowledges what is already done."
+  },
+  {
+    title: "BLESSED WITH EVERY SPIRITUAL BLESSING",
+    verse: "Ephesians 1:3",
+    cls: "fact-node",
+    scripture: "Blessed be the God and Father of our Lord Jesus Christ, who has blessed us with every spiritual blessing in the heavenly places in Christ.",
+    summary: "Past tense: 'has blessed.' Not 'will bless if you believe hard enough.' Every spiritual blessing is already deposited in Christ. The money is in the bank. Faith is not the cause of the deposit — it is the cashing of the cheque."
+  },
+  {
+    title: "OUR OLD MAN WAS CRUCIFIED",
+    verse: "Romans 6:6",
+    cls: "fact-node",
+    scripture: "Knowing this, that our old man was crucified with Him, that the body of sin might be done away with, that we should no longer be slaves of sin.",
+    summary: "Paul does not say 'crucify your old man.' He says it was crucified — with Christ, two thousand years ago. This is a fact of history, not a goal of devotion. The reckoning of Romans 6:11 is simply faith applied to this fact: counting true what God says is true."
+  },
+  {
+    title: "COMPLETE IN HIM",
+    verse: "Colossians 2:10",
+    cls: "fact-node",
+    scripture: "And you are complete in Him, who is the head of all principality and power.",
+    summary: "Not 'you will be complete when you reach maturity.' Not 'you are almost complete.' Complete — now, in Him. This is positional truth. Faith does not add to your completeness. Faith acknowledges the completeness that already exists in Christ."
+  }
+];
+
+const faithVerses = [
+  {
+    title: "THE DEFINITION",
+    verse: "Hebrews 11:1",
+    cls: "faith-node",
+    scripture: "Now faith is the substance of things hoped for, the evidence of things not seen.",
+    summary: "The Greek hypostasis means 'substantiation' — the faculty that makes real what is otherwise unseen. Just as eyes are the organ that substantiates colour, faith is the organ that substantiates spiritual reality. Without eyes, colour still exists — you simply cannot perceive it. Without faith, God's facts still stand — you simply cannot experience them."
+  },
+  {
+    title: "FAITH COMES BY HEARING",
+    verse: "Romans 10:17",
+    cls: "faith-node",
+    scripture: "So then faith comes by hearing, and hearing by the word of God.",
+    summary: "Faith is not self-generated. It comes by hearing — by encountering what God has said. This is why Nee insists that without the promises of God, our 'faith' is not real faith. You cannot believe what has not been spoken. Faith has a source outside yourself: God's declared word."
+  },
+  {
+    title: "WE WALK BY FAITH, NOT BY SIGHT",
+    verse: "2 Corinthians 5:7",
+    cls: "faith-node",
+    scripture: "For we walk by faith, not by sight.",
+    summary: "Faith and sight are two different faculties operating in two different realms. Sight deals with the visible and temporal. Faith substantiates the invisible and eternal. When you demand that God's facts be confirmed by feelings, you are asking sight to do what only faith can do — and then blaming faith for not working."
+  },
+  {
+    title: "THOSE WHO HAVE BELIEVED ENTER REST",
+    verse: "Hebrews 4:3",
+    cls: "faith-node",
+    scripture: "For we who have believed do enter that rest.",
+    summary: "Faith and rest are inseparable. If you are straining, you are not believing — you are working. True faith rests, because it has found something finished to rest upon. The anxious person who says 'I'm really trying to have faith' has not yet seen what faith actually is. Faith is the cessation of your own effort to produce what God has already produced."
+  }
+];
+
+const warningVerses = [
+  {
+    title: "FAITH WITHOUT BASIS IS DREAMING",
+    verse: "Romans 10:14",
+    cls: "warning-node",
+    scripture: "How then shall they call on Him in whom they have not believed? And how shall they believe in Him of whom they have not heard?",
+    summary: "You cannot believe what has not been declared. Paul's logic is airtight: belief requires hearing, hearing requires a word spoken. 'Faith' that has no basis in God's revealed word is not faith at all — it is religious imagination. You can be sincere and still be dreaming."
+  },
+  {
+    title: "NOT ALL FAITH IS FROM GOD",
+    verse: "Matthew 7:22–23",
+    cls: "warning-node",
+    scripture: "Many will say to Me in that day, 'Lord, Lord, have we not prophesied in Your name, cast out demons in Your name, and done many wonders in Your name?' And then I will declare to them, 'I never knew you; depart from Me.'",
+    summary: "These people believed. They believed sincerely. They believed with intensity and with results. But their faith was self-referencing — 'have we not done?' It was directed at their own spiritual activity, not at God's accomplished fact. Sincerity does not make faith true. Only God's fact makes faith true."
+  },
+  {
+    title: "ZEAL WITHOUT KNOWLEDGE",
+    verse: "Romans 10:2–3",
+    cls: "warning-node",
+    scripture: "For I bear them witness that they have a zeal for God, but not according to knowledge. For they being ignorant of God's righteousness, and seeking to establish their own righteousness, have not submitted to the righteousness of God.",
+    summary: "Zeal is not faith. Intensity is not faith. Passion for God is not the same as resting in God's facts. Israel's problem was not a lack of fervour — it was ignorance of what God had actually accomplished. They were trying to manufacture what God had already provided. That is the anatomy of the counterfeit."
+  }
+];
+
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls}`;
+  div.onclick = () => {
+    const isActive = div.classList.contains('active');
+    document.querySelectorAll(`.node.${n.cls}`).forEach(el => el.classList.remove('active'));
+    if (!isActive) div.classList.add('active');
+  };
+
+  let html = '<div class="node-header"><div>';
+  html += `<h3 class="node-title">${n.title}</h3>`;
+  html += `<span class="node-verse">${n.verse}</span>`;
+  html += '</div></div>';
+  html += `<div class="node-scripture">"${n.scripture}"</div>`;
+  html += `<div class="node-summary">${n.summary}</div>`;
+  html += '<div class="node-tap">Tap to expand</div>';
+
+  div.innerHTML = html;
+  return div;
+}
+
+document.getElementById('fact-verses').append(...factVerses.map(n => buildNode(n)));
+document.getElementById('faith-verses').append(...faithVerses.map(n => buildNode(n)));
+document.getElementById('warning-verses').append(...warningVerses.map(n => buildNode(n)));
+</script>
+</body>
+</html>

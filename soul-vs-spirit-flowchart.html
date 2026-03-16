@@ -394,27 +394,78 @@
     .sub {
       font-size: 16px;
     }
-  }
+  
+    .metaphor-key-text {
+      font-size: 14px;
+    }
+    .metaphor-key-label {
+      font-size: 10px;
+    }
+}
 
 /* Metaphor key */
-.metaphor-key{margin:0 0 20px;padding:14px 16px;border-radius:8px;cursor:pointer;transition:all 0.3s ease}
-.metaphor-key .key-header{display:flex;align-items:center;justify-content:space-between}
-.metaphor-key .key-label{font-family:'DM Sans',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
-.metaphor-key .key-toggle{font-size:10px;opacity:0.4;transition:transform 0.3s}
-.metaphor-key.active .key-toggle{transform:rotate(45deg)}
-.metaphor-key .key-content{display:none;margin-top:10px;font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;line-height:1.7}
-.metaphor-key.active .key-content{display:block}
-.metaphor-key .key-content a{text-decoration:none;border-bottom:1px solid;transition:color 0.2s}
-.metaphor-key .key-content strong{font-style:normal;font-weight:600}
-
-.metaphor-key{background:rgba(22,16,30,0.35);border:1px solid rgba(192,160,232,0.10)}
-.metaphor-key:hover{border-color:rgba(192,160,232,0.18)}
-.metaphor-key .key-label{color:#c0a0e8}
-.metaphor-key .key-toggle{color:#c0a0e8}
-.metaphor-key .key-content{color:#888090}
-.metaphor-key .key-content a{color:#c0a0e8;border-bottom-color:rgba(192,160,232,0.3)}
-.metaphor-key .key-content a:hover{opacity:0.7}
-.metaphor-key .key-content strong{color:#c0a0e8}
+.metaphor-key {
+  margin: 0 0 28px;
+  border: 1px solid rgba(192, 160, 232, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.metaphor-key-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  cursor: pointer;
+  background: rgba(192, 160, 232, 0.03);
+}
+.metaphor-key-label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: rgba(192, 160, 232, 0.5);
+}
+.metaphor-key-arrow {
+  font-size: 10px;
+  color: rgba(192, 160, 232, 0.3);
+  transition: transform 0.3s ease;
+}
+.metaphor-key.open .metaphor-key-arrow { transform: rotate(180deg); }
+.metaphor-key-content {
+  display: none;
+  padding: 14px 16px 16px;
+  border-top: 1px solid rgba(192, 160, 232, 0.06);
+}
+.metaphor-key.open .metaphor-key-content { display: block; }
+.metaphor-key-item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.metaphor-key-item:last-child { margin-bottom: 0; }
+.metaphor-key-icon {
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.metaphor-key-text {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #a09888;
+}
+.metaphor-key-text em {
+  color: #c0a0e8;
+  font-style: normal;
+  font-weight: 500;
+}
+.metaphor-key-link {
+  display: block;
+  margin-top: 10px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: rgba(192, 160, 232, 0.4);
+  text-decoration: none;
+}
+.metaphor-key-link:hover { color: #c0a0e8; }
 </style>
 </head>
 <body>
@@ -427,13 +478,22 @@
 </div>
 
 
-<div class="metaphor-key" onclick="this.classList.toggle('active')">
-  <div class="key-header">
-    <span class="key-label">Recurring metaphor used below</span>
-    <span class="key-toggle">+</span>
+<!-- Metaphor Key -->
+<div class="metaphor-key" id="metaphor-key">
+  <div class="metaphor-key-toggle" onclick="document.getElementById('metaphor-key').classList.toggle('open')">
+    <span class="metaphor-key-label">METAPHOR KEY</span>
+    <span class="metaphor-key-arrow">&#9660;</span>
   </div>
-  <div class="key-content">
-    This figure uses an image from <a href="two-operating-systems-flowchart.html">The Two Operating Systems</a>: the <strong>bicycle</strong> = self-effort, the soul trying to produce the Christian life by its own power. The <strong>self-driving car</strong> = Christ's life operating through the believer — a different source entirely, not a faster bicycle.
+  <div class="metaphor-key-content">
+    <div class="metaphor-key-item">
+      <span class="metaphor-key-icon">&#x1F6B2;</span>
+      <span class="metaphor-key-text"><em>Bicycle</em> — self-effort. The soul running the show: your own mind, will, and emotions producing the Christian life. On the bicycle thinking you're in the car.</span>
+    </div>
+    <div class="metaphor-key-item">
+      <span class="metaphor-key-icon">&#x1F697;</span>
+      <span class="metaphor-key-text"><em>Self-driving car</em> — the spirit governing. Christ's life operating from the centre outward through a yielded soul and body. <em>A different source</em>, not more effort.</span>
+    </div>
+    <a href="two-operating-systems-flowchart.html" class="metaphor-key-link">SEE: TWO OPERATING SYSTEMS &rarr;</a>
   </div>
 </div>
 
