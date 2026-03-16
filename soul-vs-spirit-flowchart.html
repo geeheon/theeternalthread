@@ -487,11 +487,11 @@
   <div class="metaphor-key-content">
     <div class="metaphor-key-item">
       <span class="metaphor-key-icon">&#x1F6B2;</span>
-      <span class="metaphor-key-text"><em>Bicycle</em> — self-effort. The soul running the show: your own mind, will, and emotions producing the Christian life. On the bicycle thinking you're in the car.</span>
+      <span class="metaphor-key-text"><em>Bicycle</em> — self-effort. The soul running the show: your own mind, will, and emotions producing the Christian life. Out of the car and back on the bicycle without realising it.</span>
     </div>
     <div class="metaphor-key-item">
       <span class="metaphor-key-icon">&#x1F697;</span>
-      <span class="metaphor-key-text"><em>Self-driving car</em> — the spirit governing. Christ's life operating from the centre outward through a yielded soul and body. <em>A different source</em>, not more effort.</span>
+      <span class="metaphor-key-text"><em>Car</em> — Christ Himself. You have been placed inside Him — His life operating from the centre outward through a yielded soul and body. <em>A different source</em>, not more effort.</span>
     </div>
     <a href="two-operating-systems-flowchart.html" class="metaphor-key-link">SEE: TWO OPERATING SYSTEMS &rarr;</a>
   </div>
@@ -578,7 +578,7 @@ summary:"When Jesus says 'deny yourself and take up your cross,' the self He's r
 {arrow:"gold",label:"RESULTING IN"},
 {num:6,title:"THE SPIRITUAL MAN",verse:"1 Corinthians 2:15, Galatians 5:25",cls:"gold",badge:"THE GOAL",
 scripture:"He who is spiritual judges all things, yet he himself is rightly judged by no one... If we live in the Spirit, let us also walk in the Spirit.",
-summary:"The spiritual man is not the one with the most Bible knowledge (that's the mind). Not the one with the most powerful emotional experiences (that's the emotions). Not the one with the strongest willpower (that's the will). The spiritual man is the one whose spirit — indwelt by the Holy Spirit — is the governing centre of his life. His mind is renewed by the spirit. His emotions are calibrated by the spirit. His will is submitted to the spirit. Everything flows from the innermost place outward — spirit → soul → body — exactly as God designed it. This is the self-driving car. Not soul-powered effort. Spirit-governed life. Christ living from the centre, expressing Himself through the personality, visible in the body."}
+summary:"The spiritual man is not the one with the most Bible knowledge (that's the mind). Not the one with the most powerful emotional experiences (that's the emotions). Not the one with the strongest willpower (that's the will). The spiritual man is the one whose spirit — indwelt by the Holy Spirit — is the governing centre of his life. His mind is renewed by the spirit. His emotions are calibrated by the spirit. His will is submitted to the spirit. Everything flows from the innermost place outward — spirit → soul → body — exactly as God designed it. This is the car — Christ Himself as your life. Not soul-powered effort. Spirit-governed life. Christ living from the centre, expressing Himself through the personality, visible in the body."}
 ];
 
 function buildNode(n){const d=document.createElement('div');d.className=`node ${n.cls}`;d.onclick=()=>{const w=d.classList.contains('active');document.querySelectorAll('.node').forEach(e=>e.classList.remove('active'));if(!w)d.classList.add('active')};let h='';if(n.badge)h+=`<div class="badge">${n.badge}</div>`;h+=`<div class="node-header"><span class="node-number">${n.num}</span><div><h3 class="node-title">${n.title}</h3><span class="node-verse">${n.verse}</span></div></div>`;h+=`<div class="node-scripture">"${n.scripture}"</div>`;h+=`<div class="node-summary">${n.summary}</div>`;h+=`<div class="node-tap">Tap to expand</div>`;d.innerHTML=h;return d}
