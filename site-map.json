@@ -12,6 +12,14 @@
           "desc": "Dead to sin, alive to God — not by effort, but by position."
         },
         {
+          "file": "baptism-flowchart.html",
+          "theme": "gold",
+          "category": "Identification with Christ",
+          "title": "Baptism — Burying a Dead Man",
+          "verse": "Romans 6:3–4 · Colossians 2:12",
+          "desc": "Not a ritual for the living — a burial for the already dead."
+        },
+        {
           "file": "galatians-flowchart.html",
           "theme": "gold",
           "category": "Law and Grace",
@@ -156,6 +164,14 @@
           "title": "Add-On vs Operating System",
           "verse": "Galatians 2:20 · Colossians 3:4",
           "desc": "Christ as addition to your life — or Christ as your life."
+        },
+        {
+          "file": "school-of-christ-flowchart.html",
+          "theme": "silver",
+          "category": "Learning Christ",
+          "title": "The School of Christ",
+          "verse": "Ephesians 4:20–21",
+          "desc": "Not learning about Christ — learning Christ Himself."
         }
       ]
     },

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>The School of Christ — Ephesians 4:20–21</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: #0a0a10;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: #c0c0d8;
+    letter-spacing: 3px;
+    line-height: 1.3;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #c0c0d8, transparent);
+    margin: 10px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #888090;
+    font-style: italic;
+  }
+
+  /* ─── Scripture block ─── */
+  .scripture-block {
+    text-align: center;
+    margin-bottom: 28px;
+    padding: 24px 20px;
+    border-radius: 10px;
+    background: rgba(16, 16, 28, 0.5);
+    border: 1px solid rgba(192, 192, 216, 0.12);
+  }
+  .scripture-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(192, 192, 216, 0.5);
+    margin-bottom: 12px;
+  }
+  .scripture-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #c8c8d8;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .scripture-text em {
+    color: #c0c0d8;
+    font-style: italic;
+  }
+  .scripture-ref {
+    font-size: 11px;
+    color: #606878;
+    letter-spacing: 1.5px;
+  }
+
+  /* ─── Word study block ─── */
+  .word-study {
+    margin: 0 0 28px;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(16, 16, 28, 0.35);
+    border: 1px solid rgba(192, 192, 216, 0.08);
+  }
+  .word-study-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(192, 192, 216, 0.45);
+    margin-bottom: 14px;
+    text-align: center;
+  }
+  .word-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .word-row:last-child { margin-bottom: 0; }
+  .greek-word {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: #c0c0d8;
+    min-width: 90px;
+  }
+  .word-def {
+    font-size: 13px;
+    color: #a0a0b0;
+    line-height: 1.5;
+  }
+
+  /* ─── Insight block ─── */
+  .insight {
+    text-align: center;
+    margin: 0 0 28px;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(16, 16, 28, 0.3);
+    border: 1px solid rgba(192, 192, 216, 0.1);
+  }
+  .insight-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(192, 192, 216, 0.45);
+    margin-bottom: 12px;
+  }
+  .insight-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #a8a8c0;
+    font-style: italic;
+    line-height: 1.7;
+  }
+  .insight-text em {
+    color: #c0c0d8;
+    font-style: italic;
+  }
+
+  /* ─── Flow arrows ─── */
+  .flow-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0;
+  }
+  .flow-line {
+    width: 1.5px;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(192, 192, 216, 0.35), rgba(192, 192, 216, 0.12));
+  }
+  .flow-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: rgba(192, 192, 216, 0.4);
+    padding: 3px 0;
+    text-align: center;
+  }
+  .flow-head {
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid rgba(192, 192, 216, 0.25);
+  }
+
+  /* ─── Two-column contrast ─── */
+  .contrast {
+    margin: 0 0 24px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(192, 192, 216, 0.1);
+  }
+  .contrast-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(16, 16, 24, 0.5);
+    border-bottom: 1px solid rgba(192, 192, 216, 0.06);
+  }
+  .contrast-header span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(192, 192, 216, 0.5);
+  }
+  .contrast-row { display: flex; }
+  .contrast-col { flex: 1; padding: 18px 14px; }
+  .contrast-col.school {
+    background: rgba(13, 18, 28, 0.3);
+    border-right: 1px solid rgba(192, 192, 216, 0.04);
+  }
+  .contrast-col.program {
+    background: rgba(46, 26, 26, 0.15);
+  }
+  .contrast-col-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .contrast-col.school .contrast-col-label { color: #c0c0d8; }
+  .contrast-col.program .contrast-col-label { color: #d8a080; }
+  .contrast-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    line-height: 2;
+    font-style: italic;
+    text-align: center;
+  }
+  .contrast-col.school .contrast-item { color: #90a0b8; }
+  .contrast-col.program .contrast-item { color: #b09888; }
+  .contrast-footer {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-top: 12px;
+    padding-top: 10px;
+  }
+  .contrast-col.school .contrast-footer {
+    color: rgba(192, 192, 216, 0.45);
+    border-top: 1px solid rgba(192, 192, 216, 0.1);
+  }
+  .contrast-col.program .contrast-footer {
+    color: rgba(216, 160, 128, 0.45);
+    border-top: 1px solid rgba(216, 160, 128, 0.1);
+  }
+
+  /* ─── Section labels ─── */
+  .section-label {
+    text-align: center;
+    margin: 28px 0 16px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(192, 192, 216, 0.08);
+  }
+  .section-label span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(192, 192, 216, 0.35);
+  }
+
+  /* ─── Expandable nodes ─── */
+  .node {
+    margin: 8px 0;
+    border-radius: 10px;
+    padding: 18px 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .node.silver {
+    background: rgba(16, 16, 28, 0.5);
+    border: 1.5px solid rgba(192, 192, 216, 0.15);
+  }
+  .node.silver.active {
+    background: rgba(16, 16, 28, 0.9);
+    border-color: #c0c0d8;
+    box-shadow: 0 0 25px rgba(192, 192, 216, 0.06), 0 4px 20px rgba(0,0,0,0.3);
+    transform: scale(1.02);
+  }
+  .node.green {
+    background: rgba(13, 28, 20, 0.5);
+    border: 1.5px solid rgba(104, 230, 160, 0.15);
+  }
+  .node.green.active {
+    background: rgba(13, 28, 20, 0.9);
+    border-color: #68e6a0;
+    box-shadow: 0 0 25px rgba(104, 230, 160, 0.06), 0 4px 20px rgba(0,0,0,0.3);
+    transform: scale(1.02);
+  }
+  .node.red {
+    background: rgba(46, 26, 26, 0.5);
+    border: 1.5px solid rgba(230, 104, 104, 0.15);
+  }
+  .node.red.active {
+    background: rgba(46, 26, 26, 0.9);
+    border-color: #e66868;
+    box-shadow: 0 0 25px rgba(230, 104, 104, 0.06), 0 4px 20px rgba(0,0,0,0.3);
+    transform: scale(1.02);
+  }
+
+  .node-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .node.active .node-header { margin-bottom: 10px; }
+
+  .node-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1;
+    opacity: 0.4;
+  }
+  .node.silver .node-number { color: #c0c0d8; }
+  .node.green .node-number { color: #68e6a0; }
+  .node.red .node-number { color: #e66868; }
+
+  .node-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0;
+  }
+  .node.silver .node-title { color: #c0c0d8; }
+  .node.green .node-title { color: #68e6a0; }
+  .node.red .node-title { color: #e66868; }
+
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+  }
+  .node.silver .node-verse { color: rgba(192, 192, 216, 0.45); }
+  .node.green .node-verse { color: rgba(104, 230, 160, 0.45); }
+  .node.red .node-verse { color: rgba(230, 104, 104, 0.45); }
+
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #d4c5a0;
+    margin: 8px 0;
+    font-style: italic;
+    border-left: 2px solid;
+    padding-left: 14px;
+    display: none;
+  }
+  .node.active .node-scripture { display: block; }
+  .node.silver .node-scripture { border-left-color: rgba(192, 192, 216, 0.25); }
+  .node.green .node-scripture { border-left-color: rgba(104, 230, 160, 0.25); }
+  .node.red .node-scripture { border-left-color: rgba(230, 104, 104, 0.25); }
+
+  .node-summary {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #b8b0a0;
+    margin: 8px 0 0;
+    display: none;
+  }
+  .node.active .node-summary { display: block; }
+
+  .node-tap {
+    font-size: 12px;
+    color: #606068;
+    margin-top: 4px;
+  }
+  .node.active .node-tap { display: none; }
+
+  /* ─── Burden / summary block ─── */
+  .burden {
+    text-align: center;
+    margin: 24px 0;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(16, 16, 28, 0.25);
+    border: 1px solid rgba(192, 192, 216, 0.1);
+  }
+  .burden p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #a0a8b8;
+    font-style: italic;
+    line-height: 1.7;
+  }
+  .burden p em { color: #c0c0d8; font-style: italic; }
+
+  /* ─── Cross-reference box ─── */
+  .cross-ref {
+    margin: 20px 0;
+    padding: 14px 18px;
+    border-radius: 8px;
+    background: rgba(16, 16, 28, 0.2);
+    border: 1px dashed rgba(192, 192, 216, 0.1);
+    text-align: center;
+  }
+  .cross-ref-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: rgba(192, 192, 216, 0.35);
+    margin-bottom: 6px;
+  }
+  .cross-ref-text {
+    font-size: 12px;
+    color: #888898;
+    line-height: 1.6;
+  }
+  .cross-ref-text a {
+    color: #c0c0d8;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(192, 192, 216, 0.2);
+  }
+  .cross-ref-text a:hover {
+    border-bottom-color: #c0c0d8;
+  }
+
+  /* ─── Footer ─── */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(192, 192, 216, 0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: #888898;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .footer-line {
+    width: 20px;
+    height: 1px;
+    background: rgba(192, 192, 216, 0.25);
+    margin: 16px auto;
+  }
+  .footer a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #605850;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .footer a:hover { color: #c0c0d8; }
+
+  /* ─── MOBILE FIXES ─── */
+  @media (max-width: 600px) {
+    .scripture-text { font-size: 19px; }
+    .insight-text { font-size: 17px; }
+    .contrast-item { font-size: 14px; }
+    .contrast-footer { font-size: 11px; }
+    .node-title { font-size: 13px; }
+    .node-verse { font-size: 15px; }
+    .node-scripture { font-size: 18px; color: #ddd0b4; }
+    .node-summary { font-size: 15px; line-height: 1.7; }
+    .node-tap { font-size: 13px; color: #8a8278; }
+    .burden p { font-size: 17px; }
+    .footer p { font-size: 16px; color: #706860; }
+    .word-def { font-size: 14px; color: #b0b0c0; }
+    .greek-word { font-size: 19px; }
+    .header p { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>THE SCHOOL OF CHRIST</h1>
+    <div class="header-line"></div>
+    <p>Ephesians 4:20–21</p>
+  </div>
+
+  <!-- ─── Opening Scripture ─── -->
+  <div class="scripture-block">
+    <div class="scripture-label">THE FOUNDATION</div>
+    <div class="scripture-text">"But you have not so learned Christ, if indeed you have heard Him and have been taught by Him, as the truth is in Jesus."</div>
+    <div class="scripture-ref">EPHESIANS 4:20–21</div>
+  </div>
+
+  <!-- ─── Word Study ─── -->
+  <div class="word-study">
+    <div class="word-study-label">THE WORDS</div>
+    <div class="word-row">
+      <span class="greek-word">mathētēs</span>
+      <span class="word-def">A learner. One under discipline. Not a student of information — a person being <em>formed</em>.</span>
+    </div>
+    <div class="word-row">
+      <span class="greek-word">manthanō</span>
+      <span class="word-def">To learn — by use, by practice, by experience. Not merely to be told.</span>
+    </div>
+    <div class="word-row">
+      <span class="greek-word">emathete</span>
+      <span class="word-def">"You learned" — aorist. A decisive event. You came under discipline to <em>Christ Himself</em>.</span>
+    </div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">THE CRITICAL DISTINCTION</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ─── The Key Insight ─── -->
+  <div class="insight">
+    <div class="insight-label">AUSTIN-SPARKS' OBSERVATION</div>
+    <div class="insight-text">
+      Jesus said: "Learn <em>of</em> Me."<br>
+      Paul said: "You did not so learn <em>Christ</em>."<br><br>
+      One little word removed — and the whole meaning changes.<br>
+      Not learning <em>about</em> Him. Not imitating <em>from outside</em>.<br>
+      But learning <em>the Person</em> — inwardly, by the Spirit,<br>
+      through experience, through breaking, through revelation.
+    </div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">TWO APPROACHES</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ─── Contrast: School vs Program ─── -->
+  <div class="contrast">
+    <div class="contrast-header">
+      <span>WHAT IS "DISCIPLESHIP"?</span>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-col school">
+        <div class="contrast-col-label">THE SCHOOL OF CHRIST</div>
+        <div class="contrast-item">The Person is the lesson</div>
+        <div class="contrast-item">The Spirit is the teacher</div>
+        <div class="contrast-item">Circumstances are the classroom</div>
+        <div class="contrast-item">Inward revelation</div>
+        <div class="contrast-item">Breaking produces knowing</div>
+        <div class="contrast-item">Christ formed in you</div>
+        <div class="contrast-footer">SUBJECTIVE — CHRIST WITHIN</div>
+      </div>
+      <div class="contrast-col program">
+        <div class="contrast-col-label">MODERN PROGRAMS</div>
+        <div class="contrast-item">Curriculum is the lesson</div>
+        <div class="contrast-item">A leader is the teacher</div>
+        <div class="contrast-item">A classroom is the classroom</div>
+        <div class="contrast-item">Outward imitation</div>
+        <div class="contrast-item">Knowledge produces doing</div>
+        <div class="contrast-item">Behaviour modified in you</div>
+        <div class="contrast-footer">OBJECTIVE — CHRIST OUTSIDE</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cross-reference to Two Operating Systems -->
+  <div class="cross-ref">
+    <div class="cross-ref-label">SEE ALSO</div>
+    <div class="cross-ref-text">
+      The bicycle is the self trying to imitate Christ from outside.<br>
+      The self-driving car is Christ operating as life from within.<br>
+      <a href="two-operating-systems-flowchart.html">Two Operating Systems →</a>
+    </div>
+  </div>
+
+  <!-- ─── THE CURRICULUM ─── -->
+  <div class="section-label"><span>THE CURRICULUM</span></div>
+
+  <div id="curriculum-nodes"></div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">AND HOW DOES HE TEACH?</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ─── THE METHOD ─── -->
+  <div class="section-label"><span>THE METHOD</span></div>
+
+  <div id="method-nodes"></div>
+
+  <!-- ─── Summary Burden ─── -->
+  <div class="burden">
+    <p>A disciple is not one who has <em>completed a course</em>.</p>
+    <p>A disciple is one who is <em>under the hand of the Teacher</em> —</p>
+    <p>being broken, being shown, being formed,</p>
+    <p>until the only thing that remains is <em>Christ</em>.</p>
+  </div>
+
+  <!-- ─── Supporting Verses ─── -->
+  <div class="section-label"><span>SUPPORTING VERSES</span></div>
+
+  <div id="support-nodes"></div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>The person who really does begin to move<br>
+    is the person who has had his final despair<br>
+    over himself, and has come to see —<br>
+    it is "no longer I, but Christ."</p>
+    <div class="footer-line"></div>
+    <a href="index.html">← THE ETERNAL THREAD</a>
+  </div>
+
+</div>
+
+<script>
+const curriculum = [
+  {
+    num: "1",
+    title: "THE OTHER-NESS OF CHRIST",
+    verse: "Mark 4:41 · John 7:46",
+    cls: "silver",
+    group: "curriculum",
+    scripture: "And they feared exceedingly, and said to one another, 'Who can this be, that even the wind and the sea obey Him!'",
+    summary: "The first lesson in the School of Christ is not moral instruction. It is confrontation. The disciples spent three years with Him and the cumulative effect was not that they learned how to be like Him — it was that they saw how altogether other He was from themselves. Every miracle, every response, every silence exposed the gap. This is the Spirit's first work in every believer: to show you that Christ is not a better version of you. He is of an entirely different order. You cannot imitate your way across that chasm."
+  },
+  {
+    num: "2",
+    title: "THE DESPAIR OF SELF",
+    verse: "John 16:31–32 · John 13:38",
+    cls: "red",
+    group: "curriculum",
+    scripture: "Do you now believe? Indeed the hour is coming, yes, has now come, that you will be scattered, each to his own, and will leave Me alone.",
+    summary: "The second lesson is the hardest. Having seen how other Christ is, you try to close the gap by effort. You make loud protestations of loyalty. Peter says 'I will lay down my life for You.' And the Lord lets it happen — lets you fail, lets you deny, lets you scatter — because no constructive work can begin until self-confidence is broken. This is not punishment. It is the necessary ground-clearing. The Lord could have prevented Peter's denial. He chose not to. The despair of self is not an accident in the curriculum. It is the curriculum."
+  },
+  {
+    num: "3",
+    title: "NO LONGER I, BUT CHRIST",
+    verse: "Galatians 2:20 · Philippians 3:10",
+    cls: "green",
+    group: "curriculum",
+    scripture: "I have been crucified with Christ; it is no longer I who live, but Christ lives in me; and the life which I now live in the flesh I live by faith in the Son of God, who loved me and gave Himself for me.",
+    summary: "Only after lessons one and two can this be real. Not a doctrine recited — a reality landed on. The same Paul who at the beginning received a revelation of Christ in him, at the end of his life cries 'that I may know Him.' This is the foundation of spiritual growth: not 'what I must do for Christ' but 'Christ is my life.' The person who begins to move spiritually is the person who has had their final despair over themselves and has seen that it is no longer I, but Christ — not my love, not my strength, not my patience, but His."
+  }
+];
+
+const method = [
+  {
+    num: "A",
+    title: "THROUGH CIRCUMSTANCES",
+    verse: "Romans 8:28–29 · 2 Corinthians 4:16–17",
+    cls: "silver",
+    group: "method",
+    scripture: "Therefore we do not lose heart. Even though our outward man is perishing, yet the inward man is being renewed day by day.",
+    summary: "The Spirit does not teach primarily through books, sermons, or conferences. He teaches through arranged situations — losses, pressures, failures, closed doors. Each circumstance is designed to expose another layer of self-reliance and drive the believer deeper into dependence on Christ. The outward man perishes. That is the method. The inward man is renewed. That is the result. You cannot have the renewal without the perishing."
+  },
+  {
+    num: "B",
+    title: "THROUGH BREAKING",
+    verse: "2 Corinthians 4:7–10 · John 12:24",
+    cls: "silver",
+    group: "method",
+    scripture: "But we have this treasure in earthen vessels, that the excellence of the power may be of God and not of us.",
+    summary: "The treasure is already inside the vessel. The problem is not the absence of Christ — it is the thickness of the vessel. The outer shell of the natural man — his opinions, his competence, his self-assurance, his religious performance — keeps the fragrance sealed in. The Spirit's work is to crack the vessel open. Not to destroy the person, but to release what is within. As Watchman Nee put it: the grain of wheat must fall into the ground and die. The shell breaks. The life comes forth. This is not optional in the school — it is the central pedagogy."
+  },
+  {
+    num: "C",
+    title: "THROUGH INWARD REVELATION",
+    verse: "Galatians 1:15–16 · 2 Corinthians 4:6",
+    cls: "silver",
+    group: "method",
+    scripture: "But when it pleased God, who separated me from my mother's womb and called me through His grace, to reveal His Son in me…",
+    summary: "Paul does not say God revealed His Son to me — he says in me. The Spirit's teaching is not objective information delivered to the mind. It is subjective revelation worked into the being. You can study Christology for decades and not know Christ. Or you can go through one dark night where all your resources fail, and in that darkness the Spirit shows you something of Christ that becomes part of you forever. This is how the School of Christ operates. Not by syllabus, but by sight — inward sight, given by the Spirit, in the furnace of experience."
+  }
+];
+
+const support = [
+  {
+    num: "",
+    title: "TAKE MY YOKE UPON YOU",
+    verse: "Matthew 11:29–30",
+    cls: "silver",
+    group: "support",
+    scripture: "Take My yoke upon you and learn from Me, for I am gentle and lowly in heart, and you will find rest for your souls. For My yoke is easy and My burden is light.",
+    summary: "This is Christ's invitation into the School. A yoke is not a textbook — it is a wooden frame that binds two together so they move as one. The disciple does not carry a curriculum. The disciple is yoked to a Person. And the remarkable thing: this yoke produces rest, not strain. The self-effort of religious performance is a heavy yoke. The yoke of being joined to Christ and learning Him is light — because He does the pulling."
+  },
+  {
+    num: "",
+    title: "CONFORMED TO HIS IMAGE",
+    verse: "Romans 8:29",
+    cls: "silver",
+    group: "support",
+    scripture: "For whom He foreknew, He also predestined to be conformed to the image of His Son, that He might be the firstborn among many brethren.",
+    summary: "This is the goal of the entire School. Not behaviour modification. Not doctrinal mastery. Conformity to the image of the Son. God presented Christ at the Jordan — 'This is My beloved Son in whom I am well pleased' — and the Spirit's entire work in every believer is to reproduce that image. The curriculum, the method, the breaking, the revelation — all of it serves one end: that Christ would be fully formed in us."
+  },
+  {
+    num: "",
+    title: "MY LITTLE CHILDREN",
+    verse: "Galatians 4:19",
+    cls: "silver",
+    group: "support",
+    scripture: "My little children, for whom I labour in birth again until Christ is formed in you.",
+    summary: "Paul does not say 'until you learn the right doctrines' or 'until you have the right behaviour.' Until Christ is formed in you. The Greek word is morphōthē — to take on an inner form, a deep structural shape. This is what the School is producing. Not external compliance. Not religious proficiency. An inward formation of Christ that reshapes the entire person from the inside out."
+  },
+  {
+    num: "",
+    title: "HE MUST INCREASE",
+    verse: "John 3:30",
+    cls: "silver",
+    group: "support",
+    scripture: "He must increase, but I must decrease.",
+    summary: "John the Baptist understood the principle of the School before the School formally opened. The entire trajectory is one direction: more of Him, less of me. Every lesson, every breaking, every revelation serves this single movement. The disciple does not graduate when they know enough. The disciple 'graduates' — if you can use that word — when there is nothing left of the old man and Christ fills all."
+  }
+];
+
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls}`;
+  div.onclick = () => {
+    const isActive = div.classList.contains('active');
+    document.querySelectorAll(`.node.${n.cls}[data-group="${n.group}"]`).forEach(el => el.classList.remove('active'));
+    if (!isActive) div.classList.add('active');
+  };
+  div.setAttribute('data-group', n.group);
+
+  let html = '<div class="node-header"><div>';
+  if (n.num) html += `<div class="node-number">${n.num}</div>`;
+  html += `<h3 class="node-title">${n.title}</h3>`;
+  html += `<span class="node-verse">${n.verse}</span>`;
+  html += '</div></div>';
+  html += `<div class="node-scripture">"${n.scripture}"</div>`;
+  html += `<div class="node-summary">${n.summary}</div>`;
+  html += '<div class="node-tap">Tap to expand</div>';
+
+  div.innerHTML = html;
+  return div;
+}
+
+document.getElementById('curriculum-nodes').append(...curriculum.map(n => buildNode(n)));
+document.getElementById('method-nodes').append(...method.map(n => buildNode(n)));
+document.getElementById('support-nodes').append(...support.map(n => buildNode(n)));
+</script>
+</body>
+</html>

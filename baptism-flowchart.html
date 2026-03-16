@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Baptism — Burying a Dead Man</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: #0f0f17;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 32px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: #e6c068;
+    letter-spacing: 3px;
+    line-height: 1.3;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #e6c068, transparent);
+    margin: 10px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #888070;
+    font-style: italic;
+  }
+
+  /* Metaphor Key */
+  .metaphor-key {
+    margin: 0 0 28px;
+    border: 1px solid rgba(230, 192, 104, 0.12);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .metaphor-key-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    cursor: pointer;
+    background: rgba(230, 192, 104, 0.03);
+  }
+  .metaphor-key-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(230, 192, 104, 0.5);
+  }
+  .metaphor-key-arrow {
+    font-size: 10px;
+    color: rgba(230, 192, 104, 0.3);
+    transition: transform 0.3s ease;
+  }
+  .metaphor-key.open .metaphor-key-arrow { transform: rotate(180deg); }
+  .metaphor-key-content {
+    display: none;
+    padding: 14px 16px 16px;
+    border-top: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .metaphor-key.open .metaphor-key-content { display: block; }
+  .metaphor-key-item {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .metaphor-key-item:last-child { margin-bottom: 0; }
+  .metaphor-key-icon {
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .metaphor-key-text {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: #a09888;
+  }
+  .metaphor-key-text em {
+    color: #e6c068;
+    font-style: normal;
+    font-weight: 500;
+  }
+  .metaphor-key-link {
+    display: block;
+    margin-top: 10px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: rgba(230, 192, 104, 0.4);
+    text-decoration: none;
+  }
+  .metaphor-key-link:hover { color: #e6c068; }
+
+  /* Contrast Box */
+  .contrast-box {
+    margin: 0 0 28px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(230, 192, 104, 0.1);
+  }
+  .contrast-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(26, 26, 46, 0.4);
+    border-bottom: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .contrast-header span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #e6c068;
+  }
+  .contrast-row {
+    display: flex;
+    border-bottom: 1px solid rgba(230, 192, 104, 0.04);
+  }
+  .contrast-row:last-child { border-bottom: none; }
+  .contrast-cell {
+    flex: 1;
+    padding: 14px 16px;
+  }
+  .contrast-cell:first-child {
+    border-right: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .contrast-cell-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+  }
+  .contrast-cell-label.common { color: #e66868; }
+  .contrast-cell-label.pauline { color: #68e6a0; }
+  .contrast-cell-text {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: #a09888;
+  }
+
+  /* Section Labels */
+  .section {
+    text-align: center;
+    padding: 24px 0 12px;
+  }
+  .section-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    padding: 5px 14px;
+    border-radius: 4px;
+    display: inline-block;
+    color: #e6c068;
+    background: rgba(230, 192, 104, 0.06);
+    border: 1px solid rgba(230, 192, 104, 0.12);
+  }
+  .section-label.green {
+    color: #68e6a0;
+    background: rgba(104, 230, 160, 0.06);
+    border-color: rgba(104, 230, 160, 0.12);
+  }
+  .section-label.red {
+    color: #e66868;
+    background: rgba(230, 104, 104, 0.06);
+    border-color: rgba(230, 104, 104, 0.12);
+  }
+  .section-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    color: #606058;
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* Node Cards */
+  .node {
+    border-radius: 10px;
+    padding: 18px 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1.5px solid;
+  }
+  .node.gold {
+    background: rgba(26, 26, 46, 0.8);
+    border-color: rgba(230, 192, 104, 0.25);
+  }
+  .node.gold.active {
+    background: #1a1a2e;
+    border-color: #e6c068;
+    box-shadow: 0 0 30px rgba(230, 192, 104, 0.12), 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .node.hinge {
+    background: rgba(45, 24, 16, 0.8);
+    border-color: rgba(230, 192, 104, 0.25);
+    box-shadow: 0 0 20px rgba(230, 192, 104, 0.06), 0 2px 10px rgba(0,0,0,0.2);
+  }
+  .node.hinge.active {
+    background: #2d1810;
+    border-color: #e6c068;
+    box-shadow: 0 0 30px rgba(230, 192, 104, 0.12), 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .node.green {
+    background: rgba(13, 40, 24, 0.8);
+    border-color: rgba(104, 230, 160, 0.25);
+  }
+  .node.green.active {
+    background: #0d2818;
+    border-color: #68e6a0;
+    box-shadow: 0 0 30px rgba(104, 230, 160, 0.12), 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .node.red {
+    background: rgba(46, 26, 26, 0.8);
+    border-color: rgba(230, 104, 104, 0.25);
+  }
+  .node.red.active {
+    background: #2e1a1a;
+    border-color: #e66868;
+    box-shadow: 0 0 30px rgba(230, 104, 104, 0.12), 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .node.active { transform: scale(1.02); }
+
+  .hinge-badge {
+    position: absolute;
+    top: -10px; right: 16px;
+    background: #e6c068;
+    color: #1a1a2e;
+    font-size: 9px; font-weight: 800;
+    letter-spacing: 1.5px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .node-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .node.active .node-header { margin-bottom: 10px; }
+
+  .node-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300;
+    line-height: 1;
+    opacity: 0.5;
+  }
+  .gold .node-number, .hinge .node-number { color: #e6c068; }
+  .green .node-number { color: #68e6a0; }
+  .red .node-number { color: #e66868; }
+
+  .node-title {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0;
+  }
+  .gold .node-title, .hinge .node-title { color: #e6c068; }
+  .green .node-title { color: #68e6a0; }
+  .red .node-title { color: #e66868; }
+
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+  }
+  .gold .node-verse, .hinge .node-verse { color: rgba(230, 192, 104, 0.56); }
+  .green .node-verse { color: rgba(104, 230, 160, 0.56); }
+  .red .node-verse { color: rgba(230, 104, 104, 0.56); }
+
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; line-height: 1.6;
+    color: #d4c5a0;
+    margin: 8px 0;
+    font-style: italic;
+    border-left: 2px solid rgba(230, 192, 104, 0.25);
+    padding-left: 14px;
+    display: none;
+  }
+  .green .node-scripture { border-left-color: rgba(104, 230, 160, 0.25); }
+  .red .node-scripture { border-left-color: rgba(230, 104, 104, 0.25); }
+  .node.active .node-scripture { display: block; }
+
+  .node-summary {
+    font-size: 13.5px; line-height: 1.65;
+    color: #b8b0a0;
+    margin: 8px 0 0 0;
+    display: none;
+  }
+  .green .node-summary { color: #a0c4b0; }
+  .red .node-summary { color: #c0a0a0; }
+  .node.active .node-summary { display: block; }
+
+  .node-tap {
+    font-size: 12px;
+    color: #888070;
+    margin-left: 38px;
+  }
+  .node.active .node-tap { display: none; }
+
+  /* Arrows */
+  .arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0;
+  }
+  .arrow-line {
+    width: 1.5px;
+    background: linear-gradient(to bottom, rgba(230, 192, 104, 0.37), rgba(230, 192, 104, 0.19));
+  }
+  .arrow-label {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    color: rgba(230, 192, 104, 0.5);
+    padding: 2px 0;
+  }
+  .arrow-head {
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid rgba(230, 192, 104, 0.31);
+  }
+  .arrow.green .arrow-line { background: linear-gradient(to bottom, rgba(104, 230, 160, 0.37), rgba(104, 230, 160, 0.19)); }
+  .arrow.green .arrow-head { border-top-color: rgba(104, 230, 160, 0.31); }
+  .arrow.green .arrow-label { color: rgba(104, 230, 160, 0.5); }
+
+  /* Callout */
+  .callout {
+    margin: 28px 0;
+    padding: 18px 20px;
+    background: #1a1a2e;
+    border: 1px solid rgba(230, 192, 104, 0.19);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .callout-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #e6c068;
+    font-style: italic;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .callout-ref {
+    font-size: 11px;
+    color: #888070;
+    letter-spacing: 1.5px;
+  }
+
+  /* Cross-reference link */
+  .crossref {
+    display: block;
+    text-align: center;
+    margin: 24px 0;
+    padding: 14px 20px;
+    border: 1px solid rgba(230, 192, 104, 0.1);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: rgba(230, 192, 104, 0.02);
+  }
+  .crossref:hover {
+    background: rgba(230, 192, 104, 0.05);
+    border-color: rgba(230, 192, 104, 0.2);
+  }
+  .crossref-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(230, 192, 104, 0.4);
+    margin-bottom: 4px;
+  }
+  .crossref-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #e6c068;
+    font-style: italic;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #888070;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .footer-line {
+    width: 20px; height: 1px;
+    background: rgba(230, 192, 104, 0.25);
+    margin: 0 auto 14px;
+  }
+  .footer a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #605850;
+    text-decoration: none;
+  }
+  .footer a:hover { color: #e6c068; }
+
+  /* === MOBILE READABILITY FIXES === */
+  @media (max-width: 600px) {
+
+    .header p {
+      font-size: 17px;
+      color: #a89a80;
+    }
+
+    .contrast-cell-text {
+      font-size: 14px;
+      color: #b0a898;
+    }
+    .contrast-cell-label {
+      font-size: 10px;
+    }
+
+    .section-sub {
+      font-size: 14px;
+      color: #8a8278;
+    }
+    .section-label {
+      font-size: 10px;
+    }
+
+    .node-title {
+      font-size: 13px;
+    }
+    .node-verse {
+      font-size: 15px;
+    }
+    .node-scripture {
+      font-size: 18px;
+      color: #ddd0b4;
+    }
+    .node-summary {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .node-tap {
+      font-size: 13px;
+      color: #8a8278;
+    }
+
+    .callout-text {
+      font-size: 19px;
+    }
+    .callout-ref {
+      font-size: 12px;
+      color: #8a8278;
+    }
+
+    .crossref-title {
+      font-size: 18px;
+    }
+    .crossref-label {
+      font-size: 10px;
+    }
+
+    .metaphor-key-text {
+      font-size: 14px;
+      color: #b0a898;
+    }
+    .metaphor-key-label {
+      font-size: 10px;
+    }
+
+    .footer p {
+      font-size: 17px;
+      color: #a09080;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>BAPTISM</h1>
+    <div class="header-line"></div>
+    <p>Burying a Dead Man</p>
+  </div>
+
+  <!-- Metaphor Key -->
+  <div class="metaphor-key" id="metaphor-key">
+    <div class="metaphor-key-toggle" onclick="document.getElementById('metaphor-key').classList.toggle('open')">
+      <span class="metaphor-key-label">METAPHOR KEY</span>
+      <span class="metaphor-key-arrow">▼</span>
+    </div>
+    <div class="metaphor-key-content">
+      <div class="metaphor-key-item">
+        <span class="metaphor-key-icon">🚲</span>
+        <span class="metaphor-key-text"><em>Bicycle</em> — self-effort. You pedal, you steer, you produce the motion. Baptism as something <em>you</em> are doing for God.</span>
+      </div>
+      <div class="metaphor-key-item">
+        <span class="metaphor-key-icon">🚗</span>
+        <span class="metaphor-key-text"><em>Self-driving car</em> — Christ's life operating through you. Baptism as entering into what <em>God has already done</em>.</span>
+      </div>
+      <a href="two-operating-systems-flowchart.html" class="metaphor-key-link">SEE: TWO OPERATING SYSTEMS →</a>
+    </div>
+  </div>
+
+  <!-- Contrast: Common vs Pauline -->
+  <div class="contrast-box">
+    <div class="contrast-header">
+      <span>TWO VIEWS OF BAPTISM</span>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-cell">
+        <div class="contrast-cell-label common">COMMON VIEW</div>
+        <div class="contrast-cell-text">A public declaration of personal faith</div>
+      </div>
+      <div class="contrast-cell">
+        <div class="contrast-cell-label pauline">PAUL'S VIEW</div>
+        <div class="contrast-cell-text">An enacted identification with an accomplished death</div>
+      </div>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-cell">
+        <div class="contrast-cell-label common">YOU ARE SAYING</div>
+        <div class="contrast-cell-text">"I have decided to follow Jesus"</div>
+      </div>
+      <div class="contrast-cell">
+        <div class="contrast-cell-label pauline">YOU ARE ENTERING</div>
+        <div class="contrast-cell-text">"I was crucified with Christ — and I am reckoning it true"</div>
+      </div>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-cell">
+        <div class="contrast-cell-label common">THE OLD MAN IS</div>
+        <div class="contrast-cell-text">Still subjectively alive — being drowned by commitment</div>
+      </div>
+      <div class="contrast-cell">
+        <div class="contrast-cell-label pauline">THE OLD MAN IS</div>
+        <div class="contrast-cell-text">Already crucified — being buried because he is dead</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: The Problem -->
+  <div class="section">
+    <span class="section-label red">THE PROBLEM</span>
+    <div class="section-sub">What most baptism classes miss</div>
+  </div>
+
+  <div id="problem-flow"></div>
+
+  <!-- SECTION: The Basis -->
+  <div class="section">
+    <span class="section-label">THE BASIS</span>
+    <div class="section-sub">What must be seen before the water</div>
+  </div>
+
+  <div id="basis-flow"></div>
+
+  <!-- Callout -->
+  <div class="callout">
+    <div class="callout-text">"Therefore we were buried with Him through baptism into death, that just as Christ was raised from the dead by the glory of the Father, even so we also should walk in newness of life."</div>
+    <div class="callout-ref">ROMANS 6:4</div>
+  </div>
+
+  <!-- Nee Illustration -->
+  <div class="callout" style="border-color: rgba(230, 192, 104, 0.12); background: rgba(26, 26, 46, 0.5);">
+    <div class="callout-text" style="font-size: 16px; color: #d4c5a0;">A wife would never bury her husband if she believed there was even a hint of life left in him. You only bury the dead when it is beyond doubt that they are dead.</div>
+    <div class="callout-text" style="font-size: 15px; color: #a09888; margin-top: 8px;">Baptism is the same. You do not go into the water hoping to finish something off. You go in when you have seen — beyond doubt — that the old man <em style="color:#e6c068; font-style:normal;">was</em> crucified.</div>
+    <div class="callout-ref">WATCHMAN NEE</div>
+  </div>
+
+  <!-- SECTION: The Meaning -->
+  <div class="section">
+    <span class="section-label green">THE ENACTMENT</span>
+    <div class="section-sub">What baptism actually does</div>
+  </div>
+
+  <div id="enactment-flow"></div>
+
+  <!-- Cross-reference to Romans 6 -->
+  <a href="romans6-flowchart.html" class="crossref">
+    <div class="crossref-label">COMPANION FIGURE</div>
+    <div class="crossref-title">Romans 6 — The Logic of Freedom</div>
+  </a>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>You do not go under the water to kill the old man.<br>You go under because he is already dead.<br>The water is a grave, not an execution.</p>
+    <div class="footer-line"></div>
+    <a href="index.html">← THE ETERNAL THREAD</a>
+  </div>
+
+</div>
+
+<script>
+const problemNodes = [
+  {
+    num: 1, title: "THE USUAL TEACHING", verse: "Common practice", cls: "red",
+    scripture: "Baptism is taught as a step of obedience, a public testimony, a declaration that you have decided to follow Christ.",
+    summary: "This is not wrong in itself — but it is drastically incomplete. It stops at the surface and never reaches what Paul says baptism actually means. The candidate is taught what to do but never shown what has already been done."
+  },
+  {
+    num: 2, title: "THE MISSING REVELATION", verse: "Romans 6:6", cls: "red",
+    scripture: "Our old man was crucified with Him, that the body of sin might be done away with, that we should no longer be slaves of sin.",
+    summary: "This verse is almost never unpacked in baptism preparation. Yet it is the entire basis of what the water signifies. Without seeing that the old man was already crucified — past tense, accomplished fact — the person being baptised does not know what they are burying. They go under the water to kill what is already dead. That is the bicycle: I am doing this. I am committing. I am making this happen."
+  },
+  {
+    num: 3, title: "THE RESULT", verse: "The subjective gap", cls: "red",
+    scripture: "They come up from the water with the old man still subjectively alive — because they were never told he was objectively dead.",
+    summary: "The baptism becomes a memory, a photo, a milestone. Within weeks the old patterns reassert themselves — and the person has no theological framework for understanding why. They assume they didn't commit hard enough. They pedal harder. The bicycle cannot get them where only the car can take them."
+  }
+];
+
+const basisNodes = [
+  {
+    num: 1, title: "THE ACCOMPLISHED FACT", verse: "Romans 6:6", cls: "gold",
+    scripture: "Our old man was crucified with Him.",
+    summary: "This is not future. Not conditional. Not aspirational. It happened when Christ died. Your old man — the entire Adamic person you were by birth — was included in His death. This is positional truth: something true of you in Christ before you ever believed it."
+  },
+  {
+    num: 2, title: "THE PRINCIPLE OF DEATH", verse: "Romans 6:7", cls: "gold",
+    scripture: "For he who has died has been freed from sin.",
+    summary: "Death severs every legal claim. A dead man owes nothing. Sin has no jurisdiction over a corpse. This is your position — not your feeling, not your experience — your legal standing before God."
+  },
+  {
+    num: 3, title: "THE RECKONING", verse: "Romans 6:11", cls: "hinge", hinge: true,
+    scripture: "Likewise you also, reckon yourselves to be dead indeed to sin, but alive to God in Christ Jesus our Lord.",
+    summary: "Here is the hinge. Reckoning is not making something true — it is counting as true what already is. This must be seen before the water has any content. Baptism without reckoning is ritual. Baptism with reckoning is revelation acted out. This is where you step out of the bicycle and into the car — not by effort but by sight."
+  }
+];
+
+const enactmentNodes = [
+  {
+    num: 1, title: "BURIED WITH HIM", verse: "Romans 6:4a", cls: "green",
+    scripture: "Therefore we were buried with Him through baptism into death.",
+    summary: "You bury dead people, not living ones. The going under is not an act of drowning the old man — it is the funeral of someone already executed at the cross. You are not killing him. You are testifying: he is dead. God did this. I am entering into it."
+  },
+  {
+    num: 2, title: "INTO DEATH", verse: "Romans 6:3", cls: "green",
+    scripture: "Do you not know that as many of us as were baptised into Christ Jesus were baptised into His death?",
+    summary: "Baptised into His death — not into a programme, a church, or a lifestyle. Into the specific death He died. The water represents the grave of Christ, and you are going in with Him. This is union, not imitation."
+  },
+  {
+    num: 3, title: "RAISED IN NEWNESS", verse: "Romans 6:4b", cls: "green",
+    scripture: "That just as Christ was raised from the dead by the glory of the Father, even so we also should walk in newness of life.",
+    summary: "Coming up out of the water is not a fresh start powered by your own resolve. It is emergence into resurrection life — His life, not yours. The newness is not new effort. It is new source. The self-driving car on the other side of the grave."
+  },
+  {
+    num: 4, title: "CLOTHED WITH CHRIST", verse: "Galatians 3:27", cls: "green",
+    scripture: "For as many of you as were baptised into Christ have put on Christ.",
+    summary: "Putting on Christ is not adding Him to who you already are. It is the revelation that who you were has died, and who you now are is found entirely in Him. You come up from the water wearing Him."
+  }
+];
+
+const arrowLabelsMap = {
+  problem: { 1: "", 2: "" },
+  basis: { 1: "", 2: "THEREFORE" },
+  enactment: { 1: "", 2: "", 3: "" }
+};
+
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls}`;
+  div.onclick = () => {
+    const isActive = div.classList.contains('active');
+    document.querySelectorAll(`.node.${n.cls}`).forEach(el => el.classList.remove('active'));
+    if (!isActive) div.classList.add('active');
+  };
+
+  let html = '';
+  if (n.hinge) html += '<div class="hinge-badge">HINGE POINT</div>';
+
+  html += '<div class="node-header">';
+  html += `<span class="node-number">${n.num}</span>`;
+  html += '<div>';
+  html += `<h3 class="node-title">${n.title}</h3>`;
+  html += `<span class="node-verse">${n.verse}</span>`;
+  html += '</div></div>';
+
+  html += `<div class="node-scripture">"${n.scripture}"</div>`;
+  html += `<div class="node-summary">${n.summary}</div>`;
+  html += `<div class="node-tap">Tap to expand</div>`;
+
+  div.innerHTML = html;
+  return div;
+}
+
+function buildArrow(label, color) {
+  const div = document.createElement('div');
+  div.className = `arrow${color ? ' ' + color : ''}`;
+  const lineH = label ? '16px' : '22px';
+  let html = `<div class="arrow-line" style="height:${lineH}"></div>`;
+  if (label) html += `<span class="arrow-label">${label}</span>`;
+  html += '<div class="arrow-head"></div>';
+  div.innerHTML = html;
+  return div;
+}
+
+// Build problem flow
+const problemFlow = document.getElementById('problem-flow');
+problemNodes.forEach((n, i) => {
+  problemFlow.appendChild(buildNode(n));
+  if (i < problemNodes.length - 1) {
+    problemFlow.appendChild(buildArrow(arrowLabelsMap.problem[i + 1], ''));
+  }
+});
+
+// Build basis flow
+const basisFlow = document.getElementById('basis-flow');
+basisNodes.forEach((n, i) => {
+  basisFlow.appendChild(buildNode(n));
+  if (i < basisNodes.length - 1) {
+    basisFlow.appendChild(buildArrow(arrowLabelsMap.basis[i + 1], ''));
+  }
+});
+
+// Build enactment flow
+const enactmentFlow = document.getElementById('enactment-flow');
+enactmentNodes.forEach((n, i) => {
+  enactmentFlow.appendChild(buildNode(n));
+  if (i < enactmentNodes.length - 1) {
+    enactmentFlow.appendChild(buildArrow(arrowLabelsMap.enactment[i + 1], 'green'));
+  }
+});
+</script>
+</body>
+</html>
