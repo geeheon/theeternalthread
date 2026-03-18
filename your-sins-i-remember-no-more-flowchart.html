@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="nav-widget.css">
+<link rel="stylesheet" href="audio-widget.css">
+<script defer src="nav-widget.js"></script>
+<script defer src="audio-widget.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Your Sins I Remember No More — The Eternal Thread</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: #0f0f17;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .container { max-width: 460px; margin: 0 auto; padding: 50px 20px 60px; }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 32px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 300;
+    color: #d4a0f0;
+    letter-spacing: 2px;
+    line-height: 1.3;
+  }
+  .header-line {
+    width: 50px; height: 1px;
+    background: linear-gradient(to right, transparent, #d4a0f040, transparent);
+    margin: 14px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; color: #888070; font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* Intro quote */
+  .intro-quote {
+    text-align: center;
+    margin-bottom: 28px;
+    padding: 0 10px;
+  }
+  .intro-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #a090b0;
+    line-height: 1.7;
+  }
+  .intro-quote .ref {
+    font-size: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    color: #706070;
+    letter-spacing: 1px;
+    margin-top: 6px;
+    display: block;
+  }
+
+  /* Section banners */
+  .section-banner {
+    text-align: center;
+    padding: 22px 0 12px;
+  }
+  .section-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 3px;
+    padding: 5px 14px; border-radius: 4px;
+    display: inline-block;
+    color: #d4a0f0;
+    background: rgba(212,160,240,0.06);
+    border: 1px solid rgba(212,160,240,0.12);
+  }
+  .section-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px; color: #706068; font-style: italic;
+    margin-top: 4px;
+  }
+
+  /* Nodes */
+  .node {
+    border-radius: 10px; padding: 18px 22px;
+    cursor: pointer; transition: all 0.3s ease;
+    position: relative;
+    border: 1.5px solid rgba(212,160,240,0.2);
+    background: rgba(28,20,36,0.8);
+    margin-bottom: 0;
+  }
+  .node:hover { border-color: rgba(212,160,240,0.35); }
+  .node.active {
+    transform: scale(1.02);
+    background: #1c1428;
+    border-color: #d4a0f0;
+    box-shadow: 0 0 30px rgba(212,160,240,0.08), 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  .node-header { display: flex; align-items: baseline; gap: 10px; }
+  .node-number {
+    font-size: 11px; font-weight: 800; color: #d4a0f060;
+    min-width: 20px;
+  }
+  .node-title {
+    font-size: 12px; font-weight: 800;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: #d4a0f0;
+  }
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px; color: #908080;
+    margin-top: 2px;
+  }
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #c0b0d0;
+    line-height: 1.6;
+    margin-top: 14px;
+    padding-left: 14px;
+    border-left: 2px solid rgba(212,160,240,0.2);
+    display: none;
+  }
+  .node.active .node-scripture { display: block; }
+  .node-summary {
+    font-size: 13.5px; color: #a89888;
+    line-height: 1.65;
+    margin-top: 12px;
+    display: none;
+  }
+  .node.active .node-summary { display: block; }
+  .node-tap {
+    font-size: 10px; color: #605050;
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-top: 10px;
+    font-weight: 700;
+  }
+  .node.active .node-tap { display: none; }
+
+  /* Badge */
+  .badge {
+    font-size: 8px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: #d4a0f0;
+    background: rgba(212,160,240,0.08);
+    border: 1px solid rgba(212,160,240,0.15);
+    padding: 3px 10px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
+  /* Arrows */
+  .arrow {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 4px 0;
+  }
+  .arrow-line {
+    width: 1.5px; height: 22px;
+    background: rgba(212,160,240,0.15);
+  }
+  .arrow-label {
+    font-size: 8px; font-weight: 800;
+    letter-spacing: 2px;
+    color: #d4a0f050;
+    padding: 2px 0;
+  }
+  .arrow-head {
+    width: 0; height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid rgba(212,160,240,0.2);
+  }
+
+  /* Chronology table */
+  .chrono-table {
+    margin: 20px 0;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .chrono-table th {
+    font-size: 8px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: #d4a0f060;
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(212,160,240,0.1);
+  }
+  .chrono-table td {
+    font-size: 13px; color: #a89888;
+    padding: 7px 10px;
+    border-bottom: 1px solid rgba(212,160,240,0.04);
+    line-height: 1.4;
+  }
+  .chrono-table td.ref {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: #807080;
+  }
+  .chrono-table td.years {
+    font-weight: 700;
+    color: #d4a0f0;
+    text-align: right;
+    font-size: 14px;
+  }
+  .chrono-table tr.total td {
+    border-top: 1px solid rgba(212,160,240,0.2);
+    color: #d4a0f0;
+    font-weight: 800;
+    padding-top: 10px;
+  }
+  .chrono-table tr.strikethrough td {
+    text-decoration: line-through;
+    text-decoration-color: rgba(212,160,240,0.3);
+    opacity: 0.5;
+  }
+
+  /* Equation display */
+  .equation {
+    text-align: center;
+    padding: 24px 0;
+    margin: 8px 0;
+  }
+  .equation .line {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: #a89888;
+    line-height: 2;
+  }
+  .equation .highlight {
+    color: #d4a0f0;
+    font-weight: 700;
+  }
+  .equation .struck {
+    text-decoration: line-through;
+    text-decoration-color: rgba(212,160,240,0.4);
+    opacity: 0.5;
+  }
+  .equation .result {
+    font-size: 20px;
+    font-weight: 800;
+    color: #d4a0f0;
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+
+  /* Prose block */
+  .prose {
+    font-size: 13.5px;
+    color: #a89888;
+    line-height: 1.65;
+    margin: 12px 0;
+    padding: 0 4px;
+  }
+  .prose em {
+    font-style: italic;
+    color: #b8a8c0;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 36px; text-align: center; padding: 20px 0;
+    border-top: 1px solid rgba(212,160,240,0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; color: #605068; font-style: italic;
+    line-height: 1.7;
+  }
+  .footer a {
+    color: #d4a0f0;
+    text-decoration: none;
+    font-style: normal;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: inline-block;
+    margin-top: 12px;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+  }
+  .footer a:hover { opacity: 0.7; }
+  .footer .see-also {
+    margin-top: 14px;
+    font-size: 13px;
+    color: #405048;
+  }
+  .footer .see-also a {
+    color: #d4a0f0;
+    opacity: 0.5;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0;
+    font-style: italic;
+    margin-top: 0;
+  }
+
+  /* === MOBILE READABILITY === */
+  @media (max-width: 600px) {
+    .header p { font-size: 17px; color: #8a8090; }
+    .intro-quote p { font-size: 18px; }
+    .intro-quote .ref { font-size: 11px; }
+    .node-scripture { font-size: 18px; }
+    .node-summary { font-size: 15px; }
+    .node-tap { font-size: 13px; }
+    .node-verse { color: #a09090; }
+    .prose { font-size: 15px; }
+    .chrono-table td { font-size: 14px; }
+    .equation .line { font-size: 15px; }
+    .footer p { font-size: 16px; color: #706878; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>YOUR SINS I<br>REMEMBER NO MORE</h1>
+    <div class="header-line"></div>
+    <p>How God writes history — with the failures already removed</p>
+  </div>
+
+  <div class="intro-quote">
+    <p>"I, even I, am He who blots out your transgressions for My own sake; and I will not remember your sins."</p>
+    <span class="ref">ISAIAH 43:25</span>
+  </div>
+
+  <!-- ===== SECTION 1: THE DISCREPANCY ===== -->
+
+  <div class="section-banner">
+    <span class="section-label">THE TWO NUMBERS</span>
+    <div class="section-sub">A discrepancy hidden in plain sight</div>
+  </div>
+
+  <div class="node" data-group="a" onclick="toggleNode(this)">
+    <div class="node-header">
+      <span class="node-number">01</span>
+      <div>
+        <h3 class="node-title">GOD'S COUNT</h3>
+        <span class="node-verse">1 Kings 6:1</span>
+      </div>
+    </div>
+    <div class="node-scripture">"In the four hundred and eightieth year after the children of Israel had come out of the land of Egypt, in the fourth year of Solomon's reign over Israel… he began to build the house of the LORD."</div>
+    <div class="node-summary">This is the Old Testament record — the divine chronicle. It states plainly that 480 years elapsed from the Exodus to the commencement of Solomon's temple. It gives the figure to the nearest month. It is precise, deliberate, and written as historical fact. This is how God counts the years.</div>
+    <div class="node-tap">Tap to expand</div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line"></div><span class="arrow-label">BUT</span><div class="arrow-head"></div></div>
+
+  <div class="node" data-group="a" onclick="toggleNode(this)">
+    <div class="node-header">
+      <span class="node-number">02</span>
+      <div>
+        <h3 class="node-title">MAN'S COUNT</h3>
+        <span class="node-verse">Acts 13:17–22</span>
+      </div>
+    </div>
+    <div class="node-scripture">"He gave them judges for about four hundred and fifty years, until Samuel the prophet. And afterward they asked for a king; and God gave them Saul… for forty years."</div>
+    <div class="node-summary">Paul, preaching in Antioch, recounts the full history as the Jews knew it. When you add up his figures — 40 years wilderness, 450 years of judges, 40 years Saul, 40 years David, and 3 years of Solomon before the temple — the total comes to 573 years. That is 93 years more than 1 Kings 6:1. Paul was not mistaken. He was counting differently. He was counting everything — including the years of failure.</div>
+    <div class="node-tap">Tap to expand</div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line"></div><span class="arrow-label">WHICH LEADS TO</span><div class="arrow-head"></div></div>
+
+  <div class="node" data-group="a" onclick="toggleNode(this)">
+    <div class="node-header">
+      <span class="node-number">03</span>
+      <div>
+        <h3 class="node-title">THE QUESTION</h3>
+        <span class="node-verse">573 − 480 = 93</span>
+      </div>
+    </div>
+    <div class="node-scripture">"I will forgive their iniquity, and their sin I will remember no more."</div>
+    <div class="node-summary">Where did 93 years go? If both counts are true — if Paul's 573 years is the full historical record, and Solomon's 480 years is the divine record — then God has deliberately subtracted 93 years from His count. The question is: which 93 years? And why?</div>
+    <div class="node-tap">Tap to expand</div>
+  </div>
+
+  <!-- ===== SECTION 2: THE 93 YEARS ===== -->
+
+  <div class="section-banner">
+    <span class="section-label">THE MISSING YEARS</span>
+    <div class="section-sub">Five periods of bondage — exactly 93 years</div>
+  </div>
+
+  <div class="prose">The book of Judges records a repeated cycle: Israel turns from God, God delivers them into the hands of a foreign nation, they cry out, and God raises a deliverer. Between the deliverances, there are periods of bondage — years when Israel was subject to foreign powers, years when they had turned away from the God who brought them out of Egypt.</div>
+
+  <div class="prose">Five of these periods of servitude are recorded with exact durations:</div>
+
+  <table class="chrono-table">
+    <tr>
+      <th>Oppressor</th>
+      <th>Reference</th>
+      <th style="text-align:right">Years</th>
+    </tr>
+    <tr class="strikethrough">
+      <td>Mesopotamia</td>
+      <td class="ref">Judges 3:8</td>
+      <td class="years">8</td>
+    </tr>
+    <tr class="strikethrough">
+      <td>Moab</td>
+      <td class="ref">Judges 3:14</td>
+      <td class="years">18</td>
+    </tr>
+    <tr class="strikethrough">
+      <td>Canaan</td>
+      <td class="ref">Judges 4:2–3</td>
+      <td class="years">20</td>
+    </tr>
+    <tr class="strikethrough">
+      <td>Midian</td>
+      <td class="ref">Judges 6:1</td>
+      <td class="years">7</td>
+    </tr>
+    <tr class="strikethrough">
+      <td>Philistines</td>
+      <td class="ref">Judges 13:1</td>
+      <td class="years">40</td>
+    </tr>
+    <tr class="total">
+      <td colspan="2">Total bondage years</td>
+      <td class="years">93</td>
+    </tr>
+  </table>
+
+  <div class="equation">
+    <div class="line">Paul's full count: <span class="highlight">573 years</span></div>
+    <div class="line">Minus bondage years: <span class="struck">93 years</span></div>
+    <div class="result">= 480 years</div>
+    <div class="line" style="margin-top: 4px; font-size: 11px; color: #706068;">Exactly what 1 Kings 6:1 records</div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line"></div><span class="arrow-label">THEREFORE</span><div class="arrow-head"></div></div>
+
+  <div class="node" data-group="b" onclick="toggleNode(this)">
+    <div class="badge">THE OMISSION PRINCIPLE</div>
+    <div class="node-header">
+      <span class="node-number">04</span>
+      <div>
+        <h3 class="node-title">GOD BLOTTED THEM OUT</h3>
+        <span class="node-verse">1 Kings 6:1 · Isaiah 43:25</span>
+      </div>
+    </div>
+    <div class="node-scripture">"I, even I, am He who blots out your transgressions for My own sake."</div>
+    <div class="node-summary">The 93 missing years are the exact total of five periods when Israel was in bondage to foreign nations — the years of their failure, their rebellion, their turning away. And God simply removed them from His record. He didn't annotate them. He didn't footnote them. He subtracted them, as though they had never happened. The writer of 1 Kings, recording the commencement of the house where atonement would be made, wrote the timeline the way God sees it — with the sin already gone.</div>
+    <div class="node-tap">Tap to expand</div>
+  </div>
+
+  <!-- ===== SECTION 3: THE BROADER WITNESS ===== -->
+
+  <div class="section-banner">
+    <span class="section-label">THE BROADER WITNESS</span>
+    <div class="section-sub">This is not an isolated case — it is God's nature</div>
+  </div>
+
+  <div class="node" data-group="c" onclick="toggleNode(this)">
+    <div class="node-header">
+      <span class="node-number">05</span>
+      <div>
+        <h3 class="node-title">BLOTTED OUT</h3>
+        <span class="node-verse">Isaiah 43:25 · Isaiah 44:22</span>
+      </div>
+    </div>
+    <div class="node-scripture">"I have blotted out, like a thick cloud, your transgressions, and like a cloud, your sins. Return to Me, for I have redeemed you."</div>
+    <div class="node-summary">The language is of erasure — not forgiveness as we tend to think of it (a grudging willingness to overlook), but a complete removal from the record. Like a cloud that dissolves and leaves no trace in the sky. The Hebrew word <em>machah</em> means to wipe clean, to obliterate. God does not merely pardon the record. He destroys it.</div>
+    <div class="node-tap">Tap to expand</div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line" style="height:16px"></div><div class="arrow-head"></div></div>
+
+  <div class="node" data-group="c" onclick="toggleNode(this)">
+    <div class="node-header">
+      <span class="node-number">06</span>
+      <div>
+        <h3 class="node-title">REMOVED</h3>
+        <span class="node-verse">Psalm 103:12</span>
+      </div>
+    </div>
+    <div class="node-scripture">"As far as the east is from the west, so far has He removed our transgressions from us."</div>
+    <div class="node-summary">East and west never meet. It is not a finite distance — it is an infinite one. This is not a statement about how far God has thrown our sin. It is a statement about how completely He has separated it from us. The sin and the sinner are no longer in the same place. In His record, the 93 years are not stored in an archive. They are gone.</div>
+    <div class="node-tap">Tap to expand</div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line" style="height:16px"></div><div class="arrow-head"></div></div>
+
+  <div class="node" data-group="c" onclick="toggleNode(this)">
+    <div class="node-header">
+      <span class="node-number">07</span>
+      <div>
+        <h3 class="node-title">CAST INTO THE DEPTHS</h3>
+        <span class="node-verse">Micah 7:19</span>
+      </div>
+    </div>
+    <div class="node-scripture">"You will cast all our sins into the depths of the sea."</div>
+    <div class="node-summary">The sea floor — unreachable, unrecoverable, unsearchable. This is not a holding cell. It is a disposal. Corrie ten Boom reportedly said that God puts our sins in the deepest sea and then puts up a sign: "No Fishing." The image is of finality. What is cast there cannot be retrieved, even by God Himself — because He has chosen not to retrieve it.</div>
+    <div class="node-tap">Tap to expand</div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line" style="height:16px"></div><div class="arrow-head"></div></div>
+
+  <div class="node" data-group="c" onclick="toggleNode(this)">
+    <div class="node-header">
+      <span class="node-number">08</span>
+      <div>
+        <h3 class="node-title">BEHIND HIS BACK</h3>
+        <span class="node-verse">Isaiah 38:17</span>
+      </div>
+    </div>
+    <div class="node-scripture">"You have cast all my sins behind Your back."</div>
+    <div class="node-summary">Behind God's back — the one place in the universe that God does not look. He is omniscient. He sees everything. But He has placed our sins in the one location He has chosen never to see. This is not ignorance. It is a sovereign act of will. He knows what was there. He has decided not to look at it. The 93 years existed. He chose not to count them.</div>
+    <div class="node-tap">Tap to expand</div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line" style="height:16px"></div><div class="arrow-head"></div></div>
+
+  <div class="node" data-group="c" onclick="toggleNode(this)">
+    <div class="node-header">
+      <span class="node-number">09</span>
+      <div>
+        <h3 class="node-title">REMEMBERED NO MORE</h3>
+        <span class="node-verse">Jeremiah 31:34 · Hebrews 8:12 · Hebrews 10:17</span>
+      </div>
+    </div>
+    <div class="node-scripture">"For I will forgive their iniquity, and their sin I will remember no more."</div>
+    <div class="node-summary">This is the promise of the new covenant — quoted three times across Jeremiah and Hebrews to make sure we don't miss it. "I will remember no more." Not "I will try to forget." Not "I will choose to overlook." He will <em>not remember</em>. For an omniscient God, this is not a failure of memory. It is the most deliberate, costly act imaginable. And in 1 Kings 6:1, centuries before the cross, He was already doing it.</div>
+    <div class="node-tap">Tap to expand</div>
+  </div>
+
+  <!-- ===== SECTION 4: THE SCAPEGOAT ===== -->
+
+  <div class="section-banner">
+    <span class="section-label">THE TYPE</span>
+    <div class="section-sub">Leviticus already pictured this</div>
+  </div>
+
+  <div class="node" data-group="d" onclick="toggleNode(this)">
+    <div class="node-header">
+      <span class="node-number">10</span>
+      <div>
+        <h3 class="node-title">THE SCAPEGOAT</h3>
+        <span class="node-verse">Leviticus 16:21–22</span>
+      </div>
+    </div>
+    <div class="node-scripture">"Aaron shall lay both his hands on the head of the live goat, confess over it all the iniquities of the children of Israel… putting them on the head of the goat, and shall send it away into the wilderness by the hand of a suitable man. The goat shall bear on itself all their iniquities to an uninhabited land."</div>
+    <div class="node-summary">On the Day of Atonement, two goats were brought. One was slain — its blood dealt with the penalty of sin before God. But the second goat was sent alive into the wilderness, carrying the sins away. Gone. Into a land of separation, a land of forgetfulness. The scapegoat did not die in the camp. It disappeared. The sins it carried were not punished twice — they were <em>removed</em>. This is the picture: not only is the penalty met, but the record itself is taken away to a place from which it can never return.</div>
+    <div class="node-tap">Tap to expand</div>
+  </div>
+
+  <!-- ===== SECTION 5: THE CENTRE ===== -->
+
+  <div class="section-banner">
+    <span class="section-label">FOR HIS OWN SAKE</span>
+    <div class="section-sub">Why God does this — and it is not about us</div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line" style="height:16px"></div><div class="arrow-head"></div></div>
+
+  <div class="node" data-group="e" onclick="toggleNode(this)">
+    <div class="badge">THE CENTRE</div>
+    <div class="node-header">
+      <span class="node-number">11</span>
+      <div>
+        <h3 class="node-title">NOT ABOUT OUR COMFORT</h3>
+        <span class="node-verse">Isaiah 43:25 · Ephesians 1:4–5</span>
+      </div>
+    </div>
+    <div class="node-scripture">"I, even I, am He who blots out your transgressions for My own sake."</div>
+    <div class="node-summary">Notice the phrase: <em>for My own sake</em>. God does not blot out sin primarily to make us feel better. He does it because sin stands in the way of what He is building. He had a purpose before the foundation of the world — to have a people conformed to the image of His Son, a Bride, a Body, a corporate vessel filled with His own life. The 93 years of bondage were years when that purpose was obstructed. God removed them from His record not because Israel deserved a clean slate, but because His purpose required one. The blotting out of sin is not sentimental. It is structural. It serves the eternal purpose. He will not allow our failure to remain on the record, because it would interrupt the story He is telling — and that story is about Him, not about us.</div>
+    <div class="node-tap">Tap to expand</div>
+  </div>
+
+  <div class="arrow"><div class="arrow-line" style="height:16px"></div><div class="arrow-head"></div></div>
+
+  <div class="node" data-group="e" onclick="toggleNode(this)">
+    <div class="node-header">
+      <span class="node-number">12</span>
+      <div>
+        <h3 class="node-title">THE TEMPLE WAS THE OCCASION</h3>
+        <span class="node-verse">1 Kings 6:1</span>
+      </div>
+    </div>
+    <div class="node-scripture">"He began to build the house of the LORD."</div>
+    <div class="node-summary">It is no accident that the omission appears in the verse announcing the temple's construction. The temple is the house of atonement — the place where sin is dealt with, where blood is shed, where God meets man in mercy. The very building whose commencement date required the omission of the bondage years is the building that pictures why they could be omitted. The record that introduces the house of forgiveness is itself written from the perspective of forgiveness. God didn't wait for the temple to be built before He started counting that way. He was counting that way before the foundation was laid.</div>
+    <div class="node-tap">Tap to expand</div>
+  </div>
+
+  <div class="footer">
+    <p>God does not keep a ledger against His people.<br>He keeps a purpose for them.<br>And the purpose has no room<br>for what He has already removed.</p>
+    <p class="see-also">See also: <a href="eternal-purpose-flowchart.html">God's Eternal Purpose</a> · <a href="final-judgment-flowchart.html">Final Judgment</a></p>
+    <a href="index.html">← THE ETERNAL THREAD</a>
+  </div>
+
+</div>
+
+<script>
+function toggleNode(el) {
+  const group = el.getAttribute('data-group');
+  const wasActive = el.classList.contains('active');
+  document.querySelectorAll('.node[data-group="' + group + '"]').forEach(n => n.classList.remove('active'));
+  if (!wasActive) el.classList.add('active');
+}
+</script>
+</body>
+</html>
