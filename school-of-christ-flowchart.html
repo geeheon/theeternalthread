@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet" href="nav-widget.css">
+<link rel="stylesheet" href="audio-widget.css">
+<script defer src="nav-widget.js"></script>
+<script defer src="audio-widget.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -376,35 +380,63 @@
   }
   .burden p em { color: #c0c0d8; font-style: italic; }
 
-  /* ─── Cross-reference box ─── */
-  .cross-ref {
-    margin: 20px 0;
-    padding: 14px 18px;
+  /* ─── Metaphor Key ─── */
+  .metaphor-key {
+    margin: 0 0 24px;
     border-radius: 8px;
-    background: rgba(16, 16, 28, 0.2);
-    border: 1px dashed rgba(192, 192, 216, 0.1);
-    text-align: center;
+    border: 1px solid rgba(192, 192, 216, 0.12);
+    background: rgba(16, 16, 28, 0.3);
+    overflow: hidden;
   }
-  .cross-ref-label {
+  .metaphor-key-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    cursor: pointer;
+  }
+  .metaphor-key-label {
     font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #c0c0d8;
+  }
+  .metaphor-key-arrow {
+    font-size: 10px;
+    color: #c0c0d8;
+    opacity: 0.5;
+    transition: transform 0.2s;
+  }
+  .metaphor-key.open .metaphor-key-arrow { transform: rotate(180deg); }
+  .metaphor-key-content {
+    display: none;
+    padding: 0 16px 14px;
+  }
+  .metaphor-key.open .metaphor-key-content { display: block; }
+  .metaphor-key-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .metaphor-key-item:last-child { margin-bottom: 0; }
+  .metaphor-key-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .metaphor-key-text {
+    font-size: 13px;
+    line-height: 1.55;
+    color: #a09880;
+  }
+  .metaphor-key-text em { color: #c0c0d8; font-style: normal; }
+  .metaphor-key-link {
+    display: block;
+    margin-top: 12px;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.5px;
-    color: rgba(192, 192, 216, 0.35);
-    margin-bottom: 6px;
-  }
-  .cross-ref-text {
-    font-size: 12px;
-    color: #888898;
-    line-height: 1.6;
-  }
-  .cross-ref-text a {
-    color: #c0c0d8;
+    color: #707870;
     text-decoration: none;
-    border-bottom: 1px solid rgba(192, 192, 216, 0.2);
   }
-  .cross-ref-text a:hover {
-    border-bottom-color: #c0c0d8;
-  }
+  .metaphor-key-link:hover { color: #c0c0d8; }
 
   /* ─── Footer ─── */
   .footer {
@@ -546,13 +578,22 @@
     </div>
   </div>
 
-  <!-- Cross-reference to Two Operating Systems -->
-  <div class="cross-ref">
-    <div class="cross-ref-label">SEE ALSO</div>
-    <div class="cross-ref-text">
-      The bicycle is the self trying to imitate Christ from outside.<br>
-      The car is Christ Himself — and you have been placed inside Him.<br>
-      <a href="two-operating-systems-flowchart.html">Two Operating Systems →</a>
+  <!-- Metaphor Key -->
+  <div class="metaphor-key" id="metaphor-key">
+    <div class="metaphor-key-toggle" onclick="document.getElementById('metaphor-key').classList.toggle('open')">
+      <span class="metaphor-key-label">METAPHOR KEY</span>
+      <span class="metaphor-key-arrow">&#9660;</span>
+    </div>
+    <div class="metaphor-key-content">
+      <div class="metaphor-key-item">
+        <span class="metaphor-key-icon">&#x1F6B2;</span>
+        <span class="metaphor-key-text"><em>Bicycle</em> — self-effort. The self trying to imitate Christ from outside: outward discipline, behaviour modification, programme-driven formation. The engine is still you.</span>
+      </div>
+      <div class="metaphor-key-item">
+        <span class="metaphor-key-icon">&#x1F697;</span>
+        <span class="metaphor-key-text"><em>Car</em> — Christ Himself. You have been placed inside Him. The School of Christ teaches not <em>about</em> Him from outside, but forms Him <em>within</em> — by the Spirit, through experience.</span>
+      </div>
+      <a href="two-operating-systems-flowchart.html" class="metaphor-key-link">SEE: TWO OPERATING SYSTEMS &rarr;</a>
     </div>
   </div>
 
