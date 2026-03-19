@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="nav-widget.css">
+<link rel="stylesheet" href="audio-widget.css">
+<script defer src="nav-widget.js"></script>
+<script defer src="audio-widget.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>God and Mammon — The Impossibility of Two Masters</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: #0f0f17;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: #e6c068;
+    letter-spacing: 3px;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #e6c068, transparent);
+    margin: 8px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #888070;
+    font-style: italic;
+  }
+
+  /* Node Cards */
+  .node {
+    border-radius: 10px;
+    padding: 18px 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1.5px solid;
+  }
+  .node.gold {
+    background: rgba(26, 26, 46, 0.8);
+    border-color: rgba(230, 192, 104, 0.25);
+  }
+  .node.gold.active {
+    background: #1a1a2e;
+    border-color: #e6c068;
+    box-shadow: 0 0 30px rgba(230, 192, 104, 0.12), 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .node.hinge {
+    background: rgba(45, 24, 16, 0.8);
+    border-color: rgba(230, 192, 104, 0.25);
+    box-shadow: 0 0 20px rgba(230, 192, 104, 0.06), 0 2px 10px rgba(0,0,0,0.2);
+  }
+  .node.hinge.active {
+    background: #2d1810;
+    border-color: #e6c068;
+    box-shadow: 0 0 30px rgba(230, 192, 104, 0.12), 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .node.result-node {
+    background: rgba(13, 40, 24, 0.8);
+    border-color: rgba(104, 230, 160, 0.25);
+  }
+  .node.result-node.active {
+    background: #0d2818;
+    border-color: #68e6a0;
+    box-shadow: 0 0 30px rgba(104, 230, 160, 0.12), 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .node.warning {
+    background: rgba(46, 26, 26, 0.8);
+    border-color: rgba(230, 104, 104, 0.25);
+  }
+  .node.warning.active {
+    background: #2e1a1a;
+    border-color: #e66868;
+    box-shadow: 0 0 20px rgba(230, 104, 104, 0.1), 0 4px 16px rgba(0,0,0,0.3);
+  }
+
+  .node.active { transform: scale(1.02); }
+
+  .hinge-badge {
+    position: absolute;
+    top: -10px; right: 16px;
+    background: #e6c068;
+    color: #1a1a2e;
+    font-size: 9px; font-weight: 800;
+    letter-spacing: 1.5px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .node-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .node.active .node-header { margin-bottom: 10px; }
+
+  .node-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300;
+    line-height: 1;
+    opacity: 0.5;
+  }
+  .gold .node-number, .hinge .node-number { color: #e6c068; }
+  .result-node .node-number { color: #68e6a0; }
+  .warning .node-number { color: #e66868; }
+
+  .node-title {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0;
+  }
+  .gold .node-title, .hinge .node-title { color: #e6c068; }
+  .result-node .node-title { color: #68e6a0; }
+  .warning .node-title { color: #e66868; }
+
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+  }
+  .gold .node-verse, .hinge .node-verse { color: rgba(230, 192, 104, 0.56); }
+  .result-node .node-verse { color: rgba(104, 230, 160, 0.56); }
+  .warning .node-verse { color: rgba(230, 104, 104, 0.56); }
+
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; line-height: 1.6;
+    color: #d4c5a0;
+    margin: 8px 0;
+    font-style: italic;
+    border-left: 2px solid rgba(230, 192, 104, 0.25);
+    padding-left: 14px;
+    display: none;
+  }
+  .result-node .node-scripture { border-left-color: rgba(104, 230, 160, 0.25); }
+  .warning .node-scripture { border-left-color: rgba(230, 104, 104, 0.25); }
+  .node.active .node-scripture { display: block; }
+
+  .node-summary {
+    font-size: 13.5px; line-height: 1.65;
+    color: #b8b0a0;
+    margin: 8px 0 0 0;
+    display: none;
+  }
+  .result-node .node-summary { color: #a0c4b0; }
+  .warning .node-summary { color: #c0a0a0; }
+  .node.active .node-summary { display: block; }
+
+  .node-tap {
+    font-size: 12px;
+    color: #888070;
+    margin-left: 38px;
+  }
+  .node.active .node-tap { display: none; }
+
+  /* Arrows */
+  .arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0;
+  }
+  .arrow-line {
+    width: 1.5px;
+    background: linear-gradient(to bottom, rgba(230, 192, 104, 0.37), rgba(230, 192, 104, 0.19));
+  }
+  .arrow-label {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    color: rgba(230, 192, 104, 0.5);
+    padding: 2px 0;
+  }
+  .arrow-head {
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid rgba(230, 192, 104, 0.31);
+  }
+
+  /* Section dividers */
+  .section-divider {
+    text-align: center;
+    margin: 32px 0 24px;
+    position: relative;
+  }
+  .section-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    height: 1px;
+    background: rgba(230, 192, 104, 0.08);
+  }
+  .section-divider span {
+    position: relative;
+    background: #0f0f17;
+    padding: 0 16px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(230, 192, 104, 0.4);
+  }
+
+  /* Callout */
+  .callout {
+    margin: 32px 0;
+    padding: 18px 20px;
+    background: #1a1a2e;
+    border: 1px solid rgba(230, 192, 104, 0.19);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .callout-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #e6c068;
+    font-style: italic;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .callout-ref {
+    font-size: 11px;
+    color: #888070;
+    letter-spacing: 1.5px;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #888070;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .footer-line {
+    width: 20px; height: 1px;
+    background: rgba(230, 192, 104, 0.25);
+    margin: 0 auto;
+  }
+  .footer a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #605850;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer a:hover { color: #e6c068; }
+
+  /* === MOBILE READABILITY FIXES === */
+  @media (max-width: 600px) {
+    .header p {
+      font-size: 17px;
+      color: #a89a80;
+    }
+    .node-scripture {
+      font-size: 18px;
+    }
+    .node-summary {
+      font-size: 15px;
+    }
+    .node-tap {
+      font-size: 13px;
+    }
+    .callout-text {
+      font-size: 19px;
+    }
+    .node-verse {
+      font-size: 14px;
+    }
+    .section-divider span {
+      font-size: 10px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>GOD AND MAMMON</h1>
+    <div class="header-line"></div>
+    <p>The impossibility of two masters</p>
+  </div>
+
+  <!-- Main Flow -->
+  <div id="main-flow"></div>
+
+  <!-- Callout -->
+  <div class="callout">
+    <div class="callout-text">"With man it is impossible, but not with God. For all things are possible with God."</div>
+    <div class="callout-ref">MARK 10:27</div>
+  </div>
+
+  <!-- Conclusion nodes -->
+  <div id="conclusion-flow"></div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>The answer is never less Mammon.<br>The answer is always more Christ.</p>
+    <div class="footer-line"></div>
+    <a href="index.html">← THE ETERNAL THREAD</a>
+  </div>
+
+</div>
+
+<script>
+const mainNodes = [
+  {
+    num: 1, title: "THE ASSUMPTION", verse: "The Western Default", cls: "gold",
+    scripture: null,
+    summary: "Most Western believers would deny that they serve money. The commands against greed feel aimed at someone else — the billionaire, the hoarder, the corrupt. Not at us. We work hard, pay our bills, give to church. Surely this isn't about us.\n\nBut the deception of Mammon has never been that people consciously choose money over God. It is that they serve money without knowing it."
+  },
+  {
+    num: 2, title: "THE UNPRECEDENTED ERA", verse: "The Historical Shift", cls: "gold",
+    scripture: null,
+    summary: "For almost all of human history, the majority of people lived at or just above subsistence. One bad harvest could be fatal. There were no savings for next year, let alone next decade. Work meant survival — not accumulation.\n\nWe are the first civilisation in history where ordinary people can say: I have enough for years. And yet we gather more. Comfort, security, and surplus have become the invisible air we breathe. We don't feel wealthy because everyone around us lives the same way. But by any historical or global measure, we are extraordinarily rich.\n\nIsrael in the wilderness is the ancient type. God delivered them from Egypt — but their appetites were still formed there. \"We remember the fish we ate in Egypt freely, the cucumbers, the melons, the leeks, the onions, and the garlic\" (Numbers 11:5). They were free, but they craved the old provision. We are the same. Delivered — but our desires are still shaped by the system we were delivered from."
+  },
+  {
+    num: 3, title: "THE STRUCTURAL IMPOSSIBILITY", verse: "Matthew 6:24", cls: "hinge", hinge: true,
+    scripture: "No one can serve two masters; for either he will hate the one and love the other, or else he will be loyal to the one and despise the other. You cannot serve God and Mammon.",
+    summary: "Jesus does not say you should not. He says you cannot. This is not moral instruction — it is a statement of structural reality. Two masters is not a difficult arrangement to manage. It is an impossibility.\n\nYou are serving one or the other right now — whether or not you have identified which."
+  },
+  {
+    num: 4, title: "THE DIAGNOSTIC", verse: "Matthew 6:19–21", cls: "gold",
+    scripture: "Do not lay up for yourselves treasures on earth, where moth and rust destroy and where thieves break in and steal; but lay up for yourselves treasures in heaven... For where your treasure is, there your heart will be also.",
+    summary: "Jesus gives a simple test. Not: what do you say you value? But: where is your treasure? Because where your treasure is, there your heart follows. The heart is not the leader here — it is the follower. It goes where you put your resources, your time, your security.\n\nThis is why the deception works. You can sincerely believe your heart belongs to God while your treasure — your actual security, your planning, your anxiety, your ambition — is entirely earthward."
+  },
+  {
+    num: 5, title: "THE RICH YOUNG RULER", verse: "Mark 10:17–27", cls: "gold",
+    scripture: "Then Jesus, looking at him, loved him, and said to him, 'One thing you lack: Go your way, sell whatever you have and give to the poor, and you will have treasure in heaven; and come, take up the cross, and follow Me.' But he was sad at this word, and went away sorrowful, for he had great possessions.",
+    summary: "This man was sincere. He ran to Jesus. He knelt. He had kept the commandments from his youth. He was not a hypocrite — he genuinely wanted eternal life.\n\nAnd Jesus, looking at him, loved him.\n\nThen Jesus gave him the one command He knew the man could not fulfil. Not to punish him — but to reveal something. The man's life-source was exposed. He could not let go. Not because he was especially greedy, but because the old life cannot produce what God demands. No amount of sincerity can overcome a structural incapacity.\n\nJesus was not setting a moral test. He was engineering a revelation. The command was the diagnosis — not the cure."
+  },
+  {
+    num: 6, title: "THE COMMON MISREADING", verse: "\"What are your idols?\"", cls: "warning",
+    scripture: null,
+    summary: "The typical application of this passage: identify your idol, name it, surrender it, try harder. This sounds spiritual but it keeps the old life as the operating agent — I identify, I repent, I overcome.\n\nBut the passage does not end with \"so try harder.\" It ends with the disciples asking, \"Who then can be saved?\" And Jesus' answer is not a strategy. It is a statement about the source: \"With man this is impossible, but not with God\" (Mark 10:27).\n\nThe point was never \"find your idol and fix it.\" The point is that the old life cannot obey — and that incapability is not the problem to solve. It is the doorway to seeing that only God can do this."
+  },
+  {
+    num: 7, title: "THE DECEITFULNESS OF RICHES", verse: "Mark 4:18–19", cls: "gold",
+    scripture: "Now these are the ones sown among thorns; they are the ones who hear the word, and the cares of this world, the deceitfulness of riches, and the desires for other things entering in choke the word, and it becomes unfruitful.",
+    summary: "Not the wickedness of riches — the deceitfulness. The seed in this soil is real. The growth is genuine. But the thorns grow alongside it, slowly, quietly, until the life is choked.\n\nNobody plants thorns on purpose. That is the whole point. And Solomon, the wealthiest man in Israel, confirmed it from experience: \"He who loves money will not be satisfied with money\" (Ecclesiastes 5:10). The man who had everything declared it structurally empty."
+  },
+  {
+    num: 8, title: "THE RICH FOOL", verse: "Luke 12:16–21", cls: "gold",
+    scripture: "And he said, 'I will do this: I will pull down my barns and build greater, and there I will store all my crops and my goods. And I will say to my soul, \"Soul, you have many goods laid up for many years; take your ease; eat, drink, and be merry.\"' But God said to him, 'Fool! This night your soul will be required of you; then whose will those things be which you have provided?'",
+    summary: "\"Many years.\" Pre-industrial humanity could never say this. We say it every day without words — in our superannuation, our insurance, our planning horizons, our retirement projections.\n\nThe rich fool was not punished for being wealthy. He was exposed for being oriented entirely around his own provision. His life was sourced in his barns. Jesus' verdict: \"So is the one who lays up treasure for himself and is not rich toward God.\"\n\nThere are two directions to be rich in. Only one of them survives the night."
+  },
+  {
+    num: 9, title: "THE BAG WITH HOLES", verse: "Haggai 1:5–6, 9", cls: "gold",
+    scripture: "You have sown much, and bring in little; you eat, but do not have enough; you drink, but you are not filled with drink; you clothe yourselves, but no one is warm; and he who earns wages, earns wages to put into a bag with holes... You looked for much, but indeed it came to little; and when you brought it home, I blew it away. Why? Because of My house that is in ruins, says the LORD of hosts, while every one of you runs to his own house.",
+    summary: "The people in Haggai's day were not idle. They were working, earning, building — but everything drained away. The reason? They were investing in their own panelled houses while God's house lay in ruins.\n\nThis is not about tithing. It is about orientation. When life is organised around self-provision and self-security, the accumulation never satisfies. There is always a leak. The bag always has holes. Because the human soul was not designed for Mammon — it was designed for God."
+  }
+];
+
+const conclusionNodes = [
+  {
+    num: 10, title: "THE POSITIONAL REALITY", verse: "Colossians 3:1–4 · 1 Timothy 6:17–19", cls: "result-node",
+    scripture: "If then you were raised with Christ, seek those things which are above, where Christ is, sitting at the right hand of God. Set your mind on things above, not on things on the earth. For you died, and your life is hidden with Christ in God.",
+    summary: "The answer is not \"try to want money less.\" That is the old life attempting self-repair — the very pattern exposed by the rich young ruler.\n\nThe answer is positional. If Christ is your life (Colossians 3:4), then treasure, heart, and life all converge on Him. Paul tells Timothy to instruct the rich \"not to set their hopes on the uncertainty of riches, but on God, who richly provides us with everything to enjoy\" (1 Timothy 6:17). The command is not to stop having — it is to stop hoping in it. Where is your hope anchored?\n\nNot subtraction, but substitution. Not less Mammon — more Christ. The exchanged life."
+  },
+  {
+    num: 11, title: "GODLINESS WITH CONTENTMENT", verse: "1 Timothy 6:6–8", cls: "result-node",
+    scripture: "Now godliness with contentment is great gain. For we brought nothing into this world, and it is certain we can carry nothing out. And having food and clothing, with these we shall be content.",
+    summary: "Paul calls contentment — autarkeia — great gain. The word means self-sufficiency, but not in the modern sense. It means needing nothing beyond what God supplies. It is the opposite of the endless accumulation cycle.\n\nThis is not poverty as a virtue. It is freedom from the tyranny of more. The person whose life is hidden with Christ in God is the only person on earth who can actually say: I have enough. Not because they have little — but because their life is not sourced in what they have."
+  }
+];
+
+const arrowLabels = {
+  1: "BUT",
+  2: "THEREFORE",
+  5: "BUT",
+  7: "AND"
+};
+
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls}`;
+  div.onclick = () => {
+    const isActive = div.classList.contains('active');
+    // Close all nodes of same class
+    document.querySelectorAll(`.node.${n.cls}`).forEach(el => el.classList.remove('active'));
+    if (!isActive) div.classList.add('active');
+  };
+
+  let html = '';
+  if (n.hinge) html += '<div class="hinge-badge">HINGE POINT</div>';
+
+  html += '<div class="node-header">';
+  html += `<span class="node-number">${n.num}</span>`;
+  html += '<div>';
+  html += `<h3 class="node-title">${n.title}</h3>`;
+  html += `<span class="node-verse">${n.verse}</span>`;
+  html += '</div></div>';
+
+  if (n.scripture) {
+    html += `<div class="node-scripture">"${n.scripture}"</div>`;
+  }
+  html += `<div class="node-summary">${n.summary.replace(/\n\n/g, '<br><br>')}</div>`;
+
+  html += `<div class="node-tap">Tap to expand</div>`;
+
+  div.innerHTML = html;
+  return div;
+}
+
+function buildArrow(label) {
+  const div = document.createElement('div');
+  div.className = 'arrow';
+  const lineH = label ? '16px' : '22px';
+  let html = `<div class="arrow-line" style="height:${lineH}"></div>`;
+  if (label) html += `<span class="arrow-label">${label}</span>`;
+  html += '<div class="arrow-head"></div>';
+  div.innerHTML = html;
+  return div;
+}
+
+function buildDivider(text) {
+  const div = document.createElement('div');
+  div.className = 'section-divider';
+  div.innerHTML = `<span>${text}</span>`;
+  return div;
+}
+
+// Build main flow
+const mainFlow = document.getElementById('main-flow');
+mainNodes.forEach((n, i) => {
+  mainFlow.appendChild(buildNode(n));
+  if (i < mainNodes.length - 1) {
+    mainFlow.appendChild(buildArrow(arrowLabels[i + 1] || null));
+  }
+});
+
+// Build conclusion flow
+const conclusionFlow = document.getElementById('conclusion-flow');
+conclusionNodes.forEach((n, i) => {
+  conclusionFlow.appendChild(buildNode(n));
+  if (i < conclusionNodes.length - 1) {
+    conclusionFlow.appendChild(buildArrow(null));
+  }
+});
+</script>
+</body>
+</html>
