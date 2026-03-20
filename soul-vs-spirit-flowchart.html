@@ -466,6 +466,66 @@
   text-decoration: none;
 }
 .metaphor-key-link:hover { color: #c0a0e8; }
+
+/* ── TABERNACLE SECTION ── */
+.tab-section { margin: 28px 0 8px; }
+.tab-header { text-align: center; margin-bottom: 18px; }
+.tab-header-label { font-size: 9px; font-weight: 800; letter-spacing: 3px; color: #c0a0e8; padding: 5px 14px; border-radius: 4px; display: inline-block; background: rgba(192,160,232,0.06); border: 1px solid rgba(192,160,232,0.12); }
+.tab-header-sub { font-family: 'Cormorant Garamond', serif; font-size: 12px; color: #606068; font-style: italic; margin-top: 4px; }
+
+.tab-diagram { position: relative; width: 100%; max-width: 380px; margin: 0 auto 20px; }
+.tab-diagram svg { width: 100%; height: auto; display: block; }
+.tab-diagram svg text { font-family: 'DM Sans', sans-serif; }
+.tab-diagram svg text.tab-svg-label { font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+.tab-diagram svg text.tab-svg-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; }
+
+.tab-note { text-align: center; margin: 16px 0 4px; padding: 16px 20px; border-radius: 8px; background: rgba(22,16,30,0.4); border: 1px solid rgba(192,160,232,0.1); }
+.tab-note-text { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; line-height: 1.6; color: #c0a0e8; }
+.tab-note-ref { font-size: 11px; letter-spacing: 1.5px; color: #706080; margin-top: 6px; }
+.tab-note-text em { color: #d8c0f0; font-style: italic; }
+
+.tab-layers { margin: 0 0 4px; }
+.tab-layer { padding: 14px 16px; border-bottom: 1px solid rgba(192,160,232,0.04); cursor: pointer; transition: all 0.3s ease; border-radius: 8px; margin-bottom: 6px; }
+.tab-layer:last-child { margin-bottom: 0; }
+.tab-layer-header { display: flex; align-items: center; gap: 12px; }
+.tab-layer-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+.tab-layer-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; }
+.tab-layer-map { font-size: 11px; font-style: italic; font-family: 'Cormorant Garamond', serif; }
+.tab-layer-content { font-size: 13.5px; line-height: 1.65; color: #b8b0a0; margin-top: 10px; padding-left: 44px; display: none; }
+.tab-layer.active .tab-layer-content { display: block; }
+.tab-layer-tap { font-size: 11px; color: #605860; margin-top: 4px; padding-left: 44px; }
+.tab-layer.active .tab-layer-tap { display: none; }
+
+.tab-layer.layer-body { background: rgba(26,20,16,0.25); border: 1px solid rgba(200,160,120,0.1); }
+.tab-layer.layer-body.active { border-color: rgba(200,160,120,0.3); }
+.tab-layer.layer-body .tab-layer-icon { background: rgba(200,160,120,0.1); border: 1.5px solid rgba(200,160,120,0.3); color: #c8a078; }
+.tab-layer.layer-body .tab-layer-title { color: #c8a078; }
+.tab-layer.layer-body .tab-layer-map { color: rgba(200,160,120,0.5); }
+
+.tab-layer.layer-soul { background: rgba(32,26,14,0.25); border: 1px solid rgba(240,208,128,0.1); }
+.tab-layer.layer-soul.active { border-color: rgba(240,208,128,0.3); }
+.tab-layer.layer-soul .tab-layer-icon { background: rgba(240,208,128,0.1); border: 1.5px solid rgba(240,208,128,0.3); color: #f0d080; }
+.tab-layer.layer-soul .tab-layer-title { color: #f0d080; }
+.tab-layer.layer-soul .tab-layer-map { color: rgba(240,208,128,0.5); }
+
+.tab-layer.layer-spirit { background: rgba(13,28,20,0.25); border: 1px solid rgba(104,230,160,0.1); }
+.tab-layer.layer-spirit.active { border-color: rgba(104,230,160,0.3); }
+.tab-layer.layer-spirit .tab-layer-icon { background: rgba(104,230,160,0.1); border: 1.5px solid rgba(104,230,160,0.3); color: #68e6a0; }
+.tab-layer.layer-spirit .tab-layer-title { color: #68e6a0; }
+.tab-layer.layer-spirit .tab-layer-map { color: rgba(104,230,160,0.5); }
+
+.tab-layer.layer-ark { background: rgba(22,16,30,0.4); border: 1px solid rgba(192,160,232,0.15); }
+.tab-layer.layer-ark.active { border-color: rgba(192,160,232,0.35); }
+.tab-layer.layer-ark .tab-layer-icon { background: rgba(192,160,232,0.12); border: 1.5px solid rgba(192,160,232,0.35); color: #c0a0e8; }
+.tab-layer.layer-ark .tab-layer-title { color: #c0a0e8; }
+.tab-layer.layer-ark .tab-layer-map { color: rgba(192,160,232,0.5); }
+
+@media (max-width: 600px) {
+  .tab-layer-content { font-size: 15px; line-height: 1.7; }
+  .tab-layer-tap { font-size: 12px; color: #807870; }
+  .tab-layer-title { font-size: 12px; }
+  .tab-note-text { font-size: 17px; }
+}
 </style>
 </head>
 <body>
@@ -536,6 +596,94 @@
 </div>
 </div>
 
+<!-- ══ TABERNACLE TYPOLOGY ══ -->
+<div class="tab-section">
+<div class="tab-header">
+  <span class="tab-header-label">THE OLD TESTAMENT PICTURE</span>
+  <div class="tab-header-sub">The tabernacle as a map of man — after Watchman Nee</div>
+</div>
+
+<div class="tab-diagram">
+<svg viewBox="0 0 380 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer Court — Body -->
+  <rect x="8" y="8" width="364" height="384" rx="14" fill="rgba(200,160,120,0.05)" stroke="rgba(200,160,120,0.22)" stroke-width="1.5"/>
+  <text x="190" y="30" text-anchor="middle" class="tab-svg-label" fill="#c8a078" font-size="9">OUTER COURT</text>
+  <text x="190" y="378" text-anchor="middle" class="tab-svg-sub" fill="rgba(200,160,120,0.55)" font-size="10.5">σῶμα — the body</text>
+  
+  <!-- Holy Place — Soul -->
+  <rect x="44" y="50" width="292" height="310" rx="11" fill="rgba(240,208,128,0.05)" stroke="rgba(240,208,128,0.18)" stroke-width="1.5"/>
+  <text x="190" y="72" text-anchor="middle" class="tab-svg-label" fill="#f0d080" font-size="9">HOLY PLACE</text>
+  <text x="190" y="348" text-anchor="middle" class="tab-svg-sub" fill="rgba(240,208,128,0.5)" font-size="10.5">ψυχή — the soul</text>
+  
+  <!-- Furniture labels in Holy Place — positioned in the lower band -->
+  <text x="100" y="296" text-anchor="middle" fill="rgba(240,208,128,0.5)" font-size="8" font-family="'DM Sans', sans-serif" letter-spacing="1">LAMPSTAND</text>
+  <text x="100" y="311" text-anchor="middle" fill="rgba(240,208,128,0.38)" font-size="9.5" font-family="'Cormorant Garamond', serif" font-style="italic">mind</text>
+  <text x="190" y="296" text-anchor="middle" fill="rgba(240,208,128,0.5)" font-size="8" font-family="'DM Sans', sans-serif" letter-spacing="1">INCENSE ALTAR</text>
+  <text x="190" y="311" text-anchor="middle" fill="rgba(240,208,128,0.38)" font-size="9.5" font-family="'Cormorant Garamond', serif" font-style="italic">emotions</text>
+  <text x="280" y="296" text-anchor="middle" fill="rgba(240,208,128,0.5)" font-size="8" font-family="'DM Sans', sans-serif" letter-spacing="1">SHOWBREAD</text>
+  <text x="280" y="311" text-anchor="middle" fill="rgba(240,208,128,0.38)" font-size="9.5" font-family="'Cormorant Garamond', serif" font-style="italic">will</text>
+  
+  <!-- Holy of Holies — Spirit -->
+  <rect x="90" y="92" width="200" height="180" rx="9" fill="rgba(104,230,160,0.04)" stroke="rgba(104,230,160,0.18)" stroke-width="1.5"/>
+  <text x="190" y="114" text-anchor="middle" class="tab-svg-label" fill="#68e6a0" font-size="9">HOLY OF HOLIES</text>
+  <text x="190" y="262" text-anchor="middle" class="tab-svg-sub" fill="rgba(104,230,160,0.45)" font-size="10.5">πνεῦμα — the spirit</text>
+  
+  <!-- Veil lines (torn — dashed) -->
+  <line x1="90" y1="92" x2="90" y2="272" stroke="rgba(192,160,232,0.2)" stroke-width="1.5" stroke-dasharray="4,5"/>
+  <line x1="290" y1="92" x2="290" y2="272" stroke="rgba(192,160,232,0.2)" stroke-width="1.5" stroke-dasharray="4,5"/>
+  <text x="75" y="185" text-anchor="middle" fill="rgba(192,160,232,0.4)" font-size="8" font-family="'DM Sans', sans-serif" font-weight="700" letter-spacing="2" transform="rotate(-90,75,185)">THE VEIL</text>
+  <text x="305" y="185" text-anchor="middle" fill="rgba(192,160,232,0.4)" font-size="8" font-family="'DM Sans', sans-serif" font-weight="700" letter-spacing="2" transform="rotate(90,305,185)">THE VEIL</text>
+  
+  <!-- The Ark — Christ -->
+  <rect x="140" y="136" width="100" height="80" rx="6" fill="rgba(192,160,232,0.07)" stroke="rgba(192,160,232,0.3)" stroke-width="1.5"/>
+  <text x="190" y="172" text-anchor="middle" class="tab-svg-label" fill="#c0a0e8" font-size="9">THE ARK</text>
+  <text x="190" y="196" text-anchor="middle" class="tab-svg-sub" fill="rgba(192,160,232,0.55)" font-size="11">Christ</text>
+</svg>
+</div>
+
+<div class="tab-note">
+  <div class="tab-note-text">"The veil of the temple was torn in two from top to bottom."</div>
+  <div class="tab-note-ref">MATTHEW 27:51</div>
+</div>
+
+<div class="tab-layers">
+  <div class="tab-layer layer-body" onclick="toggleTab(this)">
+    <div class="tab-layer-header">
+      <div class="tab-layer-icon">I</div>
+      <div><div class="tab-layer-title">THE OUTER COURT</div><div class="tab-layer-map">→ the body</div></div>
+    </div>
+    <div class="tab-layer-tap">Tap to expand</div>
+    <div class="tab-layer-content">The outermost area — visible, physical, public. The brazen altar (sacrifice) and the laver (washing) stood here. This is where most of Israel's religious life took place — external rituals, observable acts, physical obedience. Mapped to the body: the part of man that contacts the material world. Many Christians live here permanently — attending services, performing duties, going through motions. External religion. The body doing religious things without the inner life being touched.</div>
+  </div>
+  <div class="tab-layer layer-soul" onclick="toggleTab(this)">
+    <div class="tab-layer-header">
+      <div class="tab-layer-icon">II</div>
+      <div><div class="tab-layer-title">THE HOLY PLACE</div><div class="tab-layer-map">→ the soul</div></div>
+    </div>
+    <div class="tab-layer-tap">Tap to expand</div>
+    <div class="tab-layer-content">The inner room — accessible only to priests. Three pieces of furniture: the <strong>lampstand</strong> (illumination — the mind), the <strong>table of showbread</strong> (nourishment — the will, choosing to feed), and the <strong>altar of incense</strong> (ascending worship — the emotions). This is the soul's domain: thinking, choosing, feeling. Soulish Christianity lives here — rich in study, strong in decisions, moved by worship experiences — but operating from the soul's own resources. The bicycle with priestly garments on. Sincere, educated, emotional — and still not in the innermost place.</div>
+  </div>
+  <div class="tab-layer layer-spirit" onclick="toggleTab(this)">
+    <div class="tab-layer-header">
+      <div class="tab-layer-icon">III</div>
+      <div><div class="tab-layer-title">THE HOLY OF HOLIES</div><div class="tab-layer-map">→ the spirit</div></div>
+    </div>
+    <div class="tab-layer-tap">Tap to expand</div>
+    <div class="tab-layer-content">The innermost chamber — separated by a thick veil. Only the high priest could enter, and only once a year. This is where the Shekinah glory dwelt — the raw presence of God. Mapped to the human spirit: the deepest part of man, where God Himself dwells. At the cross, the veil was torn — access is open. Every believer can walk into the holy of holies. But most never do. They camp in the outer court (external religion) or the holy place (soulish experience) and never enter the place where God's presence actually is. The spirit is regenerated, the veil is torn — and still they live outside.</div>
+  </div>
+  <div class="tab-layer layer-ark" onclick="toggleTab(this)">
+    <div class="tab-layer-header">
+      <div class="tab-layer-icon">✦</div>
+      <div><div class="tab-layer-title">THE ARK OF THE COVENANT</div><div class="tab-layer-map">→ Christ in the spirit</div></div>
+    </div>
+    <div class="tab-layer-tap">Tap to expand</div>
+    <div class="tab-layer-content">Inside the holy of holies stood one object: the ark. The mercy seat on top, the glory of God resting above it, and inside — the law fulfilled, the manna preserved, Aaron's rod that budded (authority through resurrection). The ark is Christ. He is in the innermost place. When God looks at man, He is looking for the ark — not the furniture of the holy place, not the rituals of the outer court. He is looking for His Son, dwelling in the spirit of a person who has walked past the torn veil and found that everything they were looking for in the outer rooms was always here — in Him.</div>
+  </div>
+</div>
+
+</div>
+<!-- ══ END TABERNACLE ══ -->
+
 <div class="section"><span class="section-label purple">THE DESIGN</span><div class="section-sub">How God intended it to work</div></div>
 
 <div id="flow"></div>
@@ -554,6 +702,7 @@
 
 <script>
 function toggleP(el){const w=el.classList.contains('active');el.parentElement.querySelectorAll('.part').forEach(p=>p.classList.remove('active'));if(!w)el.classList.add('active')}
+function toggleTab(el){const w=el.classList.contains('active');document.querySelectorAll('.tab-layer').forEach(t=>t.classList.remove('active'));if(!w)el.classList.add('active')}
 
 const data=[
 {num:1,title:"GOD'S ORIGINAL DESIGN",verse:"Genesis 2:7, 1 Thess 5:23",cls:"purple",badge:"THE BLUEPRINT",

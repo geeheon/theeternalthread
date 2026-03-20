@@ -632,6 +632,62 @@
     }
 }
 
+/* Two Husbands illustration */
+.two-husbands { margin: 0 0 12px; }
+.two-husbands-header { text-align: center; margin-bottom: 16px; }
+.two-husbands-label { font-size: 9px; font-weight: 800; letter-spacing: 3px; color: #a0c8e8; padding: 5px 14px; border-radius: 4px; display: inline-block; background: rgba(160,200,232,0.06); border: 1px solid rgba(160,200,232,0.12); }
+.two-husbands-sub { font-family: 'Cormorant Garamond', serif; font-size: 12px; color: #606068; font-style: italic; margin-top: 4px; }
+
+.husband-card { margin-bottom: 10px; border-radius: 10px; overflow: hidden; cursor: pointer; transition: all 0.3s ease; }
+.husband-card.law { background: rgba(46,30,30,0.3); border: 1.5px solid rgba(230,104,104,0.15); }
+.husband-card.law.active { border-color: rgba(230,104,104,0.4); }
+.husband-card.grace { background: rgba(13,28,20,0.3); border: 1.5px solid rgba(104,230,160,0.15); }
+.husband-card.grace.active { border-color: rgba(104,230,160,0.4); }
+
+.husband-card-header { display: flex; align-items: center; gap: 14px; padding: 16px 18px; }
+.husband-num { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; line-height: 1; opacity: 0.4; }
+.husband-card.law .husband-num { color: #e66868; }
+.husband-card.grace .husband-num { color: #68e6a0; }
+.husband-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; }
+.husband-card.law .husband-title { color: #e66868; }
+.husband-card.grace .husband-title { color: #68e6a0; }
+.husband-verse { font-family: 'Cormorant Garamond', serif; font-size: 12px; font-style: italic; }
+.husband-card.law .husband-verse { color: rgba(230,104,104,0.45); }
+.husband-card.grace .husband-verse { color: rgba(104,230,160,0.45); }
+
+.husband-story { display: none; padding: 0 18px 18px; }
+.husband-card.active .husband-story { display: block; }
+.husband-story p { font-size: 13.5px; line-height: 1.7; color: #b8b0a0; margin-bottom: 12px; }
+.husband-story p:last-child { margin-bottom: 0; }
+.husband-story em { font-style: italic; }
+.husband-card.law .husband-story em { color: #e68080; }
+.husband-card.grace .husband-story em { color: #80e0a8; }
+.husband-tap { font-size: 11px; color: #605860; padding: 0 18px 14px; }
+.husband-card.active .husband-tap { display: none; }
+
+.husband-point { margin: 14px 0 0; padding: 14px 18px; border-radius: 8px; text-align: center; }
+.husband-card.law .husband-point { background: rgba(230,104,104,0.04); border: 1px solid rgba(230,104,104,0.08); }
+.husband-card.grace .husband-point { background: rgba(104,230,160,0.04); border: 1px solid rgba(104,230,160,0.08); }
+.husband-point-text { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; line-height: 1.6; }
+.husband-card.law .husband-point-text { color: #c09090; }
+.husband-card.grace .husband-point-text { color: #90c0a0; }
+
+.husband-transition { text-align: center; padding: 8px 0; }
+.husband-transition-text { font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #606068; }
+
+.husband-key { margin: 14px 0 0; padding: 16px 18px; border-radius: 8px; text-align: center; background: rgba(16,20,30,0.4); border: 1px solid rgba(160,200,232,0.1); }
+.husband-key-text { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; line-height: 1.6; color: #a0c8e8; }
+.husband-key-text em { color: #c0e0f8; }
+.husband-key-ref { font-size: 11px; letter-spacing: 1.5px; color: #506878; margin-top: 6px; }
+
+@media (max-width: 600px) {
+  .husband-story p { font-size: 15px; line-height: 1.7; }
+  .husband-tap { font-size: 12px; color: #807870; }
+  .husband-title { font-size: 12px; }
+  .husband-key-text { font-size: 17px; }
+  .husband-point-text { font-size: 16px; }
+}
+
 /* Metaphor key */
 .metaphor-key {
   margin: 0 0 28px;
@@ -704,7 +760,7 @@
     <h1>TO WILL IS PRESENT<br>BUT HOW TO PERFORM?</h1>
     <div class="header-line"></div>
     <p>God does the performing. You enter the stream.</p>
-    <div class="author">ROMANS 7:18 · PHILIPPIANS 2:13 · AFTER FROMKE</div>
+    <div class="author">ROMANS 7:1–6, 18 · PHILIPPIANS 2:13 · AFTER FROMKE</div>
   </div>
 
   
@@ -871,6 +927,79 @@
     </svg>
   </div>
 
+  <!-- ══ TWO HUSBANDS — Romans 7:1–6 ══ -->
+  <div class="two-husbands">
+    <div class="two-husbands-header">
+      <span class="two-husbands-label">PAUL'S ILLUSTRATION</span>
+      <div class="two-husbands-sub">Two husbands — Romans 7:1–6</div>
+    </div>
+
+    <div class="verse-box">
+      <div class="verse-text">"For the woman who has a husband is bound by the law to her husband as long as he lives. But if the husband dies, she is released from the law of her husband."</div>
+      <div class="verse-ref">ROMANS 7:2</div>
+    </div>
+
+    <div class="husband-card law" onclick="toggleH(this)">
+      <div class="husband-card-header">
+        <span class="husband-num">I</span>
+        <div>
+          <div class="husband-title">THE FIRST HUSBAND</div>
+          <div class="husband-verse">The law — Romans 7:1–3</div>
+        </div>
+      </div>
+      <div class="husband-tap">Tap to expand</div>
+      <div class="husband-story">
+        <p>A woman meets a man. She falls in love. They marry. They go on honeymoon.</p>
+        <p>They return home, and the husband tells her he would like breakfast every morning at 4am. Not just any breakfast — <em>a very specific breakfast</em>. Two eggs, sunny-side up, yolks still runny but whites fully set. Three rashers of bacon — crispy but not burnt, no chewy fat. Sourdough toast, medium-brown, butter applied while still hot so it melts evenly. Sliced avocado, fanned on the plate, with a pinch of flaky salt and cracked pepper. Sautéed mushrooms — cremini, not button — cooked in butter until golden, no sogginess. A small bowl of fresh fruit — seasonal, no melon. Freshly squeezed orange juice, no pulp. Coffee at exactly 82 degrees, long black, served in the ceramic mug, not the glass one. Every morning. Without fail. At 4am.</p>
+        <p>The requirement is not unreasonable in itself. Each item is good. The husband is upright, blameless even. There is nothing wrong with what he asks. It is <em>good</em>.</p>
+        <p>At first she does it. She sets the alarm. She rises. She cooks. But after a few mornings, she misses the alarm. The bacon is overdone. The eggs break. The avocado is bruised. She forgets the mushrooms. The coffee is too hot. She gets sloppy, exhausted, resentful. The list never shrinks. The standard never bends.</p>
+        <p>He doesn't help. He <em>can't</em> help. That's not how law works. Law <em>states the requirement</em>. It doesn't cook the breakfast. It tells you what is right — and watches while you fail to produce it.</p>
+        <div class="husband-point">
+          <div class="husband-point-text">The requirement was good.<br>The source was her.<br>She could not sustain it.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="husband-transition">
+      <span class="husband-transition-text">SHE DIES · SHE IS RELEASED · SHE IS JOINED TO ANOTHER</span>
+    </div>
+
+    <div class="husband-card grace" onclick="toggleH(this)">
+      <div class="husband-card-header">
+        <span class="husband-num">II</span>
+        <div>
+          <div class="husband-title">THE SECOND HUSBAND</div>
+          <div class="husband-verse">Christ — Romans 7:4–6</div>
+        </div>
+      </div>
+      <div class="husband-tap">Tap to expand</div>
+      <div class="husband-story">
+        <p>She goes to heaven. She meets another man — equally upright, equally blameless. They fall in love. They marry. They go on honeymoon.</p>
+        <p>They return home, and this husband tells her exactly the same thing. <em>The identical requirement.</em> Breakfast at 4am. Two eggs, sunny-side up. Three rashers of bacon, crispy. Sourdough toast, medium-brown. Fanned avocado with flaky salt. Sautéed cremini mushrooms in butter. Fresh seasonal fruit. Freshly squeezed orange juice, no pulp. Long black at 82 degrees in the ceramic mug. Every morning. Every detail the same.</p>
+        <p>Her heart sinks. She remembers the first marriage. The exhaustion. The failure. The guilt of never meeting the standard. She sets the alarm for 4am.</p>
+        <p>The alarm goes off. She drags herself to the kitchen — and <em>it's already made</em>.</p>
+        <p>The eggs are perfect. The bacon is crispy. The avocado is fanned. The mushrooms are golden. The juice is fresh. The coffee is exactly right — in the ceramic mug. The second husband is standing in the kitchen. He has done it himself. Not because she failed — but because <em>this is who he is</em>. He doesn't just state the requirement. <em>He fulfils it.</em></p>
+        <p>The next morning, the same thing. And the next. She never has to perform what she could never sustain. The standard hasn't changed. The source has.</p>
+        <div class="husband-point">
+          <div class="husband-point-text">The requirement is the same.<br>The source is him.<br>Grace doesn't lower the standard — it <em>meets</em> it.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="husband-key">
+      <div class="husband-key-text">"Therefore, my brethren, <em>you also have become dead to the law</em> through the body of Christ, that you may be <em>married to another</em> — to Him who was raised from the dead, that we should <em>bear fruit to God</em>."</div>
+      <div class="husband-key-ref">ROMANS 7:4</div>
+    </div>
+
+    <div class="discovery" style="margin-top: 16px;">
+      <div class="discovery-label">THE POINT</div>
+      <div class="discovery-text">
+        The problem with the first husband was never the breakfast. The law is holy, just, and good (Rom 7:12). The problem was the <em>source</em> — it demanded from her what she could never sustain. The second husband has the same standard but a different nature. He doesn't demand and watch. He <em>provides what he requires</em>. This is the difference between law and grace. Grace doesn't cancel the standard. It <em>fulfils it from a different source</em>. Christ in you — meeting the righteous requirement of the law (Rom 8:4) — not by your effort but by His life.
+      </div>
+    </div>
+  </div>
+  <!-- ══ END TWO HUSBANDS ══ -->
+
   <!-- Main flow -->
   <div class="section"><span class="section-label red">THE OLD WAY</span><div class="section-sub">How flesh tries to produce change</div></div>
 
@@ -936,6 +1065,11 @@
 function toggleA(el) {
   const was = el.classList.contains('active');
   el.parentElement.querySelectorAll('.app-item').forEach(a => a.classList.remove('active'));
+  if (!was) el.classList.add('active');
+}
+function toggleH(el) {
+  const was = el.classList.contains('active');
+  document.querySelectorAll('.husband-card').forEach(c => c.classList.remove('active'));
   if (!was) el.classList.add('active');
 }
 
