@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="nav-widget.css">
+<link rel="stylesheet" href="audio-widget.css">
+<script defer src="nav-widget.js"></script>
+<script defer src="audio-widget.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>His Inheritance in the Saints — The Eternal Thread</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: #0f0f17;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: #d4a0f0;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #d4a0f0, transparent);
+    margin: 8px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #888070;
+    font-style: italic;
+  }
+
+  /* ─── Opening Scripture Block ─── */
+  .opening-block {
+    text-align: center;
+    margin-bottom: 28px;
+    padding: 24px 20px;
+    border-radius: 10px;
+    background: rgba(40, 20, 50, 0.4);
+    border: 1px solid rgba(212, 160, 240, 0.12);
+  }
+  .opening-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(212, 160, 240, 0.55);
+    margin-bottom: 12px;
+  }
+  .opening-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #c8c0d8;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .opening-scripture em {
+    color: #d4a0f0;
+    font-style: italic;
+  }
+  .opening-ref {
+    font-size: 11px;
+    color: #807088;
+    letter-spacing: 1.5px;
+  }
+
+  /* ─── Contrast block ─── */
+  .contrast {
+    margin: 0 0 28px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 160, 240, 0.12);
+  }
+  .contrast-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(40, 20, 50, 0.5);
+    border-bottom: 1px solid rgba(212, 160, 240, 0.06);
+  }
+  .contrast-header span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(212, 160, 240, 0.5);
+  }
+  .contrast-row { display: flex; }
+  .contrast-col {
+    flex: 1;
+    padding: 18px 14px;
+    text-align: center;
+    background: rgba(30, 18, 40, 0.3);
+  }
+  .contrast-col + .contrast-col {
+    border-left: 1px solid rgba(212, 160, 240, 0.06);
+  }
+  .contrast-col-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .contrast-col.man-col .contrast-col-label { color: #c8a070; }
+  .contrast-col.god-col .contrast-col-label { color: #d4a0f0; }
+  .contrast-item {
+    font-size: 13px;
+    line-height: 1.55;
+    color: #a09880;
+    margin-bottom: 8px;
+  }
+  .contrast-col.god-col .contrast-item { color: #b0a8c0; }
+  .contrast-footer {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(212, 160, 240, 0.06);
+  }
+  .contrast-col.man-col .contrast-footer { color: rgba(200, 160, 112, 0.5); }
+  .contrast-col.god-col .contrast-footer { color: rgba(212, 160, 240, 0.5); }
+
+  /* ─── Flow indicators ─── */
+  .flow-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0;
+  }
+  .flow-line {
+    width: 1.5px;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(212, 160, 240, 0.3), rgba(212, 160, 240, 0.1));
+  }
+  .flow-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: rgba(212, 160, 240, 0.4);
+    padding: 3px 0;
+    text-align: center;
+  }
+  .flow-head {
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid rgba(212, 160, 240, 0.2);
+  }
+
+  /* ─── Section Labels ─── */
+  .section-label {
+    text-align: center;
+    margin: 24px 0 14px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(212, 160, 240, 0.06);
+  }
+  .section-label span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(212, 160, 240, 0.35);
+  }
+
+  /* ─── Node cards ─── */
+  .node {
+    border-radius: 10px;
+    padding: 18px 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1.5px solid;
+    margin-bottom: 10px;
+    background: rgba(30, 18, 40, 0.5);
+    border-color: rgba(212, 160, 240, 0.15);
+  }
+  .node.active {
+    background: rgba(30, 18, 40, 0.85);
+    border-color: rgba(212, 160, 240, 0.4);
+    box-shadow: 0 0 24px rgba(212, 160, 240, 0.06), 0 4px 16px rgba(0,0,0,0.3);
+    transform: scale(1.02);
+  }
+
+  /* Gold-tinted node (for the shift / reorientation) */
+  .node.gold-node {
+    background: rgba(40, 32, 16, 0.4);
+    border-color: rgba(230, 192, 104, 0.18);
+  }
+  .node.gold-node.active {
+    background: rgba(40, 32, 16, 0.75);
+    border-color: rgba(230, 192, 104, 0.4);
+    box-shadow: 0 0 24px rgba(230, 192, 104, 0.06), 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .gold-node .node-title { color: #e6c068 !important; }
+  .gold-node .node-verse { color: rgba(230, 192, 104, 0.5) !important; }
+  .gold-node .node-scripture { border-left-color: rgba(230, 192, 104, 0.25) !important; }
+  .gold-node .node-summary { color: #c8b890 !important; }
+
+  /* Red-tinted node (for the problem / man-centred) */
+  .node.problem-node {
+    background: rgba(40, 20, 22, 0.4);
+    border-color: rgba(200, 120, 120, 0.15);
+  }
+  .node.problem-node.active {
+    background: rgba(40, 20, 22, 0.7);
+    border-color: rgba(200, 120, 120, 0.35);
+    box-shadow: 0 0 24px rgba(200, 120, 120, 0.06), 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .problem-node .node-title { color: #c88080 !important; }
+  .problem-node .node-verse { color: rgba(200, 120, 120, 0.5) !important; }
+  .problem-node .node-scripture { border-left-color: rgba(200, 120, 120, 0.25) !important; }
+  .problem-node .node-summary { color: #b8a090 !important; }
+
+  /* Glory node — radiant */
+  .node.glory-node {
+    background: rgba(40, 36, 28, 0.4);
+    border-color: rgba(240, 220, 160, 0.18);
+  }
+  .node.glory-node.active {
+    background: rgba(40, 36, 28, 0.75);
+    border-color: rgba(240, 220, 160, 0.4);
+    box-shadow: 0 0 30px rgba(240, 220, 160, 0.08), 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .glory-node .node-title { color: #f0dca0 !important; }
+  .glory-node .node-verse { color: rgba(240, 220, 160, 0.5) !important; }
+  .glory-node .node-scripture { border-left-color: rgba(240, 220, 160, 0.25) !important; }
+  .glory-node .node-summary { color: #d0c8a0 !important; }
+
+  .node-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .node.active .node-header { margin-bottom: 10px; }
+
+  .node-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1;
+    opacity: 0.4;
+    color: #d4a0f0;
+  }
+  .problem-node .node-number { color: #c88080 !important; }
+  .gold-node .node-number { color: #e6c068 !important; }
+  .glory-node .node-number { color: #f0dca0 !important; }
+
+  .node-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #d4a0f0;
+    margin: 0;
+  }
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: rgba(212, 160, 240, 0.5);
+  }
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #d4c5a0;
+    margin: 8px 0;
+    font-style: italic;
+    padding-left: 14px;
+    border-left: 2px solid rgba(212, 160, 240, 0.2);
+    display: none;
+  }
+  .node.active .node-scripture { display: block; }
+
+  .node-summary {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #b0a8c0;
+    margin: 8px 0 0 0;
+    display: none;
+  }
+  .node.active .node-summary { display: block; }
+
+  .node-tap {
+    font-size: 12px;
+    color: #888070;
+  }
+  .node.active .node-tap { display: none; }
+
+  /* ─── Burden / closing quote ─── */
+  .burden {
+    text-align: center;
+    margin: 14px 0 0;
+    padding: 22px 20px;
+    border-radius: 10px;
+    background: rgba(36, 22, 48, 0.25);
+    border: 1px solid rgba(212, 160, 240, 0.08);
+  }
+  .burden p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #a098b0;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 4px;
+  }
+  .burden p:last-child { margin-bottom: 0; }
+  .burden p em { color: #d4a0f0; font-style: italic; }
+
+  /* ─── Cross-references ─── */
+  .cross-ref {
+    margin: 20px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid rgba(212, 160, 240, 0.06);
+    text-align: center;
+  }
+  .cross-ref-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(212, 160, 240, 0.3);
+    margin-bottom: 8px;
+  }
+  .cross-ref a {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: rgba(212, 160, 240, 0.4);
+    text-decoration: none;
+    margin-bottom: 4px;
+    transition: color 0.2s;
+  }
+  .cross-ref a:hover { color: #d4a0f0; }
+
+  /* Footer */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(212, 160, 240, 0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: #706870;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .footer-line {
+    width: 20px; height: 1px;
+    background: rgba(212, 160, 240, 0.25);
+    margin: 0 auto;
+  }
+  .footer a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #605850;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer a:hover { color: #d4a0f0; }
+
+  /* === MOBILE READABILITY FIXES === */
+  @media (max-width: 600px) {
+    .header p {
+      font-size: 17px;
+      color: #a89a80;
+    }
+    .opening-scripture {
+      font-size: 19px;
+    }
+    .opening-ref {
+      font-size: 12px;
+      color: #907888;
+    }
+    .node-title {
+      font-size: 13px;
+    }
+    .node-verse {
+      font-size: 15px;
+    }
+    .node-scripture {
+      font-size: 18px;
+      color: #ddd0b4;
+    }
+    .node-summary {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .node-tap {
+      font-size: 13px;
+      color: #8a8278;
+    }
+    .burden p {
+      font-size: 17px;
+    }
+    .footer p {
+      font-size: 16px;
+      color: #706860;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>HIS INHERITANCE IN THE SAINTS</h1>
+    <div class="header-line"></div>
+    <p>What does God get?</p>
+  </div>
+
+  <!-- ─── Opening Scripture ─── -->
+  <div class="opening-block">
+    <div class="opening-label">THE PRAYER</div>
+    <div class="opening-scripture">"…that you may know what is the hope of <em>His calling</em>, what are the riches of the glory of <em>His inheritance in the saints</em>, and what is the exceeding greatness of <em>His power</em> toward us who believe…"</div>
+    <div class="opening-ref">EPHESIANS 1:18</div>
+  </div>
+
+  <!-- ═══ SECTION 1: THE QUESTION ═══ -->
+  <div class="section-label"><span>THE QUESTION NOBODY ASKS</span></div>
+
+  <div id="problem-nodes"></div>
+
+  <!-- Flow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">BUT READ PAUL'S PRAYER AGAIN</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ─── Two-Column Contrast ─── -->
+  <div class="contrast">
+    <div class="contrast-header">
+      <span>WHAT WE ASK VS WHAT PAUL PRAYS</span>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-col man-col">
+        <div class="contrast-col-label">OUR QUESTION</div>
+        <div class="contrast-item">What do I get from God?</div>
+        <div class="contrast-item">What has He done for me?</div>
+        <div class="contrast-item">What is my inheritance?</div>
+        <div class="contrast-item">How am I blessed?</div>
+        <div class="contrast-item">What is my destiny?</div>
+        <div class="contrast-footer">MAN AT CENTRE</div>
+      </div>
+      <div class="contrast-col god-col">
+        <div class="contrast-col-label">PAUL'S PRAYER</div>
+        <div class="contrast-item">What does God get from us?</div>
+        <div class="contrast-item">What has He obtained?</div>
+        <div class="contrast-item">What is His inheritance?</div>
+        <div class="contrast-item">How is He satisfied?</div>
+        <div class="contrast-item">What is His purpose?</div>
+        <div class="contrast-footer">GOD AT CENTRE</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 2: SCRIPTURE ═══ -->
+  <div class="section-label"><span>GOD'S PORTION</span></div>
+
+  <div id="scripture-nodes"></div>
+
+  <!-- Flow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">THE COPERNICAN SHIFT</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ═══ SECTION 3: THE REORIENTATION ═══ -->
+  <div class="section-label"><span>EVERYTHING CHANGES</span></div>
+
+  <div id="shift-nodes"></div>
+
+  <!-- ═══ SECTION 4: THE DISPLAY ═══ -->
+  <div class="section-label"><span>THE FINAL DISPLAY</span></div>
+
+  <div id="glory-nodes"></div>
+
+  <!-- ─── Closing quote ─── -->
+  <div class="burden">
+    <p>The Christian life is not about <em>acquiring from God</em>.</p>
+    <p>It is about God <em>obtaining His inheritance</em> — in you.</p>
+  </div>
+
+  <!-- Cross-references -->
+  <div class="cross-ref">
+    <div class="cross-ref-label">RELATED</div>
+    <a href="fromke-ultimate-intention-flowchart.html">THE ULTIMATE INTENTION →</a>
+    <a href="eternal-purpose-flowchart.html">GOD'S ETERNAL PURPOSE →</a>
+    <a href="where-you-begin-flowchart.html">WHERE YOU BEGIN →</a>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>You are not the point of the story.<br>You are the joy of the Storyteller.</p>
+    <div class="footer-line"></div>
+    <a href="index.html">← THE ETERNAL THREAD</a>
+  </div>
+
+</div>
+
+<script>
+const problemNodes = [
+  {
+    num: "01", title: "THE QUESTION NOBODY ASKS", verse: "Ephesians 1:18", cls: "problem-node",
+    scripture: "…that you may know what is the hope of His calling, what are the riches of the glory of His inheritance in the saints…",
+    summary: "We read Ephesians 1 as a catalogue of our blessings. Chosen — for us. Predestined — for us. Redeemed — for us. Sealed — for us. And all of that is true. But Paul's prayer in verse 18 contains something most readers glide over. He prays that we would see three things: the hope of His calling, the riches of His inheritance in the saints, and the greatness of His power. The middle one is almost universally read as 'what we inherit.' But read it again — His inheritance. In the saints. What does God get?"
+  },
+  {
+    num: "02", title: "THE 'GET' GOSPEL", verse: "Ephesians 1:3–14", cls: "problem-node",
+    scripture: "Blessed be the God and Father of our Lord Jesus Christ, who has blessed us with every spiritual blessing in the heavenly places in Christ…",
+    summary: "Consider how the gospel is typically presented. Come to Christ and get forgiveness. Get heaven. Get victory. Get purpose. Even deeper-life conferences are promoted on a man-centred level — come and obtain Christian victory and more profound blessings for your own heart satisfaction. The entire evangelistic appeal is essentially a 'get' philosophy. This is not wrong — these blessings are real. But it is catastrophically incomplete. It leaves God's own interest entirely out of the picture."
+  },
+  {
+    num: "03", title: "EVEN THE DEEPER LIFE STAYS MAN-CENTRED", verse: "Galatians 2:20", cls: "problem-node",
+    scripture: "I have been crucified with Christ; it is no longer I who live, but Christ lives in me…",
+    summary: "Here is where it cuts deepest. Identification truth — Romans 6, Galatians 2:20, co-crucifixion, co-resurrection — is some of the richest theology in Scripture. But even this can be taught in a way that never leaves the orbit of self. 'I have been crucified with Christ' becomes about my victory. 'Christ lives in me' becomes about my experience.<br><br>One teacher put it honestly: 'For almost fifteen years I preached the glories of our position in Christ… Yet I was, without realising it, always relating all this to man, to his needs, and to his welfare. It was all for man — what man received through this new position in Christ. Then one day the truth exploded.' — DeVern Fromke<br><br>The truth is glorious. The orientation is still wrong. The sun is still orbiting the earth."
+  }
+];
+
+const scriptureNodes = [
+  {
+    num: "04", title: "HIS INHERITANCE IN THE SAINTS", verse: "Ephesians 1:18", cls: "",
+    scripture: "…the riches of the glory of His inheritance in the saints…",
+    summary: "The Greek can be read either direction — the inheritance God gives, or the inheritance God receives. But the Old Testament pattern settles the matter. Israel was not just the recipient of a land — Israel was God's portion. The land was their inheritance. The people were His. Paul is praying that the Ephesians would grasp not only what they have received in Christ, but what God has obtained for Himself. The saints are His inheritance — a people in whom He finds His satisfaction."
+  },
+  {
+    num: "05", title: "THE LORD'S PORTION IS HIS PEOPLE", verse: "Deuteronomy 32:9", cls: "",
+    scripture: "For the Lord's portion is His people; Jacob is the place of His inheritance.",
+    summary: "This is not a figure of speech. God chose Israel not merely to bless them — but to possess them. They were His allotment. His portion. His plot of ground, as it were. Every nation had its gods, but Israel was different — God claimed them as His own possession. This framework runs through the entire Old Testament: Psalm 33:12, 'Blessed is the nation whose God is the Lord, the people whom He has chosen as His own inheritance.' God is not just giving. God is obtaining."
+  },
+  {
+    num: "06", title: "A PEOPLE FOR HIS OWN POSSESSION", verse: "Titus 2:14 · 1 Peter 2:9", cls: "",
+    scripture: "…who gave Himself for us, that He might redeem us from every lawless deed and purify for Himself His own special people…",
+    summary: "The cross has a Godward purpose that most gospel presentations omit entirely. Christ did not just die to rescue us from penalty. He died to purify for Himself a people. The reflexive pronoun matters — for Himself. Peter echoes it: 'a people for His own possession.' The cross was not merely remedial. It was acquisitive — God, through the death of His Son, obtaining for Himself what He desired before the foundation of the world."
+  },
+  {
+    num: "07", title: "REDEMPTION IS MEANS, NOT END", verse: "Ephesians 1:7–10", cls: "",
+    scripture: "In Him we have redemption through His blood, the forgiveness of sins, according to the riches of His grace… that in the dispensation of the fullness of the times He might gather together in one all things in Christ.",
+    summary: "We treat the cross as the climax of the story. But Scripture presents it as the hinge. Redemption is not the ultimate purpose — it is the means by which God recovers what He was always after. The grain of wheat falls not merely to remove sin but to produce many grains. Forgiveness is not the destination; it clears the way to the destination. And the destination is verse 10 — all things gathered together in Christ. That is God's inheritance taking shape."
+  }
+];
+
+const shiftNodes = [
+  {
+    num: "08", title: "THE COPERNICAN REVOLUTION", verse: "Colossians 1:16–18", cls: "gold-node",
+    scripture: "All things were created through Him and for Him. And He is before all things, and in Him all things consist. And He is the head of the body, the church…",
+    summary: "When Galileo displaced the earth from the centre of the solar system, centuries of calculations had to be rewritten. Something similar happens when God displaces man from the centre of our theology. Everything reorients. 'All things were created through Him and for Him.' Not through Him and for us. The fall did not create the purpose — it necessitated a rescue. But the purpose was always God obtaining a corporate expression of His Son. When this lands, it is not a doctrine. It is a revolution."
+  },
+  {
+    num: "09", title: "PRAYER CHANGES", verse: "Matthew 6:9–10", cls: "gold-node",
+    scripture: "Our Father in heaven, hallowed be Your name. Your kingdom come. Your will be done on earth as it is in heaven.",
+    summary: "Notice what Jesus puts first. Not 'give us' — that comes later. First: Your name. Your kingdom. Your will. The Lord's Prayer is structured around God's interests before man's needs. When God moves to the centre, prayer shifts from 'bless me' to 'satisfy Yourself in me.' Not that petition is wrong — Jesus includes it. But orientation determines everything. Man-centred prayer asks God to serve our purposes. God-centred prayer asks to be drawn into His."
+  },
+  {
+    num: "10", title: "SUFFERING CHANGES", verse: "Romans 8:28–29", cls: "gold-node",
+    scripture: "And we know that all things work together for good to those who love God, to those who are the called according to His purpose. For whom He foreknew, He also predestined to be conformed to the image of His Son…",
+    summary: "When God is at the centre, suffering is no longer an interruption to be endured — it is a means by which God is forming something in you for Himself. The 'good' of Romans 8:28 is not comfort. It is conformity to the image of His Son. That is what God is after — and suffering is one of His primary instruments. The question shifts from 'why me?' to 'what are You forming?' And the answer is always the same: more of Christ expressed in a human vessel. That is His inheritance taking shape."
+  },
+  {
+    num: "11", title: "CHURCH CHANGES", verse: "Ephesians 1:22–23", cls: "gold-node",
+    scripture: "And gave Him to be head over all things to the church, which is His body, the fullness of Him who fills all in all.",
+    summary: "The consumer question is 'what do I get from gathering?' The God-centred question is 'what does God receive when His people gather?' The ekklesia exists as the fullness of Christ — the corporate vessel through which He expresses Himself. When the body gathers under His headship, something is displayed to the cosmos that cannot be displayed any other way. Church is not a service we attend for our benefit. It is the place where God's inheritance becomes visible."
+  }
+];
+
+const gloryNodes = [
+  {
+    num: "12", title: "THE MASTERPIECE ON DISPLAY", verse: "Ephesians 2:6–7", cls: "glory-node",
+    scripture: "…and raised us up together, and made us sit together in the heavenly places in Christ Jesus, that in the ages to come He might show the immeasurable riches of His grace in kindness toward us in Christ Jesus.",
+    summary: "Even the future glory is not ultimately for us — it is God putting on display what He has wrought. 'That He might show…' — the word is endeiknumi, to exhibit, to demonstrate publicly. In the coming ages, God will exhibit His redeemed people as the showcase of His grace. We are not spectators of His glory. We are the canvas. The masterpiece. The inheritance He has been forming since before the foundation of the world. His satisfaction. His joy. His."
+  },
+  {
+    num: "13", title: "THE BRIDE — HIS SATISFACTION", verse: "Revelation 21:2–3", cls: "glory-node",
+    scripture: "Then I, John, saw the holy city, New Jerusalem, coming down out of heaven from God, prepared as a bride adorned for her husband. And I heard a loud voice from heaven saying, 'Behold, the tabernacle of God is with men, and He will dwell with them.'",
+    summary: "The end of the Bible reveals what God has been after from the beginning. A city — but also a bride. A corporate people, perfectly joined, radiating His glory, filled with His life. The tabernacle of God is with men. Not man reaching up to God, but God finally and fully dwelling with what He has obtained. The bride is His inheritance. The city is His portion. Everything — creation, redemption, sanctification, glorification — has been moving toward this: God at home in a people who are wholly His."
+  }
+];
+
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls}`;
+  div.onclick = function() {
+    const isActive = this.classList.contains('active');
+    document.querySelectorAll('.node').forEach(el => el.classList.remove('active'));
+    if (!isActive) this.classList.add('active');
+  };
+
+  let html = '<div class="node-header">';
+  html += `<span class="node-number">${n.num}</span>`;
+  html += '<div>';
+  html += `<h3 class="node-title">${n.title}</h3>`;
+  html += `<span class="node-verse">${n.verse}</span>`;
+  html += '</div></div>';
+  html += `<div class="node-scripture">"${n.scripture}"</div>`;
+  html += `<div class="node-summary">${n.summary}</div>`;
+  html += '<div class="node-tap">Tap to expand</div>';
+
+  div.innerHTML = html;
+  return div;
+}
+
+document.getElementById('problem-nodes').append(...problemNodes.map(buildNode));
+document.getElementById('scripture-nodes').append(...scriptureNodes.map(buildNode));
+document.getElementById('shift-nodes').append(...shiftNodes.map(buildNode));
+document.getElementById('glory-nodes').append(...gloryNodes.map(buildNode));
+</script>
+</body>
+</html>
