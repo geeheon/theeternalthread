@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="nav-widget.css">
+<link rel="stylesheet" href="audio-widget.css">
+<script defer src="nav-widget.js"></script>
+<script defer src="audio-widget.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Age-Segregated Church vs the Ekklesia — The Eternal Thread</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: #0f0f17;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 48px 20px 64px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 460px; width: 100%; }
+
+  /* ===== HEADER ===== */
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 300;
+    color: #e6a868; letter-spacing: 2px;
+    line-height: 1.3;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #e6a868, transparent);
+    margin: 10px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #b8b0a0; font-style: italic;
+    line-height: 1.5; max-width: 360px; margin: 0 auto;
+  }
+
+  /* ===== SOURCE VERSE ===== */
+  .source-verse {
+    text-align: center; margin-bottom: 28px;
+    padding: 18px 16px;
+    border-top: 1px solid rgba(230,168,104,0.12);
+    border-bottom: 1px solid rgba(230,168,104,0.12);
+  }
+  .source-verse p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 16px;
+    color: #c8c0b8; line-height: 1.55;
+  }
+  .source-verse .ref {
+    display: block; margin-top: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal; font-size: 11px;
+    color: #908880; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ===== KEY PRINCIPLE ===== */
+  .key-principle {
+    text-align: center; margin-bottom: 28px; padding: 0 8px;
+  }
+  .key-principle p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 15px;
+    color: #a09890; line-height: 1.6;
+  }
+  .key-principle em { color: #e6a868; font-style: italic; }
+
+  /* ===== ANALOGY BOX ===== */
+  .analogy {
+    margin: 0 0 28px; padding: 20px 18px;
+    border-radius: 10px;
+    background: rgba(46,36,20,0.25);
+    border: 1px solid rgba(230,168,104,0.12);
+  }
+  .analogy-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px;
+    color: #e6a868; text-align: center; margin-bottom: 10px;
+  }
+  .analogy-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-style: italic; line-height: 1.65;
+    color: #b0a890; text-align: center;
+  }
+  .analogy-text em { color: #e6a868; font-style: italic; }
+
+  /* ===== SECTION LABELS ===== */
+  .section { text-align: center; padding: 22px 0 10px; }
+  .section-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 3px;
+    padding: 5px 14px; border-radius: 4px; display: inline-block;
+  }
+  .section-label.red { color: #e67868; background: rgba(230,120,104,0.06); border: 1px solid rgba(230,120,104,0.12); }
+  .section-label.warm { color: #e6a868; background: rgba(230,168,104,0.06); border: 1px solid rgba(230,168,104,0.12); }
+  .section-label.green { color: #68e6a0; background: rgba(104,230,160,0.06); border: 1px solid rgba(104,230,160,0.12); }
+  .section-sub { font-family: 'Cormorant Garamond', serif; font-size: 12px; color: #606058; font-style: italic; margin-top: 4px; }
+
+  /* ===== FLOW NODES ===== */
+  .node {
+    border-radius: 10px; padding: 18px 22px;
+    cursor: pointer; transition: all 0.3s ease;
+    position: relative; border: 1.5px solid;
+  }
+  .node.active { transform: scale(1.02); }
+  .node.red { background: rgba(46,30,30,0.6); border-color: rgba(230,120,104,0.2); }
+  .node.red.active { background: rgba(46,30,30,0.9); border-color: #e67868; box-shadow: 0 0 25px rgba(230,120,104,0.08), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.warm { background: rgba(46,36,20,0.6); border-color: rgba(230,168,104,0.2); }
+  .node.warm.active { background: rgba(46,36,20,0.9); border-color: #e6a868; box-shadow: 0 0 25px rgba(230,168,104,0.08), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.green { background: rgba(13,28,20,0.6); border-color: rgba(104,230,160,0.2); }
+  .node.green.active { background: #0d2818; border-color: #68e6a0; box-shadow: 0 0 25px rgba(104,230,160,0.08), 0 4px 20px rgba(0,0,0,0.3); }
+
+  .badge { position: absolute; top: -10px; right: 16px; font-size: 9px; font-weight: 800; letter-spacing: 1.5px; padding: 3px 10px; border-radius: 3px; font-family: 'DM Sans', sans-serif; }
+  .red .badge { background: #e67868; color: #2e1a1a; }
+  .warm .badge { background: #e6a868; color: #2e2414; }
+  .green .badge { background: #68e6a0; color: #0d2818; }
+
+  .node-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .node.active .node-header { margin-bottom: 10px; }
+  .node-number { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; line-height: 1; opacity: 0.4; }
+  .red .node-number { color: #e67868; }
+  .warm .node-number { color: #e6a868; }
+  .green .node-number { color: #68e6a0; }
+  .node-title { font-size: 12px; font-weight: 700; letter-spacing: 2px; margin: 0; }
+  .red .node-title { color: #e67868; }
+  .warm .node-title { color: #e6a868; }
+  .green .node-title { color: #68e6a0; }
+  .node-verse { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; }
+  .red .node-verse { color: rgba(230,120,104,0.5); }
+  .warm .node-verse { color: rgba(230,168,104,0.5); }
+  .green .node-verse { color: rgba(104,230,160,0.5); }
+  .node-scripture { font-family: 'Cormorant Garamond', serif; font-size: 16px; line-height: 1.6; color: #d4c5a0; margin: 8px 0; font-style: italic; border-left: 2px solid; padding-left: 14px; display: none; }
+  .node-scripture.no-quote { border-left: none; padding-left: 0; }
+  .node.active .node-scripture { display: block; }
+  .red .node-scripture { border-left-color: rgba(230,120,104,0.25); }
+  .warm .node-scripture { border-left-color: rgba(230,168,104,0.25); }
+  .green .node-scripture { border-left-color: rgba(104,230,160,0.25); }
+  .node-summary { font-size: 13.5px; line-height: 1.65; color: #b8b0a0; margin: 8px 0 0; display: none; }
+  .node.active .node-summary { display: block; }
+  .node-tap { font-size: 12px; color: #606058; margin-left: 36px; }
+  .node.active .node-tap { display: none; }
+
+  /* ===== ARROWS ===== */
+  .arrow { display: flex; flex-direction: column; align-items: center; padding: 4px 0; }
+  .arrow-line { width: 1.5px; }
+  .arrow-label { font-size: 9px; letter-spacing: 1.5px; font-weight: 700; padding: 2px 0; }
+  .arrow-head { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; }
+  .arrow.red .arrow-line { background: linear-gradient(to bottom, rgba(230,120,104,0.3), rgba(230,120,104,0.15)); }
+  .arrow.red .arrow-head { border-top: 6px solid rgba(230,120,104,0.25); }
+  .arrow.red .arrow-label { color: rgba(230,120,104,0.35); }
+  .arrow.warm .arrow-line { background: linear-gradient(to bottom, rgba(230,168,104,0.3), rgba(230,168,104,0.15)); }
+  .arrow.warm .arrow-head { border-top: 6px solid rgba(230,168,104,0.25); }
+  .arrow.warm .arrow-label { color: rgba(230,168,104,0.35); }
+  .arrow.green .arrow-line { background: linear-gradient(to bottom, rgba(104,230,160,0.3), rgba(104,230,160,0.15)); }
+  .arrow.green .arrow-head { border-top: 6px solid rgba(104,230,160,0.25); }
+  .arrow.green .arrow-label { color: rgba(104,230,160,0.35); }
+
+  /* ===== SYMPTOMS ===== */
+  .symptoms {
+    margin: 28px 0; padding: 20px;
+    border-radius: 10px;
+    background: rgba(46,30,30,0.15);
+    border: 1px solid rgba(230,120,104,0.1);
+  }
+  .symptoms-header {
+    text-align: center; margin-bottom: 16px;
+  }
+  .symptoms-header span {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #e67868;
+  }
+  .symptom {
+    padding: 14px 16px; border-radius: 8px; margin-bottom: 10px;
+    background: rgba(46,30,30,0.2);
+    border: 1px solid transparent;
+    cursor: pointer; transition: all 0.3s ease;
+  }
+  .symptom:last-child { margin-bottom: 0; }
+  .symptom.active {
+    background: rgba(46,30,30,0.4);
+    border-color: rgba(230,120,104,0.15);
+  }
+  .symptom-q {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #c09080; font-style: italic;
+  }
+  .symptom-a {
+    font-size: 13px; line-height: 1.65; color: #a09080;
+    margin-top: 8px; display: none;
+  }
+  .symptom.active .symptom-a { display: block; }
+  .symptom-tap { font-size: 11px; color: #605850; margin-top: 4px; }
+  .symptom.active .symptom-tap { display: none; }
+
+  /* ===== CALLOUT ===== */
+  .callout {
+    margin: 24px 0; padding: 18px 20px;
+    border-radius: 8px; text-align: center;
+    background: rgba(13,28,20,0.4);
+    border: 1px solid rgba(104,230,160,0.12);
+  }
+  .callout-text { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-style: italic; line-height: 1.5; color: #68e6a0; margin-bottom: 6px; }
+  .callout-ref { font-size: 11px; letter-spacing: 1.5px; color: #507060; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    margin-top: 40px; text-align: center; padding: 20px 0;
+    border-top: 1px solid rgba(230,168,104,0.06);
+  }
+  .footer p { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: #888070; font-style: italic; line-height: 1.7; margin-bottom: 12px; }
+  .footer .see-also {
+    margin-top: 14px; font-size: 13px; color: #605850;
+  }
+  .footer .see-also a {
+    color: #e6a868; opacity: 0.5;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-weight: 400;
+    letter-spacing: 0; font-style: italic;
+    text-decoration: none; text-transform: none;
+  }
+  .footer .see-also a:hover { opacity: 0.8; }
+  .footer-line { width: 20px; height: 1px; background: rgba(230,168,104,0.25); margin: 12px auto; }
+  .footer a.back {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: #605850;
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer a.back:hover { color: #e6a868; }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 600px) {
+    .header p { font-size: 17px; }
+    .source-verse p { font-size: 18px; }
+    .key-principle p { font-size: 17px; }
+    .analogy-text { font-size: 17px; }
+    .analogy-label { font-size: 10px; }
+    .node-title { font-size: 13px; }
+    .node-verse { font-size: 15px; color: #a09888; }
+    .node-scripture { font-size: 18px; color: #ddd0b4; }
+    .node-summary { font-size: 15px; line-height: 1.7; }
+    .node-tap { font-size: 13px; color: #8a8278; }
+    .badge { font-size: 10px; }
+    .section-label { font-size: 10px; }
+    .section-sub { font-size: 14px; color: #8a8278; }
+    .arrow-label { font-size: 10px; }
+    .symptom-q { font-size: 17px; }
+    .symptom-a { font-size: 15px; line-height: 1.7; }
+    .symptom-tap { font-size: 12px; color: #807870; }
+    .callout-text { font-size: 19px; }
+    .callout-ref { font-size: 12px; color: #8a8278; }
+    .footer p { font-size: 17px; color: #a09080; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== HEADER ===== -->
+  <div class="header">
+    <h1>The Segregated Church<br>vs the Ekklesia</h1>
+    <div class="header-line"></div>
+    <p>The New Testament knows nothing of a church sorted by age — only a family growing together</p>
+  </div>
+
+  <!-- ===== SOURCE VERSE ===== -->
+  <div class="source-verse">
+    <p>"The older women likewise… that they admonish the young women… the older men… likewise exhort the young men to be sober-minded."</p>
+    <span class="ref">Titus 2:2–6</span>
+  </div>
+
+  <!-- ===== KEY PRINCIPLE ===== -->
+  <div class="key-principle">
+    <p>Paul's instruction to Titus presupposes a community where older and younger are in <em>regular, organic proximity</em> — not sorted into separate rooms, but woven into the same fabric of shared life. When we separate the generations, we don't just lose convenience. We lose the very structure by which the New Testament says formation happens.</p>
+  </div>
+
+  <!-- ===== ANALOGY ===== -->
+  <div class="analogy">
+    <div class="analogy-label">THE FAMILY TABLE</div>
+    <div class="analogy-text">
+      Imagine a household where the children eat in one room, the teenagers in another, and the adults in the dining room — every week, for years. Everyone is fed. But <em>formation</em> doesn't happen. Children never hear the real conversations. They never see how the older ones handle conflict, gratitude, grief. Then at eighteen they're handed a seat at the adult table and have no idea how to be there.<br><br>
+      The family table is where you <em>become</em> family — not just where you eat.
+    </div>
+  </div>
+
+  <!-- ===== HOW WE GOT HERE ===== -->
+  <div class="section"><span class="section-label red">HOW WE GOT HERE</span><div class="section-sub">The drift from household to programme</div></div>
+
+  <div id="flow1"></div>
+
+  <!-- ===== WHAT'S LOST ===== -->
+  <div class="section"><span class="section-label warm">WHAT'S LOST</span><div class="section-sub">The theological cost of sorting by age</div></div>
+
+  <div id="flow2"></div>
+
+  <!-- ===== SYMPTOMS ===== -->
+  <div class="symptoms">
+    <div class="symptoms-header"><span>DIAGNOSTIC</span></div>
+    <div class="symptom" onclick="toggleS(this)">
+      <div class="symptom-q">Why do teenagers leave the church at eighteen?</div>
+      <div class="symptom-tap">Tap to expand</div>
+      <div class="symptom-a">Because they were never in it. They were in the youth group — a parallel institution with its own culture, its own leaders, its own style. When the youth group ends, there's nothing to transition into, because they were never part of the thing they're being asked to join. They didn't leave the ekklesia. They were never given a seat at the table.</div>
+    </div>
+    <div class="symptom" onclick="toggleS(this)">
+      <div class="symptom-q">Why do children find "real" church boring?</div>
+      <div class="symptom-tap">Tap to expand</div>
+      <div class="symptom-a">Because they've been trained on a substitute — high-energy, entertainment-calibrated, designed to hold their attention. The actual gathering, where adults worship, wrestle, repent, and share life, looks dull by comparison. But it only looks dull because they've never been part of it. A child who grows up watching adults encounter Christ doesn't find it boring. They find it real.</div>
+    </div>
+    <div class="symptom" onclick="toggleS(this)">
+      <div class="symptom-q">Why is there no Titus 2 in your community?</div>
+      <div class="symptom-tap">Tap to expand</div>
+      <div class="symptom-a">Because older and younger are never in the same room at the same time. Older women can't train younger women if they meet in separate programmes. Fathers in the faith — those who have "known Him who is from the beginning" — have no access to the children and young men who need them most. The inter-generational chain that Paul took for granted has been structurally severed. Then we create mentoring programmes to try to recreate artificially what should happen organically.</div>
+    </div>
+    <div class="symptom" onclick="toggleS(this)">
+      <div class="symptom-q">Why does spiritual maturity seem so rare?</div>
+      <div class="symptom-tap">Tap to expand</div>
+      <div class="symptom-a">Because maturity is caught, not just taught. You don't become a father in the faith by attending a class about fatherhood. You become one by being around fathers — watching how they respond, how they pray, how they handle suffering, how they see God's purpose in everything. When the generations are separated, the younger never see maturity modelled. They only hear about it secondhand, pre-digested, in a curriculum.</div>
+    </div>
+  </div>
+
+  <!-- ===== THE NT PICTURE ===== -->
+  <div class="section"><span class="section-label green">THE NT PICTURE</span><div class="section-sub">The ekklesia as household — all ages, one life</div></div>
+
+  <div id="flow3"></div>
+
+  <!-- ===== CALLOUT ===== -->
+  <div class="callout">
+    <div class="callout-text">"So then you are no longer strangers and foreigners, but fellow citizens with the saints and members of the household of God."</div>
+    <div class="callout-ref">EPHESIANS 2:19</div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">
+    <p>The ekklesia is not a school<br>with age-graded classrooms.<br><br>It is a household.<br>The youngest and the oldest<br>formed together<br>by the same life.</p>
+    <p class="see-also">See also: <a href="head-and-body-flowchart.html">The Head and the Body</a> · <a href="addon-vs-operating-system-flowchart.html">Add-On vs Operating System</a> · <a href="children-youngmen-fathers-flowchart.html">Children, Young Men, Fathers</a></p>
+    <div class="footer-line"></div>
+    <a class="back" href="index.html">← THE ETERNAL THREAD</a>
+  </div>
+
+</div>
+
+<script>
+// Symptom toggle
+function toggleS(el) {
+  const was = el.classList.contains('active');
+  el.parentElement.querySelectorAll('.symptom').forEach(s => s.classList.remove('active'));
+  if (!was) el.classList.add('active');
+}
+
+// ===== FLOW DATA =====
+
+const flow1Data = [
+  {
+    num: 1, title: "THE SUNDAY SCHOOL INVENTION", verse: "Robert Raikes, 1780s", cls: "red",
+    badge: "THE ORIGIN", quote: false,
+    scripture: "Literacy classes for working-class children — imported into the church as a convenience.",
+    summary: "Sunday Schools were invented in 1780s England by Robert Raikes — not as theology, but as literacy education for children who worked in factories six days a week. Sunday was the only available day. The idea was compassionate and practical. But when it migrated into the church, it calcified. What began as a social response became an unquestioned structural feature. Within a century, removing children from the gathering was no longer a pragmatic decision — it was simply how church worked. Nobody asked whether it was biblical. It was just normal."
+  },
+  { arrow: "red" },
+  {
+    num: 2, title: "THE PROGRAMME MINDSET", verse: "The institutional logic", cls: "red",
+    quote: false,
+    scripture: "Once you separate children, you need a programme for every age.",
+    summary: "Once you create a children's programme, you need a youth programme. Then a young adults programme. Then a seniors ministry. Each demographic gets its own silo — its own leaders, its own content, its own culture. The body of Christ gets sliced into age brackets. The gathering is no longer one family sharing one life under one head. It is a suite of parallel services, each calibrated to a demographic. The logic is the logic of the market: segment your audience and deliver tailored content. It is not the logic of a household."
+  },
+  { arrow: "red" },
+  {
+    num: 3, title: "THE CONSUMER DYNAMIC", verse: "The marketplace logic", cls: "red",
+    quote: false,
+    scripture: "\"We have something for everyone\" — church as a product competing for families.",
+    summary: "Age-segregation serves the consumer model perfectly. \"We have something for everyone.\" Parents are freed from the inconvenience of keeping children present. Teenagers get entertainment calibrated to their attention span. The institution competes on the quality of its kids' programme as a selling point — a reason to choose this church over the one down the road. The gathering optimises for comfort and convenience, not for formation. The question becomes \"does this meet my family's needs?\" — not \"is Christ the head here?\""
+  },
+  { arrow: "red", label: "REQUIRING" },
+  {
+    num: 4, title: "THE PROFESSIONAL REQUIREMENT", verse: "The staffing logic", cls: "red",
+    quote: false,
+    scripture: "Each silo needs its own paid staff — the clergy-laity divide deepens.",
+    summary: "Each age group needs dedicated leaders. Children's pastors, youth pastors, young adults coordinators, seniors ministry teams. The professional class expands. Ministry becomes specialised delivery — a trained worker producing content for a passive audience — rather than a body where every member functions. The more programmes you run, the more staff you need. The more staff you hire, the less the ordinary believer is expected to contribute. The every-member-functioning reality of 1 Corinthians 14 becomes structurally impossible. The institution has replaced the organism."
+  },
+];
+
+const flow2Data = [
+  {
+    num: 5, title: "INTER-GENERATIONAL FORMATION DISAPPEARS", verse: "Titus 2:1–8", cls: "warm",
+    badge: "THE COST",
+    scripture: "The older women likewise, that they be reverent in behaviour… that they admonish the young women.",
+    summary: "Paul's instruction to Titus assumes a community where older and younger share the same space. Older women are to train younger women — not in a programme, but in the fabric of daily life. Older men are to model sobriety and sound faith where younger men can see it. This is structurally impossible in a segregated model. If older women are in the main service and younger women are volunteering in the children's programme, Titus 2 can't happen. The inter-generational chain that Paul took for granted has been severed — then we create mentoring programmes to try to replace what should have been organic all along."
+  },
+  { arrow: "warm" },
+  {
+    num: 6, title: "THE HOUSEHOLD METAPHOR IS EMPTIED", verse: "Ephesians 2:19 · 1 Timothy 3:15", cls: "warm",
+    scripture: "You are… members of the household of God… the house of God, which is the church of the living God.",
+    summary: "Paul calls the ekklesia a household — not a campus, not a service provider, not an institution with departments. A household includes every age. Grandparents, parents, children, infants — all under one roof, all sharing one table. The choice of metaphor is deliberate. When Paul could have said \"army\" or \"school\" or \"kingdom\" — and he does use those images elsewhere — his most common image for the local ekklesia is a house, a family. Removing children from the gathering is like sending kids to eat in a different building during a family meal. Everyone is fed. But it is no longer a family table."
+  },
+  { arrow: "warm" },
+  {
+    num: 7, title: "CHILDREN ARE SHIELDED FROM REALITY", verse: "cf. Deuteronomy 6:6–7", cls: "warm",
+    scripture: "You shall teach them diligently to your children… when you sit in your house, when you walk by the way.",
+    summary: "Instead of encountering the real substance of faith alongside adults — worship, repentance, struggle, communion, prayer — children receive a sanitised, entertainment-driven version. Felt-board stories and colouring sheets instead of the actual presence of God's people encountering Christ together. Then at eighteen they're expected to transition into \"real church\" — a world they've never seen. The Deuteronomy 6 model is the opposite: faith is transmitted in the dailyness of shared life, not outsourced to a specialist in a separate room. Children learn what they see, not what they're told about."
+  },
+  { arrow: "warm" },
+  {
+    num: 8, title: "THE BODY LOSES MEMBERS", verse: "1 Corinthians 12:21–22", cls: "warm",
+    scripture: "The eye cannot say to the hand, \"I have no need of you.\" No, much rather, those members of the body which seem to be weaker are necessary.",
+    summary: "Paul's point is about the mutual dependence of every member in the body — no part dispensable, no part inferior. The direct context is spiritual gifts, not age groups. But the principle exposes what age-segregation does structurally: every week, the gathered body tells an entire demographic \"we don't need you in this room.\" The weakest, youngest members — those Paul would call \"necessary\" — are removed from the functioning body and placed in a holding room until they're old enough to participate. The body assembles, but never whole."
+  },
+];
+
+const flow3Data = [
+  {
+    num: 9, title: "WHOLE HOUSEHOLDS", verse: "Acts 16:31–34 · Acts 2:46–47", cls: "green",
+    badge: "THE PATTERN",
+    scripture: "Believe on the Lord Jesus Christ, and you will be saved, you and your household… breaking bread from house to house, they ate their food with gladness.",
+    summary: "The early church thought in household units. The Philippian jailer was saved — and his whole household with him. They broke bread house to house — entire families eating, worshipping, and learning together in living rooms, not auditoriums. You don't run a children's programme in someone's home. In a living room, the five-year-old sits on the same floor where the elder prays. The teenager hears the same conversation as the grandmother. The setting itself prevents segregation. The house church pattern isn't a quaint historical detail — it is the structural context in which inter-generational formation naturally occurs."
+  },
+  { arrow: "green" },
+  {
+    num: 10, title: "TITUS 2 AS INTER-GENERATIONAL DESIGN", verse: "Titus 2:1–8", cls: "green",
+    scripture: "Speak the things which are proper for sound doctrine: that the older men be sober, reverent, temperate, sound in faith, in love, in patience…",
+    summary: "Titus 2 is not a mentoring programme. It is a description of what happens when a community is structured as a household. Older men model sobriety and endurance where younger men can see it. Older women shape younger women — not through a six-week course, but through proximity, daily life, shared meals, and visible faith. Paul gives Titus no instructions for setting this up. He assumes it's already happening, because it's the natural fruit of a community that gathers as a family. The instruction is about what to teach in that context — not how to create the context. The context is the ekklesia itself."
+  },
+  { arrow: "green" },
+  {
+    num: 11, title: "EVERY MEMBER — INCLUDING THE YOUNG", verse: "1 Corinthians 14:26 · Ephesians 4:16", cls: "green",
+    scripture: "When you come together, each one has a hymn, a lesson, a revelation, a tongue, or an interpretation. Let all things be done for edification.",
+    summary: "The Pauline gathering is participatory. \"Each one has\" — Paul writes to the whole church, with no age exemption. He is not specifically envisioning five-year-olds giving interpretations. But the principle is total: the gathering belongs to the whole body, and the whole body contributes. A child who grows up in a participatory gathering — watching every member function under Christ's headship, hearing adults share from Scripture, learning to sit in the reality of corporate worship — absorbs something no curriculum can teach. They don't learn about the body of Christ. They experience it."
+  },
+  { arrow: "green", label: "PRODUCING" },
+  {
+    num: 12, title: "FORMATION BY PROXIMITY", verse: "Deuteronomy 6:6–9 · Titus 2:1–8", cls: "green",
+    badge: "THE FRUIT",
+    scripture: "These words which I command you today shall be in your heart. You shall teach them diligently to your children.",
+    summary: "The Deuteronomy 6 model is formation by proximity — not delegation. Faith is transmitted when you sit, when you walk, when you lie down, when you rise up. It is caught in the dailyness of shared life. The New Testament ekklesia inherits this principle: the generations are together, and the younger are formed by watching the older live out their faith in real time. Not in a classroom. Not through a curriculum. Around a table, in a home, in the middle of real life. This is how fathers in the faith reproduce. This is how children in the faith grow up. Not by being sorted — by being present."
+  },
+];
+
+// ===== BUILD FUNCTIONS =====
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls}`;
+  div.onclick = () => {
+    const was = div.classList.contains('active');
+    document.querySelectorAll('.node').forEach(el => el.classList.remove('active'));
+    if (!was) div.classList.add('active');
+  };
+  let h = '';
+  if (n.badge) h += `<div class="badge">${n.badge}</div>`;
+  h += `<div class="node-header"><span class="node-number">${n.num}</span><div>`;
+  h += `<h3 class="node-title">${n.title}</h3>`;
+  h += `<span class="node-verse">${n.verse}</span></div></div>`;
+  const quoteClass = n.quote === false ? ' no-quote' : '';
+  h += n.quote === false ? `<div class="node-scripture${quoteClass}">${n.scripture}</div>` : `<div class="node-scripture">\u201C${n.scripture}\u201D</div>`;
+  h += `<div class="node-summary">${n.summary}</div>`;
+  h += `<div class="node-tap">Tap to expand</div>`;
+  div.innerHTML = h;
+  return div;
+}
+function buildArrow(cfg) {
+  const div = document.createElement('div');
+  div.className = `arrow ${cfg.cls}`;
+  const lh = cfg.label ? '16px' : '22px';
+  let h = `<div class="arrow-line" style="height:${lh}"></div>`;
+  if (cfg.label) h += `<span class="arrow-label">${cfg.label}</span>`;
+  h += '<div class="arrow-head"></div>';
+  div.innerHTML = h;
+  return div;
+}
+
+// Render flows
+const f1 = document.getElementById('flow1');
+flow1Data.forEach(item => {
+  if (item.arrow !== undefined) f1.appendChild(buildArrow({ cls: item.arrow, label: item.label }));
+  else f1.appendChild(buildNode(item));
+});
+const f2 = document.getElementById('flow2');
+flow2Data.forEach(item => {
+  if (item.arrow !== undefined) f2.appendChild(buildArrow({ cls: item.arrow, label: item.label }));
+  else f2.appendChild(buildNode(item));
+});
+const f3 = document.getElementById('flow3');
+flow3Data.forEach(item => {
+  if (item.arrow !== undefined) f3.appendChild(buildArrow({ cls: item.arrow, label: item.label }));
+  else f3.appendChild(buildNode(item));
+});
+</script>
+</body>
+</html>
