@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="nav-widget.css">
+<link rel="stylesheet" href="audio-widget.css">
+<script defer src="nav-widget.js"></script>
+<script defer src="audio-widget.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>The Great Commission — The Eternal Thread</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: #0f0f17;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 48px 20px 64px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 460px; width: 100%; }
+
+  /* ===== HEADER ===== */
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 300;
+    color: #e6a868; letter-spacing: 2px;
+    line-height: 1.3;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #e6a868, transparent);
+    margin: 10px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #b8b0a0; font-style: italic;
+    line-height: 1.5; max-width: 360px; margin: 0 auto;
+  }
+
+  /* ===== SOURCE VERSE ===== */
+  .source-verse {
+    text-align: center; margin-bottom: 28px;
+    padding: 18px 16px;
+    border-top: 1px solid rgba(230,168,104,0.12);
+    border-bottom: 1px solid rgba(230,168,104,0.12);
+  }
+  .source-verse p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 16px;
+    color: #c8c0b8; line-height: 1.55;
+  }
+  .source-verse .ref {
+    display: block; margin-top: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal; font-size: 11px;
+    color: #908880; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ===== KEY PRINCIPLE ===== */
+  .key-principle {
+    text-align: center; margin-bottom: 28px; padding: 0 8px;
+  }
+  .key-principle p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 15px;
+    color: #a09890; line-height: 1.6;
+  }
+  .key-principle em { color: #e6a868; font-style: italic; }
+
+  /* ===== GREEK BOX ===== */
+  .greek-box {
+    margin: 0 0 28px; padding: 20px 18px;
+    border-radius: 10px;
+    background: rgba(46,36,20,0.25);
+    border: 1px solid rgba(230,168,104,0.12);
+  }
+  .greek-box-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px;
+    color: #e6a868; text-align: center; margin-bottom: 12px;
+  }
+  .greek-item {
+    margin-bottom: 10px; padding-bottom: 10px;
+    border-bottom: 1px solid rgba(230,168,104,0.06);
+  }
+  .greek-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .greek-word {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-style: italic; color: #e6a868;
+    text-align: center; margin-bottom: 2px;
+  }
+  .greek-gloss {
+    font-size: 12px; color: #908880; text-align: center;
+    letter-spacing: 0.5px;
+  }
+  .greek-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; font-style: italic; color: #a09890;
+    text-align: center; margin-top: 3px; line-height: 1.5;
+  }
+
+  /* ===== SECTION LABELS ===== */
+  .section { text-align: center; padding: 22px 0 10px; }
+  .section-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 3px;
+    padding: 5px 14px; border-radius: 4px; display: inline-block;
+  }
+  .section-label.red { color: #e67868; background: rgba(230,120,104,0.06); border: 1px solid rgba(230,120,104,0.12); }
+  .section-label.warm { color: #e6a868; background: rgba(230,168,104,0.06); border: 1px solid rgba(230,168,104,0.12); }
+  .section-label.green { color: #68e6a0; background: rgba(104,230,160,0.06); border: 1px solid rgba(104,230,160,0.12); }
+  .section-sub { font-family: 'Cormorant Garamond', serif; font-size: 12px; color: #606058; font-style: italic; margin-top: 4px; }
+
+  /* ===== FLOW NODES ===== */
+  .node {
+    border-radius: 10px; padding: 18px 22px;
+    cursor: pointer; transition: all 0.3s ease;
+    position: relative; border: 1.5px solid;
+  }
+  .node.active { transform: scale(1.02); }
+  .node.red { background: rgba(46,30,30,0.6); border-color: rgba(230,120,104,0.2); }
+  .node.red.active { background: rgba(46,30,30,0.9); border-color: #e67868; box-shadow: 0 0 25px rgba(230,120,104,0.08), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.warm { background: rgba(46,36,20,0.6); border-color: rgba(230,168,104,0.2); }
+  .node.warm.active { background: rgba(46,36,20,0.9); border-color: #e6a868; box-shadow: 0 0 25px rgba(230,168,104,0.08), 0 4px 20px rgba(0,0,0,0.3); }
+  .node.green { background: rgba(13,28,20,0.6); border-color: rgba(104,230,160,0.2); }
+  .node.green.active { background: #0d2818; border-color: #68e6a0; box-shadow: 0 0 25px rgba(104,230,160,0.08), 0 4px 20px rgba(0,0,0,0.3); }
+
+  .badge { position: absolute; top: -10px; right: 16px; font-size: 9px; font-weight: 800; letter-spacing: 1.5px; padding: 3px 10px; border-radius: 3px; font-family: 'DM Sans', sans-serif; }
+  .red .badge { background: #e67868; color: #2e1a1a; }
+  .warm .badge { background: #e6a868; color: #2e2414; }
+  .green .badge { background: #68e6a0; color: #0d2818; }
+
+  .node-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .node.active .node-header { margin-bottom: 10px; }
+  .node-number { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; line-height: 1; opacity: 0.4; }
+  .red .node-number { color: #e67868; }
+  .warm .node-number { color: #e6a868; }
+  .green .node-number { color: #68e6a0; }
+  .node-title { font-size: 12px; font-weight: 700; letter-spacing: 2px; margin: 0; }
+  .red .node-title { color: #e67868; }
+  .warm .node-title { color: #e6a868; }
+  .green .node-title { color: #68e6a0; }
+  .node-verse { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; }
+  .red .node-verse { color: rgba(230,120,104,0.5); }
+  .warm .node-verse { color: rgba(230,168,104,0.5); }
+  .green .node-verse { color: rgba(104,230,160,0.5); }
+  .node-scripture { font-family: 'Cormorant Garamond', serif; font-size: 16px; line-height: 1.6; color: #d4c5a0; margin: 8px 0; font-style: italic; border-left: 2px solid; padding-left: 14px; display: none; }
+  .node-scripture.no-quote { border-left: none; padding-left: 0; }
+  .node.active .node-scripture { display: block; }
+  .red .node-scripture { border-left-color: rgba(230,120,104,0.25); }
+  .warm .node-scripture { border-left-color: rgba(230,168,104,0.25); }
+  .green .node-scripture { border-left-color: rgba(104,230,160,0.25); }
+  .node-summary { font-size: 13.5px; line-height: 1.65; color: #b8b0a0; margin: 8px 0 0; display: none; }
+  .node.active .node-summary { display: block; }
+  .node-tap { font-size: 12px; color: #606058; margin-left: 36px; }
+  .node.active .node-tap { display: none; }
+
+  /* ===== ARROWS ===== */
+  .arrow { display: flex; flex-direction: column; align-items: center; padding: 4px 0; }
+  .arrow-line { width: 1.5px; }
+  .arrow-label { font-size: 9px; letter-spacing: 1.5px; font-weight: 700; padding: 2px 0; }
+  .arrow-head { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; }
+  .arrow.red .arrow-line { background: linear-gradient(to bottom, rgba(230,120,104,0.3), rgba(230,120,104,0.15)); }
+  .arrow.red .arrow-head { border-top: 6px solid rgba(230,120,104,0.25); }
+  .arrow.red .arrow-label { color: rgba(230,120,104,0.35); }
+  .arrow.warm .arrow-line { background: linear-gradient(to bottom, rgba(230,168,104,0.3), rgba(230,168,104,0.15)); }
+  .arrow.warm .arrow-head { border-top: 6px solid rgba(230,168,104,0.25); }
+  .arrow.warm .arrow-label { color: rgba(230,168,104,0.35); }
+  .arrow.green .arrow-line { background: linear-gradient(to bottom, rgba(104,230,160,0.3), rgba(104,230,160,0.15)); }
+  .arrow.green .arrow-head { border-top: 6px solid rgba(104,230,160,0.25); }
+  .arrow.green .arrow-label { color: rgba(104,230,160,0.35); }
+
+  /* ===== CALLOUT ===== */
+  .callout {
+    margin: 24px 0; padding: 18px 20px;
+    border-radius: 8px; text-align: center;
+    background: rgba(13,28,20,0.4);
+    border: 1px solid rgba(104,230,160,0.12);
+  }
+  .callout-text { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-style: italic; line-height: 1.5; color: #68e6a0; margin-bottom: 6px; }
+  .callout-ref { font-size: 11px; letter-spacing: 1.5px; color: #507060; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    margin-top: 40px; text-align: center; padding: 20px 0;
+    border-top: 1px solid rgba(230,168,104,0.06);
+  }
+  .footer p { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: #888070; font-style: italic; line-height: 1.7; margin-bottom: 12px; }
+  .footer .see-also {
+    margin-top: 14px; font-size: 13px; color: #605850;
+  }
+  .footer .see-also a {
+    color: #e6a868; opacity: 0.5;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-weight: 400;
+    letter-spacing: 0; font-style: italic;
+    text-decoration: none; text-transform: none;
+  }
+  .footer .see-also a:hover { opacity: 0.8; }
+  .footer-line { width: 20px; height: 1px; background: rgba(230,168,104,0.25); margin: 12px auto; }
+  .footer a.back {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: #605850;
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer a.back:hover { color: #e6a868; }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 600px) {
+    .header p { font-size: 17px; }
+    .source-verse p { font-size: 18px; }
+    .key-principle p { font-size: 17px; }
+    .greek-word { font-size: 19px; }
+    .greek-gloss { font-size: 13px; }
+    .greek-note { font-size: 16px; }
+    .greek-box-label { font-size: 10px; }
+    .node-title { font-size: 13px; }
+    .node-verse { font-size: 15px; color: #a09888; }
+    .node-scripture { font-size: 18px; color: #ddd0b4; }
+    .node-summary { font-size: 15px; line-height: 1.7; }
+    .node-tap { font-size: 13px; color: #8a8278; }
+    .badge { font-size: 10px; }
+    .section-label { font-size: 10px; }
+    .section-sub { font-size: 14px; color: #8a8278; }
+    .arrow-label { font-size: 10px; }
+    .callout-text { font-size: 19px; }
+    .callout-ref { font-size: 12px; color: #8a8278; }
+    .footer p { font-size: 17px; color: #a09080; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== HEADER ===== -->
+  <div class="header">
+    <h1>The Great Commission</h1>
+    <div class="header-line"></div>
+    <p>Not a campaign to launch — a life to transmit as you go, under His authority, in His presence</p>
+  </div>
+
+  <!-- ===== SOURCE VERSE ===== -->
+  <div class="source-verse">
+    <p>"All authority has been given to Me in heaven and on earth. Go therefore and make disciples of all the nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to observe all things that I have commanded you; and lo, I am with you always, even to the end of the age."</p>
+    <span class="ref">Matthew 28:18–20</span>
+  </div>
+
+  <!-- ===== KEY PRINCIPLE ===== -->
+  <div class="key-principle">
+    <p>The commission begins and ends with <em>Christ Himself</em> — His authority (v. 18), His presence (v. 20). Everything in between is held inside that frame. When we detach the middle commands from the One who speaks them, we turn a relational commission into an institutional programme.</p>
+  </div>
+
+  <!-- ===== GREEK BOX ===== -->
+  <div class="greek-box">
+    <div class="greek-box-label">THE GREEK STRUCTURE</div>
+    <div class="greek-item">
+      <div class="greek-word">poreuthentes</div>
+      <div class="greek-gloss">AORIST PASSIVE PARTICIPLE — "HAVING GONE" / "AS YOU GO"</div>
+      <div class="greek-note">Not a command to launch a mission — an assumption that you are already moving</div>
+    </div>
+    <div class="greek-item">
+      <div class="greek-word">mathēteusate</div>
+      <div class="greek-gloss">AORIST IMPERATIVE — "MAKE DISCIPLES"</div>
+      <div class="greek-note">The only imperative in the passage — this is the actual command</div>
+    </div>
+    <div class="greek-item">
+      <div class="greek-word">baptizontes</div>
+      <div class="greek-gloss">PRESENT PARTICIPLE — "BAPTIZING"</div>
+      <div class="greek-note">Ongoing identification — not a one-time ritual</div>
+    </div>
+    <div class="greek-item">
+      <div class="greek-word">didaskontes</div>
+      <div class="greek-gloss">PRESENT PARTICIPLE — "TEACHING"</div>
+      <div class="greek-note">Teaching them to observe — not to know about</div>
+    </div>
+  </div>
+
+  <!-- ===== THE COMMON READING ===== -->
+  <div class="section"><span class="section-label red">THE COMMON READING</span><div class="section-sub">What we hear when we don't read the Greek</div></div>
+
+  <div id="flow1"></div>
+
+  <!-- ===== WHAT THE TEXT ACTUALLY SAYS ===== -->
+  <div class="section"><span class="section-label warm">WHAT THE TEXT ACTUALLY SAYS</span><div class="section-sub">The structure of the commission, word by word</div></div>
+
+  <div id="flow2"></div>
+
+  <!-- ===== THE ORGANIC COMMISSION ===== -->
+  <div class="section"><span class="section-label green">THE ORGANIC COMMISSION</span><div class="section-sub">What Christ actually sent His people to do</div></div>
+
+  <div id="flow3"></div>
+
+  <!-- ===== CALLOUT ===== -->
+  <div class="callout">
+    <div class="callout-text">"And lo, I am with you always, even to the end of the age."</div>
+    <div class="callout-ref">MATTHEW 28:20</div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">
+    <p>The commission is not a programme<br>to execute in His absence.<br><br>It is a life to transmit<br>in His presence —<br>beginning and ending<br>with Christ Himself.</p>
+    <p class="see-also">See also: <a href="head-and-body-flowchart.html">The Head and the Body</a> · <a href="gifts-and-roles-flowchart.html">Gifts, Roles, and the Ekklesia</a> · <a href="school-of-christ-flowchart.html">The School of Christ</a></p>
+    <div class="footer-line"></div>
+    <a class="back" href="index.html">← THE ETERNAL THREAD</a>
+  </div>
+
+</div>
+
+<script>
+// ===== FLOW DATA =====
+
+const flow1Data = [
+  {
+    num: 1, title: "\"GO\" AS THE COMMAND", verse: "The missionary imperative", cls: "red",
+    badge: "THE ASSUMPTION", quote: false,
+    scripture: "\"Go!\" — read as the primary command, launching an evangelistic enterprise.",
+    summary: "In the common reading, \"Go\" carries the weight of the entire passage. It becomes an imperative: Go! — leave your comfort zone, cross the ocean, launch the outreach, fund the campaign. The entire missions-industrial complex hangs on this one word. But in the Greek, poreuthentes is not an imperative at all. It is an aorist passive participle — \"having gone\" or \"as you go.\" It describes the posture in which the real command is carried out. Jesus is not commanding departure. He is assuming movement. The commission does not begin with \"Go.\" It begins with \"All authority has been given to Me.\""
+  },
+  { arrow: "red" },
+  {
+    num: 2, title: "\"MAKE CONVERTS\"", verse: "The decision model", cls: "red",
+    quote: false,
+    scripture: "\"Win souls\" — reduce the commission to securing decisions.",
+    summary: "\"Make disciples\" gets flattened into \"make converts.\" The goal becomes the moment of decision — the altar call, the sinner's prayer, the hand raised, the card signed. Once the decision is made, the commission is considered fulfilled. But mathēteusate does not mean \"secure a decision.\" It means to bring someone into the sustained reality of being a learner, a follower, someone being formed. A disciple is not someone who said yes once. A disciple is someone being shaped into the image of Christ. The decision model measures conversions. The commission measures formation."
+  },
+  { arrow: "red" },
+  {
+    num: 3, title: "BAPTISM AS RITUAL", verse: "The membership ceremony", cls: "red",
+    quote: false,
+    scripture: "\"Get them baptized\" — the next step in the programme.",
+    summary: "In the institutional reading, baptism becomes a ritual milestone — the public declaration, the church membership step, the next item on the new-believer checklist. But in Matthew 28, baptism is not a programme step. It is baptism into the name — singular — of the Father, Son, and Spirit. Into a Person. Into union. Paul will later make this explicit: baptized into Christ's death, buried with Him, raised with Him (Romans 6:3–4). The commission's baptism is identification with a Person, not enrolment in an institution."
+  },
+  { arrow: "red" },
+  {
+    num: 4, title: "TEACHING AS INFORMATION", verse: "The curriculum model", cls: "red",
+    quote: false,
+    scripture: "\"Teach them the basics\" — transfer content, check the box.",
+    summary: "The final participle — \"teaching them\" — gets read as information transfer. Create a curriculum. Run a class. Cover the doctrinal basics. Make sure they know the right answers. But Jesus does not say \"teaching them all things I have commanded.\" He says \"teaching them to observe\" — tērein, to keep, to guard, to hold fast. The object is not knowledge. It is obedience that flows from life. You cannot teach someone to observe by giving them a textbook. You teach them to observe by living alongside them — which is exactly what Jesus did with twelve men for three years."
+  },
+];
+
+const flow2Data = [
+  {
+    num: 5, title: "ALL AUTHORITY", verse: "Matthew 28:18", cls: "warm",
+    badge: "THE GROUND",
+    scripture: "All authority has been given to Me in heaven and on earth.",
+    summary: "The commission does not begin with a command. It begins with a declaration. All authority — not some, not spiritual authority only, not authority over the church — all authority, in heaven and on earth, has been given to Christ. This is the ground of everything that follows. The disciples are not sent out on their own initiative, their own strength, or their own programme. They are sent under the total, cosmic authority of the risen Christ. \"Therefore\" — because of this authority — go. Every command in the passage flows from this reality. Without it, the commission is a human project. With it, it is the outworking of His reign."
+  },
+  { arrow: "warm" },
+  {
+    num: 6, title: "AS YOU GO", verse: "Matthew 28:19a — poreuthentes", cls: "warm",
+    scripture: "Go therefore…",
+    summary: "Poreuthentes is a participle, not an imperative. The grammatical force is attendant circumstance: \"as you go\" or \"having gone.\" Jesus is not commanding a special departure. He is describing the normal movement of their lives. As you go — into the marketplace, into the next village, into your daily round — in the course of your going, make disciples. This reframes everything. The commission is not a special event. It is not a programme to be launched or a campaign to be funded. It is what happens naturally when people who live under Christ's authority move through the world carrying His life. The going is assumed. The disciple-making is the command."
+  },
+  { arrow: "warm" },
+  {
+    num: 7, title: "MAKE DISCIPLES", verse: "Matthew 28:19b — mathēteusate", cls: "warm",
+    badge: "THE IMPERATIVE",
+    scripture: "…make disciples of all the nations…",
+    summary: "This is the only imperative verb in the passage. Not \"go,\" not \"baptize,\" not \"teach\" — those are all participles. The single command is: make disciples. A mathētēs is a learner — but not in the modern classroom sense. In first-century Jewish culture, a disciple was someone who attached themselves to a teacher, who walked where the teacher walked, who absorbed the teacher's life and not merely the teacher's information. \"Make disciples\" means to reproduce in others what Christ has produced in you. Not by running a programme, but by transmitting a life. This is why Paul could say \"Be imitators of me, as I am of Christ\" (1 Cor. 11:1). He was doing what the commission describes."
+  },
+  { arrow: "warm" },
+  {
+    num: 8, title: "BAPTIZING INTO THE NAME", verse: "Matthew 28:19c — baptizontes", cls: "warm",
+    scripture: "…baptizing them in the name of the Father and of the Son and of the Holy Spirit…",
+    summary: "The present participle baptizontes describes an ongoing reality that accompanies disciple-making. And the object is striking: into the name — singular, not names. The three Persons share one name, one identity, one reality. To baptize someone into the name of the Triune God is not a ritual checkbox. It is identification. It is bringing someone into the reality of the God who is — Father, Son, and Spirit. Paul understood this: \"As many of you as were baptized into Christ have put on Christ\" (Gal. 3:27). The commission's baptism is entrance into a Person, not an institution. Union, not membership."
+  },
+  { arrow: "warm" },
+  {
+    num: 9, title: "TEACHING THEM TO OBSERVE", verse: "Matthew 28:20a — didaskontes tērein", cls: "warm",
+    scripture: "…teaching them to observe all things that I have commanded you…",
+    summary: "The second present participle: teaching. But the object is not information — it is tērein, \"to keep, to guard, to observe.\" Jesus does not say \"teaching them all that I commanded.\" He says \"teaching them to observe all that I commanded.\" The difference is enormous. One produces people who know right answers. The other produces people who live in obedience. And the method matters: Jesus taught twelve men to observe by living with them. He did not give lectures. He walked with them, ate with them, let them watch Him pray, corrected them in real time, and sent them out to practise what they'd seen. Teaching them to observe requires proximity, not curriculum. It requires a life to imitate, not a syllabus to complete."
+  },
+  { arrow: "warm", label: "BOOKENDED BY" },
+  {
+    num: 10, title: "I AM WITH YOU", verse: "Matthew 28:20b", cls: "warm",
+    badge: "THE PROMISE",
+    scripture: "…and lo, I am with you always, even to the end of the age.",
+    summary: "The commission ends where it began — with Christ Himself. It opened with His authority. It closes with His presence. Everything in between — the going, the disciple-making, the baptizing, the teaching — is held inside this frame. The commission is not a task to execute in His absence. It is work carried out in His presence, by His authority, through His life. \"I am with you\" — not \"I will watch from heaven.\" Not \"I will empower you from a distance.\" I am with you. Always. To the end. The entire commission, from first word to last, is Christ-saturated. Pull Him out of the frame and all you have left is a human programme."
+  },
+];
+
+const flow3Data = [
+  {
+    num: 11, title: "NOT A PROGRAMME — A LIFE", verse: "1 Thessalonians 2:8 · Acts 2:42–47", cls: "green",
+    badge: "THE REALITY",
+    scripture: "So, affectionately longing for you, we were well pleased to impart to you not only the gospel of God, but also our own lives, because you had become dear to us.",
+    summary: "Paul's practice in Thessalonica is the commission in action. He did not run an evangelism campaign. He shared his life. He imparted not only the gospel as message — but his own life as a living demonstration of that message. The early church in Acts 2 did the same thing: they continued in the apostles' teaching, in fellowship, in the breaking of bread, and in prayer. This was not a programme. It was a shared life. Disciple-making happened in the fabric of daily existence — meals, conversations, worship, work. The commission is fulfilled not when we launch initiatives but when we live a shared life in which Christ is being transmitted from one person to another."
+  },
+  { arrow: "green" },
+  {
+    num: 12, title: "THE EKKLESIA, NOT THE ENTERPRISE", verse: "Colossians 1:28–29", cls: "green",
+    scripture: "Him we preach, warning every man and teaching every man in all wisdom, that we may present every man complete in Christ.",
+    summary: "Paul's goal is not conversions tallied. It is \"every man complete in Christ\" — teleion, mature, fully formed. This is the commission's fruit. Not decisions. Not baptismal records. Not church growth statistics. But whole people — people in whom Christ is being formed, people being presented mature in Him. And the method? \"Him we preach.\" Not a system. Not a methodology. Christ Himself. The commission produces an ekklesia — a living, breathing community of people being formed into Christ's image — not an enterprise managing campaigns. The organic body, where every member functions under the head, is the natural environment in which the commission bears fruit."
+  },
+  { arrow: "green" },
+  {
+    num: 13, title: "UNDER HIS AUTHORITY, IN HIS PRESENCE", verse: "Matthew 28:18, 20", cls: "green",
+    badge: "THE FRAME",
+    scripture: "All authority has been given to Me… and lo, I am with you always.",
+    summary: "The commission's first and last words are both about Christ. His authority opens it. His presence closes it. The commands sit inside that frame — and they only make sense inside it. Apart from His authority, \"make disciples\" is just another human programme. Apart from His presence, \"teaching them to observe\" is just moral instruction. The commission is not a set of tasks delegated to us while Christ is away. It is the overflow of a people who live under His reign and in His company. When the church reduces the commission to an evangelistic strategy, it has extracted the middle of the sentence from the Person who speaks it. The Great Commission is not great because of its scope. It is great because of the One who gives it — and who never leaves."
+  },
+];
+
+// ===== BUILD FUNCTIONS =====
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls}`;
+  div.onclick = () => {
+    const was = div.classList.contains('active');
+    document.querySelectorAll('.node').forEach(el => el.classList.remove('active'));
+    if (!was) div.classList.add('active');
+  };
+  let h = '';
+  if (n.badge) h += `<div class="badge">${n.badge}</div>`;
+  h += `<div class="node-header"><span class="node-number">${n.num}</span><div>`;
+  h += `<h3 class="node-title">${n.title}</h3>`;
+  h += `<span class="node-verse">${n.verse}</span></div></div>`;
+  const quoteClass = n.quote === false ? ' no-quote' : '';
+  h += n.quote === false ? `<div class="node-scripture${quoteClass}">${n.scripture}</div>` : `<div class="node-scripture">\u201C${n.scripture}\u201D</div>`;
+  h += `<div class="node-summary">${n.summary}</div>`;
+  h += `<div class="node-tap">Tap to expand</div>`;
+  div.innerHTML = h;
+  return div;
+}
+function buildArrow(cfg) {
+  const div = document.createElement('div');
+  div.className = `arrow ${cfg.cls}`;
+  const lh = cfg.label ? '16px' : '22px';
+  let h = `<div class="arrow-line" style="height:${lh}"></div>`;
+  if (cfg.label) h += `<span class="arrow-label">${cfg.label}</span>`;
+  h += '<div class="arrow-head"></div>';
+  div.innerHTML = h;
+  return div;
+}
+
+// Render flows
+const f1 = document.getElementById('flow1');
+flow1Data.forEach(item => {
+  if (item.arrow !== undefined) f1.appendChild(buildArrow({ cls: item.arrow, label: item.label }));
+  else f1.appendChild(buildNode(item));
+});
+const f2 = document.getElementById('flow2');
+flow2Data.forEach(item => {
+  if (item.arrow !== undefined) f2.appendChild(buildArrow({ cls: item.arrow, label: item.label }));
+  else f2.appendChild(buildNode(item));
+});
+const f3 = document.getElementById('flow3');
+flow3Data.forEach(item => {
+  if (item.arrow !== undefined) f3.appendChild(buildArrow({ cls: item.arrow, label: item.label }));
+  else f3.appendChild(buildNode(item));
+});
+</script>
+</body>
+</html>
