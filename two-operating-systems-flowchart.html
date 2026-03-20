@@ -42,6 +42,41 @@
     font-size: 13px; color: #606058; letter-spacing: 2px; margin-top: 4px;
   }
 
+  /* ─── Misread / Actual meaning boxes ─── */
+  .misread-box {
+    margin: 0 0 20px; padding: 22px 18px;
+    border-radius: 10px;
+    background: rgba(46,26,26,0.25);
+    border: 1px solid rgba(230,104,104,0.12);
+    text-align: center;
+  }
+  .misread-box-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px;
+    color: #e66868; margin-bottom: 12px;
+  }
+  .misread-box-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #a08080; font-style: italic; line-height: 1.7;
+  }
+  .misread-box-text em { color: #e66868; font-style: italic; }
+
+  .actual-box {
+    margin: 0 0 28px; padding: 22px 18px;
+    border-radius: 10px;
+    background: rgba(13,28,20,0.25);
+    border: 1px solid rgba(104,230,160,0.12);
+    text-align: center;
+  }
+  .actual-box-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px;
+    color: #68e6a0; margin-bottom: 12px;
+  }
+  .actual-box-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #80a090; font-style: italic; line-height: 1.7;
+  }
+  .actual-box-text em { color: #68e6a0; font-style: italic; }
+
   /* Definition */
   .def {
     margin: 0 0 24px; padding: 20px;
@@ -492,6 +527,14 @@
       font-size: 10px;
     }
 
+    /* ── MISREAD / ACTUAL BOXES ── */
+    .misread-box-text, .actual-box-text {
+      font-size: 17px;
+    }
+    .misread-box-label, .actual-box-label {
+      font-size: 10px;
+    }
+
     /* ── GREEK / REFERENCE TEXT ── */
     .greek, .part-greek, .state-greek {
       font-size: 14px;
@@ -687,6 +730,25 @@
     <div class="header-line"></div>
     <p>Why everything from the flesh misses the mark — even the "good" things</p>
     <div class="greek">ἁμαρτία — hamartia — to miss the mark</div>
+  </div>
+
+  <!-- ─── The common misunderstanding ─── -->
+  <div class="misread-box">
+    <div class="misread-box-label">THE COMMON MISUNDERSTANDING</div>
+    <div class="misread-box-text">
+      "Walk in the Spirit" = <em>try harder to resist sin.</em><br>
+      Suppress the flesh. Discipline yourself. Push through.<br>
+      The Spirit helps — <em>but you still have to drive.</em>
+    </div>
+  </div>
+
+  <div class="actual-box">
+    <div class="actual-box-label">WHAT PAUL ACTUALLY SAYS</div>
+    <div class="actual-box-text">
+      "Walk in the Spirit" = <em>draw life from a different source entirely.</em><br>
+      Not willpower against flesh — <em>displacement of flesh.</em><br>
+      "You shall not fulfil the lust of the flesh" — as a <em>result</em>, not as a goal.
+    </div>
   </div>
 
   <!-- Definition -->
