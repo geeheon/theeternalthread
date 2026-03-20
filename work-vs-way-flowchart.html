@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="nav-widget.css">
+<link rel="stylesheet" href="audio-widget.css">
+<script defer src="nav-widget.js"></script>
+<script defer src="audio-widget.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>The Work vs The Way of the Cross</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: #0a0a10;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: #c0c0d8;
+    letter-spacing: 3px;
+    line-height: 1.3;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #c0c0d8, transparent);
+    margin: 10px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #888090;
+    font-style: italic;
+  }
+
+  /* ─── Scripture block ─── */
+  .scripture-block {
+    text-align: center;
+    margin-bottom: 28px;
+    padding: 24px 20px;
+    border-radius: 10px;
+    background: rgba(16, 16, 28, 0.5);
+    border: 1px solid rgba(192, 192, 216, 0.12);
+  }
+  .scripture-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(192, 192, 216, 0.5);
+    margin-bottom: 12px;
+  }
+  .scripture-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #c8c8d8;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .scripture-text em {
+    color: #c0c0d8;
+    font-style: italic;
+  }
+  .scripture-ref {
+    font-size: 11px;
+    color: #606878;
+    letter-spacing: 1.5px;
+  }
+
+  /* ─── Two-column contrast ─── */
+  .contrast {
+    margin: 0 0 24px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(192, 192, 216, 0.1);
+  }
+  .contrast-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(16, 16, 24, 0.5);
+    border-bottom: 1px solid rgba(192, 192, 216, 0.06);
+  }
+  .contrast-header span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(192, 192, 216, 0.5);
+  }
+  .contrast-row { display: flex; }
+  .contrast-col { flex: 1; padding: 18px 14px; }
+  .contrast-col.work {
+    background: rgba(13, 18, 28, 0.3);
+    border-right: 1px solid rgba(192, 192, 216, 0.04);
+  }
+  .contrast-col.way {
+    background: rgba(20, 16, 28, 0.3);
+  }
+  .contrast-col-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .contrast-col.work .contrast-col-label { color: #c0c0d8; }
+  .contrast-col.way .contrast-col-label { color: #d0b0e0; }
+  .contrast-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    line-height: 2;
+    font-style: italic;
+    text-align: center;
+  }
+  .contrast-col.work .contrast-item { color: #90a0b8; }
+  .contrast-col.way .contrast-item { color: #b0a0c0; }
+  .contrast-footer {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-top: 12px;
+    padding-top: 10px;
+  }
+  .contrast-col.work .contrast-footer {
+    color: rgba(192, 192, 216, 0.45);
+    border-top: 1px solid rgba(192, 192, 216, 0.1);
+  }
+  .contrast-col.way .contrast-footer {
+    color: rgba(208, 176, 224, 0.45);
+    border-top: 1px solid rgba(208, 176, 224, 0.1);
+  }
+
+  /* ─── Flow arrows ─── */
+  .flow-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0;
+  }
+  .flow-line {
+    width: 1.5px;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(192, 192, 216, 0.35), rgba(192, 192, 216, 0.12));
+  }
+  .flow-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: rgba(192, 192, 216, 0.4);
+    padding: 3px 0;
+    text-align: center;
+  }
+  .flow-head {
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid rgba(192, 192, 216, 0.25);
+  }
+
+  /* ─── Section labels ─── */
+  .section-label {
+    text-align: center;
+    margin: 28px 0 16px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(192, 192, 216, 0.08);
+  }
+  .section-label span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(192, 192, 216, 0.35);
+  }
+
+  /* ─── Expandable nodes ─── */
+  .node {
+    margin: 8px 0;
+    border-radius: 10px;
+    padding: 18px 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .node.silver {
+    background: rgba(16, 16, 28, 0.5);
+    border: 1.5px solid rgba(192, 192, 216, 0.15);
+  }
+  .node.silver.active {
+    background: rgba(16, 16, 28, 0.9);
+    border-color: #c0c0d8;
+    box-shadow: 0 0 25px rgba(192, 192, 216, 0.06), 0 4px 20px rgba(0,0,0,0.3);
+    transform: scale(1.02);
+  }
+  .node.green {
+    background: rgba(13, 28, 20, 0.5);
+    border: 1.5px solid rgba(104, 230, 160, 0.15);
+  }
+  .node.green.active {
+    background: rgba(13, 28, 20, 0.9);
+    border-color: #68e6a0;
+    box-shadow: 0 0 25px rgba(104, 230, 160, 0.06), 0 4px 20px rgba(0,0,0,0.3);
+    transform: scale(1.02);
+  }
+  .node.red {
+    background: rgba(46, 26, 26, 0.5);
+    border: 1.5px solid rgba(230, 104, 104, 0.15);
+  }
+  .node.red.active {
+    background: rgba(46, 26, 26, 0.9);
+    border-color: #e66868;
+    box-shadow: 0 0 25px rgba(230, 104, 104, 0.06), 0 4px 20px rgba(0,0,0,0.3);
+    transform: scale(1.02);
+  }
+  .node.gold {
+    background: rgba(28, 24, 16, 0.5);
+    border: 1.5px solid rgba(230, 192, 104, 0.15);
+  }
+  .node.gold.active {
+    background: rgba(28, 24, 16, 0.9);
+    border-color: #e6c068;
+    box-shadow: 0 0 25px rgba(230, 192, 104, 0.06), 0 4px 20px rgba(0,0,0,0.3);
+    transform: scale(1.02);
+  }
+
+  .node-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .node.active .node-header { margin-bottom: 10px; }
+
+  .node-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1;
+    opacity: 0.4;
+  }
+  .node.silver .node-number { color: #c0c0d8; }
+  .node.green .node-number { color: #68e6a0; }
+  .node.red .node-number { color: #e66868; }
+  .node.gold .node-number { color: #e6c068; }
+
+  .node-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0;
+  }
+  .node.silver .node-title { color: #c0c0d8; }
+  .node.green .node-title { color: #68e6a0; }
+  .node.red .node-title { color: #e66868; }
+  .node.gold .node-title { color: #e6c068; }
+
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+  }
+  .node.silver .node-verse { color: rgba(192, 192, 216, 0.45); }
+  .node.green .node-verse { color: rgba(104, 230, 160, 0.45); }
+  .node.red .node-verse { color: rgba(230, 104, 104, 0.45); }
+  .node.gold .node-verse { color: rgba(230, 192, 104, 0.45); }
+
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #d4c5a0;
+    margin: 8px 0;
+    font-style: italic;
+    border-left: 2px solid;
+    padding-left: 14px;
+    display: none;
+  }
+  .node.active .node-scripture { display: block; }
+  .node.silver .node-scripture { border-left-color: rgba(192, 192, 216, 0.25); }
+  .node.green .node-scripture { border-left-color: rgba(104, 230, 160, 0.25); }
+  .node.red .node-scripture { border-left-color: rgba(230, 104, 104, 0.25); }
+  .node.gold .node-scripture { border-left-color: rgba(230, 192, 104, 0.25); }
+
+  .node-summary {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #b8b0a0;
+    margin: 8px 0 0;
+    display: none;
+  }
+  .node.active .node-summary { display: block; }
+
+  .node-tap {
+    font-size: 12px;
+    color: #606068;
+    margin-top: 4px;
+  }
+  .node.active .node-tap { display: none; }
+
+  /* ─── Burden / summary block ─── */
+  .burden {
+    text-align: center;
+    margin: 24px 0;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(16, 16, 28, 0.25);
+    border: 1px solid rgba(192, 192, 216, 0.1);
+  }
+  .burden p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #a0a8b8;
+    font-style: italic;
+    line-height: 1.7;
+  }
+  .burden p em { color: #c0c0d8; font-style: italic; }
+
+  /* ─── Footer ─── */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(192, 192, 216, 0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: #888898;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .footer-line {
+    width: 20px;
+    height: 1px;
+    background: rgba(192, 192, 216, 0.25);
+    margin: 16px auto;
+  }
+  .footer a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #605850;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .footer a:hover { color: #c0c0d8; }
+
+  /* ─── MOBILE FIXES ─── */
+  @media (max-width: 600px) {
+    .scripture-text { font-size: 19px; }
+    .contrast-item { font-size: 14px; }
+    .contrast-footer { font-size: 11px; }
+    .node-title { font-size: 13px; }
+    .node-verse { font-size: 15px; }
+    .node-scripture { font-size: 18px; color: #ddd0b4; }
+    .node-summary { font-size: 15px; line-height: 1.7; }
+    .node-tap { font-size: 13px; color: #8a8278; }
+    .burden p { font-size: 17px; }
+    .footer p { font-size: 16px; color: #706860; }
+    .header p { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>THE WORK VS THE WAY<br>OF THE CROSS</h1>
+    <div class="header-line"></div>
+    <p>Galatians 6:14 · Philippians 3:10</p>
+  </div>
+
+  <!-- ─── Opening Scripture ─── -->
+  <div class="scripture-block">
+    <div class="scripture-label">THE CROSS IN FULL</div>
+    <div class="scripture-text">"God forbid that I should glory, save in the cross of our Lord Jesus Christ, by whom the world is crucified unto me, and I unto the world."</div>
+    <div class="scripture-ref">GALATIANS 6:14</div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">ONE EVENT — TWO DIMENSIONS</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ─── Contrast: Work vs Way ─── -->
+  <div class="contrast">
+    <div class="contrast-header">
+      <span>THE CROSS OF CHRIST</span>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-col work">
+        <div class="contrast-col-label">THE WORK</div>
+        <div class="contrast-item">Accomplished once</div>
+        <div class="contrast-item">Finished at Calvary</div>
+        <div class="contrast-item">Objective fact</div>
+        <div class="contrast-item">Christ died for me</div>
+        <div class="contrast-item">Believed and reckoned</div>
+        <div class="contrast-item">Justification</div>
+        <div class="contrast-footer">WHAT CHRIST DID</div>
+      </div>
+      <div class="contrast-col way">
+        <div class="contrast-col-label">THE WAY</div>
+        <div class="contrast-item">Experienced daily</div>
+        <div class="contrast-item">Ongoing in the believer</div>
+        <div class="contrast-item">Subjective reality</div>
+        <div class="contrast-item">I die with Christ</div>
+        <div class="contrast-item">Embraced and walked</div>
+        <div class="contrast-item">Transformation</div>
+        <div class="contrast-footer">WHAT THE CROSS DOES IN ME</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── THE WORK ─── -->
+  <div class="section-label"><span>THE WORK OF THE CROSS</span></div>
+
+  <div id="work-nodes"></div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">OLD TESTAMENT TYPE</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <div id="redsea-node"></div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">BUT THERE IS A SECOND DIMENSION</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ─── THE WAY ─── -->
+  <div class="section-label"><span>THE WAY OF THE CROSS</span></div>
+
+  <div id="way-nodes"></div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">OLD TESTAMENT TYPE</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <div id="jordan-node"></div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">THE DIAGNOSTIC</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ─── THE GAP ─── -->
+  <div class="section-label"><span>THE WILDERNESS</span></div>
+
+  <div id="gap-nodes"></div>
+
+  <!-- ─── Burden ─── -->
+  <div class="burden">
+    <p>The cross is not <em>only</em> an event behind you.</p>
+    <p>It is a <em>path</em> beneath you.</p>
+    <p>The Work sets you free. The Way forms you.</p>
+    <p>You cannot have the <em>image</em> without both.</p>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">WHAT THE WAY REQUIRES</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- ─── RESOLUTION ─── -->
+  <div class="section-label"><span>THE RESULT</span></div>
+
+  <div id="result-nodes"></div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>The cross is not a doctrine to be mastered.<br>
+    It is a Person to be conformed to —<br>
+    until there is nothing left<br>
+    but <em>Christ</em>.</p>
+    <div class="footer-line"></div>
+    <a href="index.html">← THE ETERNAL THREAD</a>
+  </div>
+
+</div>
+
+<script>
+const work = [
+  {
+    num: "01",
+    title: "WHAT CHRIST ACCOMPLISHED",
+    verse: "Romans 6:6 · Colossians 2:13–14",
+    cls: "silver",
+    group: "work",
+    scripture: "Knowing this, that our old man was crucified with Him, that the body of sin might be done away with, that we should no longer be slaves of sin.",
+    summary: "The Work of the Cross is what Christ accomplished objectively, once for all, finished at Calvary. The old man crucified. The handwriting of ordinances blotted out. Sins forgiven. The law's claim satisfied. Reconciliation accomplished. There is nothing to add to it. It is not a process — it is a fact. The believer's response to the Work is not effort but reckoning: counting as true what God has already done. This is the foundation of Romans 6 — 'reckon yourselves to be dead indeed to sin.' The verb is in the indicative, not the imperative. You are not told to die. You are told to count yourself as already dead."
+  },
+  {
+    num: "02",
+    title: "COMPLETE — NOTHING TO ADD",
+    verse: "John 19:30 · Hebrews 10:14",
+    cls: "silver",
+    group: "work",
+    scripture: "For by one offering He has perfected forever those who are being sanctified.",
+    summary: "The Work cannot be improved, supplemented, or repeated. 'It is finished' is the most theologically loaded sentence in Scripture. The sacrifice is complete. The veil is torn. Access is permanent. Every attempt to re-earn, re-qualify, or re-secure what was accomplished at Calvary is a reversion to the principle of law. The Work stands outside of time and outside of your experience. It is not dependent on how you feel about it. Your worst day does not diminish it. Your best day does not add to it. This is positional truth — and it is the ground on which everything else rests."
+  }
+];
+
+const redsea = [
+  {
+    num: "",
+    title: "THE RED SEA — DELIVERANCE FROM EGYPT",
+    verse: "Exodus 14:13–14",
+    cls: "gold",
+    group: "redsea",
+    scripture: "And Moses said to the people, 'Do not be afraid. Stand still, and see the salvation of the LORD, which He will accomplish for you today. For the Egyptians whom you see today, you shall see again no more forever. The LORD will fight for you, and you shall hold your peace.'",
+    summary: "The crossing of the Red Sea is the Old Testament type of the Work of the Cross. Israel did not fight — God acted. The sea opened, the people walked through on dry ground, and Egypt was destroyed behind them. This is objective, once-for-all deliverance. The old life annihilated. The enemy drowned. And the critical detail: Israel contributed nothing to it. They stood still. They held their peace. God fought. This is the gospel in picture form — salvation accomplished entirely by another. The believer's position after the Red Sea is: out of Egypt, free, no longer slaves. Positional deliverance."
+  }
+];
+
+const way = [
+  {
+    num: "03",
+    title: "DAILY DYING",
+    verse: "Luke 9:23 · Philippians 3:10",
+    cls: "silver",
+    group: "way",
+    scripture: "Then He said to them all, 'If anyone desires to come after Me, let him deny himself, and take up his cross daily, and follow Me.'",
+    summary: "The Way of the Cross is the ongoing subjective experience — the daily outworking of what Calvary accomplished. It is not a second cross and it is not a repetition of Calvary. It is the progressive application of the one cross to the believer's actual soul: will, desires, ambitions, self-sufficiency, independence. 'Take up your cross daily' is not a general call to hardship. It is a specific call to consent — consenting to the death of the self-life so that the life of Christ can be expressed. Most Christians know the Work. Far fewer have embraced the Way. They accept that Christ died for them but resist the daily dying that conforms them to His image."
+  },
+  {
+    num: "04",
+    title: "THE BREAKING OF THE OUTER MAN",
+    verse: "2 Corinthians 4:7–12 · John 12:24",
+    cls: "silver",
+    group: "way",
+    scripture: "But we have this treasure in earthen vessels, that the excellence of the power may be of God and not of us — always carrying about in the body the dying of the Lord Jesus, that the life of Jesus also may be manifested in our body.",
+    summary: "The Way of the Cross is not self-punishment and it is not asceticism. It is God's progressive breaking of the outer man — the shell of self-confidence, self-direction, and self-reliance — so that the treasure within can be released. The grain of wheat falls into the ground and dies. The shell cracks. The life comes forth. This is not a one-time event but a continuous pattern: loss, pressure, failure, closed doors — each one designed to thin the vessel so that Christ can shine through. The treasure is already inside. The problem has never been the absence of Christ. The problem is the thickness of the vessel."
+  }
+];
+
+const jordan = [
+  {
+    num: "",
+    title: "THE JORDAN — ENTRY INTO THE LAND",
+    verse: "Joshua 3:13–17",
+    cls: "gold",
+    group: "jordan",
+    scripture: "And it shall come to pass, as soon as the soles of the feet of the priests who bear the ark of the LORD, the Lord of all the earth, shall rest in the waters of the Jordan, that the waters of the Jordan shall be cut off.",
+    summary: "The crossing of the Jordan is the Old Testament type of the Way of the Cross. Unlike the Red Sea, the Jordan required participation. The priests' feet had to touch the water before it parted. The land was promised — but it had to be possessed, city by city, battle by battle. Every stronghold in Canaan is a picture of something in the self-life that must be displaced by Christ. The inheritance is real and guaranteed — but it will not simply fall into your lap. You must walk into it. This is the subjective dimension: not earning what was given, but experientially possessing what was positionally secured. Israel was delivered at the Red Sea. Israel was transformed in Canaan."
+  }
+];
+
+const gap = [
+  {
+    num: "",
+    title: "THE GAP — AFFIRMING THE WORK, AVOIDING THE WAY",
+    verse: "Hebrews 3:16–19",
+    cls: "red",
+    group: "gap",
+    scripture: "For who, having heard, rebelled? Indeed, was it not all who came out of Egypt, led by Moses? Now with whom was He angry forty years? Was it not with those who sinned, whose corpses fell in the wilderness? And to whom did He swear that they would not enter His rest, but to those who did not obey?",
+    summary: "Between the Red Sea and the Jordan there is a wilderness — and an entire generation died in it. They believed in the deliverance. They celebrated it. They sang about it on the far shore. But they refused the journey. They wanted out of Egypt without entry into Canaan. Deliverance without transformation. The Work without the Way. This is the justified-but-untransformed Christian. Sound on the doctrine of the cross. Orthodox on substitutionary atonement. And yet the self-life untouched, the soul unbroken, the old patterns of independence intact. The Wilderness is not a place of atheism. It is a place of correct belief and zero possession — a generation that could recite the story of the Red Sea while refusing to cross the Jordan."
+  },
+  {
+    num: "",
+    title: "BELIEVING BUT NOT ENTERING",
+    verse: "Hebrews 4:1–2",
+    cls: "red",
+    group: "gap",
+    scripture: "Therefore, since a promise remains of entering His rest, let us fear lest any of you seem to have come short of it. For indeed the gospel was preached to us as well as to them; but the word which they heard did not profit them, not being mixed with faith in those who heard it.",
+    summary: "The generation that fell in the Wilderness did not lack information. They had seen the plagues. They had walked through the sea on dry ground. They had received the law at Sinai. Their problem was not unbelief about the Exodus — they were there. Their problem was unbelief about the Land. They trusted God's rescue but not God's lordship. They wanted His salvation but not His transformation. Hebrews makes this explicit: 'the word did not profit them, not being mixed with faith.' They heard. They believed the facts. But they would not step into the river. And so an entire generation circled the same ground for forty years — free from Egypt, short of Canaan, and dying in between."
+  }
+];
+
+const result = [
+  {
+    num: "",
+    title: "CONSENT, NOT EFFORT",
+    verse: "Philippians 2:12–13",
+    cls: "silver",
+    group: "result",
+    scripture: "Work out your own salvation with fear and trembling; for it is God who works in you both to will and to do for His good pleasure.",
+    summary: "The Way of the Cross is not a return to self-effort — that would undo the Work. It is consent. The believer's part is agreement with God's verdict on the self-life: 'Yes, that must go.' The breaking is God's work; the consent is yours. Philippians 2 holds both sides in a single sentence: 'work out' — because there is something for you to do — 'for it is God who works in you' — because the energy, the will, and the ability are all His. This is not passivity and it is not activism. It is the yielded life. The branch does not strain to bear fruit. It remains in the vine. And the vine does everything."
+  },
+  {
+    num: "",
+    title: "CONFORMED TO HIS IMAGE",
+    verse: "Romans 8:28–29",
+    cls: "green",
+    group: "result",
+    scripture: "And we know that all things work together for good to those who love God, to those who are the called according to His purpose. For whom He foreknew, He also predestined to be conformed to the image of His Son.",
+    summary: "This is the destination of both the Work and the Way. The 'good' of Romans 8:28 is not comfort, not prosperity, not a trouble-free life. It is conformity to the image of His Son. The Work of the Cross makes this legally possible — the old man is crucified, the new creation is established, the believer is positioned in Christ. The Way of the Cross makes it actually real — the self-life is progressively broken, and Christ fills the space that self once occupied. Both are the cross. Neither is optional. The Work without the Way produces an orthodox life that never changes. The Way without the Work produces striving with no foundation. Together, they produce what God was after before the foundation of the world: a people conformed to the image of His Son."
+  }
+];
+
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls}`;
+  div.onclick = () => {
+    const isActive = div.classList.contains('active');
+    document.querySelectorAll(`.node[data-group="${n.group}"]`).forEach(el => el.classList.remove('active'));
+    if (!isActive) div.classList.add('active');
+  };
+  div.setAttribute('data-group', n.group);
+
+  let html = '<div class="node-header"><div>';
+  if (n.num) html += `<div class="node-number">${n.num}</div>`;
+  html += `<h3 class="node-title">${n.title}</h3>`;
+  html += `<span class="node-verse">${n.verse}</span>`;
+  html += '</div></div>';
+  html += `<div class="node-scripture">"${n.scripture}"</div>`;
+  html += `<div class="node-summary">${n.summary}</div>`;
+  html += '<div class="node-tap">Tap to expand</div>';
+
+  div.innerHTML = html;
+  return div;
+}
+
+document.getElementById('work-nodes').append(...work.map(n => buildNode(n)));
+document.getElementById('redsea-node').append(...redsea.map(n => buildNode(n)));
+document.getElementById('way-nodes').append(...way.map(n => buildNode(n)));
+document.getElementById('jordan-node').append(...jordan.map(n => buildNode(n)));
+document.getElementById('gap-nodes').append(...gap.map(n => buildNode(n)));
+document.getElementById('result-nodes').append(...result.map(n => buildNode(n)));
+</script>
+</body>
+</html>
