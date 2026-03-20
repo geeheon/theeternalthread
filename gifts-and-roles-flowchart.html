@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="nav-widget.css">
+  <link rel="stylesheet" href="audio-widget.css">
+  <script defer src="nav-widget.js"></script>
+  <script defer src="audio-widget.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Gifts, Roles, and the Ekklesia — The Eternal Thread</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0f0f17;
+      color: #e8e0d8;
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 48px 20px 64px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 460px;
+      width: 100%;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 26px;
+      color: #e6a868;
+      letter-spacing: 0.5px;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .header-line {
+      width: 50px;
+      height: 1px;
+      margin: 10px auto 14px;
+      background: linear-gradient(90deg, transparent, #e6a868, transparent);
+    }
+
+    .header p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: #b8b0a0;
+      line-height: 1.5;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+
+    /* ===== CENTRAL QUOTE ===== */
+    .source-verse {
+      text-align: center;
+      margin-bottom: 32px;
+      padding: 18px 16px;
+      border-top: 1px solid rgba(230,168,104,0.12);
+      border-bottom: 1px solid rgba(230,168,104,0.12);
+    }
+
+    .source-verse p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: #c8c0b8;
+      line-height: 1.55;
+    }
+
+    .source-verse .ref {
+      display: block;
+      margin-top: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-style: normal;
+      font-size: 11px;
+      color: #908880;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ===== KEY PRINCIPLE ===== */
+    .key-principle {
+      text-align: center;
+      margin-bottom: 32px;
+      padding: 0 8px;
+    }
+
+    .key-principle p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15.5px;
+      color: #a8a098;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .key-principle em {
+      color: #e6a868;
+      font-style: italic;
+    }
+
+    /* ===== CONTRAST BLOCKS ===== */
+    .contrast-section {
+      margin-bottom: 28px;
+    }
+
+    .contrast-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .contrast-item {
+      flex: 1;
+      padding: 10px 10px;
+      border-radius: 5px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .contrast-item.left {
+      background: rgba(90,60,60,0.1);
+      border-left: 2px solid rgba(180,100,100,0.25);
+      color: #b8a098;
+    }
+
+    .contrast-item.right {
+      background: rgba(90,75,50,0.1);
+      border-left: 2px solid rgba(230,168,104,0.25);
+      color: #c0b098;
+    }
+
+    .contrast-item .label {
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .contrast-item.left .label { color: #c08080; }
+    .contrast-item.right .label { color: #e6a868; }
+
+    .diagram-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #706860;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    /* ===== BURDEN ===== */
+    .centre-burden {
+      text-align: center;
+      padding: 20px 12px;
+      margin-bottom: 28px;
+      border-top: 1px solid rgba(230,168,104,0.08);
+      border-bottom: 1px solid rgba(230,168,104,0.08);
+    }
+
+    .burden-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #706860;
+      margin-bottom: 10px;
+    }
+
+    .centre-burden p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14.5px;
+      color: #a8a098;
+      line-height: 1.65;
+      font-style: italic;
+    }
+
+    .centre-burden p + p {
+      margin-top: 10px;
+    }
+
+    /* ===== NODE CARDS ===== */
+    .group-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #706860;
+      margin: 24px 0 10px;
+      padding-left: 2px;
+    }
+
+    .node {
+      background: rgba(230,168,104,0.04);
+      border: 1px solid rgba(230,168,104,0.08);
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .node:hover {
+      background: rgba(230,168,104,0.07);
+      border-color: rgba(230,168,104,0.14);
+    }
+
+    .node-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #d0c8c0;
+    }
+
+    .node-verse {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: #908880;
+      margin-top: 2px;
+    }
+
+    .node-scripture {
+      display: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: #c8c0b8;
+      line-height: 1.55;
+      margin-top: 10px;
+      padding-left: 12px;
+      border-left: 2px solid rgba(230,168,104,0.15);
+    }
+
+    .node-summary {
+      display: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13.5px;
+      color: #a09888;
+      line-height: 1.55;
+      margin-top: 8px;
+    }
+
+    .node-tap {
+      display: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      color: #605850;
+      margin-top: 6px;
+      font-style: italic;
+    }
+
+    .node.active .node-scripture,
+    .node.active .node-summary {
+      display: block;
+    }
+
+    .node.active .node-tap {
+      display: none;
+    }
+
+    .node:not(.active) .node-tap {
+      display: block;
+    }
+
+    /* Node colour variants */
+    .node.warm { background: rgba(230,168,104,0.04); border-color: rgba(230,168,104,0.08); }
+    .node.warm:hover { background: rgba(230,168,104,0.07); border-color: rgba(230,168,104,0.14); }
+    .node.warm .node-scripture { border-left-color: rgba(230,168,104,0.15); }
+
+    .node.gold { background: rgba(230,192,104,0.04); border-color: rgba(230,192,104,0.08); }
+    .node.gold:hover { background: rgba(230,192,104,0.07); border-color: rgba(230,192,104,0.14); }
+    .node.gold .node-scripture { border-left-color: rgba(230,192,104,0.15); }
+
+    .node.muted { background: rgba(140,130,120,0.04); border-color: rgba(140,130,120,0.08); }
+    .node.muted:hover { background: rgba(140,130,120,0.07); border-color: rgba(140,130,120,0.14); }
+    .node.muted .node-scripture { border-left-color: rgba(140,130,120,0.15); }
+
+    /* ===== ARROW ===== */
+    .arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 6px 0;
+    }
+
+    .arrow-line {
+      width: 1px;
+      height: 20px;
+      background: linear-gradient(to bottom, rgba(230,168,104,0.08), rgba(230,168,104,0.2));
+    }
+
+    .arrow-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #706860;
+      margin: 4px 0;
+    }
+
+    .arrow-head {
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid rgba(230,168,104,0.25);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(230,168,104,0.06);
+    }
+
+    .footer p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: #807870;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .footer a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #605850;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer a:hover { color: #e6a868; }
+
+    .see-also {
+      margin-top: 14px;
+      font-size: 13px;
+      color: #706860;
+    }
+
+    .see-also a {
+      color: #e6a868;
+      opacity: 0.5;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0;
+      font-style: italic;
+      text-decoration: none;
+      text-transform: none;
+    }
+
+    .see-also a:hover { opacity: 0.8; }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 600px) {
+      .header p { font-size: 17px; }
+      .source-verse p { font-size: 18px; }
+      .key-principle p { font-size: 17px; }
+      .node-scripture { font-size: 18px; }
+      .node-summary { font-size: 15px; }
+      .node-tap { font-size: 13px; }
+      .contrast-item { font-size: 13px; }
+      .centre-burden p { font-size: 16px; }
+      .node-verse { color: #a09888; }
+      .footer p { font-size: 15px; color: #908880; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+      <h1>Gifts, Roles, and the Ekklesia</h1>
+      <div class="header-line"></div>
+      <p>How the Spirit distributes — and how the body functions</p>
+    </div>
+
+    <!-- ===== CENTRAL VERSE ===== -->
+    <div class="source-verse">
+      <p>"But one and the same Spirit works all these things, distributing to each one individually just as He wills."</p>
+      <span class="ref">1 Corinthians 12:11</span>
+    </div>
+
+    <!-- ===== KEY PRINCIPLE ===== -->
+    <div class="key-principle">
+      <p>The New Testament describes gifts given by the Spirit, recognised by the body, and expressed in <em>function</em>. The modern church has largely replaced this with credentials conferred by institutions and expressed in <em>office</em>. These are two different systems — producing two different kinds of church.</p>
+    </div>
+
+    <!-- ===== CONTRAST ROWS: TWO SYSTEMS ===== -->
+    <div class="contrast-section">
+      <div class="diagram-label">Two patterns</div>
+
+      <div class="contrast-row">
+        <div class="contrast-item left">
+          <span class="label">Source</span>
+          Seminary degree, ordination board, denominational credential
+        </div>
+        <div class="contrast-item right">
+          <span class="label">Source</span>
+          The Holy Spirit — distributing to each one individually as He wills
+        </div>
+      </div>
+
+      <div class="contrast-row">
+        <div class="contrast-item left">
+          <span class="label">Basis</span>
+          Formal education and institutional approval
+        </div>
+        <div class="contrast-item right">
+          <span class="label">Basis</span>
+          Spiritual gifting recognised in the context of body life
+        </div>
+      </div>
+
+      <div class="contrast-row">
+        <div class="contrast-item left">
+          <span class="label">Expression</span>
+          A titled position — pastor, minister, reverend
+        </div>
+        <div class="contrast-item right">
+          <span class="label">Expression</span>
+          A functioning member — shepherding, teaching, prophesying
+        </div>
+      </div>
+
+      <div class="contrast-row">
+        <div class="contrast-item left">
+          <span class="label">Scope</span>
+          One person performs ministry; the rest observe
+        </div>
+        <div class="contrast-item right">
+          <span class="label">Scope</span>
+          Every member ministers; leadership equips them to do so
+        </div>
+      </div>
+
+      <div class="contrast-row">
+        <div class="contrast-item left">
+          <span class="label">Accountability</span>
+          Upward — to a board, denomination, or hierarchy
+        </div>
+        <div class="contrast-item right">
+          <span class="label">Accountability</span>
+          Mutual — within the body, with open access to one another
+        </div>
+      </div>
+
+      <div class="contrast-row">
+        <div class="contrast-item left">
+          <span class="label">Result</span>
+          A professional class serves a passive laity
+        </div>
+        <div class="contrast-item right">
+          <span class="label">Result</span>
+          A body of diverse gifts, each functioning according to its measure
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== BURDEN ===== -->
+    <div class="centre-burden">
+      <div class="burden-label">The question</div>
+      <p>How did the early church recognise its leaders? Not by diplomas — by fruit. Not by credentials — by function. The question is not whether leadership exists in the ekklesia. It clearly does. The question is how it emerges and what it looks like when it does.</p>
+    </div>
+
+    <!-- ===== SECTION 1: HOW THE SPIRIT DISTRIBUTES ===== -->
+    <div class="group-label">How the Spirit distributes</div>
+
+    <div class="node warm" data-group="gifts">
+      <div class="node-title">Diverse Gifts, One Source</div>
+      <div class="node-verse">1 Corinthians 12:4–7</div>
+      <div class="node-scripture">"Now there are varieties of gifts, but the same Spirit. And there are varieties of ministries, and the same Lord. There are varieties of effects, but the same God who works all things in all persons. But to each one is given the manifestation of the Spirit for the common good."</div>
+      <div class="node-summary">Gifts, ministries, effects — all diverse. But the source is one: the same Spirit, the same Lord, the same God. And the distribution is universal: "to each one." Not to the ordained. Not to the seminary graduate. To each one — for the common good. The system Paul describes has no non-functioning members.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="node warm" data-group="gifts">
+      <div class="node-title">Distributed as He Wills</div>
+      <div class="node-verse">1 Corinthians 12:11</div>
+      <div class="node-scripture">"But one and the same Spirit works all these things, distributing to each one individually just as He wills."</div>
+      <div class="node-summary">The Spirit is the distributor. Not a hiring committee. Not an ordination board. Not a denominational office. He distributes individually — each gift fitted to each person — as He wills. This means the determination of who is gifted for what belongs to the Spirit, not to any institution.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="node warm" data-group="gifts">
+      <div class="node-title">God Has Placed the Members</div>
+      <div class="node-verse">1 Corinthians 12:18</div>
+      <div class="node-scripture">"But now God has placed the members, each one of them, in the body, just as He desired."</div>
+      <div class="node-summary">God placed the members. The verb is past tense — it is already done. This is not a process of human selection. It is a divine arrangement. Every member already has a place, already has a function, already has a gift. The only question is whether the structure of the church allows them to express it.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-line"></div>
+      <div class="arrow-label">THEREFORE</div>
+      <div class="arrow-head"></div>
+    </div>
+
+    <!-- ===== SECTION 2: WHAT THE GIFTS ARE ===== -->
+    <div class="group-label">What the gifts look like</div>
+
+    <div class="node warm" data-group="lists">
+      <div class="node-title">The Gift Lists</div>
+      <div class="node-verse">Romans 12:6–8</div>
+      <div class="node-scripture">"Since we have gifts that differ according to the grace given to us, each of us is to exercise them accordingly: if prophecy, according to the proportion of his faith; if service, in his serving; or he who teaches, in his teaching; or he who exhorts, in his exhortation; he who gives, with liberality; he who leads, with diligence; he who shows mercy, with cheerfulness."</div>
+      <div class="node-summary">Paul's list in Romans is strikingly practical: prophecy, service, teaching, exhortation, giving, leading, mercy. No title is attached to any of them. No credential is required. These are functions — things people do in the context of body life — not positions people hold. And the list is not exhaustive. It is illustrative. The Spirit is not limited to seven categories.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="node warm" data-group="lists">
+      <div class="node-title">The Manifestation Gifts</div>
+      <div class="node-verse">1 Corinthians 12:8–10</div>
+      <div class="node-scripture">"For to one is given the word of wisdom through the Spirit, and to another the word of knowledge according to the same Spirit; to another faith by the same Spirit, and to another gifts of healing by the one Spirit, and to another the effecting of miracles, and to another prophecy, and to another the distinguishing of spirits, and to another various kinds of tongues, and to another the interpretation of tongues."</div>
+      <div class="node-summary">These are not permanent offices. They are manifestations — the Spirit showing up through individual members at specific moments for the building up of the body. A word of wisdom here. A gift of healing there. Distinguishing of spirits when it is needed. The body as a living organism, responsive to its head in real time.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="node warm" data-group="lists">
+      <div class="node-title">When You Assemble</div>
+      <div class="node-verse">1 Corinthians 14:26</div>
+      <div class="node-scripture">"What is the outcome then, brethren? When you assemble, each one has a psalm, has a teaching, has a revelation, has a tongue, has an interpretation. Let all things be done for edification."</div>
+      <div class="node-summary">This is the picture of gathered ekklesia. "Each one has" something. Not one person with a sermon. Not a worship team with a setlist. Each one — a psalm, a teaching, a revelation. The operative word is not "some" or "one." It is "each." The gathering exists for the whole body to function, not for the congregation to watch a performance.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-line"></div>
+      <div class="arrow-label">AND YET</div>
+      <div class="arrow-head"></div>
+    </div>
+
+    <!-- ===== SECTION 3: THE EQUIPPING ROLES ===== -->
+    <div class="group-label">The equipping roles</div>
+
+    <div class="node gold" data-group="equip">
+      <div class="node-title">Given to the Church</div>
+      <div class="node-verse">Ephesians 4:11–12</div>
+      <div class="node-scripture">"And He gave some as apostles, and some as prophets, and some as evangelists, and some as pastors and teachers, for the equipping of the saints for the work of service, to the building up of the body of Christ."</div>
+      <div class="node-summary">Five functions. Not five offices. Christ gave these gifts to the church — not as performers but as equippers. Their purpose is stated plainly: "for the equipping of the saints for the work of service." The saints do the work. The gifted ones equip them. The moment this is inverted — one person doing the ministry while the saints watch — the design is broken.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="node gold" data-group="equip">
+      <div class="node-title">Apostles</div>
+      <div class="node-verse">1 Corinthians 3:10 · Acts 13:2–4</div>
+      <div class="node-scripture">"According to the grace of God which was given to me, like a wise master builder I laid a foundation…"</div>
+      <div class="node-summary">An apostle is a sent one — someone who plants, establishes, and lays foundations. Not a denominational superintendent. Not a self-appointed title. Paul was sent by the Spirit, recognised by the church at Antioch, and his apostleship was evident in the fruit: churches planted, saints established, Christ formed in communities. The function was recognisable. No credential was needed to verify it.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="node gold" data-group="equip">
+      <div class="node-title">Prophets</div>
+      <div class="node-verse">1 Corinthians 14:3 · Acts 11:27–28</div>
+      <div class="node-scripture">"But one who prophesies speaks to men for edification and exhortation and consolation."</div>
+      <div class="node-summary">Prophets speak from God into present situations — for edification, exhortation, consolation. Not fortune-telling. Not platform authority. Agabus prophesied a famine. The Corinthian gatherings were to include prophetic words from multiple voices, weighed by the body. A prophet is not a lone authority figure. A prophet functions within the body, accountable to it.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="node gold" data-group="equip">
+      <div class="node-title">Evangelists</div>
+      <div class="node-verse">Acts 21:8 · 2 Timothy 4:5</div>
+      <div class="node-scripture">"…do the work of an evangelist, fulfil your ministry."</div>
+      <div class="node-summary">Philip is called "the evangelist." Timothy is told to do the work of one. The gift is a function — someone through whom the gospel moves outward with particular power. Not a touring speaker. Not a brand. Not a career in crusade ministry. A function in the body — carrying the gospel to those who have not heard it, then connecting new believers into body life.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="node gold" data-group="equip">
+      <div class="node-title">Shepherds and Teachers</div>
+      <div class="node-verse">Acts 20:28 · 1 Peter 5:1–3</div>
+      <div class="node-scripture">"Shepherd the flock of God among you, exercising oversight not under compulsion, but voluntarily, according to the will of God; and not for sordid gain, but with eagerness; nor yet as lording it over those allotted to your charge, but proving to be examples to the flock."</div>
+      <div class="node-summary">Peter's instruction to shepherds is striking in what it rules out: not under compulsion, not for money, not lording it over. The shepherd is among the flock — not above it. The teacher opens Scripture so that the saints can handle it themselves. Both functions are local, relational, and expressed in the context of daily life — not a Sunday stage. And "pastor" in Ephesians 4 appears once. It was never meant to become the singular office that defines the modern church.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-line"></div>
+      <div class="arrow-label">BUT THEN</div>
+      <div class="arrow-head"></div>
+    </div>
+
+    <!-- ===== SECTION 4: WHAT REPLACED IT ===== -->
+    <div class="group-label">What replaced it</div>
+
+    <div class="node muted" data-group="replaced">
+      <div class="node-title">From Function to Office</div>
+      <div class="node-verse">Historical development</div>
+      <div class="node-scripture"></div>
+      <div class="node-summary">Somewhere between the apostolic era and the fourth century, function hardened into office. The person who shepherded became "the Pastor." The person who taught became "the Teacher" — a salaried role. The living, plural, recognisable functions of the body were consolidated into a single professional position. What the Spirit distributed among many, the institution concentrated in one.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="node muted" data-group="replaced">
+      <div class="node-title">From Recognition to Credential</div>
+      <div class="node-verse">Historical development</div>
+      <div class="node-scripture"></div>
+      <div class="node-summary">In the New Testament, gifting was recognised by the community that experienced it. Timothy's gift was confirmed by the elders who knew him. Paul's apostleship was evident in his fruit. The question was never "Where did you study?" but "What has the Spirit done through you?" Over time, this was replaced by formal education, examinations, and institutional ordination. The community that once said, "We see the Spirit working through you," was replaced by a board that says, "You have completed the requirements."</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="node muted" data-group="replaced">
+      <div class="node-title">From Plural to Singular</div>
+      <div class="node-verse">cf. Acts 14:23 · Titus 1:5 · Philippians 1:1</div>
+      <div class="node-scripture">"When they had appointed elders in every church…" · "…that you would set in order what remains and appoint elders in every city…" · "…to all the saints in Christ Jesus who are in Philippi, including the overseers and deacons."</div>
+      <div class="node-summary">Elders. Plural. In every church. Paul and Barnabas appointed elders — not a pastor. Titus was told to appoint elders — not a senior minister. Philippi had overseers — not a lead pastor and staff. The New Testament knows nothing of a single person leading a local church. Leadership was always plural, always local, and always recognisable by character and function — not by title and training.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="node muted" data-group="replaced">
+      <div class="node-title">From "Each One Has" to "One Man Speaks"</div>
+      <div class="node-verse">cf. 1 Corinthians 14:26</div>
+      <div class="node-scripture"></div>
+      <div class="node-summary">The most visible change is in the gathering itself. Paul's picture — "each one has a psalm, has a teaching, has a revelation" — has been replaced by a single sermon delivered to a silent audience. The gifts that the Spirit distributed to every member have been functionally revoked. Not by theological decree, but by structural design. The building, the programme, the order of service — all of it is arranged around one voice. The rest sit and listen. Week after week. Year after year.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-line"></div>
+      <div class="arrow-label">SO THEN</div>
+      <div class="arrow-head"></div>
+    </div>
+
+    <!-- ===== SECTION 5: WHAT'S LOST ===== -->
+    <div class="group-label">What is lost</div>
+
+    <div class="node warm" data-group="lost">
+      <div class="node-title">Gifts Atrophy</div>
+      <div class="node-verse">1 Timothy 4:14</div>
+      <div class="node-scripture">"Do not neglect the spiritual gift within you…"</div>
+      <div class="node-summary">A gift that is never exercised atrophies. When the structure only makes room for one gift — preaching — every other gift goes dormant. The person with mercy has no avenue. The person with a prophetic word has no space. The teacher who could open Scripture in a living room has no gathering where that is welcome. Paul told Timothy not to neglect his gift. The modern church structurally neglects the gifts of most of its members.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="node warm" data-group="lost">
+      <div class="node-title">Mutual Edification Disappears</div>
+      <div class="node-verse">Ephesians 4:16</div>
+      <div class="node-scripture">"…from whom the whole body, being fitted and held together by what every joint supplies, according to the proper working of each individual part, causes the growth of the body for the building up of itself in love."</div>
+      <div class="node-summary">The body builds itself up — "by what every joint supplies." When most joints supply nothing because the structure gives them no role, the body cannot build itself. Growth becomes dependent on the quality of the sermon, the charisma of the leader, the programme of the institution. This is not the growth Paul describes. His growth comes from every part working.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <div class="node warm" data-group="lost">
+      <div class="node-title">The Head Is Displaced</div>
+      <div class="node-verse">Colossians 2:19</div>
+      <div class="node-scripture">"…and not holding fast to the head, from whom the entire body, being supplied and held together by the joints and ligaments, grows with a growth which is from God."</div>
+      <div class="node-summary">When a single human leader becomes the functional head of a local church — setting the vision, directing the programme, determining who speaks and when — Christ's headship becomes theoretical. The members hold fast to the pastor's vision rather than to the head. The supply comes through one channel rather than through "joints and ligaments." This is not a criticism of leaders. It is a structural observation. The system itself places a human being where only Christ belongs.</div>
+      <div class="node-tap">tap to expand</div>
+    </div>
+
+    <!-- ===== CLOSING BURDEN ===== -->
+    <div class="centre-burden" style="margin-top: 28px;">
+      <div class="burden-label">The pattern</div>
+      <p>The New Testament pattern is not leaderless. It is not structureless. But its leadership emerges from the Spirit's gifting, is recognised in the context of shared life, and exists to equip — not to replace — the functioning of every member.</p>
+      <p>The question is not whether the church needs people who shepherd, teach, and plant. It does. The question is whether these functions require institutional machinery to produce — or whether the Spirit is still distributing to each one individually, just as He wills.</p>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+      <p>The Spirit has already distributed.<br>The members have already been placed.<br>The only question is whether the structure<br>allows the body to function.</p>
+      <p class="see-also" style="margin-top: 14px; font-size: 13px; color: #706860;">See also: <a href="head-and-body-flowchart.html">The Head and the Body</a></p>
+      <a href="index.html">← THE ETERNAL THREAD</a>
+    </div>
+
+  </div>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    document.querySelectorAll('.node').forEach(function(node) {
+      node.addEventListener('click', function() {
+        var group = this.getAttribute('data-group');
+        document.querySelectorAll('.node[data-group="' + group + '"]').forEach(function(n) {
+          if (n !== node) n.classList.remove('active');
+        });
+        this.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>
