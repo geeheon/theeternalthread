@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="nav-widget.css">
+<link rel="stylesheet" href="audio-widget.css">
+<script defer src="nav-widget.js"></script>
+<script defer src="audio-widget.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Redeeming the Time — Purchasing Back the Kairos</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: #0f0f17;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: #e6c068;
+    letter-spacing: 3px;
+    line-height: 1.3;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #e6c068, transparent);
+    margin: 10px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #888070;
+    font-style: italic;
+  }
+
+  /* ─── Greek anatomy block ─── */
+  .greek-block {
+    margin: 0 0 28px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(230, 192, 104, 0.12);
+  }
+  .greek-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(26, 22, 14, 0.5);
+    border-bottom: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .greek-header span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(230, 192, 104, 0.5);
+  }
+  .greek-body {
+    padding: 22px 20px;
+    background: rgba(26, 22, 14, 0.3);
+  }
+  .greek-phrase {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: #e6c068;
+    text-align: center;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+  .greek-english {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: #c8b888;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .greek-transliteration {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: #706858;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .greek-word {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .greek-word:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .greek-word-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(230, 192, 104, 0.45);
+    margin-bottom: 6px;
+  }
+  .greek-word-term {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #c8b888;
+    margin-bottom: 2px;
+  }
+  .greek-word-english {
+    font-size: 11px;
+    color: #706858;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .greek-word-meaning {
+    font-size: 13px;
+    color: #a09880;
+    line-height: 1.6;
+  }
+  .greek-word-meaning em {
+    color: #e6c068;
+    font-style: normal;
+  }
+
+  /* ─── Two-column contrast ─── */
+  .contrast {
+    margin: 0 0 28px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(230, 192, 104, 0.12);
+  }
+  .contrast-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(26, 22, 14, 0.5);
+    border-bottom: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .contrast-header span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(230, 192, 104, 0.5);
+  }
+  .contrast-row { display: flex; }
+  .contrast-col {
+    flex: 1;
+    padding: 18px 14px;
+    background: rgba(26, 22, 14, 0.3);
+  }
+  .contrast-col + .contrast-col {
+    border-left: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .contrast-col-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .contrast-col.kairos .contrast-col-label { color: #e6c068; }
+  .contrast-col.chronos .contrast-col-label { color: #887868; }
+  .contrast-item {
+    font-size: 12.5px;
+    line-height: 1.5;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(230, 192, 104, 0.04);
+  }
+  .contrast-col.kairos .contrast-item { color: #c8b888; }
+  .contrast-col.chronos .contrast-item { color: #908878; }
+  .contrast-item:last-child { border-bottom: none; }
+  .contrast-footer {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(230, 192, 104, 0.08);
+  }
+  .contrast-col.kairos .contrast-footer { color: rgba(230, 192, 104, 0.6); }
+  .contrast-col.chronos .contrast-footer { color: rgba(136, 120, 104, 0.6); }
+
+  /* ─── Flow arrows ─── */
+  .flow-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0;
+  }
+  .flow-line {
+    width: 1.5px;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(230, 192, 104, 0.35), rgba(230, 192, 104, 0.12));
+  }
+  .flow-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: rgba(230, 192, 104, 0.45);
+    padding: 3px 0;
+    text-align: center;
+  }
+  .flow-head {
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid rgba(230, 192, 104, 0.25);
+  }
+
+  /* ─── Insight / quote blocks ─── */
+  .insight-block {
+    text-align: center;
+    margin: 0 0 28px;
+    padding: 22px 20px;
+    border-radius: 10px;
+    background: rgba(26, 22, 14, 0.35);
+    border: 1px solid rgba(230, 192, 104, 0.1);
+  }
+  .insight-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(230, 192, 104, 0.45);
+    margin-bottom: 12px;
+  }
+  .insight-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: #c8b888;
+    font-style: italic;
+    line-height: 1.65;
+  }
+  .insight-text em {
+    color: #e6c068;
+    font-style: italic;
+  }
+
+  /* ─── Warning / problem block ─── */
+  .problem-block {
+    text-align: center;
+    margin: 0 0 28px;
+    padding: 22px 20px;
+    border-radius: 10px;
+    background: rgba(30, 18, 14, 0.35);
+    border: 1px solid rgba(200, 120, 100, 0.12);
+  }
+  .problem-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(200, 120, 100, 0.5);
+    margin-bottom: 12px;
+  }
+  .problem-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: #ccacac;
+    font-style: italic;
+    line-height: 1.65;
+  }
+  .problem-text em {
+    color: #e6c068;
+    font-style: italic;
+  }
+
+  /* ─── Tug-of-war diagram ─── */
+  .tug-diagram {
+    margin: 0 0 28px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(230, 192, 104, 0.12);
+  }
+  .tug-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(26, 22, 14, 0.5);
+    border-bottom: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .tug-header span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(230, 192, 104, 0.5);
+  }
+  .tug-body {
+    padding: 24px 16px;
+    background: rgba(26, 22, 14, 0.3);
+  }
+  .tug-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .tug-side {
+    flex: 1;
+    text-align: center;
+    padding: 14px 8px;
+    border-radius: 6px;
+  }
+  .tug-side.evil {
+    background: rgba(200, 100, 80, 0.08);
+    border: 1px solid rgba(200, 100, 80, 0.15);
+  }
+  .tug-side.believer {
+    background: rgba(230, 192, 104, 0.06);
+    border: 1px solid rgba(230, 192, 104, 0.15);
+  }
+  .tug-side-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .tug-side.evil .tug-side-label { color: rgba(200, 120, 100, 0.7); }
+  .tug-side.believer .tug-side-label { color: rgba(230, 192, 104, 0.7); }
+  .tug-side-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .tug-side.evil .tug-side-text { color: #b09090; }
+  .tug-side.believer .tug-side-text { color: #c8b888; }
+  .tug-centre {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 10px 6px;
+  }
+  .tug-centre-icon {
+    font-size: 18px;
+    color: #e6c068;
+    margin-bottom: 4px;
+  }
+  .tug-centre-label {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: rgba(230, 192, 104, 0.5);
+  }
+  .tug-correction {
+    text-align: center;
+    padding-top: 14px;
+    border-top: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .tug-correction-text {
+    font-size: 12.5px;
+    color: #a09880;
+    line-height: 1.6;
+  }
+  .tug-correction-text em {
+    color: #e6c068;
+    font-style: normal;
+  }
+
+  /* ─── Node cards ─── */
+  .node {
+    border-radius: 10px;
+    padding: 18px 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1.5px solid;
+    margin-bottom: 12px;
+    background: rgba(30, 20, 18, 0.8);
+    border-color: rgba(200, 120, 100, 0.2);
+  }
+  .node.active {
+    transform: scale(1.02);
+    background: #1e1610;
+    border-color: rgba(200, 120, 100, 0.6);
+    box-shadow: 0 0 30px rgba(200, 120, 100, 0.08), 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .node-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(200, 130, 110, 0.85);
+    margin-bottom: 4px;
+  }
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: #888070;
+  }
+  .node-scripture {
+    display: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #c8b8a0;
+    line-height: 1.7;
+    margin-top: 14px;
+    padding: 14px 0 14px 16px;
+    border-left: 2px solid rgba(200, 120, 100, 0.2);
+  }
+  .node.active .node-scripture { display: block; }
+  .node-summary {
+    display: none;
+    font-size: 13.5px;
+    color: #b0a898;
+    line-height: 1.7;
+    margin-top: 14px;
+  }
+  .node.active .node-summary { display: block; }
+  .node-tap {
+    font-size: 11px;
+    color: #706860;
+    margin-top: 8px;
+    transition: opacity 0.3s;
+  }
+  .node.active .node-tap { opacity: 0; height: 0; margin: 0; overflow: hidden; }
+
+  /* ─── Bottom note ─── */
+  .bottom-note {
+    text-align: center;
+    margin: 32px 0 28px;
+    padding: 0 10px;
+  }
+  .bottom-note p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #a09080;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  .bottom-note p:last-child { margin-bottom: 0; }
+  .bottom-note p em {
+    color: #e6c068;
+    font-style: italic;
+  }
+
+  /* ─── Footer ─── */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 0;
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #a09080;
+    font-style: italic;
+    line-height: 1.8;
+  }
+  .footer-line {
+    width: 40px; height: 1px;
+    background: linear-gradient(to right, transparent, #605850, transparent);
+    margin: 20px auto;
+  }
+  .footer a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #605850;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer a:hover { color: #e6c068; }
+
+  /* ─── Mobile ─── */
+  @media (max-width: 600px) {
+    .node-scripture { font-size: 18px; color: #ddd0b4; }
+    .node-summary { font-size: 15px; line-height: 1.7; }
+    .node-tap { font-size: 13px; color: #8a8278; }
+    .header p { font-size: 17px; }
+    .insight-text { font-size: 18px; }
+    .problem-text { font-size: 18px; }
+    .greek-phrase { font-size: 24px; }
+    .tug-correction-text { font-size: 14px; }
+    .bottom-note p { font-size: 17px; }
+    .footer p { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>REDEEMING THE TIME</h1>
+    <div class="header-line"></div>
+    <p>Not managing your schedule — purchasing back the moment</p>
+  </div>
+
+  <!-- Opening Scripture -->
+  <div class="insight-block">
+    <div class="insight-label">EPHESIANS 5:15–17</div>
+    <div class="insight-text">"See then that you walk circumspectly, not as fools but as wise, <em>redeeming the time, because the days are evil.</em> Therefore do not be unwise, but understand what the will of the Lord is."</div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">WHAT DID PAUL ACTUALLY SAY?</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- Greek anatomy -->
+  <div class="greek-block">
+    <div class="greek-header"><span>THE GREEK — EPHESIANS 5:16</span></div>
+    <div class="greek-body">
+      <div class="greek-phrase">ἐξαγοραζόμενοι τὸν καιρόν, ὅτι αἱ ἡμέραι πονηραί εἰσιν</div>
+      <div class="greek-english">"redeeming the time, because the days are evil"</div>
+      <div class="greek-transliteration">exagorazomenoi ton kairon, hoti hai hēmerai ponērai eisin</div>
+
+      <div class="greek-word">
+        <div class="greek-word-label">"REDEEMING" — THE VERB</div>
+        <div class="greek-word-term">ἐξαγοραζόμενοι</div>
+        <div class="greek-word-english">exagorazomenoi — participle of ἐξαγοράζω (exagorazō)</div>
+        <div class="greek-word-meaning">A compound: <em>ex</em> (out of) + <em>agorazō</em> (to buy in the marketplace). The <em>ex-</em> prefix carries a directional sense — buying something <em>out of</em> its current situation. Paul uses the same root verb in Galatians 3:13 and 4:5 where Christ redeems us from the curse of the Law. Here the form is middle voice — buying up <em>for oneself</em>. The sense: seize the opportunity, make it your own, purchase it out of the adverse conditions that would otherwise consume it.</div>
+      </div>
+
+      <div class="greek-word">
+        <div class="greek-word-label">"THE TIME" — THE OBJECT</div>
+        <div class="greek-word-term">τὸν καιρόν</div>
+        <div class="greek-word-english">ton kairon — accusative of καιρός (kairos)</div>
+        <div class="greek-word-meaning">Not <em>chronos</em> (clock-time, duration, the general flow of time). <em>Kairos</em> is an appointed season — a window that opens and closes. An opportune moment. The right time. Paul is not telling you to manage your diary. He is telling you to seize a <em>God-appointed window</em> before it passes.</div>
+      </div>
+
+      <div class="greek-word">
+        <div class="greek-word-label">"BECAUSE THE DAYS ARE EVIL" — THE REASON</div>
+        <div class="greek-word-term">ὅτι αἱ ἡμέραι πονηραί εἰσιν</div>
+        <div class="greek-word-english">hoti hai hēmerai ponērai eisin — the causal clause that follows</div>
+        <div class="greek-word-meaning">This is not part of the phrase "redeeming the time" — it is Paul's reason <em>why</em> the purchasing is necessary. The days are <em>ponērai</em> — evil, morally corrupt, harmful. The age itself is working against you. The kairos needs buying up precisely <em>because</em> the environment is hostile to it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">TWO KINDS OF TIME</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- Chronos vs Kairos contrast -->
+  <div class="contrast">
+    <div class="contrast-header"><span>CHRONOS VS KAIROS</span></div>
+    <div class="contrast-row">
+      <div class="contrast-col chronos">
+        <div class="contrast-col-label">CHRONOS</div>
+        <div class="contrast-item">Clock time</div>
+        <div class="contrast-item">Duration, measurement</div>
+        <div class="contrast-item">Flows continuously</div>
+        <div class="contrast-item">Quantity of time</div>
+        <div class="contrast-item">Can be managed</div>
+        <div class="contrast-footer">TICKING</div>
+      </div>
+      <div class="contrast-col kairos">
+        <div class="contrast-col-label">KAIROS</div>
+        <div class="contrast-item">Appointed season</div>
+        <div class="contrast-item">A window that opens</div>
+        <div class="contrast-item">Opens, then closes</div>
+        <div class="contrast-item">Quality of moment</div>
+        <div class="contrast-item">Must be seized</div>
+        <div class="contrast-footer">SUMMONING</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">SO WHAT IS PAUL SAYING?</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- The real meaning -->
+  <div class="insight-block">
+    <div class="insight-label">THE ACTUAL MEANING</div>
+    <div class="insight-text">Seize the <em>God-appointed moment</em> and make it your own — because the evil of this age will swallow it if you don't.<br><br>Not "manage your hours better."<br>Not "be productive for God."<br><br><em>The window is open. Purchase it before it closes.</em></div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">BUT WHERE IS THE KAIROS?</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- Tug-of-war diagram -->
+  <div class="tug-diagram">
+    <div class="tug-header"><span>THE KAIROS IS NOT ON NEUTRAL GROUND</span></div>
+    <div class="tug-body">
+      <div class="tug-row">
+        <div class="tug-side evil">
+          <div class="tug-side-label">THE EVIL AGE</div>
+          <div class="tug-side-text">Busyness, noise, distraction, comfort, delay</div>
+        </div>
+        <div class="tug-centre">
+          <div class="tug-centre-icon">◆</div>
+          <div class="tug-centre-label">KAIROS</div>
+        </div>
+        <div class="tug-side believer">
+          <div class="tug-side-label">THE BELIEVER</div>
+          <div class="tug-side-text">Awake, walking wisely, recognising the moment</div>
+        </div>
+      </div>
+      <div class="tug-correction">
+        <div class="tug-correction-text">If you go with the flow of the age, the kairos will be consumed — not because the devil snatches it, but because <em>busyness and drift fill the space where purpose was supposed to go</em>. Buying it up costs something: attention, sacrifice, the refusal to be distracted.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">THE COMMON MISREADING</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- The problem -->
+  <div class="problem-block">
+    <div class="problem-label">WHAT MOST BELIEVERS ASSUME</div>
+    <div class="problem-text">"God's purpose for my life will come about eventually. It's a future thing. One day it will arrive."<br><br>But Paul's language says the opposite. The purpose has a <em>present-tense window</em>. If you don't recognise it and act, the season passes.<br><br>And for many believers, that "one day" <em>never actually arrives</em>. Ask the older saints who spent decades waiting for God's purpose to unfold — and who now look back and realise the window was open years ago, but busyness, distraction, and the assumption that there was always more time quietly filled the space where purpose was supposed to go.<br><br>The opportunity was not future. It was <em>now</em> — and now it is gone.</div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">THE CONTEXT</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- Ephesians context block -->
+  <div class="insight-block">
+    <div class="insight-label">WHY THIS MATTERS IN EPHESIANS</div>
+    <div class="insight-text">Chapters 1–3 unfold <em>God's eternal purpose</em> — what He determined before the foundation of the world.<br><br>Chapters 4–6 say: <em>now walk worthy of it.</em><br><br>"Redeeming the kairos" sits in the second half. It is not a standalone life tip. It is the call to step into the eternal purpose <em>now</em> — in the present season — before the evil of this age fills that window with something else.</div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">THE NEXT VERSE</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- Eph 5:17 -->
+  <div class="insight-block">
+    <div class="insight-label">EPHESIANS 5:17</div>
+    <div class="insight-text">"Therefore do not be unwise, but <em>understand what the will of the Lord is.</em>"<br><br>The kairos is not vague. It is the moment to step into God's <em>revealed will</em> — what He is making available now. Not a mysterious future destiny. A present window requiring present recognition.<br><br>What is the will of the Lord? Paul has already told you. Ephesians 1–3 unfolds it — <em>God's eternal purpose</em>, determined before the foundation of the world. The kairos is not a personal life plan. It is your present-tense intersection with that purpose.</div>
+  </div>
+
+  <!-- Flow arrow -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">TWO WARNINGS FROM SCRIPTURE</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <!-- Two warning nodes -->
+  <div id="warning-verses"></div>
+
+  <!-- Bottom note -->
+  <div class="bottom-note">
+    <p>The purpose doesn't just arrive.</p>
+    <p>The window opens — and it requires something of you.</p>
+    <p><em>Attention. Recognition. Cost.</em></p>
+    <p>Before it closes.</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>It was never a future event.<br>It was a kairos<br>that needed to be purchased back<br>from the noise.</p>
+    <div class="footer-line"></div>
+    <a href="index.html">← THE ETERNAL THREAD</a>
+  </div>
+
+</div>
+
+<script>
+const warningVerses = [
+  {
+    title: "YOU DID NOT KNOW THE TIME",
+    verse: "Luke 19:44",
+    scripture: "They will level you to the ground, and your children within you, and they will not leave in you one stone upon another, because you did not know the time of your visitation.",
+    summary: "The word is kairos. Jerusalem's destruction came because the city did not recognise its God-appointed moment. The visitation was present — standing in front of them in the person of Christ — and they missed it. The kairos passed. This is what it looks like to fail to 'redeem the time.' The moment came, and they were looking elsewhere."
+  },
+  {
+    title: "A CONVENIENT SEASON",
+    verse: "Acts 24:25",
+    scripture: "Now as he reasoned about righteousness, self-control, and the judgment to come, Felix was afraid and answered, 'Go away for now; when I have a convenient time I will call for you.'",
+    summary: "The word Felix uses for 'convenient time' is kairos. Felix was a Roman governor hearing Paul's defence as a prisoner. But Paul didn't just argue his legal case — he reasoned with Felix about righteousness, self-control, and the judgment to come. This was Felix's moment to respond to the gospel. He was moved — Scripture says he was afraid. But he deferred. 'When I have a convenient season.' That season never came. Felix's kairos was not the same as the believer's in Ephesians 5 — his was the window to respond to the truth for the first time. But the pattern is identical: the window opens, you say 'later,' and later never arrives."
+  }
+];
+
+function buildNode(n) {
+  const div = document.createElement('div');
+  div.className = 'node';
+  div.onclick = () => {
+    const isActive = div.classList.contains('active');
+    document.querySelectorAll('.node').forEach(el => el.classList.remove('active'));
+    if (!isActive) div.classList.add('active');
+  };
+
+  let html = '<div class="node-header"><div>';
+  html += `<h3 class="node-title">${n.title}</h3>`;
+  html += `<span class="node-verse">${n.verse}</span>`;
+  html += '</div></div>';
+  html += `<div class="node-scripture">"${n.scripture}"</div>`;
+  html += `<div class="node-summary">${n.summary}</div>`;
+  html += '<div class="node-tap">Tap to expand</div>';
+
+  div.innerHTML = html;
+  return div;
+}
+
+document.getElementById('warning-verses').append(...warningVerses.map(n => buildNode(n)));
+</script>
+</body>
+</html>
