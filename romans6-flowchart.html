@@ -879,7 +879,6 @@ function buildNode(n, isFailure) {
 
   if (isFailure) {
     html += `<div class="failure-text">${n.text}</div>`;
-    html += `<div class="node-scripture">"${n.text}"</div>`;
   }
 
   if (!isFailure) html += `<div class="node-tap">Tap to expand</div>`;
