@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="nav-widget.css">
+<link rel="stylesheet" href="audio-widget.css">
+<script defer src="nav-widget.js"></script>
+<script defer src="audio-widget.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Prayer — The Spirit's Intercession — The Eternal Thread</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: #0f0f17;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: #e6c068;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #e6c068, transparent);
+    margin: 8px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #888070;
+    font-style: italic;
+  }
+  .header .author {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #605850;
+    margin-top: 10px;
+    font-style: normal;
+  }
+
+  /* Verse box */
+  .verse-box {
+    text-align: center;
+    padding: 20px 18px;
+    margin-bottom: 28px;
+    border-radius: 10px;
+    background: rgba(26, 22, 14, 0.4);
+    border: 1px solid rgba(230, 192, 104, 0.1);
+  }
+  .verse-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: #c8b888;
+    line-height: 1.7;
+  }
+  .verse-text em { font-style: normal; color: #e6c068; }
+  .verse-ref {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #706858;
+    margin-top: 10px;
+  }
+
+  /* Sections */
+  .section {
+    text-align: center;
+    margin: 36px 0 20px;
+  }
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    padding: 4px 14px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+  .section-label.gold { color: #e6c068; background: rgba(230, 192, 104, 0.08); }
+  .section-label.green { color: #68e6a0; background: rgba(104, 230, 160, 0.08); }
+  .section-label.blue { color: #68a0e6; background: rgba(104, 160, 230, 0.08); }
+  .section-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: #808070;
+    font-style: italic;
+    margin-top: 6px;
+  }
+
+  /* Flow arrows */
+  .flow-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 16px 0;
+  }
+  .flow-line {
+    width: 1.5px;
+    height: 24px;
+    background: rgba(230, 192, 104, 0.18);
+  }
+  .flow-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(230, 192, 104, 0.35);
+    margin: 6px 0;
+    text-align: center;
+  }
+  .flow-head {
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid rgba(230, 192, 104, 0.2);
+  }
+
+  /* Nodes */
+  .node {
+    background: rgba(26, 22, 14, 0.5);
+    border: 1px solid rgba(230, 192, 104, 0.1);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  .node:hover { border-color: rgba(230, 192, 104, 0.2); }
+  .node.active { border-color: rgba(230, 192, 104, 0.35); }
+  .node-header { display: flex; align-items: center; gap: 14px; }
+  .node-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: rgba(230, 192, 104, 0.2);
+    line-height: 1;
+    min-width: 28px;
+    text-align: center;
+  }
+  .node-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #e6c068;
+    text-transform: uppercase;
+  }
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: #908878;
+    font-style: italic;
+    margin-top: 2px;
+  }
+  .node-badge {
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #e6c068;
+    background: rgba(230, 192, 104, 0.1);
+    padding: 2px 8px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 4px;
+  }
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #c8b888;
+    line-height: 1.65;
+    padding: 14px 0 14px 16px;
+    border-left: 2px solid rgba(230, 192, 104, 0.15);
+    margin-top: 14px;
+    display: none;
+  }
+  .node-scripture em { font-style: normal; color: #e6c068; }
+  .node-summary {
+    font-size: 13.5px;
+    color: #a09880;
+    line-height: 1.65;
+    margin-top: 12px;
+    display: none;
+  }
+  .node-summary em { color: #c8b888; font-style: italic; }
+  .node-tap {
+    font-size: 11px;
+    color: #504840;
+    margin-top: 10px;
+  }
+  .node.active .node-scripture,
+  .node.active .node-summary { display: block; }
+  .node.active .node-tap { display: none; }
+
+  /* Green nodes */
+  .node.green { border-color: rgba(104, 230, 160, 0.1); }
+  .node.green:hover { border-color: rgba(104, 230, 160, 0.2); }
+  .node.green.active { border-color: rgba(104, 230, 160, 0.35); }
+  .node.green .node-num { color: rgba(104, 230, 160, 0.2); }
+  .node.green .node-title { color: #68e6a0; }
+  .node.green .node-badge { color: #68e6a0; background: rgba(104, 230, 160, 0.1); }
+  .node.green .node-scripture { border-left-color: rgba(104, 230, 160, 0.15); }
+
+  /* Blue nodes */
+  .node.blue { border-color: rgba(104, 160, 230, 0.1); }
+  .node.blue:hover { border-color: rgba(104, 160, 230, 0.2); }
+  .node.blue.active { border-color: rgba(104, 160, 230, 0.35); }
+  .node.blue .node-num { color: rgba(104, 160, 230, 0.2); }
+  .node.blue .node-title { color: #68a0e6; }
+  .node.blue .node-badge { color: #68a0e6; background: rgba(104, 160, 230, 0.1); }
+  .node.blue .node-scripture { border-left-color: rgba(104, 160, 230, 0.15); }
+
+  /* Contrast table */
+  .contrast {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(230, 192, 104, 0.12);
+    margin-bottom: 24px;
+  }
+  .contrast-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(26, 22, 14, 0.5);
+    border-bottom: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .contrast-header span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(230, 192, 104, 0.5);
+  }
+  .contrast-row { display: flex; }
+  .contrast-col {
+    flex: 1;
+    padding: 16px 14px;
+    background: rgba(26, 22, 14, 0.3);
+  }
+  .contrast-col + .contrast-col {
+    border-left: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .contrast-col-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .contrast-col.spirit-col .contrast-col-label { color: #68e6a0; }
+  .contrast-col.soul-col .contrast-col-label { color: #e6c068; }
+  .contrast-item {
+    font-size: 12.5px;
+    color: #a09880;
+    line-height: 1.5;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(230, 192, 104, 0.04);
+  }
+  .contrast-item:last-child { border-bottom: none; }
+  .contrast-col.spirit-col .contrast-item { color: #88b898; }
+  .contrast-footer {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-top: 12px;
+  }
+  .contrast-col.soul-col .contrast-footer { color: rgba(230, 192, 104, 0.4); }
+  .contrast-col.spirit-col .contrast-footer { color: rgba(104, 230, 160, 0.4); }
+
+  /* River illustration block */
+  .river {
+    margin: 28px 0;
+    padding: 22px 18px;
+    border-radius: 10px;
+    background: rgba(14, 20, 26, 0.5);
+    border: 1px solid rgba(104, 160, 230, 0.12);
+  }
+  .river-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(104, 160, 230, 0.5);
+    margin-bottom: 14px;
+    text-align: center;
+  }
+  .river-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: #98a8b8;
+    font-style: italic;
+    line-height: 1.75;
+    text-align: center;
+  }
+  .river-text em { font-style: normal; color: #68a0e6; }
+
+  /* Three-layer diagram */
+  .layers {
+    margin: 28px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(230, 192, 104, 0.1);
+  }
+  .layers-header {
+    text-align: center;
+    padding: 12px;
+    background: rgba(26, 22, 14, 0.5);
+    border-bottom: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .layers-header span {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: rgba(230, 192, 104, 0.45);
+  }
+  .layer-item {
+    padding: 16px 18px;
+    background: rgba(26, 22, 14, 0.3);
+    border-bottom: 1px solid rgba(230, 192, 104, 0.05);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .layer-item:last-child { border-bottom: none; }
+  .layer-item:hover { background: rgba(26, 22, 14, 0.5); }
+  .layer-item-header { display: flex; align-items: center; gap: 12px; }
+  .layer-icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 800;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+  .layer-item.above .layer-icon { background: rgba(104, 160, 230, 0.1); border: 1.5px solid rgba(104, 160, 230, 0.3); color: #68a0e6; }
+  .layer-item.within .layer-icon { background: rgba(104, 230, 160, 0.1); border: 1.5px solid rgba(104, 230, 160, 0.3); color: #68e6a0; }
+  .layer-item.conscious .layer-icon { background: rgba(230, 192, 104, 0.1); border: 1.5px solid rgba(230, 192, 104, 0.3); color: #e6c068; }
+  .layer-title {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .layer-item.above .layer-title { color: #68a0e6; }
+  .layer-item.within .layer-title { color: #68e6a0; }
+  .layer-item.conscious .layer-title { color: #e6c068; }
+  .layer-ref {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: #706860;
+    margin-top: 2px;
+  }
+  .layer-desc {
+    font-size: 13px;
+    color: #908878;
+    line-height: 1.6;
+    margin-top: 10px;
+    display: none;
+  }
+  .layer-desc em { color: #c8b888; font-style: italic; }
+  .layer-tap {
+    font-size: 11px;
+    color: #504840;
+    margin-top: 8px;
+  }
+  .layer-item.active .layer-desc { display: block; }
+  .layer-item.active .layer-tap { display: none; }
+
+  /* Callout */
+  .callout {
+    text-align: center;
+    margin: 28px 0;
+    padding: 20px 18px;
+    border-radius: 10px;
+    background: rgba(26, 22, 14, 0.4);
+    border: 1px solid rgba(230, 192, 104, 0.1);
+  }
+  .callout-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: #c8b888;
+    line-height: 1.7;
+  }
+  .callout-text em { font-style: normal; color: #e6c068; }
+  .callout-ref {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #706858;
+    margin-top: 10px;
+  }
+
+  /* Cross reference */
+  .cross-ref {
+    margin: 20px 0;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border-left: 3px solid rgba(230, 192, 104, 0.15);
+    background: rgba(26, 22, 14, 0.3);
+  }
+  .cross-ref-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: rgba(230, 192, 104, 0.35);
+    margin-bottom: 6px;
+  }
+  .cross-ref-text {
+    font-size: 13px;
+    color: #908878;
+    line-height: 1.55;
+  }
+  .cross-ref-text a {
+    color: #e6c068;
+    text-decoration: none;
+  }
+  .cross-ref-text a:hover { text-decoration: underline; }
+
+  /* Footer */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: #888070;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .footer-line {
+    width: 20px; height: 1px;
+    background: rgba(230, 192, 104, 0.25);
+    margin: 0 auto 14px;
+  }
+  .footer a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #605850;
+    text-decoration: none;
+  }
+  .footer a:hover { color: #e6c068; }
+
+  /* === MOBILE READABILITY FIXES === */
+  @media (max-width: 600px) {
+    .header p {
+      font-size: 17px;
+      color: #a89a80;
+    }
+    .verse-text { font-size: 18px; }
+    .section-sub { font-size: 14px; color: #8a8278; }
+    .node-title { font-size: 13px; }
+    .node-verse { font-size: 15px; }
+    .node-scripture { font-size: 18px; color: #ddd0b4; }
+    .node-summary { font-size: 15px; line-height: 1.7; }
+    .node-tap { font-size: 13px; color: #8a8278; }
+    .contrast-item { font-size: 14px; }
+    .contrast-col.spirit-col .contrast-item { color: #98c8a8; }
+    .contrast-col.soul-col .contrast-item { color: #c0b898; }
+    .river-text { font-size: 17px; }
+    .layer-desc { font-size: 15px; line-height: 1.7; }
+    .layer-tap { font-size: 13px; color: #8a8278; }
+    .callout-text { font-size: 19px; }
+    .callout-ref { font-size: 12px; color: #8a8278; }
+    .cross-ref-text { font-size: 14px; }
+    .footer p { font-size: 16px; color: #706860; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>PRAYER</h1>
+    <div class="header-line"></div>
+    <p>The Spirit's Intercession</p>
+    <div class="author">ROMANS 8:26–27 · HEBREWS 7:25 · JOHN 17</div>
+  </div>
+
+  <!-- Opening verse -->
+  <div class="verse-box">
+    <div class="verse-text">"Likewise the Spirit also helps in our weaknesses. For <em>we do not know</em> what we should pray for as we ought, but the Spirit Himself makes intercession for us with <em>groanings which cannot be uttered</em>."</div>
+    <div class="verse-ref">ROMANS 8:26</div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 1: THE COMMON PICTURE           -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="section">
+    <span class="section-label gold">THE COMMON PICTURE</span>
+    <div class="section-sub">What most people think prayer is</div>
+  </div>
+
+  <div id="section-common"></div>
+
+  <!-- Contrast: Soulish vs Spiritual prayer -->
+  <div class="contrast">
+    <div class="contrast-header">
+      <span>SOULISH PRAYER VS SPIRITUAL PRAYER</span>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-col soul-col">
+        <div class="contrast-col-label">SOULISH</div>
+        <div class="contrast-item">Begins with my need</div>
+        <div class="contrast-item">Measured by duration</div>
+        <div class="contrast-item">Produces guilt when absent</div>
+        <div class="contrast-item">Strains upward toward God</div>
+        <div class="contrast-item">More effort = more power</div>
+        <div class="contrast-item">The soul talking to the ceiling</div>
+        <div class="contrast-footer">PRODUCING</div>
+      </div>
+      <div class="contrast-col spirit-col">
+        <div class="contrast-col-label">SPIRITUAL</div>
+        <div class="contrast-item">Begins with God's movement</div>
+        <div class="contrast-item">Measured by nothing</div>
+        <div class="contrast-item">Arises from life, not duty</div>
+        <div class="contrast-item">Responds to what God is doing</div>
+        <div class="contrast-item">Less self = more reality</div>
+        <div class="contrast-item">The spirit joining what is already happening</div>
+        <div class="contrast-footer">RESPONDING</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 2: THE RIVER                    -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">BUT IF PRAYER IS NOT TECHNIQUE</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <div class="section">
+    <span class="section-label blue">THE RIVER</span>
+    <div class="section-sub">What is actually happening when you pray</div>
+  </div>
+
+  <div class="river">
+    <div class="river-label">THE PICTURE</div>
+    <div class="river-text">You are standing in a river.<br>It was flowing before you noticed it.<br>It flows while you sleep.<br><br>The current is the Spirit's intercession —<br>continuous, powerful,<br>moving in a direction <em>you did not choose</em><br>and often cannot perceive.<br><br>Christ at the right hand is the headwaters —<br>the source that keeps the river moving.<br><br>Your conscious prayer is not the current.<br>It is the moment you <em>feel</em> it —<br>stop resisting, let your weight into it,<br>and begin moving <em>with</em> it.</div>
+  </div>
+
+  <div id="section-river"></div>
+
+  <div class="cross-ref">
+    <div class="cross-ref-label">RELATED FIGURE</div>
+    <div class="cross-ref-text">The soul vs spirit distinction behind soulish prayer is treated in full in <a href="soul-vs-spirit-flowchart.html">Soul vs Spirit</a>. Nee's three functions of the spirit — conscience, intuition, communion — place prayer in the communion function: the spirit's direct contact with God.</div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 3: THE THREE LAYERS             -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">THREE LAYERS OF INTERCESSION</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <div class="section">
+    <span class="section-label green">THE THREE LAYERS</span>
+    <div class="section-sub">You are held between two intercessions you did not start</div>
+  </div>
+
+  <div class="layers">
+    <div class="layers-header"><span>THREE CONCURRENT REALITIES</span></div>
+
+    <div class="layer-item above" onclick="toggleLayer(this)">
+      <div class="layer-item-header">
+        <div class="layer-icon">↑</div>
+        <div>
+          <div class="layer-title">Christ Intercedes Above</div>
+          <div class="layer-ref">Hebrews 7:25 · Romans 8:34</div>
+        </div>
+      </div>
+      <div class="layer-tap">Tap to expand</div>
+      <div class="layer-desc">Christ "always lives to make intercession" for you. This is His current, continuous ministry at the Father's right hand — not a past action but a present and ongoing one. He did not stop speaking on your behalf after the ascension. He is speaking now. When Romans 8:34 asks "Who condemns?" the answer includes: Christ "who also makes intercession for us." This intercession is not triggered by your prayer. It is happening whether you are awake, asleep, articulate, or completely silent. <em>The headwaters do not wait for the river to ask them to flow.</em></div>
+    </div>
+
+    <div class="layer-item within" onclick="toggleLayer(this)">
+      <div class="layer-item-header">
+        <div class="layer-icon">↓</div>
+        <div>
+          <div class="layer-title">The Spirit Intercedes Within</div>
+          <div class="layer-ref">Romans 8:26–27</div>
+        </div>
+      </div>
+      <div class="layer-tap">Tap to expand</div>
+      <div class="layer-desc">The Spirit intercedes "with groanings which cannot be uttered." The Greek is <em>alalētos</em> — wordless, inexpressible, beyond language. This is not a prayer language you speak. It is the Spirit communicating with the Father at a level that bypasses human speech entirely. You do not produce it. You do not even hear it. It happens in you but not through your mouth. And the Father "who searches hearts" knows exactly what the Spirit means — because the Spirit always intercedes "according to the will of God" (v. 27). <em>The current moves whether you feel it or not.</em></div>
+    </div>
+
+    <div class="layer-item conscious" onclick="toggleLayer(this)">
+      <div class="layer-item-header">
+        <div class="layer-icon">●</div>
+        <div>
+          <div class="layer-title">You Turn and Respond</div>
+          <div class="layer-ref">Matthew 6:9 · Galatians 4:6</div>
+        </div>
+      </div>
+      <div class="layer-tap">Tap to expand</div>
+      <div class="layer-desc">Then there is your conscious prayer — the moment you turn to the Father. This is not the engine. It is the <em>response</em>. The Spirit within and Christ above are already interceding. Your prayer does not activate the intercession. The intercession is what draws you to pray in the first place. That quiet pull to turn to God — even without words, even when you are not sure what you need — that <em>is</em> the Spirit's work surfacing into your consciousness. You did not generate that impulse. It rose from somewhere deeper than your mind. And God values this turning — not because He needs information, but because <em>you are a son, not a pipe.</em> He does not want only to move through you unconsciously. He wants a person who says "Father" — even badly, even briefly. <em>You feel the current and begin moving with it.</em></div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 4: WHAT JESUS SHOWS US          -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">THE PATTERN</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <div class="section">
+    <span class="section-label gold">WHAT JESUS SHOWS US</span>
+    <div class="section-sub">Why the Son who knew the Father perfectly still prayed</div>
+  </div>
+
+  <div id="section-jesus"></div>
+
+  <div class="callout">
+    <div class="callout-text">"Your Father <em>knows</em> what you need<br><em>before</em> you ask Him."</div>
+    <div class="callout-ref">MATTHEW 6:8</div>
+  </div>
+
+  <div id="section-jesus2"></div>
+
+  <div class="cross-ref">
+    <div class="cross-ref-label">RELATED FIGURE</div>
+    <div class="cross-ref-text">The reorientation of prayer from "bless me" to "satisfy Yourself in me" is the same shift explored in <a href="his-inheritance-flowchart.html">His Inheritance in the Saints</a> — what changes when God moves to the centre.</div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 5: TONGUES AND THE SPIRIT       -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">A NECESSARY DISTINCTION</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <div class="section">
+    <span class="section-label gold">TONGUES AND THE SPIRIT'S INTERCESSION</span>
+    <div class="section-sub">Related — but not the same thing</div>
+  </div>
+
+  <div id="section-tongues"></div>
+
+  <div class="callout">
+    <div class="callout-text">"If I pray in a tongue, <em>my spirit prays</em>,<br>but my understanding is <em>unfruitful</em>.<br>What is the conclusion then?<br>I will pray with the spirit,<br><em>and</em> I will also pray with the understanding."</div>
+    <div class="callout-ref">1 CORINTHIANS 14:14–15</div>
+  </div>
+
+  <div id="section-tongues2"></div>
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 5b: BUT DOES THIS MEAN...       -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">THE HONEST QUESTION</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <div class="section">
+    <span class="section-label gold">DOES THIS MEAN MOST PRAYER IS WASTED?</span>
+    <div class="section-sub">What about every prayer meeting you've ever sat in?</div>
+  </div>
+
+  <div id="section-honest"></div>
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 6: CORPORATE PRAYER             -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">THE BODY PRAYS</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <div class="section">
+    <span class="section-label gold">CORPORATE PRAYER</span>
+    <div class="section-sub">Not individuals praying in proximity — a body in one accord</div>
+  </div>
+
+  <div id="section-corporate"></div>
+
+  <div class="cross-ref">
+    <div class="cross-ref-label">RELATED FIGURE</div>
+    <div class="cross-ref-text">The body functioning together — every member contributing, none expendable — is the subject of <a href="head-and-body-flowchart.html">The Head and the Body</a>.</div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 7: THE DESTINATION              -->
+  <!-- ═══════════════════════════════════════ -->
+
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">THE DESTINATION</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <div class="section">
+    <span class="section-label green">PRAYER AND THE ETERNAL PURPOSE</span>
+    <div class="section-sub">Cooperation, not petition</div>
+  </div>
+
+  <div id="section-destination"></div>
+
+  <!-- Final river -->
+  <div class="river">
+    <div class="river-label">THE RIVER — REVISITED</div>
+    <div class="river-text">The river was flowing before you noticed it.<br>It flows while you sleep.<br>It will flow after you are gone.<br><br>Your prayer does not <em>create</em> the current.<br>Your prayer is evidence that the current <em>has reached you</em>.<br><br>The most powerful prayer happening in you right now<br>is one you cannot hear,<br>cannot produce,<br>and cannot improve by effort.<br><br>And the Father who searches hearts<br><em>knows exactly what the Spirit means.</em></div>
+  </div>
+
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">
+    <p>You do not know how to pray.<br>That is the starting point —<br>not the problem.<br><br>The Spirit intercedes within.<br>Christ intercedes above.<br>And you — held between two intercessions<br>you did not start —<br>turn to the Father<br>and say the only word that matters:<br><em>Abba.</em></p>
+    <div class="footer-line"></div>
+    <a href="index.html">← THE ETERNAL THREAD</a>
+  </div>
+
+</div>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+// Layer toggle
+function toggleLayer(el) {
+  const was = el.classList.contains('active');
+  el.parentElement.querySelectorAll('.layer-item').forEach(l => l.classList.remove('active'));
+  if (!was) el.classList.add('active');
+}
+
+// ── Node data ──
+const commonNodes = [
+  {
+    num: 1, title: "A PERSON TALKING TO GOD",
+    verse: "The common assumption",
+    summary: "Ask most Christians what prayer is and the answer is immediate: talking to God. Asking for things. Presenting needs. A monologue directed upward. The better you pray — longer, more fervently, more articulately — the more effective it is. Prayer becomes a discipline to master, measured by duration and consistency. Miss a day, feel guilty. Miss a week, feel distant. The entire framework assumes that prayer is primarily a human activity directed at God. And that you are the engine."
+  },
+  {
+    num: 2, title: "THE GUILT CYCLE",
+    verse: "The religious flesh at work",
+    summary: "If prayer is a human activity, then its quality depends on you. Pray more — better results. Pray less — worse results. This is the flesh applied to prayer: <em>your effort as the engine</em>. The result is predictable: guilt when you don't pray enough, pride when you do, and an unshakeable suspicion that the real prayer warriors are somewhere else, doing it better. You try techniques. You set alarms. You push through boredom. And underneath it all, a quiet question you're afraid to ask: <em>does this actually work the way I've been told?</em>"
+  },
+  {
+    num: 3, title: "TEACH US TO PRAY",
+    verse: "Luke 11:1",
+    scripture: "Now it came to pass, as He was praying in a certain place, when He ceased, that one of His disciples said to Him, 'Lord, teach us to pray, as John also taught his disciples.'",
+    summary: "The disciples did not ask 'teach us <em>how</em> to pray.' They asked 'teach us <em>to</em> pray.' They had seen something in Jesus that they lacked entirely. It was not technique. It was not posture. It was not duration. It was <em>source</em>. Something in His prayer came from a place they could not reach by effort. They were watching a Son commune with His Father — and they knew their own prayer was a different species entirely."
+  }
+];
+
+const riverNodes = [
+  {
+    num: 4, title: "THE SPIRIT'S INTERCESSION IS WORDLESS",
+    verse: "Romans 8:26 — alalētos",
+    badge: "KEY DISTINCTION",
+    scripture: "The Spirit Himself makes intercession for us with groanings which cannot be uttered.",
+    summary: "The Greek word is <em>alalētos</em> — not 'in an unknown language' but 'inexpressible, beyond words, unutterable.' This is not a prayer language you speak. It is not tongues. It is the Spirit communicating with the Father at a level that transcends human language entirely. You do not produce it. You do not hear it. You cannot improve it by effort. It is happening in you — in your spirit — but not through your vocal cords. Your inability to articulate your need is not a barrier to this intercession. It is the very condition Paul describes as normal: <em>we do not know what we should pray for as we ought.</em> That ignorance is not a failing to fix. It is the permanent human condition — and the exact place where the Spirit takes over."
+  },
+  {
+    num: 5, title: "THE FATHER WHO SEARCHES HEARTS",
+    verse: "Romans 8:27",
+    scripture: "Now He who searches the hearts knows what the mind of the Spirit is, because He makes intercession for the saints according to the will of God.",
+    summary: "The circuit is complete — and you are not the conductor. The Spirit intercedes according to the will of God. The Father who searches hearts knows what the Spirit means. The alignment between the Spirit's intercession and the Father's will is perfect — because they are the same God. Your fumbling, half-formed, three-word prayer does not need to be perfect. It is carried into the Father's presence by an Intercessor who never misunderstands, never misaligns, and never sleeps. The river flows whether you feel it or not."
+  },
+  {
+    num: 6, title: "CHRIST ALWAYS LIVES TO INTERCEDE",
+    verse: "Hebrews 7:25",
+    scripture: "Therefore He is also able to save to the uttermost those who come to God through Him, since He always lives to make intercession for them.",
+    summary: "Two intercessors. The Spirit within — Romans 8:26–27. Christ above — Hebrews 7:25, Romans 8:34. Christ's intercession at the Father's right hand is continuous: He <em>always lives</em> to make intercession. This is not past tense. It is His current ministry — right now, as you read this. He did not stop advocating for you after the ascension. The believer is held between two intercessions — one within, one above — both aligned with the Father's will, both operating independently of your effort, both flowing whether you are conscious of them or not."
+  }
+];
+
+const jesusNodes = [
+  {
+    num: 7, title: "THE SON RECEIVING",
+    verse: "John 5:19 · John 5:30",
+    scripture: "The Son can do nothing of Himself, but what He sees the Father do; for whatever He does, the Son also does in like manner.",
+    summary: "Jesus is the one person who did not <em>need</em> the Spirit to bridge the gap between His understanding and the Father's will. He knew the Father perfectly. And yet He withdrew to pray constantly — sometimes all night (Luke 6:12). Why? Because prayer for Jesus was not petition from a distance. It was <em>communion</em>. The Son receiving from the Father, moment by moment. 'The Son can do nothing of Himself' — not inability, but willing dependence. Prayer was where He <em>saw</em> what the Father was doing. It was the relationship operating. Not a religious activity bolted onto life — it was the life itself expressed Godward."
+  }
+];
+
+const jesus2Nodes = [
+  {
+    num: 8, title: "THE LORD'S PRAYER — REORIENTED",
+    verse: "Matthew 6:9–10",
+    scripture: "Our Father in heaven, hallowed be Your name. Your kingdom come. Your will be done on earth as it is in heaven.",
+    summary: "Notice what Jesus puts first. Not 'give us' — that comes three lines later. First: Your name. Your kingdom. Your will. The prayer is structured around God's interests before man's needs. Jesus knows the Father already knows what you need (v. 8). So why pray? Because prayer is not informing God — it is <em>aligning with</em> God. It is the creature entering into the Creator's purposes. The destination of prayer is not 'God, bless my life.' It is 'Father, satisfy Yourself in me.' Petition is real and legitimate — Jesus includes it. But orientation determines everything."
+  },
+  {
+    num: 9, title: "JOHN 17 — THE PRAYER THAT REVEALS PRAYER",
+    verse: "John 17:1–26",
+    scripture: "Father, the hour has come. Glorify Your Son, that Your Son also may glorify You.",
+    summary: "The longest recorded prayer of Jesus — and it is almost entirely about the Father's glory and the believers' unity. Jesus asks for Himself once (v. 1–5), and the request is: glorify Me so I can glorify You. Then He prays for the disciples (v. 6–19): keep them, sanctify them. Then for all believers (v. 20–26): that they may be one. The whole prayer orbits around the Father's purpose — not human need. This is what prayer looks like when the Son is at the centre. It is not a shopping list. It is a Son cooperating with His Father's deepest intention."
+  }
+];
+
+const tonguesNodes = [
+  {
+    num: 10, title: "TONGUES IS NOT ROMANS 8:26",
+    verse: "1 Corinthians 14:2, 14 · Romans 8:26",
+    badge: "CLARIFICATION",
+    scripture: "For he who speaks in a tongue does not speak to men but to God, for no one understands him; however, in the spirit he speaks mysteries.",
+    summary: "Tongues (<em>glōssa</em>) and the Spirit's intercession (<em>alalētos</em>) are often conflated — but they are not the same thing. Tongues is speech: audible, produced by the speaker, described by Paul as 'my spirit prays' (1 Cor 14:14). The Spirit's intercession in Romans 8:26 is explicitly <em>beyond utterance</em> — wordless, inexpressible, not produced by you at all. Tongues is a genuine spiritual gift. But it is not what Paul is describing in Romans 8. The Spirit's intercession is deeper than any language — including a prayer language. It happens at a level you cannot access, produce, or even perceive.<br><br>That said — tongues is not nothing. Paul says the one who speaks in a tongue 'speaks <em>mysteries</em>' (v. 2) — the Greek is <em>mystēria</em>, hidden things beyond ordinary perception. Your spirit may be engaging with God in a way your intellect cannot track. The mind's non-involvement is not a sign that nothing is happening. It may be a sign that something is happening <em>deeper than your mind can reach</em> — a direct spirit-to-God channel that bypasses the soul's processing entirely. Not a flaw. The design."
+  }
+];
+
+const tongues2Nodes = [
+  {
+    num: 11, title: "PAUL'S OWN ASSESSMENT",
+    verse: "1 Corinthians 14:14–19",
+    scripture: "For if I pray in a tongue, my spirit prays, but my understanding is unfruitful. What is the conclusion then? I will pray with the spirit, and I will also pray with the understanding.",
+    summary: "Paul does not dismiss tongues. He says 'I wish you all spoke with tongues' (v. 5) and 'I thank God I speak with tongues more than you all' (v. 18). But he immediately adds: 'yet in the church I would rather speak five words with my understanding, that I may teach others also, than ten thousand words in a tongue.' His assessment is precise: when you pray in tongues, your spirit is engaged — but your understanding is <em>unfruitful</em>. Paul's solution is not 'more tongues' or 'no tongues.' It is <em>both</em>: spirit <em>and</em> understanding together. The spirit engaged but the mind disconnected is incomplete. Paul wants the whole person praying — not just one faculty operating in isolation.<br><br>Tongues is a genuine faculty of the spirit, given by the Spirit, that edifies even when the mind is unfruitful (v. 4). Paul practised it extensively — 'more than you all.' He did not treat it as rare or occasional. But what he <em>did</em> correct was the Corinthian framework: the elevation of tongues into the supreme marker of spirituality, the assumption that more tongues equals more spiritual power. What turns the gift from spirit to flesh is not the frequency but the <em>framework</em> — when it becomes a metric of maturity, a guilt-driven obligation, or a performance measured by duration rather than a genuine expression of the spirit's communion with God. Paul practised it freely. He refused to let it become a programme."
+  },
+  {
+    num: 12, title: "WHEN PRAYER BECOMES A PROGRAMME",
+    verse: "Matthew 6:7",
+    scripture: "And when you pray, do not use vain repetitions as the heathen do. For they think that they will be heard for their many words.",
+    summary: "Here is the diagnostic. When any form of prayer — tongues, petition, intercession, liturgy — becomes something measured by quantity, driven by guilt, and pursued under the assumption that more volume equals more spiritual power, it has crossed from the spirit into the soul. It has become the flesh managing a spiritual gift as a religious programme. Jesus warns against exactly this: the belief that you will be heard <em>for your many words</em>. The Father is not counting duration. He is not impressed by effort. He already knows what you need. The question is not 'did you pray enough?' The question is 'did you pray from the spirit — or from the flesh?'"
+  }
+];
+
+const honestNodes = [
+  {
+    num: 13, title: "THE CLOTHING IS SOULISH — THE IMPULSE MAY NOT BE",
+    verse: "Romans 8:26 · 2 Corinthians 4:7",
+    scripture: "But we have this treasure in earthen vessels, that the excellence of the power may be of God and not of us.",
+    summary: "A person at a Bible study prays a fumbling, formulaic-sounding prayer — 'Lord, please bless Susan's surgery.' Is that the flesh? Not necessarily. The Spirit's intercession is wordless — but when it surfaces into consciousness, the person has to put it into words, and the only words they have are human, limited, often formulaic. The clothing is soulish. The impulse underneath it may be genuinely from the Spirit. You cannot tell from the outside. Even the person praying often cannot tell. The treasure is in <em>earthen vessels</em> — the vessel is always inadequate. That does not mean the treasure is absent."
+  },
+  {
+    num: 14, title: "THE FRAMEWORK IS THE PROBLEM — NOT EVERY PRAYER IN IT",
+    verse: "Matthew 6:7–8",
+    summary: "What <em>is</em> flesh-derived is the framework — the system that says: we must now pray, for this duration, in this format, and the more fervency we produce, the more God is moved. <em>That</em> is the flesh. It is the structure around the prayer, not necessarily every prayer within it. The structure teaches people that prayer is a human activity powered by human effort. And so most people in that structure are, understandably, praying from the soul most of the time — because that is what they have been taught prayer is. The tragedy is not that people pray imperfectly. It is that almost no one tells them there is something else — that the Spirit is already praying, that Christ is already interceding, that their job is not to produce prayer but to <em>become conscious of a conversation already in progress</em>."
+  },
+  {
+    num: 15, title: "GRACE COVERS EVEN THIS",
+    verse: "Romans 8:26–27",
+    scripture: "Likewise the Spirit also helps in our weaknesses. For we do not know what we should pray for as we ought.",
+    summary: "If only perfectly spirit-originated prayer counted, then no one in the history of the church has ever prayed an acceptable prayer except Jesus. Paul himself said 'we do not know what we should pray for <em>as we ought</em>.' That <em>we</em> includes Paul. The entire point of Romans 8:26–27 is that the Spirit compensates for our inadequacy — not that our inadequacy disqualifies us. God does not reject the prayer that comes from a sincere heart in a limited framework. He meets people where they are. But He also invites them deeper — into a prayer that is less about what they produce and more about what the Spirit is already doing. The prayers at Bible studies are not wasted. They are <em>less than what prayer could be</em>. And the people praying them often sense that — which is why prayer meetings feel hollow to so many honest believers."
+  }
+];
+
+const corporateNodes = [
+  {
+    num: 16, title: "ONE ACCORD",
+    verse: "Acts 4:24 · Acts 1:14",
+    scripture: "So when they heard that, they raised their voice to God with one accord…",
+    summary: "The early church prayed together — and the word is <em>homothumadon</em>: one mind, one passion, one impulse. This is not individuals praying in the same room. It is a body in which the Spirit is moving through each member toward the same end. The river flowing through many channels as one current. Corporate prayer in the New Testament is not a prayer meeting format. It is the body of Christ functioning — each member contributing what the Spirit gives, none dominating, all moving together. When this happens, the result is not human coordination. It is the Head directing His body in real time."
+  },
+  {
+    num: 17, title: "WHERE TWO OR THREE",
+    verse: "Matthew 18:19–20",
+    scripture: "Again I say to you that if two of you agree on earth concerning anything that they ask, it shall be done for them by My Father in heaven. For where two or three are gathered together in My name, I am there in the midst of them.",
+    summary: "This is not a minimum attendance policy. The word 'agree' is <em>symphōneō</em> — to sound together, to be in harmony. It is a musical term. Two or three people hearing the same note from the Spirit and voicing it together. This kind of agreement cannot be manufactured by discussion. It arises when individuals are each listening to the Spirit and discovering — often with surprise — that the Spirit is saying the same thing through each of them. That convergence is not human coordination. It is the river flowing through separate channels and arriving at the same place."
+  }
+];
+
+const destinationNodes = [
+  {
+    num: 18, title: "NOT CHANGING GOD'S MIND",
+    verse: "Romans 8:27 · 1 John 5:14–15",
+    scripture: "Now this is the confidence that we have in Him, that if we ask anything according to His will, He hears us.",
+    summary: "Prayer does not change God's mind. It aligns you with it. The Spirit already intercedes according to the will of God (Rom 8:27). Christ already lives to intercede at the right hand (Heb 7:25). Your conscious prayer enters a stream that is already flowing in the direction of God's purpose. 'According to His will' is not a restriction — it is a liberation. You do not need to figure out the right words. You need to be in the current. And the Spirit's whole ministry is to get you there."
+  },
+  {
+    num: 19, title: "REAL PARTICIPATION — NOT THE ENGINE",
+    verse: "James 5:16–18 · Luke 18:1 · 1 Timothy 2:1",
+    scripture: "The effective, fervent prayer of a righteous man avails much. Elijah was a man with a nature like ours, and he prayed earnestly that it would not rain; and it did not rain on the land for three years and six months.",
+    summary: "Here is the tension Scripture does not resolve neatly — and neither should we. On one side: God is sovereign, the Spirit intercedes perfectly, and your fumbling prayer adds nothing to God's knowledge or power. On the other: Scripture repeatedly presents human prayer as genuinely mattering to what happens on earth. Elijah prayed and it did not rain. He prayed again and it rained. Jesus told parables about persistence in prayer. Paul asks churches to pray for him as though it makes a real difference.<br><br>Both are true. God does not <em>need</em> your prayer to accomplish His will. But He has sovereignly chosen to work <em>through</em> human cooperation — and prayer is one of the primary ways that cooperation operates. When you feel a prompting to pray for someone, that is the Spirit's intercession surfacing into your consciousness — the river reaching a point where you can feel it. The Spirit is inviting you to consciously participate in what He is already doing. If you ignore it, does God's purpose for that person fail? No. But something may be lost — not for God, but for you and possibly for them. A father is already caring for his household. He asks his son to carry the groceries inside. If the son refuses, the groceries still get in. But the son missed a moment of partnership. And there is something in the Father's heart that <em>wanted</em> the son to carry it — not because He needed the help, but because that is what sons do. They participate in their Father's work.<br><br>Your prayer does not <em>cause</em> God to act. But it may be the means God has chosen to act <em>through</em>. Not because He needs a trigger, but because He is a Father who works <em>with</em> His sons, not merely over them."
+  },
+  {
+    num: 20, title: "THE PRAY-ER BECOMES THE ANSWER",
+    verse: "Ephesians 3:20–21 · Isaiah 6:8",
+    badge: "THE DESTINATION",
+    scripture: "Now to Him who is able to do exceedingly abundantly above all that we ask or think, according to the power that works in us…",
+    summary: "The deepest prayer is not a request that God do something out there. It is a yielding to God doing something <em>in here</em>. The power works <em>in us</em>. Isaiah prays, 'Lord, send someone' — and hears himself say, 'Here am I, send me.' The pray-er became the answer. This is the destination of all prayer: not petition as a transaction but cooperation with God's eternal purpose. You do not pray and then go live your life. Prayer <em>is</em> the life — the conscious turning of a son toward his Father, discovering that the Father was already moving, and finding yourself carried into the centre of what He is doing."
+  }
+];
+
+// ── Build functions ──
+function buildNode(n, group) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls || ''}`;
+  div.onclick = () => {
+    const isActive = div.classList.contains('active');
+    document.querySelectorAll(`#${group} .node`).forEach(el => el.classList.remove('active'));
+    if (!isActive) div.classList.add('active');
+  };
+
+  let html = '<div class="node-header">';
+  html += `<div class="node-num">${n.num}</div>`;
+  html += '<div>';
+  html += `<h3 class="node-title">${n.title}</h3>`;
+  html += `<span class="node-verse">${n.verse}</span>`;
+  if (n.badge) html += `<div class="node-badge">${n.badge}</div>`;
+  html += '</div></div>';
+  if (n.scripture) html += `<div class="node-scripture">"${n.scripture}"</div>`;
+  html += `<div class="node-summary">${n.summary}</div>`;
+  html += '<div class="node-tap">Tap to expand</div>';
+
+  div.innerHTML = html;
+  return div;
+}
+
+function buildArrow() {
+  const div = document.createElement('div');
+  div.className = 'flow-arrow';
+  div.innerHTML = '<div class="flow-line"></div><div class="flow-head"></div>';
+  return div;
+}
+
+function renderNodes(containerId, nodes) {
+  const container = document.getElementById(containerId);
+  nodes.forEach((n, i) => {
+    container.appendChild(buildNode(n, containerId));
+    if (i < nodes.length - 1) container.appendChild(buildArrow());
+  });
+}
+
+renderNodes('section-common', commonNodes);
+renderNodes('section-river', riverNodes);
+renderNodes('section-jesus', jesusNodes);
+renderNodes('section-jesus2', jesus2Nodes);
+renderNodes('section-tongues', tonguesNodes);
+renderNodes('section-tongues2', tongues2Nodes);
+renderNodes('section-honest', honestNodes);
+renderNodes('section-corporate', corporateNodes);
+renderNodes('section-destination', destinationNodes);
+</script>
+</body>
+</html>
