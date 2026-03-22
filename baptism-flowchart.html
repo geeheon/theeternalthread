@@ -629,7 +629,7 @@
 <script>
 const problemNodes = [
   {
-    num: 1, title: "THE USUAL TEACHING", verse: "Common practice", cls: "red",
+    num: 1, title: "THE USUAL TEACHING", verse: "Common practice", cls: "red", isQuote: false,
     scripture: "Baptism is taught as a step of obedience, a public testimony, a declaration that you have decided to follow Christ.",
     summary: "This is not wrong in itself — but it is drastically incomplete. It stops at the surface and never reaches what Paul says baptism actually means. The candidate is taught what to do but never shown what has already been done."
   },
@@ -639,7 +639,7 @@ const problemNodes = [
     summary: "This verse is almost never unpacked in baptism preparation. Yet it is the entire basis of what the water signifies. Without seeing that the old man was already crucified — past tense, accomplished fact — the person being baptised does not know what they are burying. They go under the water to kill what is already dead. That is the bicycle: I am doing this. I am committing. I am making this happen."
   },
   {
-    num: 3, title: "THE RESULT", verse: "The subjective gap", cls: "red",
+    num: 3, title: "THE RESULT", verse: "The subjective gap", cls: "red", isQuote: false,
     scripture: "They come up from the water with the old man still subjectively alive — because they were never told he was objectively dead.",
     summary: "The baptism becomes a memory, a photo, a milestone. Within weeks the old patterns reassert themselves — and the person has no theological framework for understanding why. They assume they didn't commit hard enough. They pedal harder. The bicycle cannot carry them where only Christ can."
   }
@@ -711,7 +711,8 @@ function buildNode(n) {
   html += `<span class="node-verse">${n.verse}</span>`;
   html += '</div></div>';
 
-  html += `<div class="node-scripture">"${n.scripture}"</div>`;
+  const q = n.isQuote !== false;
+  html += `<div class="node-scripture">${q ? '\u201c' : ''}${n.scripture}${q ? '\u201d' : ''}</div>`;
   html += `<div class="node-summary">${n.summary}</div>`;
   html += `<div class="node-tap">Tap to expand</div>`;
 
