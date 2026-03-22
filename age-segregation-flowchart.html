@@ -248,9 +248,9 @@
     .analogy-text { font-size: 17px; }
     .analogy-label { font-size: 10px; }
     .node-title { font-size: 13px; }
-    .node-verse { font-size: 15px; color: #a09888; }
+    .node-verse { font-size: 13px; color: #a09888; }
     .node-scripture { font-size: 18px; color: #ddd0b4; }
-    .node-summary { font-size: 15px; line-height: 1.7; }
+    .node-summary { font-size: 15px; line-height: 1.65; }
     .node-tap { font-size: 13px; color: #8a8278; }
     .badge { font-size: 10px; }
     .section-label { font-size: 10px; }
@@ -461,7 +461,7 @@ function buildNode(n) {
   h += `<h3 class="node-title">${n.title}</h3>`;
   h += `<span class="node-verse">${n.verse}</span></div></div>`;
   const quoteClass = n.quote === false ? ' no-quote' : '';
-  h += n.quote === false ? `<div class="node-scripture${quoteClass}">${n.scripture}</div>` : `<div class="node-scripture">\u201C${n.scripture}\u201D</div>`;
+  h += n.quote === false ? `<div class="node-scripture${quoteClass}">${n.scripture}</div>` : `<div class="node-scripture">"${n.scripture}"</div>`;
   h += `<div class="node-summary">${n.summary}</div>`;
   h += `<div class="node-tap">Tap to expand</div>`;
   div.innerHTML = h;
