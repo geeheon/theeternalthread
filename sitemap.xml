@@ -140,4 +140,9 @@
     <loc>https://theeternalthread.org/great-commission-flowchart.html</loc>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://theeternalthread.org/prayer-flowchart.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
