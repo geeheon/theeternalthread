@@ -85,7 +85,7 @@
   .node {
     border-radius: 10px;
     padding: 18px 22px;
-    cursor: pointer;
+    cursor: default;
     transition: all 0.3s ease;
     position: relative;
     border: 1.5px solid;
@@ -856,11 +856,14 @@ function buildNode(n, isFailure) {
   const div = document.createElement('div');
   const cls = isFailure ? 'failure' : n.cls;
   div.className = `node ${cls}`;
-  div.onclick = () => {
-    const isActive = div.classList.contains('active');
-    document.querySelectorAll(`.node.${cls}`).forEach(el => el.classList.remove('active'));
-    if (!isActive) div.classList.add('active');
-  };
+  if (!isFailure) {
+    div.style.cursor = 'pointer';
+    div.onclick = () => {
+      const isActive = div.classList.contains('active');
+      document.querySelectorAll(`.node.${cls}`).forEach(el => el.classList.remove('active'));
+      if (!isActive) div.classList.add('active');
+    };
+  }
 
   let html = '';
   if (n.hinge) html += '<div class="hinge-badge">HINGE POINT</div>';
