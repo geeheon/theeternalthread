@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3FFTQZE977"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3FFTQZE977');
+  </script>
+<link rel="stylesheet" href="nav-widget.css">
+<link rel="stylesheet" href="audio-widget.css">
+<script defer src="nav-widget.js"></script>
+<script defer src="audio-widget.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Worship — Presenting the Body</title>
+  <meta name="description" content="Not a song you sing — a body you present. An interactive flowchart exploring Romans 12:1–2 and the worship Scripture actually describes.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://theeternalthread.org/worship-flowchart.html">
+  <meta property="og:title" content="Worship — The Eternal Thread">
+  <meta property="og:description" content="Not a song you sing — a body you present.">
+  <meta property="og:site_name" content="The Eternal Thread">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Worship — The Eternal Thread">
+  <meta name="twitter:description" content="Not a song you sing — a body you present.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    background: #0f0f17;
+    color: #d4c5a0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .container { max-width: 460px; margin: 0 auto; padding: 40px 20px 60px; }
+
+  .header { text-align: center; margin-bottom: 32px; }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 300;
+    color: #e6c068; letter-spacing: 3px;
+  }
+  .header-line {
+    width: 40px; height: 1.5px;
+    background: linear-gradient(to right, transparent, #e6c068, transparent);
+    margin: 10px auto;
+  }
+  .header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; color: #888070; font-style: italic;
+  }
+  .header .refs {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; color: #606058; letter-spacing: 1.5px; margin-top: 6px;
+  }
+
+  /* ─── Opening verse ─── */
+  .verse-box {
+    margin: 0 0 28px; padding: 22px 18px;
+    border-radius: 10px;
+    background: rgba(26, 22, 14, 0.5);
+    border: 1px solid rgba(230, 192, 104, 0.12);
+    text-align: center;
+  }
+  .verse-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; color: #d4c5a0; font-style: italic; line-height: 1.7;
+  }
+  .verse-text em { font-style: normal; color: #e6c068; }
+  .verse-ref {
+    font-size: 11px; letter-spacing: 1.5px; color: #706858; margin-top: 10px;
+  }
+
+  /* ─── Contrast box (misread / actual) ─── */
+  .contrast {
+    margin: 0 0 24px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(230, 192, 104, 0.1);
+  }
+  .contrast-header {
+    text-align: center; padding: 12px;
+    background: rgba(26, 22, 14, 0.5);
+    border-bottom: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .contrast-header span {
+    font-size: 9px; font-weight: 800; letter-spacing: 2.5px; color: rgba(230, 192, 104, 0.45);
+  }
+  .contrast-row { display: flex; }
+  .contrast-col {
+    flex: 1; padding: 18px 14px;
+    text-align: center;
+  }
+  .contrast-col.assumed {
+    background: rgba(46, 26, 26, 0.2);
+    border-right: 1px solid rgba(230, 192, 104, 0.06);
+  }
+  .contrast-col.actual {
+    background: rgba(13, 28, 20, 0.2);
+  }
+  .contrast-col-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px; margin-bottom: 12px;
+  }
+  .contrast-col.assumed .contrast-col-label { color: #e68868; }
+  .contrast-col.actual .contrast-col-label { color: #68e6a0; }
+  .contrast-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-style: italic; line-height: 1.7;
+    margin-bottom: 6px;
+  }
+  .contrast-col.assumed .contrast-item { color: #b09080; }
+  .contrast-col.actual .contrast-item { color: #90b0a0; }
+  .contrast-footer {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px; text-align: center; margin-top: 12px;
+  }
+  .contrast-col.assumed .contrast-footer { color: rgba(230, 136, 104, 0.4); }
+  .contrast-col.actual .contrast-footer { color: rgba(104, 230, 160, 0.4); }
+
+  /* ─── Section labels ─── */
+  .section { text-align: center; padding: 22px 0 10px; }
+  .section-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 3px;
+    padding: 5px 14px; border-radius: 4px; display: inline-block;
+  }
+  .section-label.gold { color: #e6c068; background: rgba(230, 192, 104, 0.06); border: 1px solid rgba(230, 192, 104, 0.12); }
+  .section-label.green { color: #68e6a0; background: rgba(104, 230, 160, 0.06); border: 1px solid rgba(104, 230, 160, 0.12); }
+  .section-label.warm { color: #e6a868; background: rgba(230, 168, 104, 0.06); border: 1px solid rgba(230, 168, 104, 0.12); }
+  .section-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px; color: #606058; font-style: italic; margin-top: 4px;
+  }
+
+  /* ─── Nodes ─── */
+  .node {
+    background: rgba(20, 16, 12, 0.5);
+    border: 1px solid rgba(230, 192, 104, 0.1);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 0;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.25s;
+  }
+  .node:hover { transform: scale(1.01); }
+  .node.active {
+    border-color: rgba(230, 192, 104, 0.35);
+    box-shadow: 0 0 30px rgba(230, 192, 104, 0.08), 0 4px 20px rgba(0,0,0,0.3);
+    transform: scale(1.02);
+  }
+  .node.green-node {
+    border-color: rgba(104, 230, 160, 0.1);
+  }
+  .node.green-node.active {
+    border-color: rgba(104, 230, 160, 0.35);
+    box-shadow: 0 0 30px rgba(104, 230, 160, 0.08), 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .node.warm-node {
+    border-color: rgba(230, 168, 104, 0.1);
+  }
+  .node.warm-node.active {
+    border-color: rgba(230, 168, 104, 0.35);
+    box-shadow: 0 0 30px rgba(230, 168, 104, 0.08), 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .node-header { display: flex; align-items: flex-start; gap: 14px; }
+  .node-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 300;
+    color: rgba(230, 192, 104, 0.4);
+    line-height: 1; min-width: 28px;
+  }
+  .node.green-node .node-num { color: rgba(104, 230, 160, 0.4); }
+  .node.warm-node .node-num { color: rgba(230, 168, 104, 0.4); }
+  .node-title {
+    font-size: 12px; font-weight: 700; letter-spacing: 2px;
+    color: #e6c068; margin: 0;
+  }
+  .node.green-node .node-title { color: #68e6a0; }
+  .node.warm-node .node-title { color: #e6a868; }
+  .node-verse {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; font-style: italic;
+    color: rgba(230, 192, 104, 0.5);
+  }
+  .node.green-node .node-verse { color: rgba(104, 230, 160, 0.5); }
+  .node.warm-node .node-verse { color: rgba(230, 168, 104, 0.5); }
+  .node-badge {
+    display: inline-block; margin-top: 4px;
+    font-size: 8px; font-weight: 800; letter-spacing: 1.5px;
+    padding: 2px 8px; border-radius: 3px;
+    color: #e6c068; background: rgba(230, 192, 104, 0.08);
+    border: 1px solid rgba(230, 192, 104, 0.15);
+  }
+  .node.green-node .node-badge {
+    color: #68e6a0; background: rgba(104, 230, 160, 0.08);
+    border-color: rgba(104, 230, 160, 0.15);
+  }
+  .node-scripture {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; line-height: 1.6; color: #d4c5a0;
+    margin: 8px 0; font-style: italic;
+    border-left: 2px solid rgba(230, 192, 104, 0.25);
+    padding-left: 14px; display: none;
+  }
+  .node.green-node .node-scripture { border-left-color: rgba(104, 230, 160, 0.25); }
+  .node.warm-node .node-scripture { border-left-color: rgba(230, 168, 104, 0.25); }
+  .node.active .node-scripture { display: block; }
+  .node-summary {
+    font-size: 13.5px; line-height: 1.65; color: #b8b0a0;
+    margin: 8px 0 0; display: none;
+  }
+  .node.active .node-summary { display: block; }
+  .node-tap { font-size: 12px; color: #606058; margin-left: 42px; }
+  .node.active .node-tap { display: none; }
+
+  /* ─── Flow arrows ─── */
+  .flow-arrow { display: flex; flex-direction: column; align-items: center; padding: 6px 0; }
+  .flow-line {
+    width: 1.5px; height: 24px;
+    background: linear-gradient(to bottom, rgba(230, 192, 104, 0.25), rgba(230, 192, 104, 0.1));
+  }
+  .flow-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+    color: rgba(230, 192, 104, 0.3); padding: 2px 0;
+  }
+  .flow-head {
+    width: 0; height: 0;
+    border-left: 5px solid transparent; border-right: 5px solid transparent;
+    border-top: 6px solid rgba(230, 192, 104, 0.2);
+  }
+
+  /* ─── Breathing analogy ─── */
+  .breathing {
+    margin: 28px 0; padding: 22px 18px;
+    border-radius: 10px;
+    background: rgba(14, 20, 26, 0.4);
+    border: 1px solid rgba(104, 160, 230, 0.12);
+  }
+  .breathing-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2.5px;
+    color: rgba(104, 160, 230, 0.5);
+    margin-bottom: 14px; text-align: center;
+  }
+  .breathing-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; color: #98a8b8;
+    font-style: italic; line-height: 1.75; text-align: center;
+  }
+  .breathing-text em { font-style: normal; color: #68a0e6; }
+
+  /* ─── Callout ─── */
+  .callout {
+    text-align: center; margin: 28px 0; padding: 20px 18px;
+    border-radius: 10px;
+    background: rgba(26, 22, 14, 0.4);
+    border: 1px solid rgba(230, 192, 104, 0.1);
+  }
+  .callout-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-style: italic;
+    color: #c8b888; line-height: 1.7;
+  }
+  .callout-text em { font-style: normal; color: #e6c068; }
+  .callout-ref {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; letter-spacing: 2px;
+    color: #706858; margin-top: 10px;
+  }
+
+  /* ─── Cross reference ─── */
+  .cross-ref {
+    margin: 20px 0; padding: 14px 16px;
+    border-radius: 8px;
+    border-left: 3px solid rgba(230, 192, 104, 0.15);
+    background: rgba(26, 22, 14, 0.3);
+  }
+  .cross-ref-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 2px;
+    color: rgba(230, 192, 104, 0.35); margin-bottom: 6px;
+  }
+  .cross-ref-text {
+    font-size: 13px; color: #908878; line-height: 1.55;
+  }
+  .cross-ref-text a { color: #e6c068; text-decoration: none; }
+  .cross-ref-text a:hover { text-decoration: underline; }
+
+  /* ─── Footer ─── */
+  .footer { margin-top: 40px; text-align: center; padding: 20px 0; }
+  .footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #888070;
+    font-style: italic; line-height: 1.7; margin-bottom: 12px;
+  }
+  .footer p em { color: #e6c068; font-style: italic; }
+  .footer-line {
+    width: 40px; height: 1px;
+    background: linear-gradient(90deg, transparent, #706860, transparent);
+    margin: 20px auto;
+  }
+  .footer a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; letter-spacing: 2px;
+    color: #605850; text-decoration: none;
+  }
+  .footer a:hover { color: #e6c068; }
+
+  /* ─── Mobile ─── */
+  @media (max-width: 600px) {
+    .header p { font-size: 17px; color: #a89a80; }
+    .verse-text { font-size: 18px; }
+    .section-sub { font-size: 14px; color: #8a8278; }
+    .node-title { font-size: 13px; }
+    .node-verse { font-size: 15px; }
+    .node-scripture { font-size: 18px; color: #ddd0b4; }
+    .node-summary { font-size: 15px; line-height: 1.7; }
+    .node-tap { font-size: 13px; color: #8a8278; }
+    .contrast-item { font-size: 14px; }
+    .contrast-col.actual .contrast-item { color: #98c8a8; }
+    .contrast-col.assumed .contrast-item { color: #c0a898; }
+    .breathing-text { font-size: 17px; }
+    .callout-text { font-size: 19px; }
+    .cross-ref-text { font-size: 14px; }
+    .footer p { font-size: 16px; color: #706860; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>WORSHIP</h1>
+    <div class="header-line"></div>
+    <p>Presenting the Body</p>
+    <div class="refs">ROMANS 12:1–2 · JOHN 4:23–24 · 1 PETER 2:5–9</div>
+  </div>
+
+  <!-- Opening verse -->
+  <div class="verse-box">
+    <div class="verse-text">"I beseech you therefore, brethren, by the mercies of God, that you <em>present your bodies</em> a living sacrifice, holy, acceptable to God, which is your <em>reasonable service</em>."</div>
+    <div class="verse-ref">ROMANS 12:1</div>
+  </div>
+
+  <!-- Contrast box -->
+  <div class="contrast">
+    <div class="contrast-header">
+      <span>WHAT MOST ASSUME VS WHAT SCRIPTURE SAYS</span>
+    </div>
+    <div class="contrast-row">
+      <div class="contrast-col assumed">
+        <div class="contrast-col-label">COMMON PICTURE</div>
+        <div class="contrast-item">Worship is singing</div>
+        <div class="contrast-item">Led by a worship team</div>
+        <div class="contrast-item">Happens on Sunday</div>
+        <div class="contrast-item">Measured by atmosphere</div>
+        <div class="contrast-item">The soul reaching upward</div>
+        <div class="contrast-footer">PERFORMANCE</div>
+      </div>
+      <div class="contrast-col actual">
+        <div class="contrast-col-label">ROMANS 12:1–2</div>
+        <div class="contrast-item">Worship is presenting the body</div>
+        <div class="contrast-item">Offered by every priest</div>
+        <div class="contrast-item">Happens at all times</div>
+        <div class="contrast-item">Measured by nothing</div>
+        <div class="contrast-item">The spirit overflowing outward</div>
+        <div class="contrast-footer">PRESENTING</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 1: THE COMMON PICTURE           -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="section">
+    <span class="section-label gold">THE COMMON PICTURE</span>
+    <div class="section-sub">What most people assume worship is</div>
+  </div>
+
+  <div id="section-common"></div>
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 2: THE HINGE — ROMANS 12:1–2   -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">BUT PAUL SAYS SOMETHING ELSE</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <div class="section">
+    <span class="section-label gold">THE HINGE</span>
+    <div class="section-sub">Romans 12:1–2 — the passage that redefines everything</div>
+  </div>
+
+  <div id="section-hinge"></div>
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 3: THE BREATHING ANALOGY        -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">IF WORSHIP IS OVERFLOW</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <div class="section">
+    <span class="section-label gold">THE PICTURE</span>
+    <div class="section-sub">Worship as breathing</div>
+  </div>
+
+  <div class="breathing">
+    <div class="breathing-label">THE ANALOGY</div>
+    <div class="breathing-text">
+      Worship is the <em>exhale</em><br>
+      of what the Spirit has <em>inhaled</em> into you.<br><br>
+      The Spirit reveals who God is —<br>
+      the Father, the Son, the finished work,<br>
+      the eternal purpose —<br>
+      and that revelation lands in your spirit.<br><br>
+      That landing <em>is</em> the inhale.<br><br>
+      Worship is what happens next:<br>
+      the spirit, filled with what it has seen,<br>
+      <em>breathes it back out</em> toward God —<br>
+      not only as a song,<br>
+      but as <em>a life operated by faith</em>.<br><br>
+      Every act of reckoning is worship.<br>
+      Every act of yielding is worship.<br>
+      Every moment of walking by the Spirit<br>
+      instead of the flesh — <em>worship</em>.<br><br>
+      The presenting of the body<br>
+      is not a posture you strike on Sunday.<br>
+      It is the ordinary act of saying,<br>
+      with your body, in real time:<br>
+      <em>I am not the source. He is.</em><br><br>
+      That acknowledgment — lived out,<br>
+      moment by moment, by faith —<br>
+      is what the Father receives as worship.<br><br>
+      You cannot exhale<br>
+      what has not been breathed in.<br><br>
+      Trying to worship without revelation<br>
+      is trying to exhale <em>with empty lungs</em>.<br>
+      You get effort. You get performance.<br>
+      You do not get worship.
+    </div>
+  </div>
+
+  <div id="section-breathing"></div>
+
+  <div class="cross-ref">
+    <div class="cross-ref-label">RELATED FIGURE</div>
+    <div class="cross-ref-text">The distinction between the spirit as the organ of worship and the soul as the seat of emotion is treated in full in <a href="soul-vs-spirit-flowchart.html">Soul vs Spirit</a>. Nee places worship in the communion function of the spirit — not in the mind or the emotions, but in the deepest part of the human person where contact with God occurs.</div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 4: IN SPIRIT AND IN TRUTH       -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">THE ORGAN AND THE CONTENT</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <div class="section">
+    <span class="section-label green">IN SPIRIT AND IN TRUTH</span>
+    <div class="section-sub">John 4:23–24 — what Jesus told the Samaritan woman</div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-text">"The hour is coming, and <em>now is</em>,<br>when the true worshippers will worship the Father<br><em>in spirit and truth</em>;<br>for the Father is <em>seeking</em> such to worship Him."</div>
+    <div class="callout-ref">JOHN 4:23</div>
+  </div>
+
+  <div id="section-spirit"></div>
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 5: PRIESTHOOD AND CORPORATE    -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">EVERY BELIEVER A PRIEST</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <div class="section">
+    <span class="section-label warm">A KINGDOM OF PRIESTS</span>
+    <div class="section-sub">Not a worship team and an audience — a body</div>
+  </div>
+
+  <div id="section-priesthood"></div>
+
+  <div class="callout">
+    <div class="callout-text">"What is the outcome then, brethren?<br>When you assemble,<br><em>each one</em> has a psalm, has a teaching,<br>has a revelation, has a tongue,<br>has an interpretation.<br>Let all things be done for <em>edification</em>."</div>
+    <div class="callout-ref">1 CORINTHIANS 14:26</div>
+  </div>
+
+  <div id="section-corporate"></div>
+
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SECTION 7: THE FATHER SEEKS             -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="flow-arrow">
+    <div class="flow-line"></div>
+    <span class="flow-label">THE DESTINATION</span>
+    <div class="flow-head"></div>
+  </div>
+
+  <div class="section">
+    <span class="section-label green">THE FATHER IS SEEKING</span>
+    <div class="section-sub">Worship and the eternal purpose</div>
+  </div>
+
+  <div id="section-seeking"></div>
+
+  <!-- Final breathing revisited -->
+  <div class="breathing">
+    <div class="breathing-label">THE BREATH — REVISITED</div>
+    <div class="breathing-text">
+      The Spirit reveals the Son.<br>
+      The Son reveals the Father.<br>
+      The Father <em>seeks</em> worshippers.<br><br>
+      The whole movement of the Godhead<br>
+      is toward this: a creature<br>
+      who has <em>seen</em> something,<br>
+      and cannot help but <em>respond</em>.<br><br>
+      That response is worship.<br>
+      Not produced. Not performed.<br>
+      <em>Exhaled.</em>
+    </div>
+  </div>
+
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">
+    <p>The Father is not asking<br>
+    for a better performance.<br><br>
+    He is seeking a life<br>
+    that has seen His Son<br>
+    and been wholly yielded to Him —<br>
+    a body presented,<br>
+    a sacrifice that stays alive,<br>
+    an exhale that never stops.<br><br>
+    <em>That is worship.</em></p>
+    <div class="footer-line"></div>
+    <a href="index.html">← THE ETERNAL THREAD</a>
+  </div>
+
+</div>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+const commonNodes = [
+  {
+    num: 1, title: "WORSHIP MEANS SINGING",
+    verse: "The default assumption",
+    summary: "Ask most Christians what worship is and the answer comes instantly: the songs. The worship set. The part of the service before the sermon. A worship leader stands on a platform, a band plays, the congregation sings along, and the quality of the worship is measured by the atmosphere in the room. The entire framework assumes that worship is a musical activity performed at a scheduled time in a designated space. Everything else in the Christian life is something else."
+  },
+  {
+    num: 2, title: "THE WORSHIP INDUSTRY",
+    verse: "A market built on a misidentification",
+    summary: "Once worship is equated with music, it becomes a product. Worship albums. Worship conferences. Worship leaders with recording contracts. The songs are written to produce a specific emotional arc — building intensity, a dynamic peak, a quiet landing. The congregation becomes an audience, and the quality of the experience depends on the skill of the performers. None of this is necessarily cynical. Many of the people involved are sincere. But the structure itself has replaced a priestly act with a consumer experience — and almost no one notices, because the emotional effect feels so much like the real thing."
+  },
+  {
+    num: 3, title: "ATMOSPHERE MISTAKEN FOR PRESENCE",
+    verse: "Hebrews 4:12",
+    scripture: "For the word of God is living and powerful, and sharper than any two-edged sword, piercing even to the division of soul and spirit.",
+    summary: "Here is the deeper problem. Music stirs the soul — the emotions, the mind, the aesthetic sense. A well-crafted song in a darkened room with the right lighting can move anyone, believer or not. And the worshipper interprets that response as <em>God is here</em>. The feeling becomes the proof of presence.<br><br>But the inverse follows immediately: when the feeling is absent — Monday morning, a dry season, a flat service — the conclusion is <em>God feels distant</em>. The worship environment has trained people to index God's nearness to their emotional state. Feeling moved equals close to God. Not feeling moved equals far from God.<br><br>This creates a dependency: you need the environment to reproduce the feeling, because over time the feeling has become the unconscious measure of God's nearness. This is why people chase conferences, why they say <em>the worship was amazing tonight</em> (meaning the sensation was strong), and why a quiet service with one hymn can feel spiritually dead to someone shaped by this loop — even though nothing about God's actual presence has changed. He is no more present in the key change than in the silence. But the soul cannot tell the difference without the Spirit's help. Hebrews 4:12 says the word of God divides soul and spirit — precisely because they are not the same thing and are easily confused."
+  }
+];
+
+const hingeNodes = [
+  {
+    num: 4, title: "THEREFORE",
+    verse: "Romans 12:1a",
+    summary: "Romans 12:1 begins with <em>therefore</em>. That word points backward — to everything Paul has laid out in Romans 1 through 11. Justification. Identification with Christ in death and resurrection. The law of the Spirit of life. Adoption as sons. The golden chain from foreknowledge to glorification. Eleven chapters of what God has accomplished. And only <em>then</em> does Paul say: now, in light of all this, here is what worship looks like. Worship is not the means of accessing these realities. It is the <em>response</em> to having seen them. Revelation comes first. Worship follows."
+  },
+  {
+    num: 5, title: "PRESENT YOUR BODIES",
+    verse: "Romans 12:1b — paristēmi",
+    scripture: "Present your bodies a living sacrifice, holy, acceptable to God.",
+    summary: "The word is <em>paristēmi</em> — to place beside, to present, to yield. It is the same word Paul used in Romans 6:13: do not present your members as instruments of unrighteousness, but present yourselves to God. In Romans 6, reckoning is the ground — you count yourself dead to sin and alive to God. Presenting is the act that follows — you yield your members to God as instruments of righteousness. Romans 12:1 takes that same act and names it for what it is: worship. The presenting of the body — not just the voice, not just the emotions, but the entire embodied person. And the sacrifice is <em>living</em>. Old Testament sacrifices died. This one stays alive. You present a body that keeps breathing, keeps walking, keeps working — but now as something wholly yielded."
+  },
+  {
+    num: 6, title: "REASONABLE SERVICE",
+    verse: "Romans 12:1c — logikēn latreian",
+    scripture: "...which is your reasonable service.",
+    summary: "The phrase is <em>logikēn latreian</em>. <em>Logikēn</em> comes from <em>logos</em> — rational, word-based, corresponding to reality. This is worship that makes sense in light of what God has done. You have been justified, identified, placed in Christ, sealed with the Spirit — and the rational response is to present your body. <em>Latreia</em> is the priestly service word — used for the Levitical ministry in the temple. Paul is not describing singing. He is describing the priestly act of offering."
+  },
+  {
+    num: 7, title: "THE MIND, NOT THE MOOD",
+    verse: "Romans 12:2",
+    scripture: "And do not be conformed to this world, but be transformed by the renewing of your mind.",
+    summary: "The site of transformation is the <em>nous</em> — the mind. Not the emotions. Not the atmosphere. The world's system shapes you by conformity from the outside in. God transforms you by renewal from the inside out. This is why worship built on emotional intensity is structurally fragile: it depends on external conditions — the song, the room, the band — rather than on the inward seeing of what is already true. When the music stops, the feeling fades. When the mind has been renewed, the worship does not stop — because the reality it rests on has not changed."
+  }
+];
+
+const breathingNodes = [
+  {
+    num: 8, title: "THE SPIRIT REVEALS — THE SPIRIT WORSHIPS",
+    verse: "1 Corinthians 2:10–12 · John 16:13–14",
+    scripture: "But God has revealed them to us through His Spirit. For the Spirit searches all things, yes, the deep things of God.",
+    summary: "The Holy Spirit's ministry is to reveal. He searches the deep things of God and communicates them to the human spirit. He takes what belongs to Christ and discloses it (John 16:14). This disclosure — this <em>inhale</em> — is not information transfer. It is the spirit being filled with a seeing of who God is and what He has done. And a spirit filled with revelation cannot remain inert. It overflows. That overflow — toward God, in adoration, in yieldedness, in the presenting of the body — is worship. He fills the lungs; the exhale is worship."
+  },
+  {
+    num: 9, title: "EVERY ACT OF FAITH IS AN ACT OF WORSHIP",
+    verse: "Romans 12:1 · Romans 6:13 · Galatians 2:20",
+    badge: "THE REVOLUTIONARY CLAIM",
+    summary: "Here is what Romans 12:1 actually implies — and it is radical. If worship is the presenting of the body, and if presenting the body is the same act as yielding your members to God (Romans 6:13), then every act of faith <em>is</em> worship. Not preparation for worship. Not a step toward worship. Worship itself.<br><br>When you reckon yourself dead to sin and alive to God — that is worship. When you yield your will to His will — that is worship. When you walk by the Spirit rather than by the flesh — that is worship. When you trust Him with your finances, your marriage, your future — every one of those acts is a presenting of the body. Every one is a living sacrifice.<br><br>This collapses the entire sacred-secular divide. What you experience as faith — reckoning, yielding, walking by the Spirit — the Father receives as worship. The ordinary Monday morning act of saying <em>I am not the source, He is</em> and living accordingly is no less worship than the most exalted song in the most atmospheric room. It may be more.<br><br>This is why Paul does not say <em>worship me with a song</em>. He says <em>present your bodies</em>. The whole person. The whole life. Every hour."
+  }
+];
+
+const spiritNodes = [
+  {
+    num: 10, title: "IN SPIRIT AND IN TRUTH",
+    verse: "John 4:21–24",
+    scripture: "The hour is coming, and now is, when the true worshippers will worship the Father in spirit and truth; for the Father is seeking such to worship Him. God is Spirit, and those who worship Him must worship in spirit and truth.",
+    summary: "The Samaritan woman asked where to worship — Jerusalem or Gerizim. Jesus abolished the question. The place does not matter because worship is not a function of geography. It is a function of spirit. When Jesus says <em>in spirit</em>, He is not saying <em>sincerely</em>. He is naming the organ: the human spirit, the deepest part of the person, the place where God is contacted. And <em>in truth</em> does not mean <em>honestly</em> — it means <em>in reality</em>, in correspondence with what is actually so. True worship touches God (in spirit) with content that corresponds to who God actually is (in truth). This cannot be manufactured by a building, a schedule, or a setlist."
+  },
+  {
+    num: 11, title: "THE FATHER IS SEEKING",
+    verse: "John 4:23",
+    scripture: "The hour is coming, and now is, when the true worshippers will worship the Father in spirit and truth; for the Father is seeking such to worship Him.",
+    summary: "Jesus does not say the Father <em>commands</em> worship. He says the Father <em>seeks</em> worshippers. God is not extracting tribute from reluctant subjects. He is looking for something. There is a satisfaction in the Godhead that comes from a creature who has seen the Son and responded freely — not under compulsion, not by programme, but from the overflow of a spirit filled with revelation. Fromke would say this is the ultimate intention: not that God would bless man, but that God would find in man a conscious, willing return of love. The Father seeking worshippers means worship satisfies something in God — not just in us."
+  }
+];
+
+const priesthoodNodes = [
+  {
+    num: 12, title: "A KINGDOM OF PRIESTS",
+    verse: "1 Peter 2:5, 9 · Revelation 1:5–6 · Hebrews 13:15",
+    cls: "warm-node",
+    scripture: "You also, as living stones, are being built up a spiritual house, a holy priesthood, to offer up spiritual sacrifices acceptable to God through Jesus Christ.",
+    summary: "In the Old Testament, only the Levitical priests could offer sacrifices and minister before God. The congregation watched. The curtain separated. The New Testament abolishes this entirely. Peter calls the whole community a <em>holy priesthood</em>. Revelation states it in the past tense: He <em>has made</em> us kings and priests (1:6). Every believer has already been constituted a priest.<br><br>Hebrews 13:15 says to <em>continually</em> offer the sacrifice of praise, the fruit of lips. Not on Sunday mornings. Without interruption. And the sacrifice is offered <em>by Him</em>, through Christ, not through a worship leader or a musical arrangement. The access is direct. The priesthood does not clock in and clock out.<br><br>The question is not whether you have the authority to minister to God directly. You do. The question is whether the structures you sit in on Sunday morning reflect that reality or functionally reinstate the Old Testament pattern: one priest ministers, the congregation observes. The cross was meant to abolish that."
+  },
+  {
+    num: 13, title: "WHEN YOU ASSEMBLE",
+    verse: "1 Corinthians 14:26 · Ephesians 5:18–21",
+    cls: "warm-node",
+    scripture: "Be filled with the Spirit, speaking to one another in psalms and hymns and spiritual songs, singing and making melody in your heart to the Lord.",
+    summary: "Paul's picture of gathered worship is a body in which <em>each one</em> comes with something the Spirit has given: a psalm, a teaching, a revelation. The operative word is not <em>some</em>. It is <em>each</em>. And in Ephesians 5, singing is <em>speaking to one another</em> — mutual, reciprocal, participatory — flowing from being <em>filled with the Spirit</em>, not from a chord progression. Worship and mutual ministry are the same activity in the ekklesia: the body building itself up in love as each member contributes what the Spirit gives."
+  },
+  {
+    num: 14, title: "THE CONCERT MODEL VS THE BODY MODEL",
+    verse: "1 Corinthians 12:14–26",
+    cls: "warm-node",
+    summary: "In the concert model, worship is produced by the few and consumed by the many. A platform team prepares material and presents it. The congregation sings along. In the body model, worship emerges from the whole community. There is no audience because every member is a priest. One person shares a scripture. Another prays in response. A third begins a song the body joins — not from a screen, but from an inner prompting. The head directs; the body follows. This is messier than a produced service. It is also what Paul describes."
+  },
+  {
+    num: 15, title: "THEN WHAT IS SINGING?",
+    verse: "Psalm 96:1 · Colossians 3:16 · Revelation 5:9",
+    cls: "warm-node",
+    summary: "If worship is the whole life presented to God, then what is singing? It is one <em>expression</em> of worship — and a legitimate one. Scripture is full of song: the Psalms, the songs of Moses and Miriam, the new song around the throne in Revelation. The problem was never music itself. The problem is when music becomes the <em>definition</em> of worship rather than one expression of it — when the singing portion of the service displaces everything else the body was meant to offer.<br><br>A song that arises from a spirit that has seen something is worship, the same way yielding your will on Monday morning is worship. The origin is the same: revelation producing overflow. The correction is not to stop singing. It is to recover everything else that singing was never meant to replace — and to stop confusing the atmosphere the music creates with the presence of the God who was already there before the first chord."
+  }
+];
+
+const seekingNodes = [
+  {
+    num: 16, title: "A CORPORATE EXPRESSION FOR GOD'S PLEASURE",
+    verse: "Ephesians 1:6, 12, 14 · Ephesians 3:21 · Revelation 5:9–10",
+    cls: "green-node",
+    badge: "THE DESTINATION",
+    scripture: "To Him be glory in the church by Christ Jesus to all generations, forever and ever. Amen.",
+    summary: "Three times in Ephesians 1, Paul says the purpose of God's work is <em>to the praise of His glory</em>. This is not God demanding applause. It is the natural terminus of everything God is doing. When the creature sees the Creator truly, the only possible response is worship. It is not extracted. It is inevitable.<br><br>And the destination is not the individual believer alone — though it includes that. The destination is <em>glory in the church</em>. A corporate expression. A body of priests, each filled with the Spirit, each seeing the Son, each presenting their body, and together offering to the Father the worship He has been seeking since before the foundation of the world. Revelation shows this in its fullness: every tongue, every nation, gathered around the throne, singing a new song that no one taught them and no worship leader directed. The Lamb is in the centre. The body surrounds Him. And the Father receives what He was after all along."
+  }
+];
+
+function buildNode(n, group) {
+  const div = document.createElement('div');
+  div.className = `node ${n.cls || ''}`;
+  div.onclick = () => {
+    const isActive = div.classList.contains('active');
+    document.querySelectorAll(`#${group} .node`).forEach(el => el.classList.remove('active'));
+    if (!isActive) div.classList.add('active');
+  };
+  let html = '<div class="node-header">';
+  html += `<div class="node-num">${String(n.num).padStart(2, '0')}</div>`;
+  html += '<div>';
+  html += `<h3 class="node-title">${n.title}</h3>`;
+  html += `<span class="node-verse">${n.verse}</span>`;
+  if (n.badge) html += `<div class="node-badge">${n.badge}</div>`;
+  html += '</div></div>';
+  if (n.scripture) html += `<div class="node-scripture">"${n.scripture}"</div>`;
+  html += `<div class="node-summary">${n.summary}</div>`;
+  html += '<div class="node-tap">Tap to expand</div>';
+  div.innerHTML = html;
+  return div;
+}
+
+function buildArrow() {
+  const div = document.createElement('div');
+  div.className = 'flow-arrow';
+  div.innerHTML = '<div class="flow-line"></div><div class="flow-head"></div>';
+  return div;
+}
+
+function renderNodes(containerId, nodes) {
+  const container = document.getElementById(containerId);
+  nodes.forEach((n, i) => {
+    container.appendChild(buildNode(n, containerId));
+    if (i < nodes.length - 1) container.appendChild(buildArrow());
+  });
+}
+
+renderNodes('section-common', commonNodes);
+renderNodes('section-hinge', hingeNodes);
+renderNodes('section-breathing', breathingNodes);
+renderNodes('section-spirit', spiritNodes);
+renderNodes('section-priesthood', priesthoodNodes);
+renderNodes('section-corporate', seekingNodes);
+</script>
+</body>
+</html>
