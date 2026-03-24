@@ -17,15 +17,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <title>The Eternal Thread</title>
-  <meta name="description" content="Tracing the structural logic of Scripture — interactive flowcharts exploring the eternal purpose, positional truth, the exchanged life, and the organic church.">
+  <meta name="description" content="The logic of Scripture, made visible — interactive flowcharts exploring the eternal purpose, positional truth, the exchanged life, and the organic church.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://theeternalthread.org/">
   <meta property="og:title" content="The Eternal Thread">
-  <meta property="og:description" content="Tracing the structural logic of Scripture — interactive flowcharts exploring the eternal purpose, positional truth, the exchanged life, and the organic church.">
+  <meta property="og:description" content="The logic of Scripture, made visible — interactive flowcharts exploring the eternal purpose, positional truth, the exchanged life, and the organic church.">
   <meta property="og:site_name" content="The Eternal Thread">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="The Eternal Thread">
-  <meta name="twitter:description" content="Tracing the structural logic of Scripture — interactive flowcharts exploring the eternal purpose, positional truth, the exchanged life, and the organic church.">
+  <meta name="twitter:description" content="The logic of Scripture, made visible — interactive flowcharts exploring the eternal purpose, positional truth, the exchanged life, and the organic church.">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -253,7 +253,6 @@
     .site-footer {
       text-align: center;
       margin-top: 20px;
-      padding-top: 20px;
     }
 
     .footer-divider {
@@ -313,7 +312,7 @@
 
     <div class="site-header">
       <h1>The Eternal Thread</h1>
-      <p class="tagline">Tracing the structural logic of Scripture</p>
+      <p class="tagline">The logic of Scripture, made visible</p>
       <div class="header-line"></div>
     </div>
 
@@ -330,7 +329,7 @@
 
     <div class="site-footer">
       <div class="footer-divider"></div>
-      <p class="contact">Questions or reflections? <span class="copy-email" data-email="contact@theeternalthread.org">contact@theeternalthread.org</span><span class="copied-tooltip">copied</span></p>
+      <p class="contact"></p>
     </div>
 
   </div>
@@ -389,23 +388,37 @@
         console.warn('[index] Could not load site-map.json');
       });
 
-    // Copy email to clipboard on click
-    var emailLink = document.querySelector('.copy-email');
-    if (emailLink) {
-      emailLink.addEventListener('click', function () {
-        var email = this.getAttribute('data-email');
-        var el = this;
-        var tooltip = document.querySelector('.copied-tooltip');
-        navigator.clipboard.writeText(email).then(function () {
-          el.classList.add('copied');
+    // Build email entirely in JS — Cloudflare cannot obfuscate what it cannot see
+    (function () {
+      var u = 'contact';
+      var d = 'theeternalthread.org';
+      var addr = u + '@' + d;
+      var el = document.querySelector('.site-footer .contact');
+      if (!el) return;
+
+      var emailSpan = document.createElement('span');
+      emailSpan.className = 'copy-email';
+      emailSpan.textContent = addr;
+
+      var tooltip = document.createElement('span');
+      tooltip.className = 'copied-tooltip';
+      tooltip.textContent = 'copied';
+
+      el.textContent = 'Questions or reflections? ';
+      el.appendChild(emailSpan);
+      el.appendChild(tooltip);
+
+      emailSpan.addEventListener('click', function () {
+        navigator.clipboard.writeText(addr).then(function () {
+          emailSpan.classList.add('copied');
           tooltip.classList.add('show');
           setTimeout(function () {
-            el.classList.remove('copied');
+            emailSpan.classList.remove('copied');
             tooltip.classList.remove('show');
           }, 1800);
         });
       });
-    }
+    })();
   </script>
 </body>
 </html>
