@@ -270,14 +270,33 @@
       letter-spacing: 0.5px;
     }
 
-    .site-footer .contact a {
+    .site-footer .contact .copy-email {
       color: #585048;
-      text-decoration: none;
+      cursor: pointer;
       transition: color 0.2s;
     }
 
-    .site-footer .contact a:hover {
+    .site-footer .contact .copy-email:hover {
       color: #908880;
+    }
+
+    .site-footer .contact .copy-email.copied {
+      color: #68e6a0;
+    }
+
+    .copied-tooltip {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      color: #68e6a0;
+      letter-spacing: 0.5px;
+      margin-left: 6px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .copied-tooltip.show {
+      opacity: 1;
     }
 
     @media (max-width: 600px) {
@@ -311,7 +330,7 @@
 
     <div class="site-footer">
       <div class="footer-divider"></div>
-      <p class="contact">Questions or reflections? <a href="mailto:contact@theeternalthread.org">contact@theeternalthread.org</a></p>
+      <p class="contact">Questions or reflections? <span class="copy-email" data-email="contact@theeternalthread.org">contact@theeternalthread.org</span><span class="copied-tooltip">copied</span></p>
     </div>
 
   </div>
@@ -369,6 +388,24 @@
       .catch(function () {
         console.warn('[index] Could not load site-map.json');
       });
+
+    // Copy email to clipboard on click
+    var emailLink = document.querySelector('.copy-email');
+    if (emailLink) {
+      emailLink.addEventListener('click', function () {
+        var email = this.getAttribute('data-email');
+        var el = this;
+        var tooltip = document.querySelector('.copied-tooltip');
+        navigator.clipboard.writeText(email).then(function () {
+          el.classList.add('copied');
+          tooltip.classList.add('show');
+          setTimeout(function () {
+            el.classList.remove('copied');
+            tooltip.classList.remove('show');
+          }, 1800);
+        });
+      });
+    }
   </script>
 </body>
 </html>
