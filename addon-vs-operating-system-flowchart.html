@@ -610,78 +610,8 @@
     .sub {
       font-size: 16px;
     }
-  
-    .metaphor-key-text {
-      font-size: 14px;
-    }
-    .metaphor-key-label {
-      font-size: 10px;
-    }
 }
 
-/* Metaphor key */
-.metaphor-key {
-  margin: 0 0 28px;
-  border: 1px solid rgba(104, 230, 160, 0.12);
-  border-radius: 8px;
-  overflow: hidden;
-}
-.metaphor-key-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 16px;
-  cursor: pointer;
-  background: rgba(104, 230, 160, 0.03);
-}
-.metaphor-key-label {
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: rgba(104, 230, 160, 0.5);
-}
-.metaphor-key-arrow {
-  font-size: 10px;
-  color: rgba(104, 230, 160, 0.3);
-  transition: transform 0.3s ease;
-}
-.metaphor-key.open .metaphor-key-arrow { transform: rotate(180deg); }
-.metaphor-key-content {
-  display: none;
-  padding: 14px 16px 16px;
-  border-top: 1px solid rgba(104, 230, 160, 0.06);
-}
-.metaphor-key.open .metaphor-key-content { display: block; }
-.metaphor-key-item {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-.metaphor-key-item:last-child { margin-bottom: 0; }
-.metaphor-key-icon {
-  font-size: 13px;
-  flex-shrink: 0;
-}
-.metaphor-key-text {
-  font-size: 12.5px;
-  line-height: 1.55;
-  color: #a09888;
-}
-.metaphor-key-text em {
-  color: #68e6a0;
-  font-style: normal;
-  font-weight: 500;
-}
-.metaphor-key-link {
-  display: block;
-  margin-top: 10px;
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  color: rgba(104, 230, 160, 0.4);
-  text-decoration: none;
-}
-.metaphor-key-link:hover { color: #68e6a0; }
 </style>
 </head>
 <body>
@@ -694,25 +624,6 @@
   </div>
 
   
-<!-- Metaphor Key -->
-<div class="metaphor-key" id="metaphor-key">
-  <div class="metaphor-key-toggle" onclick="document.getElementById('metaphor-key').classList.toggle('open')">
-    <span class="metaphor-key-label">METAPHOR KEY</span>
-    <span class="metaphor-key-arrow">&#9660;</span>
-  </div>
-  <div class="metaphor-key-content">
-    <div class="metaphor-key-item">
-      <span class="metaphor-key-icon">&#x1F6B2;</span>
-      <span class="metaphor-key-text"><em>Bicycle</em> — self-effort with religious accessories bolted on. Prayer module, Bible reading module, church attendance module — added to a life still centred on self.</span>
-    </div>
-    <div class="metaphor-key-item">
-      <span class="metaphor-key-icon">&#x1F697;</span>
-      <span class="metaphor-key-text"><em>Car</em> — Christ as the actual <em>operating system</em>. Not modules added to self-life, but a wholly different source. You have been placed into Him — and He runs everything.</span>
-    </div>
-    <a href="two-operating-systems-flowchart.html" class="metaphor-key-link">SEE: TWO OPERATING SYSTEMS &rarr;</a>
-  </div>
-</div>
-
 <!-- Modern Architecture -->
   <div class="arch modern">
     <div class="arch-label">
@@ -741,16 +652,15 @@
         <!-- TITHE (bottom-left) -->
         <circle cx="101" cy="202" r="18" fill="rgba(230,120,104,0.08)" stroke="rgba(230,120,104,0.2)" stroke-width="1"/>
         <text x="101" y="205" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="7.5" fill="#d3a090">TITHE</text>
-        <!-- DEVO APP (left) -->
+        <!-- DEVOTIONS (left) -->
         <circle cx="69" cy="95" r="18" fill="rgba(230,120,104,0.08)" stroke="rgba(230,120,104,0.2)" stroke-width="1"/>
-        <text x="69" y="92" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="7.5" fill="#d3a090">DEVO</text>
-        <text x="69" y="101" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="7.5" fill="#d3a090">APP</text>
+        <text x="69" y="98" text-anchor="middle" font-family="'DM Sans',sans-serif" font-weight="700" font-size="6.5" fill="#d3a090">DEVOTIONS</text>
       </svg>
     </div>
     <div class="modules">
       <span class="module-pill">Sunday service</span>
       <span class="module-pill">Small group</span>
-      <span class="module-pill">Devotional app</span>
+      <span class="module-pill">Devotions</span>
       <span class="module-pill">Prayer in crisis</span>
       <span class="module-pill">Tithe</span>
       <span class="module-pill">Worship playlist</span>
@@ -835,7 +745,7 @@
     <div class="symptom" onclick="toggleS(this)">
       <div class="symptom-q">Why is there so little genuine transformation?</div>
       <div class="symptom-tap">Tap to expand</div>
-      <div class="symptom-a">Because transformation requires the operating system to change, not just the modules. You can add a prayer module and a Bible reading module and a church attendance module to a life that's still fundamentally centred on self — and nothing changes at the core. The bicycle gets religious accessories bolted onto it. It's still a bicycle. Transformation happens when Christ becomes the actual source — when the operating system itself is replaced.</div>
+      <div class="symptom-a">Because transformation requires the operating system to change, not just the modules. You can add a prayer module and a Bible reading module and a church attendance module to a life that's still fundamentally centred on self — and nothing changes at the core. The self-life gets religious accessories bolted onto it. It is still the self-life. Transformation happens when Christ becomes the actual source — when the operating system itself is replaced.</div>
     </div>
     <div class="symptom" onclick="toggleS(this)">
       <div class="symptom-q">Why do most Christians look identical to non-Christians?</div>
