@@ -250,6 +250,36 @@
       letter-spacing: 1px;
     }
 
+    .site-footer {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 20px;
+    }
+
+    .footer-divider {
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #706860, transparent);
+      margin: 0 auto 20px;
+    }
+
+    .site-footer .contact {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      color: #484038;
+      letter-spacing: 0.5px;
+    }
+
+    .site-footer .contact a {
+      color: #585048;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .site-footer .contact a:hover {
+      color: #908880;
+    }
+
     @media (max-width: 600px) {
       .card-desc { font-size: 14px; opacity: 0.8; }
       .card-verse { color: #a09888; }
@@ -278,6 +308,11 @@
     <div id="cards"></div>
 
     <div class="page-count"></div>
+
+    <div class="site-footer">
+      <div class="footer-divider"></div>
+      <p class="contact">Questions or reflections? <a href="mailto:contact@theeternalthread.org">contact@theeternalthread.org</a></p>
+    </div>
 
   </div>
 
