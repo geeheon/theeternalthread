@@ -79,28 +79,28 @@
       display: block;
       text-decoration: none;
       border-radius: 6px;
-      padding: 18px 20px;
-      margin-bottom: 24px;
+      padding: 14px 16px;
+      margin-bottom: 8px;
       cursor: pointer;
       transition: background 0.2s, border-color 0.2s;
-      background: rgba(144,136,128,0.06);
-      border: 1px solid rgba(144,136,128,0.12);
-      text-align: center;
+      background: rgba(144,136,128,0.04);
+      border: 1px dashed rgba(144,136,128,0.14);
+      position: relative;
     }
 
     .start-here:hover {
-      background: rgba(144,136,128,0.10);
-      border-color: rgba(144,136,128,0.20);
+      background: rgba(144,136,128,0.08);
+      border-color: rgba(144,136,128,0.22);
     }
 
     .start-here-label {
       font-family: 'DM Sans', sans-serif;
       font-size: 9px;
       font-weight: 500;
-      letter-spacing: 2.5px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: #908880;
-      margin-bottom: 6px;
+      color: #706860;
+      margin-bottom: 4px;
     }
 
     .start-here-title {
@@ -117,6 +117,17 @@
       color: #807870;
       line-height: 1.5;
       margin-top: 6px;
+      opacity: 0.6;
+    }
+
+    .start-here-arrow {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: #908880;
+      opacity: 0.2;
     }
 
     /* Section dividers */
@@ -126,7 +137,7 @@
       font-size: 9px;
       letter-spacing: 2.5px;
       text-transform: uppercase;
-      color: #504840;
+      color: #685e55;
       margin: 28px 0 4px;
       padding-left: 2px;
     }
@@ -135,7 +146,7 @@
       display: block;
       font-family: 'DM Sans', sans-serif;
       font-size: 12px;
-      color: #605850;
+      color: #504840;
       line-height: 1.5;
       margin-bottom: 12px;
       padding-left: 2px;
@@ -261,6 +272,7 @@
       <div class="start-here-label">New here?</div>
       <div class="start-here-title">Start Here</div>
       <div class="start-here-desc">What this site is, who it's for, and where to begin.</div>
+      <span class="start-here-arrow">→</span>
     </a>
 
     <div id="cards"></div>
