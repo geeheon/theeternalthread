@@ -351,6 +351,100 @@
     font-size: 12px; color: #688070;
   }
 
+  /* Case Study Toggle */
+  .case-study-toggle {
+    text-align: center;
+    margin-top: 16px;
+  }
+  .case-study-toggle button {
+    background: transparent;
+    border: 1px solid rgba(200, 168, 152, 0.19);
+    border-radius: 6px;
+    color: #c8a898;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 10px 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .case-study-toggle button:hover, .case-study-toggle button.open {
+    border-color: rgba(200, 168, 152, 0.37);
+  }
+
+  .case-study-section {
+    margin-top: 24px;
+    display: none;
+  }
+  .case-study-section.visible { display: block; }
+
+  /* Case Study */
+  .case-study {
+    margin-top: 20px;
+    padding: 16px 18px;
+    background: rgba(230, 104, 104, 0.04);
+    border: 1px solid rgba(230, 104, 104, 0.12);
+    border-radius: 10px;
+  }
+  .case-study-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px; font-weight: 800;
+    letter-spacing: 2px; color: #e66868;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .case-study-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; color: #c8a898;
+    font-style: italic;
+    margin-bottom: 6px;
+  }
+  .case-study-body {
+    margin-top: 14px;
+  }
+  .cs-phase {
+    margin-bottom: 14px;
+    padding-left: 14px;
+    border-left: 2px solid rgba(230, 104, 104, 0.15);
+  }
+  .cs-phase-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 1.5px; color: #a07070;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .cs-phase-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; color: #b0a098;
+    line-height: 1.65;
+  }
+  .cs-divider {
+    width: 20px; height: 1px;
+    background: linear-gradient(90deg, rgba(230,104,104,0.2), transparent);
+    margin: 16px 0;
+  }
+  .cs-diagnosis {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: rgba(230, 192, 104, 0.04);
+    border: 1px solid rgba(230, 192, 104, 0.12);
+    border-radius: 8px;
+  }
+  .cs-diagnosis-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px; font-weight: 800;
+    letter-spacing: 2px; color: #e6c068;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .cs-diagnosis-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; color: #c8b898;
+    line-height: 1.65;
+  }
+
   /* Footer */
   .footer {
     margin-top: 40px;
@@ -716,6 +810,17 @@
       font-size: 10px;
     }
 
+    /* ── CASE STUDY ── */
+    .case-study-title {
+      font-size: 19px;
+    }
+    .cs-phase-text {
+      font-size: 14px;
+    }
+    .cs-diagnosis-text {
+      font-size: 14px;
+    }
+
     /* ── MODULE / MARK / REF ── */
     .module-pill {
       font-size: 11px;
@@ -793,9 +898,47 @@
     </div>
   </div>
 
+  <!-- Case Study Toggle -->
+  <div class="case-study-toggle">
+    <button id="case-study-btn" onclick="toggleCaseStudy()">VIEW A REAL-WORLD EXAMPLE</button>
+  </div>
+
+  <!-- Case Study Section -->
+  <div class="case-study-section" id="case-study-section">
+    <div class="case-study" id="case-study">
+      <div class="case-study-label">CASE STUDY</div>
+      <div class="case-study-title">The man who installed accountability software</div>
+      <div class="case-study-body">
+        <div class="cs-phase">
+          <div class="cs-phase-label">THE STRUGGLE</div>
+          <div class="cs-phase-text">A man is trapped in a cycle of pornography. He confesses to his pastor. A book is recommended. Accountability software is installed on every device. Weekly check-ins begin.</div>
+        </div>
+        <div class="cs-phase">
+          <div class="cs-phase-label">THE INITIAL VICTORY</div>
+          <div class="cs-phase-text">Two months of apparent victory. The system appears to work. Willpower seems to hold. The pastor is encouraged.</div>
+        </div>
+        <div class="cs-phase">
+          <div class="cs-phase-label">THE RELAPSE</div>
+          <div class="cs-phase-text">One night, the old pull returns. He finds a device without the software — or simply a way around it. The fall is followed by shame, guilt, and dread of the next check-in.</div>
+        </div>
+        <div class="cs-phase">
+          <div class="cs-phase-label">THE COVER-UP</div>
+          <div class="cs-phase-text">He lies to the pastor. The external system is intact but the man inside it is dying. The cycle restarts with even heavier guilt.</div>
+        </div>
+
+        <div class="cs-divider"></div>
+
+        <div class="cs-diagnosis">
+          <div class="cs-diagnosis-label">WHAT ROMANS 6 EXPOSES</div>
+          <div class="cs-diagnosis-text">Every part of this approach assumes the old man is still alive and needs to be <em>managed</em>. Accountability apps restrain the flesh. Willpower suppresses the flesh. Weekly check-ins monitor the flesh. But Paul does not say the flesh should be managed. He says the old man was <em>crucified</em> (Romans 6:6). The entire strategy is built on a misdiagnosis: it treats as living what God has already put to death. The answer is not a better system of restraint — it is reckoning as true what is already true.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <div class="footer">
-    <p>The road hasn't moved.<br>You've walked it before.<br>Reckon it true again — tomorrow morning.</p>
+    <p>The old man is still dead.<br>The life is still His.<br>There is nothing left to fix.</p>
     <div class="footer-line"></div>
     <a href="index.html">← THE ETERNAL THREAD</a>
   </div>
@@ -924,6 +1067,15 @@ function toggleFailure() {
   const btn = document.getElementById('failure-btn');
   const visible = section.classList.toggle('visible');
   btn.textContent = visible ? 'HIDE FAILURE CYCLE' : 'VIEW THE FAILURE CYCLE';
+  btn.classList.toggle('open', visible);
+  if (visible) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function toggleCaseStudy() {
+  const section = document.getElementById('case-study-section');
+  const btn = document.getElementById('case-study-btn');
+  const visible = section.classList.toggle('visible');
+  btn.textContent = visible ? 'HIDE EXAMPLE' : 'VIEW A REAL-WORLD EXAMPLE';
   btn.classList.toggle('open', visible);
   if (visible) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
