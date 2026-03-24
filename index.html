@@ -142,15 +142,6 @@
       padding-left: 2px;
     }
 
-    .section-desc {
-      display: block;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      color: #585048;
-      line-height: 1.5;
-      margin-bottom: 12px;
-      padding-left: 2px;
-    }
 
     /* Cards */
     .card {
@@ -303,7 +294,6 @@
       .card-verse { color: #a09888; }
       .site-header .tagline { font-size: 17px; }
       .start-here-desc { font-size: 14px; }
-      .section-desc { font-size: 13.5px; }
     }
   </style>
 </head>
@@ -335,13 +325,6 @@
   </div>
 
   <script>
-    var sectionDescs = {
-      "The Christian Life": "What actually happened when Christ died — and what that means for the believer's daily life.",
-      "God's Grand Narrative": "The purpose behind everything — what God was after before creation, and where it is all heading.",
-      "Spiritual Growth": "How the Christian life actually progresses — the inner mechanics of transformation.",
-      "Church & Culture": "What the New Testament actually describes when it says church — and how far we have drifted."
-    };
-
     fetch('site-map.json')
       .then(function (r) { return r.json(); })
       .then(function (data) {
@@ -353,13 +336,6 @@
           divider.className = 'section-divider';
           divider.textContent = section.title;
           container.appendChild(divider);
-
-          if (sectionDescs[section.title]) {
-            var desc = document.createElement('span');
-            desc.className = 'section-desc';
-            desc.textContent = sectionDescs[section.title];
-            container.appendChild(desc);
-          }
 
           section.pages.forEach(function (page) {
             pageNum++;
