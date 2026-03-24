@@ -341,115 +341,114 @@
     font-style: italic;
   }
 
-  /* ===== SUPPORTING VERSES ===== */
-  .supporting-label {
-    text-align: center;
-    margin: 32px 0 16px;
+  /* ===== SCRIPTURE REFERENCE SECTION ===== */
+  .ref-section {
+    margin-top: 32px;
     padding-top: 20px;
     border-top: 1px solid rgba(104,160,230,0.08);
   }
 
-  .supporting-label span {
+  .ref-section-label {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .ref-section-label span {
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 2.5px;
     color: rgba(104,160,230,0.3);
   }
 
-  .verse-group-label {
+  .ref-group-label {
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 2px;
-    margin: 18px 0 8px;
-    padding-left: 4px;
+    margin: 22px 0 10px;
+    padding-left: 2px;
   }
 
-  .verse-group-label.source-lbl { color: rgba(104,160,230,0.4); }
-  .verse-group-label.character-lbl { color: rgba(104,180,200,0.4); }
-  .verse-group-label.covenant-lbl { color: rgba(130,160,230,0.4); }
+  .ref-group-label.source-lbl { color: rgba(104,160,230,0.4); }
+  .ref-group-label.character-lbl { color: rgba(104,180,200,0.4); }
+  .ref-group-label.covenant-lbl { color: rgba(130,160,230,0.4); }
 
-  /* ===== NODES ===== */
-  .node {
-    border-radius: 10px;
-    padding: 18px 22px;
-    margin-bottom: 6px;
+  /* ===== COMPACT REFERENCE ITEMS ===== */
+  .ref-item {
+    padding: 12px 16px;
+    margin-bottom: 4px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background 0.25s, border-color 0.25s;
-    position: relative;
-    overflow: hidden;
+    transition: background 0.2s, border-color 0.2s;
+    border: 1px solid transparent;
   }
 
-  .node.source-node {
-    background: rgba(104,160,230,0.04);
-    border: 1px solid rgba(104,160,230,0.08);
-  }
-  .node.source-node:hover { border-color: rgba(104,160,230,0.15); }
-  .node.source-node.active { border-color: rgba(104,160,230,0.2); background: rgba(104,160,230,0.06); }
+  .ref-item.source { background: rgba(104,160,230,0.025); }
+  .ref-item.source:hover { background: rgba(104,160,230,0.05); }
+  .ref-item.source.active { background: rgba(104,160,230,0.05); border-color: rgba(104,160,230,0.15); }
 
-  .node.character-node {
-    background: rgba(104,180,200,0.04);
-    border: 1px solid rgba(104,180,200,0.08);
-  }
-  .node.character-node:hover { border-color: rgba(104,180,200,0.15); }
-  .node.character-node.active { border-color: rgba(104,180,200,0.2); background: rgba(104,180,200,0.06); }
+  .ref-item.character { background: rgba(104,180,200,0.025); }
+  .ref-item.character:hover { background: rgba(104,180,200,0.05); }
+  .ref-item.character.active { background: rgba(104,180,200,0.05); border-color: rgba(104,180,200,0.15); }
 
-  .node.covenant-node {
-    background: rgba(130,160,230,0.04);
-    border: 1px solid rgba(130,160,230,0.08);
-  }
-  .node.covenant-node:hover { border-color: rgba(130,160,230,0.15); }
-  .node.covenant-node.active { border-color: rgba(130,160,230,0.2); background: rgba(130,160,230,0.06); }
+  .ref-item.covenant { background: rgba(130,160,230,0.025); }
+  .ref-item.covenant:hover { background: rgba(130,160,230,0.05); }
+  .ref-item.covenant.active { background: rgba(130,160,230,0.05); border-color: rgba(130,160,230,0.15); }
 
-  .node-title {
+  .ref-header {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .ref-title {
     font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: #a0a098;
+    color: #90908a;
   }
 
-  .node-verse {
+  .ref-verse {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 13px;
-    color: #807870;
-    margin-top: 2px;
+    font-size: 12.5px;
+    color: #706860;
   }
 
-  .node-scripture {
+  .ref-scripture {
     display: none;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 16px;
-    color: #c8c0b0;
-    line-height: 1.7;
-    margin-top: 12px;
-    padding: 12px 0 12px 14px;
-    border-left: 2px solid rgba(104,160,230,0.15);
-  }
-
-  .node-summary {
-    display: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13.5px;
-    color: #908880;
+    font-size: 15.5px;
+    color: #c0b8a8;
     line-height: 1.65;
     margin-top: 10px;
+    padding: 10px 0 10px 14px;
+    border-left: 2px solid rgba(104,160,230,0.12);
   }
 
-  .node-tap {
+  .ref-commentary {
+    display: none;
     font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    color: #605850;
-    margin-top: 6px;
+    font-size: 13px;
+    color: #888078;
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+
+  .ref-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: #585048;
+    margin-top: 4px;
     font-style: italic;
     transition: opacity 0.2s;
   }
 
-  .node.active .node-scripture,
-  .node.active .node-summary { display: block; }
-  .node.active .node-tap { opacity: 0; height: 0; margin: 0; overflow: hidden; }
+  .ref-item.active .ref-scripture,
+  .ref-item.active .ref-commentary { display: block; }
+  .ref-item.active .ref-tap { opacity: 0; height: 0; margin: 0; overflow: hidden; }
 
   /* ===== FOOTER ===== */
   .footer {
@@ -493,11 +492,11 @@
     .application-col-label { font-size: 9px; }
     .application-result { font-size: 10px; }
     .burden p { font-size: 17px; }
-    .node-title { font-size: 13px; }
-    .node-verse { font-size: 13px; }
-    .node-scripture { font-size: 18px; color: #ddd0b4; }
-    .node-summary { font-size: 15px; line-height: 1.65; }
-    .node-tap { font-size: 13px; color: #8a8278; }
+    .ref-title { font-size: 12px; }
+    .ref-verse { font-size: 13px; }
+    .ref-scripture { font-size: 17px; color: #d0c8b4; }
+    .ref-commentary { font-size: 14px; line-height: 1.65; }
+    .ref-tap { font-size: 12px; color: #787068; }
     .footer p { font-size: 15px; color: #908880; }
     .contrast-col.natural .contrast-item { color: #b0a090; }
     .contrast-col.agape .contrast-item { color: #90a8c0; }
@@ -611,17 +610,19 @@
     <p>And only what is sourced in God<br>can do what God commands.</p>
   </div>
 
-  <!-- ===== SUPPORTING VERSES ===== -->
-  <div class="supporting-label"><span>SUPPORTING VERSES</span></div>
+  <!-- ===== SCRIPTURE REFERENCES ===== -->
+  <div class="ref-section">
+    <div class="ref-section-label"><span>SCRIPTURE REFERENCES</span></div>
 
-  <div class="verse-group-label source-lbl">THE SOURCE OF AGAPE</div>
-  <div id="source-verses"></div>
+    <div class="ref-group-label source-lbl">THE SOURCE OF AGAPE</div>
+    <div id="source-refs"></div>
 
-  <div class="verse-group-label character-lbl">THE CHARACTER OF AGAPE</div>
-  <div id="character-verses"></div>
+    <div class="ref-group-label character-lbl">THE CHARACTER OF AGAPE</div>
+    <div id="character-refs"></div>
 
-  <div class="verse-group-label covenant-lbl">AGAPE IN COVENANT</div>
-  <div id="covenant-verses"></div>
+    <div class="ref-group-label covenant-lbl">AGAPE IN COVENANT</div>
+    <div id="covenant-refs"></div>
+  </div>
 
   <!-- ===== FOOTER ===== -->
   <div class="footer">
@@ -633,115 +634,107 @@
 </div>
 
 <script>
-var sourceVerses = [
+var sourceRefs = [
   {
     title: "GOD IS LOVE",
     verse: "1 John 4:8",
-    cls: "source-node",
+    cls: "source",
     scripture: "He who does not love does not know God, for God is love.",
-    summary: "Love is not merely something God does. It is what He is. Agape is not a human capacity that God endorses — it is a divine attribute that humans can only receive and express as they are joined to Him. The source is not the human heart. The source is God Himself."
+    commentary: "Love is not merely something God does. It is what He is. Agape is not a human capacity that God endorses — it is a divine attribute that humans can only receive and express as they are joined to Him. The source is not the human heart. The source is God Himself."
   },
   {
     title: "LOVE HAS BEEN POURED OUT",
     verse: "Romans 5:5",
-    cls: "source-node",
+    cls: "source",
     scripture: "Now hope does not disappoint, because the love of God has been poured out in our hearts by the Holy Spirit who was given to us.",
-    summary: "Paul does not say that we have been taught to love, or inspired to love, or given a better motive for loving. He says the love of God has been poured out — deposited, supplied — by the Holy Spirit. The love is in us, but it did not originate in us. It came from outside, from above, through the Spirit."
+    commentary: "Paul does not say that we have been taught to love, or inspired to love, or given a better motive for loving. He says the love of God has been poured out — deposited, supplied — by the Holy Spirit. The love is in us, but it did not originate in us. It came from outside, from above, through the Spirit."
   },
   {
     title: "WE LOVE BECAUSE HE FIRST LOVED US",
     verse: "1 John 4:19",
-    cls: "source-node",
+    cls: "source",
     scripture: "We love Him because He first loved us.",
-    summary: "The order is everything. We do not love in order to earn God's love. We love because we have already received it. The flow is from God to us, and then through us. Agape is always a response to a prior gift — never an achievement of the human will."
+    commentary: "The order is everything. We do not love in order to earn God's love. We love because we have already received it. The flow is from God to us, and then through us. Agape is always a response to a prior gift — never an achievement of the human will."
   }
 ];
 
-var characterVerses = [
+var characterRefs = [
   {
     title: "LOVE IS PATIENT, LOVE IS KIND",
     verse: "1 Corinthians 13:4–7",
-    cls: "character-node",
+    cls: "character",
     scripture: "Love suffers long and is kind; love does not envy; love does not parade itself, is not puffed up; does not behave rudely, does not seek its own, is not provoked, thinks no evil; does not rejoice in iniquity, but rejoices in the truth; bears all things, believes all things, hopes all things, endures all things.",
-    summary: "Read this list honestly and ask: can any human being produce this from natural resources? This is not a description of intense human affection. This is a description of divine character. Paul is describing the nature of God's own love — the love that must be received before it can be expressed."
+    commentary: "Read this list honestly and ask: can any human being produce this from natural resources? This is not a description of intense human affection. This is a description of divine character. Paul is describing the nature of God's own love — the love that must be received before it can be expressed."
   },
   {
     title: "THE FRUIT OF THE SPIRIT IS LOVE",
     verse: "Galatians 5:22–23",
-    cls: "character-node",
+    cls: "character",
     scripture: "But the fruit of the Spirit is love, joy, peace, longsuffering, kindness, goodness, faithfulness, gentleness, self-control.",
-    summary: "Love leads the list of the Spirit's fruit — and it is the Spirit's fruit, not ours. Just as a branch does not strain to produce grapes, the believer does not manufacture agape by discipline. It is borne through the Spirit's life operating in and through the one who abides."
+    commentary: "Love leads the list of the Spirit's fruit — and it is the Spirit's fruit, not ours. Just as a branch does not strain to produce grapes, the believer does not manufacture agape by discipline. It is borne through the Spirit's life operating in and through the one who abides."
   },
   {
     title: "GREATER LOVE HAS NO ONE THAN THIS",
     verse: "John 15:13",
-    cls: "character-node",
+    cls: "character",
     scripture: "Greater love has no one than this, than to lay down one's life for his friends.",
-    summary: "The measure of agape is not feeling — it is cost. The willingness to lay down one's life is not the product of sentiment. It is the mark of a love that operates on a different principle entirely — self-giving rather than self-seeking, sacrifice rather than satisfaction."
+    commentary: "The measure of agape is not feeling — it is cost. The willingness to lay down one's life is not the product of sentiment. It is the mark of a love that operates on a different principle entirely — self-giving rather than self-seeking, sacrifice rather than satisfaction."
   }
 ];
 
-var covenantVerses = [
+var covenantRefs = [
   {
     title: "HUSBANDS, LOVE YOUR WIVES",
     verse: "Ephesians 5:25",
-    cls: "covenant-node",
+    cls: "covenant",
     scripture: "Husbands, love your wives, just as Christ also loved the church and gave Himself for her.",
-    summary: "The standard for a husband's love is not romance, not compatibility, not mutual benefit. It is Christ's self-giving death. This is not a demand to feel more strongly. It is a call to love from the same source that Christ loved from — the divine life, poured out without condition."
+    commentary: "The standard for a husband's love is not romance, not compatibility, not mutual benefit. It is Christ's self-giving death. This is not a demand to feel more strongly. It is a call to love from the same source that Christ loved from — the divine life, poured out without condition."
   },
   {
     title: "LOVE NEVER FAILS",
     verse: "1 Corinthians 13:8",
-    cls: "covenant-node",
+    cls: "covenant",
     scripture: "Love never fails.",
-    summary: "Human love fails regularly. It fails under pressure, under disappointment, under the ordinary erosion of time. If agape never fails, it cannot be sourced in the human heart, which fails constantly. The love that never fails must come from the One who never fails."
+    commentary: "Human love fails regularly. It fails under pressure, under disappointment, under the ordinary erosion of time. If agape never fails, it cannot be sourced in the human heart, which fails constantly. The love that never fails must come from the One who never fails."
   },
   {
     title: "AS I HAVE LOVED YOU",
     verse: "John 13:34",
-    cls: "covenant-node",
+    cls: "covenant",
     scripture: "A new commandment I give to you, that you love one another; as I have loved you, that you also love one another.",
-    summary: "The newness of the command is not the instruction to love — that existed already. The newness is the standard: as I have loved you. Christ's love is the measure, the model, and the source. The command presupposes a supply. You cannot obey this command from natural resources. You can only obey it by drawing from the love that has already been given."
+    commentary: "The newness of the command is not the instruction to love — that existed already. The newness is the standard: as I have loved you. Christ's love is the measure, the model, and the source. The command presupposes a supply. You cannot obey this command from natural resources. You can only obey it by drawing from the love that has already been given."
   }
 ];
 
-function buildNode(n) {
+function buildRef(r) {
   var div = document.createElement('div');
-  div.className = 'node ' + n.cls;
-  div.setAttribute('data-group', n.cls);
+  div.className = 'ref-item ' + r.cls;
 
-  var html = '<div class="node-title">' + n.title + '</div>';
-  html += '<div class="node-verse">' + n.verse + '</div>';
-  html += '<div class="node-scripture">"' + n.scripture + '"</div>';
-  html += '<div class="node-summary">' + n.summary + '</div>';
-  html += '<div class="node-tap">Tap to expand</div>';
+  var html = '<div class="ref-header">';
+  html += '<span class="ref-title">' + r.title + '</span>';
+  html += '<span class="ref-verse">' + r.verse + '</span>';
+  html += '</div>';
+  html += '<div class="ref-scripture">"' + r.scripture + '"</div>';
+  html += '<div class="ref-commentary">' + r.commentary + '</div>';
+  html += '<div class="ref-tap">Tap to expand</div>';
 
   div.innerHTML = html;
+
+  div.addEventListener('click', function() {
+    var group = r.cls;
+    var wasActive = this.classList.contains('active');
+    document.querySelectorAll('.ref-item.' + group).forEach(function(el) {
+      el.classList.remove('active');
+    });
+    if (!wasActive) this.classList.add('active');
+  });
+
   return div;
 }
 
-document.getElementById('source-verses').append.apply(
-  document.getElementById('source-verses'),
-  sourceVerses.map(function(n) { return buildNode(n); })
-);
-document.getElementById('character-verses').append.apply(
-  document.getElementById('character-verses'),
-  characterVerses.map(function(n) { return buildNode(n); })
-);
-document.getElementById('covenant-verses').append.apply(
-  document.getElementById('covenant-verses'),
-  covenantVerses.map(function(n) { return buildNode(n); })
-);
-
-document.querySelectorAll('.node').forEach(function(node) {
-  node.addEventListener('click', function() {
-    var group = this.getAttribute('data-group');
-    document.querySelectorAll('.node[data-group="' + group + '"]').forEach(function(n) {
-      if (n !== node) n.classList.remove('active');
-    });
-    this.classList.toggle('active');
-  });
-});
+sourceRefs.forEach(function(r) { document.getElementById('source-refs').appendChild(buildRef(r)); });
+characterRefs.forEach(function(r) { document.getElementById('character-refs').appendChild(buildRef(r)); });
+covenantRefs.forEach(function(r) { document.getElementById('covenant-refs').appendChild(buildRef(r)); });
 </script>
 </body>
 </html>

@@ -315,130 +315,116 @@
   .burden p:last-child { margin-bottom: 0; }
   .burden p em { color: #e6c068; font-style: italic; }
 
-  /* ─── Supporting Verses Section ─── */
-  .supporting-label {
-    text-align: center;
-    margin: 32px 0 16px;
+  /* ─── Scripture Reference Section ─── */
+  .ref-section {
+    margin-top: 32px;
     padding-top: 20px;
     border-top: 1px solid rgba(230, 192, 104, 0.08);
   }
-  .supporting-label span {
+
+  .ref-section-label {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .ref-section-label span {
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 2.5px;
     color: rgba(230, 192, 104, 0.3);
   }
 
-  .verse-group-label {
+  .ref-group-label {
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 2px;
-    margin: 18px 0 8px;
-    padding-left: 4px;
+    margin: 22px 0 10px;
+    padding-left: 2px;
   }
-  .verse-group-label.fact { color: rgba(230, 192, 104, 0.4); }
-  .verse-group-label.faith-grp { color: rgba(160, 200, 230, 0.4); }
-  .verse-group-label.warning { color: rgba(230, 130, 104, 0.4); }
 
-  /* ─── Node cards ─── */
-  .node {
-    border-radius: 10px;
-    padding: 18px 22px;
+  .ref-group-label.fact { color: rgba(230, 192, 104, 0.45); }
+  .ref-group-label.faith-grp { color: rgba(160, 200, 230, 0.45); }
+  .ref-group-label.warning { color: rgba(230, 130, 104, 0.45); }
+
+  .ref-item {
+    padding: 12px 16px;
+    margin-bottom: 4px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    border: 1.5px solid;
-    margin-bottom: 10px;
-  }
-  .node.fact-node {
-    background: rgba(26, 22, 14, 0.5);
-    border-color: rgba(230, 192, 104, 0.18);
-  }
-  .node.fact-node.active {
-    background: rgba(26, 22, 14, 0.85);
-    border-color: rgba(230, 192, 104, 0.45);
-    box-shadow: 0 0 24px rgba(230, 192, 104, 0.08), 0 4px 16px rgba(0,0,0,0.3);
-  }
-  .node.faith-node {
-    background: rgba(14, 18, 30, 0.5);
-    border-color: rgba(160, 200, 230, 0.18);
-  }
-  .node.faith-node.active {
-    background: rgba(14, 18, 30, 0.85);
-    border-color: rgba(160, 200, 230, 0.45);
-    box-shadow: 0 0 24px rgba(160, 200, 230, 0.08), 0 4px 16px rgba(0,0,0,0.3);
-  }
-  .node.warning-node {
-    background: rgba(36, 24, 14, 0.5);
-    border-color: rgba(230, 130, 104, 0.18);
-  }
-  .node.warning-node.active {
-    background: rgba(36, 24, 14, 0.8);
-    border-color: rgba(230, 130, 104, 0.45);
-    box-shadow: 0 0 24px rgba(230, 130, 104, 0.08), 0 4px 16px rgba(0,0,0,0.3);
+    transition: background 0.2s, border-color 0.2s;
+    border: 1px solid transparent;
   }
 
-  .node.active { transform: scale(1.02); }
+  .ref-item.fact-ref { background: rgba(230, 192, 104, 0.025); }
+  .ref-item.fact-ref:hover { background: rgba(230, 192, 104, 0.05); }
+  .ref-item.fact-ref.active { background: rgba(230, 192, 104, 0.05); border-color: rgba(230, 192, 104, 0.2); }
 
-  .node-header {
+  .ref-item.faith-ref { background: rgba(160, 200, 230, 0.025); }
+  .ref-item.faith-ref:hover { background: rgba(160, 200, 230, 0.05); }
+  .ref-item.faith-ref.active { background: rgba(160, 200, 230, 0.05); border-color: rgba(160, 200, 230, 0.2); }
+
+  .ref-item.warning-ref { background: rgba(230, 130, 104, 0.025); }
+  .ref-item.warning-ref:hover { background: rgba(230, 130, 104, 0.05); }
+  .ref-item.warning-ref.active { background: rgba(230, 130, 104, 0.05); border-color: rgba(230, 130, 104, 0.2); }
+
+  .ref-header {
     display: flex;
     align-items: baseline;
-    gap: 10px;
-    margin-bottom: 4px;
+    gap: 8px;
   }
-  .node.active .node-header { margin-bottom: 10px; }
 
-  .node-title {
-    font-size: 12px;
+  .ref-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 2px;
-    margin: 0;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #90908a;
   }
-  .fact-node .node-title { color: #e6c068; }
-  .faith-node .node-title { color: #a0c8e6; }
-  .warning-node .node-title { color: #e68268; }
 
-  .node-verse {
+  .ref-verse {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
     font-style: italic;
+    font-size: 12.5px;
+    color: #706860;
   }
-  .fact-node .node-verse { color: rgba(230, 192, 104, 0.5); }
-  .faith-node .node-verse { color: rgba(160, 200, 230, 0.5); }
-  .warning-node .node-verse { color: rgba(230, 130, 104, 0.5); }
 
-  .node-scripture {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    line-height: 1.6;
-    color: #d4c5a0;
-    margin: 8px 0;
-    font-style: italic;
-    padding-left: 14px;
+  .ref-scripture {
     display: none;
-  }
-  .fact-node .node-scripture { border-left: 2px solid rgba(230, 192, 104, 0.25); }
-  .faith-node .node-scripture { border-left: 2px solid rgba(160, 200, 230, 0.25); }
-  .warning-node .node-scripture { border-left: 2px solid rgba(230, 130, 104, 0.25); }
-  .node.active .node-scripture { display: block; }
-
-  .node-summary {
-    font-size: 13.5px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15.5px;
+    color: #c8c0a8;
     line-height: 1.65;
-    color: #b8b0a0;
-    margin: 8px 0 0 0;
-    display: none;
+    margin-top: 10px;
+    padding: 10px 0 10px 14px;
   }
-  .fact-node .node-summary { color: #b8a890; }
-  .faith-node .node-summary { color: #90a8c0; }
-  .warning-node .node-summary { color: #b8a090; }
-  .node.active .node-summary { display: block; }
 
-  .node-tap {
-    font-size: 12px;
-    color: #888070;
+  .ref-item.fact-ref .ref-scripture { border-left: 2px solid rgba(230, 192, 104, 0.18); }
+  .ref-item.faith-ref .ref-scripture { border-left: 2px solid rgba(160, 200, 230, 0.18); }
+  .ref-item.warning-ref .ref-scripture { border-left: 2px solid rgba(230, 130, 104, 0.18); }
+
+  .ref-commentary {
+    display: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: #888078;
+    line-height: 1.6;
+    margin-top: 8px;
   }
-  .node.active .node-tap { display: none; }
+
+  .ref-tap {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: #585048;
+    margin-top: 4px;
+    font-style: italic;
+    transition: opacity 0.2s;
+  }
+
+  .ref-item.active .ref-scripture,
+  .ref-item.active .ref-commentary { display: block; }
+  .ref-item.active .ref-tap { opacity: 0; height: 0; margin: 0; overflow: hidden; }
 
   /* ─── Bottom Note ─── */
   .bottom-note {
@@ -509,24 +495,11 @@
     .burden p {
       font-size: 17px;
     }
-    .node-title {
-      font-size: 13px;
-    }
-    .node-verse {
-      font-size: 13px;
-    }
-    .node-scripture {
-      font-size: 18px;
-      color: #ddd0b4;
-    }
-    .node-summary {
-      font-size: 15px;
-      line-height: 1.65;
-    }
-    .node-tap {
-      font-size: 13px;
-      color: #8a8278;
-    }
+    .ref-title { font-size: 12px; }
+    .ref-verse { font-size: 13px; }
+    .ref-scripture { font-size: 17px; color: #d0c8b4; }
+    .ref-commentary { font-size: 14px; line-height: 1.65; }
+    .ref-tap { font-size: 12px; color: #787068; }
     .bottom-note p {
       font-size: 15px;
       color: #a09080;
@@ -685,17 +658,19 @@
     <div class="nee-source">WATCHMAN NEE · THE CHRISTIAN VOL. 6</div>
   </div>
 
-  <!-- ─── Supporting Verses ─── -->
-  <div class="supporting-label"><span>SUPPORTING VERSES</span></div>
+  <!-- ─── Scripture References ─── -->
+  <div class="ref-section">
+    <div class="ref-section-label"><span>SCRIPTURE REFERENCES</span></div>
 
-  <div class="verse-group-label fact">GOD'S ACCOMPLISHED FACTS</div>
-  <div id="fact-verses"></div>
+    <div class="ref-group-label fact">GOD'S ACCOMPLISHED FACTS</div>
+    <div id="fact-refs"></div>
 
-  <div class="verse-group-label faith-grp">THE NATURE OF FAITH</div>
-  <div id="faith-verses"></div>
+    <div class="ref-group-label faith-grp">THE NATURE OF FAITH</div>
+    <div id="faith-refs"></div>
 
-  <div class="verse-group-label warning">FAITH WITHOUT A BASIS</div>
-  <div id="warning-verses"></div>
+    <div class="ref-group-label warning">FAITH WITHOUT A BASIS</div>
+    <div id="warning-refs"></div>
+  </div>
 
   <!-- ─── Bottom Note ─── -->
   <div class="bottom-note">
@@ -713,116 +688,121 @@
 </div>
 
 <script>
-const factVerses = [
+const factRefs = [
   {
     title: "IT IS FINISHED",
     verse: "John 19:30",
-    cls: "fact-node",
+    cls: "fact-ref",
     scripture: "So when Jesus had received the sour wine, He said, 'It is finished!' And bowing His head, He gave up His spirit.",
-    summary: "Not <em>it is begun</em> or <em>it is underway</em>. Finished. The redemptive work of God is a completed fact — accomplished before you were born, before you believed, before you felt anything. Faith does not complete what Christ left incomplete. It acknowledges what is already done."
+    commentary: "Not <em>it is begun</em> or <em>it is underway</em>. Finished. The redemptive work of God is a completed fact — accomplished before you were born, before you believed, before you felt anything. Faith does not complete what Christ left incomplete. It acknowledges what is already done."
   },
   {
     title: "BLESSED WITH EVERY SPIRITUAL BLESSING",
     verse: "Ephesians 1:3",
-    cls: "fact-node",
+    cls: "fact-ref",
     scripture: "Blessed be the God and Father of our Lord Jesus Christ, who has blessed us with every spiritual blessing in the heavenly places in Christ.",
-    summary: "Past tense: <em>has blessed</em>. Not <em>will bless if you believe hard enough</em>. Every spiritual blessing is already deposited in Christ. The money is in the bank. Faith is not the cause of the deposit — it is the cashing of the cheque."
+    commentary: "Past tense: <em>has blessed</em>. Not <em>will bless if you believe hard enough</em>. Every spiritual blessing is already deposited in Christ. The money is in the bank. Faith is not the cause of the deposit — it is the cashing of the cheque."
   },
   {
     title: "OUR OLD MAN WAS CRUCIFIED",
     verse: "Romans 6:6",
-    cls: "fact-node",
+    cls: "fact-ref",
     scripture: "Knowing this, that our old man was crucified with Him, that the body of sin might be done away with, that we should no longer be slaves of sin.",
-    summary: "Paul does not say <em>crucify your old man</em>. He says it was crucified — with Christ, two thousand years ago. This is a fact of history, not a goal of devotion. The reckoning of Romans 6:11 is simply faith applied to this fact: counting true what God says is true."
+    commentary: "Paul does not say <em>crucify your old man</em>. He says it was crucified — with Christ, two thousand years ago. This is a fact of history, not a goal of devotion. The reckoning of Romans 6:11 is simply faith applied to this fact: counting true what God says is true."
   },
   {
     title: "COMPLETE IN HIM",
     verse: "Colossians 2:10",
-    cls: "fact-node",
+    cls: "fact-ref",
     scripture: "And you are complete in Him, who is the head of all principality and power.",
-    summary: "Not <em>you will be complete when you reach maturity</em>. Not <em>you are almost complete</em>. Complete — now, in Him. This is positional truth. Faith does not add to your completeness. Faith acknowledges the completeness that already exists in Christ."
+    commentary: "Not <em>you will be complete when you reach maturity</em>. Not <em>you are almost complete</em>. Complete — now, in Him. This is positional truth. Faith does not add to your completeness. Faith acknowledges the completeness that already exists in Christ."
   }
 ];
 
-const faithVerses = [
+const faithRefs = [
   {
     title: "THE DEFINITION",
     verse: "Hebrews 11:1",
-    cls: "faith-node",
+    cls: "faith-ref",
     scripture: "Now faith is the substance of things hoped for, the evidence of things not seen.",
-    summary: "The Greek hypostasis means <em>substantiation</em> — the faculty that makes real what is otherwise unseen. Just as eyes are the organ that substantiates colour, faith is the organ that substantiates spiritual reality. Without eyes, colour still exists — you simply cannot perceive it. Without faith, God's facts still stand — you simply cannot experience them."
+    commentary: "The Greek hypostasis means <em>substantiation</em> — the faculty that makes real what is otherwise unseen. Just as eyes are the organ that substantiates colour, faith is the organ that substantiates spiritual reality. Without eyes, colour still exists — you simply cannot perceive it. Without faith, God's facts still stand — you simply cannot experience them."
   },
   {
     title: "FAITH COMES BY HEARING",
     verse: "Romans 10:17",
-    cls: "faith-node",
+    cls: "faith-ref",
     scripture: "So then faith comes by hearing, and hearing by the word of God.",
-    summary: "Faith is not self-generated. It comes by hearing — by encountering what God has said. This is why Nee insists that without the promises of God, our <em>faith</em> is not real faith. You cannot believe what has not been spoken. Faith has a source outside yourself: God's declared word."
+    commentary: "Faith is not self-generated. It comes by hearing — by encountering what God has said. This is why Nee insists that without the promises of God, our <em>faith</em> is not real faith. You cannot believe what has not been spoken. Faith has a source outside yourself: God's declared word."
   },
   {
     title: "WE WALK BY FAITH, NOT BY SIGHT",
     verse: "2 Corinthians 5:7",
-    cls: "faith-node",
+    cls: "faith-ref",
     scripture: "For we walk by faith, not by sight.",
-    summary: "Faith and sight are two different faculties operating in two different realms. Sight deals with the visible and temporal. Faith substantiates the invisible and eternal. When you demand that God's facts be confirmed by feelings, you are asking sight to do what only faith can do — and then blaming faith for not working."
+    commentary: "Faith and sight are two different faculties operating in two different realms. Sight deals with the visible and temporal. Faith substantiates the invisible and eternal. When you demand that God's facts be confirmed by feelings, you are asking sight to do what only faith can do — and then blaming faith for not working."
   },
   {
     title: "THOSE WHO HAVE BELIEVED ENTER REST",
     verse: "Hebrews 4:3",
-    cls: "faith-node",
+    cls: "faith-ref",
     scripture: "For we who have believed do enter that rest.",
-    summary: "Faith and rest are inseparable. If you are straining, you are not believing — you are working. True faith rests, because it has found something finished to rest upon. The anxious person who says <em>I'm really trying to have faith</em> has not yet seen what faith actually is. Faith is the cessation of your own effort to produce what God has already produced."
+    commentary: "Faith and rest are inseparable. If you are straining, you are not believing — you are working. True faith rests, because it has found something finished to rest upon. The anxious person who says <em>I'm really trying to have faith</em> has not yet seen what faith actually is. Faith is the cessation of your own effort to produce what God has already produced."
   }
 ];
 
-const warningVerses = [
+const warningRefs = [
   {
     title: "FAITH WITHOUT BASIS IS DREAMING",
     verse: "Romans 10:14",
-    cls: "warning-node",
+    cls: "warning-ref",
     scripture: "How then shall they call on Him in whom they have not believed? And how shall they believe in Him of whom they have not heard?",
-    summary: "You cannot believe what has not been declared. Paul's logic is airtight: belief requires hearing, hearing requires a word spoken. Faith that has no basis in God's revealed word is not faith at all — it is religious imagination. You can be sincere and still be dreaming."
+    commentary: "You cannot believe what has not been declared. Paul's logic is airtight: belief requires hearing, hearing requires a word spoken. Faith that has no basis in God's revealed word is not faith at all — it is religious imagination. You can be sincere and still be dreaming."
   },
   {
     title: "NOT ALL FAITH IS FROM GOD",
     verse: "Matthew 7:22–23",
-    cls: "warning-node",
+    cls: "warning-ref",
     scripture: "Many will say to Me in that day, 'Lord, Lord, have we not prophesied in Your name, cast out demons in Your name, and done many wonders in Your name?' And then I will declare to them, 'I never knew you; depart from Me.'",
-    summary: "These people believed. They believed sincerely. They believed with intensity and with results. But their faith was self-referencing: <em>have we not done?</em> It was directed at their own spiritual activity, not at God's accomplished fact. Sincerity does not make faith true. Only God's fact makes faith true."
+    commentary: "These people believed. They believed sincerely. They believed with intensity and with results. But their faith was self-referencing: <em>have we not done?</em> It was directed at their own spiritual activity, not at God's accomplished fact. Sincerity does not make faith true. Only God's fact makes faith true."
   },
   {
     title: "ZEAL WITHOUT KNOWLEDGE",
     verse: "Romans 10:2–3",
-    cls: "warning-node",
+    cls: "warning-ref",
     scripture: "For I bear them witness that they have a zeal for God, but not according to knowledge. For they being ignorant of God's righteousness, and seeking to establish their own righteousness, have not submitted to the righteousness of God.",
-    summary: "Zeal is not faith. Intensity is not faith. Passion for God is not the same as resting in God's facts. Israel's problem was not a lack of fervour — it was ignorance of what God had actually accomplished. They were trying to manufacture what God had already provided. That is the anatomy of the counterfeit."
+    commentary: "Zeal is not faith. Intensity is not faith. Passion for God is not the same as resting in God's facts. Israel's problem was not a lack of fervour — it was ignorance of what God had actually accomplished. They were trying to manufacture what God had already provided. That is the anatomy of the counterfeit."
   }
 ];
 
-function buildNode(n) {
+function buildRef(r) {
   const div = document.createElement('div');
-  div.className = `node ${n.cls}`;
-  div.onclick = () => {
-    const isActive = div.classList.contains('active');
-    document.querySelectorAll(`.node.${n.cls}`).forEach(el => el.classList.remove('active'));
-    if (!isActive) div.classList.add('active');
-  };
+  div.className = 'ref-item ' + r.cls;
 
-  let html = '<div class="node-header"><div>';
-  html += `<h3 class="node-title">${n.title}</h3>`;
-  html += `<span class="node-verse">${n.verse}</span>`;
-  html += '</div></div>';
-  html += `<div class="node-scripture">"${n.scripture}"</div>`;
-  html += `<div class="node-summary">${n.summary}</div>`;
-  html += '<div class="node-tap">Tap to expand</div>';
+  let html = '<div class="ref-header">';
+  html += '<span class="ref-title">' + r.title + '</span>';
+  html += '<span class="ref-verse">' + r.verse + '</span>';
+  html += '</div>';
+  html += '<div class="ref-scripture">"' + r.scripture + '"</div>';
+  html += '<div class="ref-commentary">' + r.commentary + '</div>';
+  html += '<div class="ref-tap">Tap to expand</div>';
 
   div.innerHTML = html;
+
+  div.addEventListener('click', function() {
+    const group = r.cls;
+    const wasActive = this.classList.contains('active');
+    document.querySelectorAll('.ref-item.' + group).forEach(function(el) {
+      el.classList.remove('active');
+    });
+    if (!wasActive) this.classList.add('active');
+  });
+
   return div;
 }
 
-document.getElementById('fact-verses').append(...factVerses.map(n => buildNode(n)));
-document.getElementById('faith-verses').append(...faithVerses.map(n => buildNode(n)));
-document.getElementById('warning-verses').append(...warningVerses.map(n => buildNode(n)));
+factRefs.forEach(r => document.getElementById('fact-refs').appendChild(buildRef(r)));
+faithRefs.forEach(r => document.getElementById('faith-refs').appendChild(buildRef(r)));
+warningRefs.forEach(r => document.getElementById('warning-refs').appendChild(buildRef(r)));
 </script>
 </body>
 </html>
