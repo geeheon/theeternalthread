@@ -21,7 +21,7 @@
     '<div class="nav-panel">' +
     '  <div class="nav-panel-header">' +
     '    <div class="nav-panel-title">The Eternal Thread</div>' +
-    '    <div class="nav-panel-sub">Tracing the structural logic of Scripture</div>' +
+    '    <div class="nav-panel-sub">The logic of Scripture, made visible</div>' +
     '  </div>' +
     '  <button class="nav-close" aria-label="Close navigation">' +
     '    <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>' +
