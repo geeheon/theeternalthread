@@ -440,7 +440,7 @@
   <div class="bottom-note">
     <p>The Christian life does not begin by effort from Adam toward Christ, but from the reality of already being in Christ by new birth.</p>
     <p>Reckoning is not making something true. It is counting as true what already is.</p>
-    <div class="reckoning-ref">ROMANS 6:11 RESTS ON ROMANS 5:12–21</div>
+    <div class="reckoning-ref">ROMANS 6:11 RESTS ON ROMANS 6:1–10 — WITHIN THE WIDER ADAM/CHRIST ARGUMENT</div>
   </div>
 
   <!-- Footer -->
@@ -459,14 +459,14 @@ const adamVerses = [
     verse: "Romans 5:12",
     cls: "adam-node",
     scripture: "Therefore, just as through one man sin entered the world, and death through sin, and thus death spread to all men, because all sinned —",
-    summary: "Sin's entry was corporate, not individual. One man sinned; all were constituted sinners. No one chose this inheritance — it came by birth under Adam's headship."
+    summary: "Paul's emphasis is unmistakable: sin entered through <em>one man</em>, and through that one man, death spread to all. The weight falls on headship — what Adam did determined what all his descendants inherited. No one chose this. It came by birth."
   },
   {
     title: "ONE OFFENCE — JUDGEMENT TO ALL",
     verse: "Romans 5:18a",
     cls: "adam-node",
     scripture: "Through one man's offence judgement came to all men, resulting in condemnation —",
-    summary: "Condemnation was not assigned person by person on the basis of personal sins. It came wholesale, through one man's offence, to all who share his nature by birth."
+    summary: "Paul's point is not that personal sins are irrelevant, but that condemnation did not wait for them. It came through one man's offence, to all who share his nature by birth. The problem is older and deeper than anything you personally did."
   },
   {
     title: "ONE MAN'S DISOBEDIENCE — MANY MADE SINNERS",
@@ -483,7 +483,7 @@ const christVerses = [
     verse: "1 Corinthians 15:45, 47",
     cls: "christ-node",
     scripture: "And so it is written, \"The first man Adam became a living being.\" The last Adam became a life-giving spirit. … The first man was of the earth, made of dust; the second Man is the Lord from heaven.",
-    summary: "Paul names them plainly: there is a first man and a last. The first became a living being — alive, but dependent. The last became a life-giving spirit — the source of life Himself. One is of the earth. The other is the Lord from heaven. These are the only two heads of humanity."
+    summary: "Paul names them plainly: there is a first man and a last. The first became a living being — alive, but dependent. The last became a life-giving spirit — the source of life Himself. One is of the earth. The other is the Lord from heaven. Paul presents these as the two representative figures who define humanity's two orders."
   },
   {
     title: "ONE ACT — JUSTIFICATION OF LIFE",
@@ -514,7 +514,7 @@ const reckoningVerses = [
     verse: "Romans 6:11",
     cls: "reckoning-node",
     scripture: "Likewise you also, reckon yourselves to be dead indeed to sin, but alive to God in Christ Jesus our Lord.",
-    summary: "This is the practical hinge. Romans 5 established the positional transfer — out of Adam, into Christ. Romans 6 says: now count it as true. Reckoning does not create the reality. It stands on a reality already accomplished by the two headships."
+    summary: "This is the practical hinge. Romans 5 establishes the two representative orders — Adam's and Christ's. Romans 6 draws out what this means for the believer: now count it as true. Reckoning does not create the reality. It stands on a reality already accomplished by the two headships."
   },
   {
     title: "OUR OLD MAN WAS CRUCIFIED",
@@ -538,7 +538,7 @@ function buildNode(n) {
   html += `<h3 class="node-title">${n.title}</h3>`;
   html += `<span class="node-verse">${n.verse}</span>`;
   html += '</div></div>';
-  html += `<div class="node-scripture">"${n.scripture}"</div>`;
+  html += `<div class="node-scripture">${n.scripture}</div>`;
   html += `<div class="node-summary">${n.summary}</div>`;
   html += '<div class="node-tap">Tap to expand</div>';
 

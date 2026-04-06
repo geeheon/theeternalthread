@@ -459,7 +459,7 @@
   <div class="header">
     <h1>THE VINE &amp; THE BRANCHES</h1>
     <div class="header-line"></div>
-    <p>John 15:1–8</p>
+    <p>John 15:1–11 · NKJV</p>
   </div>
 
   <!-- ─── Source: Christ the Vine ─── -->
@@ -509,8 +509,8 @@
         <div class="contrast-col-label">THE COMMON MISTAKE</div>
         <div class="contrast-item">Try harder</div>
         <div class="contrast-item">Maintain by effort</div>
-        <div class="contrast-item">More devotions as technique</div>
-        <div class="contrast-item">More prayer as strain</div>
+        <div class="contrast-item">Devotions as checklist</div>
+        <div class="contrast-item">Prayer used as leverage</div>
         <div class="contrast-item">Self-reliance</div>
         <div class="contrast-item">Trying to produce from self</div>
         <div class="contrast-footer">THE BRANCH STRAINS</div>
@@ -544,7 +544,6 @@
 
   <!-- Footer -->
   <div class="footer">
-    <p>A branch attached to the vine<br>does not worry about fruit.<br>It simply stays.<br>The life does the rest.</p>
     <div class="footer-line"></div>
     <a href="index.html">← THE ETERNAL THREAD</a>
   </div>
@@ -558,14 +557,14 @@ const vineVerses = [
     verse: "John 15:1",
     cls: "vine-node",
     scripture: "I am the true vine, and My Father is the vinedresser.",
-    summary: "Christ does not say He is the gardener, the teacher, or the helper. He is the vine — the source of life itself. The Father is the vinedresser, the one who cultivates. The branch's role is neither to tend nor to produce, but to bear."
+    summary: "Christ is not presenting Himself here primarily as instructor or example — He is the vine, the source of life itself. The Father is the vinedresser, the one who cultivates. The branch's role is not to generate but to bear."
   },
   {
     title: "ABIDE IN ME",
     verse: "John 15:4",
     cls: "vine-node",
     scripture: "Abide in Me, and I in you. As the branch cannot bear fruit of itself, unless it abides in the vine, neither can you, unless you abide in Me.",
-    summary: "The Greek word is menō — remain, stay, dwell. It is not an action word of straining or achieving. It is a word of staying put. The branch does not attach itself to the vine by effort. Now it simply remains. The moment it tries to produce fruit independently, it has already departed from the vine's purpose."
+    summary: "The Greek word is menō — remain, stay, dwell. It is an imperative: Jesus is commanding continuance, not commending passivity. But the command is to <em>stay</em>, not to <em>produce</em>. The branch does not attach itself to the vine by effort — it remains where it already is. The moment it tries to produce fruit independently, it has already departed from the vine's purpose."
   },
   {
     title: "WITHOUT ME — NOTHING",
@@ -575,11 +574,18 @@ const vineVerses = [
     summary: "Not \"without Me you can do less\" or \"without Me it's harder.\" Nothing. Zero. The branch severed from the vine's life-flow produces exactly nothing of spiritual value — no matter how impressive the external effort looks. This is the death-blow to self-effort religion."
   },
   {
+    title: "IF MY WORDS ABIDE IN YOU",
+    verse: "John 15:7",
+    cls: "vine-node",
+    scripture: "If you abide in Me, and My words abide in you, you will ask what you desire, and it shall be done for you.",
+    summary: "Abiding is not vague inwardness. It has content: His words remaining in you, shaping what you ask. Prayer here is not a technique bolted onto the Christian life — it is the natural speech of a branch drawing on the vine. What you desire and what He desires converge, because His words are living in you."
+  },
+  {
     title: "ABIDE IN MY LOVE",
     verse: "John 15:9–10",
     cls: "vine-node",
     scripture: "As the Father loved Me, I also have loved you; abide in My love. If you keep My commandments, you will abide in My love, just as I have kept My Father's commandments and abide in His love.",
-    summary: "Abiding is not cold or mechanical. Its atmosphere is love — His love received and rested in. You do not keep His commandments to secure His love, but from within the sphere of His love. You obey because you are already in it."
+    summary: "Abiding is not cold or mechanical. Its atmosphere is love — His love received and lived in. His love is not earned by obedience, but obedience is the way you continue in His love. Jesus draws an explicit parallel: just as He kept His Father's commandments and remained in His love, so the branch keeps His commandments and remains in His. Obedience is not the price of admission — it is the posture of remaining."
   }
 ];
 
@@ -589,7 +595,7 @@ const warningVerses = [
     verse: "John 15:2",
     cls: "warning-node",
     scripture: "Every branch in Me that does not bear fruit He takes away; and every branch that bears fruit He prunes, that it may bear more fruit.",
-    summary: "The Father's pruning is not punishment — it is cultivation. The fruitless branch is removed; the fruitful branch is cut back so that more life flows through less wood. What does the knife touch? Whatever competes with the vine's own life — wood that consumes energy but bears no fruit. The vinedresser cuts it back not to harm the branch, but to clear the way for greater fruitfulness. Pruning feels like loss. It is actually the vinedresser's vote of confidence."
+    summary: "The emphasis here is cultivation, not condemnation. The fruitless branch is removed; the fruitful branch is cut back so that more life flows through less wood. What does the knife touch? Whatever competes with the vine's own life — wood that consumes energy but bears no fruit. The vinedresser cuts it back not to harm the branch, but to clear the way for greater fruitfulness. Pruning feels like loss. But the knife is in the vinedresser's hand — and He prunes what already bears fruit."
   },
   {
     title: "CAST OUT AND WITHERED",
@@ -615,13 +621,6 @@ const fruitVerses = [
     scripture: "But the fruit of the Spirit is love, joy, peace, longsuffering, kindness, goodness, faithfulness, gentleness, self-control.",
     summary: "Paul calls it the fruit of the Spirit — not the fruit of self-effort or religious performance. It is produced by the Spirit's life flowing through you, exactly as the vine's life produces grapes through the branch. You cannot manufacture love. You can only bear what the vine produces as you walk in dependence on the Spirit."
   },
-  {
-    title: "HE WHO BEGAN A GOOD WORK",
-    verse: "Philippians 1:6",
-    cls: "fruit-node",
-    scripture: "Being confident of this very thing, that He who has begun a good work in you will complete it until the day of Jesus Christ.",
-    summary: "He began it. He completes it. The entire work — from first fruit to final harvest — is His. The branch's confidence is not in its own grip on the vine, but in the vine's grip on the branch."
-  }
 ];
 
 function buildNode(n) {
