@@ -239,6 +239,17 @@
   .green .node-verse { color: rgba(104, 230, 160, 0.56); }
   .red .node-verse { color: rgba(230, 104, 104, 0.56); }
 
+  .node-description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; line-height: 1.6;
+    color: #d4c5a0;
+    margin: 8px 0;
+    font-style: italic;
+    display: none;
+  }
+  .red .node-description { color: #c8a8a8; }
+  .node.active .node-description { display: block; }
+
   .node-scripture {
     font-family: 'Cormorant Garamond', serif;
     font-size: 16px; line-height: 1.6;
@@ -406,6 +417,10 @@
       font-size: 13px;
     }
     .node-scripture {
+      font-size: 18px;
+      color: #ddd0b4;
+    }
+    .node-description {
       font-size: 18px;
       color: #ddd0b4;
     }
@@ -623,9 +638,13 @@ function buildNode(n) {
   html += `<span class="node-verse">${n.verse}</span>`;
   html += '</div></div>';
 
-  const q = n.isQuote !== false;
-  html += `<div class="node-scripture">${q ? '"' : ''}${n.scripture}${q ? '"' : ''}</div>`;
-  html += `<div class="node-summary">${n.summary}</div>`;
+  if (n.isQuote === false) {
+    html += `<div class="node-description">${n.scripture}</div>`;
+    html += `<div class="node-summary">${n.summary}</div>`;
+  } else {
+    html += `<div class="node-scripture">${n.scripture}</div>`;
+    html += `<div class="node-summary">${n.summary}</div>`;
+  }
   html += `<div class="node-tap">Tap to expand</div>`;
 
   div.innerHTML = html;

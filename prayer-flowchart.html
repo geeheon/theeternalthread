@@ -944,7 +944,7 @@ function buildNode(n, group) {
   html += `<span class="node-verse">${n.verse}</span>`;
   if (n.badge) html += `<div class="node-badge">${n.badge}</div>`;
   html += '</div></div>';
-  if (n.scripture) html += `<div class="node-scripture">"${n.scripture}"</div>`;
+  if (n.scripture) html += `<div class="node-scripture">${n.scripture}</div>`;
   html += `<div class="node-summary">${n.summary}</div>`;
   html += '<div class="node-tap">Tap to expand</div>';
 

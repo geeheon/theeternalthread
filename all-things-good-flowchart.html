@@ -806,7 +806,7 @@ function buildNode(n) {
   h += `<div class="node-header"><span class="node-number">${n.num}</span><div>`;
   h += `<h3 class="node-title">${n.title}</h3>`;
   h += `<span class="node-verse">${n.verse}</span></div></div>`;
-  h += `<div class="node-scripture">"${n.scripture}"</div>`;
+  h += `<div class="node-scripture">${n.scripture}</div>`;
   h += `<div class="node-summary">${n.summary}</div>`;
   h += `<div class="node-tap">Tap to expand</div>`;
   div.innerHTML = h;

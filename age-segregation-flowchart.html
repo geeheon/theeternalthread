@@ -151,8 +151,8 @@
   .warm .node-verse { color: rgba(230,168,104,0.5); }
   .green .node-verse { color: rgba(104,230,160,0.5); }
   .node-scripture { font-family: 'Cormorant Garamond', serif; font-size: 16px; line-height: 1.6; color: #d4c5a0; margin: 8px 0; font-style: italic; border-left: 2px solid; padding-left: 14px; display: none; }
-  .node-scripture.no-quote { border-left: none; padding-left: 0; }
-  .node.active .node-scripture { display: block; }
+  .node-description { font-family: 'Cormorant Garamond', serif; font-size: 16px; line-height: 1.6; color: #d4c5a0; margin: 8px 0; font-style: italic; display: none; }
+  .node.active .node-scripture, .node.active .node-description { display: block; }
   .red .node-scripture { border-left-color: rgba(230,120,104,0.25); }
   .warm .node-scripture { border-left-color: rgba(230,168,104,0.25); }
   .green .node-scripture { border-left-color: rgba(104,230,160,0.25); }
@@ -468,9 +468,13 @@ function buildNode(n) {
   h += `<div class="node-header"><span class="node-number">${n.num}</span><div>`;
   h += `<h3 class="node-title">${n.title}</h3>`;
   h += `<span class="node-verse">${n.verse}</span></div></div>`;
-  const quoteClass = n.quote === false ? ' no-quote' : '';
-  h += n.quote === false ? `<div class="node-scripture${quoteClass}">${n.scripture}</div>` : `<div class="node-scripture">"${n.scripture}"</div>`;
-  h += `<div class="node-summary">${n.summary}</div>`;
+  if (n.quote === false) {
+    h += `<div class="node-description">${n.scripture}</div>`;
+    h += `<div class="node-summary">${n.summary}</div>`;
+  } else {
+    h += `<div class="node-scripture">${n.scripture}</div>`;
+    h += `<div class="node-summary">${n.summary}</div>`;
+  }
   h += `<div class="node-tap">Tap to expand</div>`;
   div.innerHTML = h;
   return div;
