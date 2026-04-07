@@ -391,7 +391,7 @@
   <div class="def-box">
     <div class="def-label">NOT WHAT YOU THINK</div>
     <div class="def-text">
-      When Scripture speaks of Satan's kingdom, it does not primarily mean demonic possession, occult rituals, or dramatic evil. It means a <em>system</em> — an organised arrangement of ordinary things that carries humanity along without God. The most effective lie is not the one that shocks you. It is the one that feels like <em>common sense</em>.
+      Scripture's picture of Satan's rule is not limited to demonic possession, occult rituals, or dramatic evil. It also describes a <em>system</em> — an organised arrangement of ordinary things that carries humanity along without God. The most effective lie is not the one that shocks you. It is the one that feels like <em>common sense</em>.
     </div>
   </div>
 
@@ -421,7 +421,7 @@
   <div id="flow"></div>
 
   <!-- Threefold parallel -->
-  <div class="parallel-table">
+  <div class="parallel-table" id="parallel-table">
     <div class="parallel-header"><span>THE THREEFOLD PATTERN</span></div>
     <div class="parallel-row head">
       <div class="parallel-cell head-cell">GENESIS 3</div>
@@ -445,10 +445,10 @@
     </div>
   </div>
 
-  <div class="insight">
+  <div class="insight" id="parallel-insight">
     <div class="insight-label">THE PATTERN</div>
     <div class="insight-text">
-      The same threefold appeal — <em>appetite</em>, <em>acquisition</em>, <em>achievement</em> — appears in the garden, in John's letter, and in Christ's temptation. It is not a coincidence. It is the system's signature. The same levers, used across every age.
+      The same threefold appeal — <em>appetite</em>, <em>acquisition</em>, <em>achievement</em> — appears in the garden, in John's letter, and in Christ's temptation. The parallel is striking and consistent: the same levers, used across every age.
     </div>
   </div>
 
@@ -487,13 +487,13 @@ const data = [
     num: 3, title: "THE INVISIBLE CURRENT", verse: "Ephesians 2:2", cls: "red",
     badge: "THE MECHANISM",
     scripture: "In which you once walked according to the course of this world...",
-    summary: "The word translated <em>course</em> is <em>aiōn</em> — age, epoch, zeitgeist. It describes something atmospheric: a prevailing current, a direction that everything moves in. You do not swim in it consciously. You are carried. This is the genius of the system — it does not feel like a kingdom. It feels like <em>just how things are</em>. The path from kindergarten through school to university to career to mortgage to retirement is not evil. But it is a current. And the current has a direction: toward a full, productive, respectable life that has no structural need for God."
+    summary: "The word translated <em>course</em> is <em>aiōn</em> — age, epoch, zeitgeist. It describes something atmospheric: a prevailing current, a direction that everything moves in. You do not swim in it consciously. You are carried. This is the genius of the system — it does not feel like a kingdom. It feels like <em>just how things are</em>. The familiar trajectory from education to career to mortgage to retirement is not evil in itself. But it is a current. And the current has a direction: toward a full, productive, respectable life that has no structural need for God. The issue is not ordinary callings themselves, but their becoming the whole story — a life defined without reference to God's purpose."
   },
   { arrow: "red" },
   {
     num: 4, title: "THE OCCUPIED LIFE", verse: "Luke 8:14, Matthew 13:22", cls: "red",
     scripture: "Now the ones that fell among thorns are those who, when they have heard, go out and are choked with cares, riches, and pleasures of life, and bring no fruit to maturity.",
-    summary: "Jesus described the mechanism exactly. Not persecution. Not dramatic sin. Just cares, riches, and pleasures (the ordinary stuff of life) crowding out the word until it produces nothing. The system doesn't need you to sin. It just needs to keep you occupied. If you are fully absorbed in the legitimate demands of the current — the school run, the career ladder, the renovation, the holiday, the next thing — you never have to consciously reject God. You just never get around to His purpose. The seed is choked not by weeds that look like weeds, but by weeds that look like life."
+    summary: "Jesus described this mechanism precisely. Not persecution. Not dramatic sin. Just cares, riches, and pleasures (the ordinary stuff of life) crowding out the word until it produces nothing. The system doesn't need you to sin. It just needs to keep you occupied. If you are fully absorbed in the legitimate demands of the current — the school run, the career ladder, the renovation, the holiday, the next thing — you never have to consciously reject God. You just never get around to His purpose. The seed is choked not by weeds that look like weeds, but by weeds that look like life."
   },
   { arrow: "red" },
   {
@@ -501,13 +501,14 @@ const data = [
     scripture: "For all that is in the world — the lust of the flesh, the lust of the eyes, and the pride of life — is not of the Father but is of the world.",
     summary: "John gives the system's taxonomy. The lust of the flesh — appetite, comfort, the pull toward what feels good. The lust of the eyes — acquisition, image, the pull toward what looks good. The pride of life — status, achievement, the pull toward what makes you look significant. These three channels appear in Genesis 3 — the tree was good for food, pleasant to the eyes, desirable to make one wise. They reappear in Christ's wilderness temptation — bread for hunger, kingdoms for the eyes, spectacular rescue for prestige. The system's levers have never changed. Only the packaging."
   },
+  { insertParallel: true },
   { arrow: "amber", label: "FORESHADOWED IN" },
 
   { section: "amber", sectionLabel: "THE OLD TESTAMENT SHADOWS", sectionSub: "Types and patterns of the world-system" },
   {
     num: 6, title: "BABEL — CIVILISATION WITHOUT GOD", verse: "Genesis 11:1–9", cls: "amber",
     scripture: "Come, let us build ourselves a city, and a tower whose top is in the heavens; let us make a name for ourselves.",
-    summary: "Babel is the prototype of the <em>kosmos</em>. Humanity organising itself upward — unified, impressive, purposeful — with no reference to God. 'Let us make a name for ourselves' is not immoral. It is morally neutral — civilisation-building that exists entirely for human glory. Babel is the world-system in embryo: collective effort, shared ambition, technological achievement, cultural unity — all directed away from God's purpose. The text does not say God scattered Babel because it was immoral. What provoked the scattering was a unified humanity building for its own name — a civilisation that functioned as an alternative to God Himself."
+    summary: "Babel is the prototype of the <em>kosmos</em>. Humanity organising itself upward — unified, impressive, purposeful — with no reference to God. 'Let us make a name for ourselves' is not lurid wickedness. It is corporate self-exaltation — civilisation-building that exists entirely for human glory. Babel is the world-system in embryo: collective effort, shared ambition, technological achievement, cultural unity — all directed away from God's purpose. The text does not say God scattered Babel because of vice. What provoked the scattering was a unified humanity building for its own name — a civilisation that functioned as an alternative to God Himself."
   },
   { arrow: "amber" },
   {
@@ -519,7 +520,7 @@ const data = [
   {
     num: 8, title: "THE STATUE — ONE SYSTEM, MANY COSTUMES", verse: "Daniel 2:31–45", cls: "amber",
     scripture: "You watched while a stone was cut out without hands, which struck the image on its feet... and the stone that struck the image became a great mountain and filled the whole earth.",
-    summary: "Nebuchadnezzar's statue — gold, silver, bronze, iron, clay — represents successive world empires. But the genius of Daniel's vision is that they are all one statue. The system changes its clothing — Babylon, Persia, Greece, Rome, modernity — but the underlying structure is continuous: human civilisation organised apart from God. The stone cut without hands that destroys the statue is Christ's kingdom. It doesn't reform the statue. It doesn't improve the iron or polish the clay. It replaces it entirely. The kingdom of God and the world-system are not two versions of the same thing. They are antithetical."
+    summary: "Nebuchadnezzar's statue — gold, silver, bronze, iron, clay — represents successive world empires. But the genius of Daniel's vision is that they are all one statue. The system changes its clothing — Babylon, Persia, Greece, Rome — but the underlying structure is continuous: human civilisation organised apart from God. The pattern does not stop with Rome; the logic extends wherever human power builds without reference to God. The stone cut without hands that destroys the statue is Christ's kingdom. It doesn't reform the statue. It doesn't improve the iron or polish the clay. It replaces it entirely. The kingdom of God and the world-system are not two versions of the same thing. They are antithetical."
   },
   { arrow: "amber" },
   {
@@ -548,7 +549,7 @@ const data = [
   {
     num: 12, title: "IN BUT NOT OF", verse: "John 17:14–18, 2 Corinthians 6:17", cls: "green",
     scripture: "I do not pray that You should take them out of the world, but that You should keep them from the evil one. They are not of the world, just as I am not of the world. As You sent Me into the world, I also have sent them into the world.",
-    summary: "Jesus did not ask the Father to extract His people from the system. He asked for them to be kept from the evil one while remaining within it. This is not withdrawal — it is non-derivation. Jesus was in the world but not sourced by it. He drew His identity, security, purpose, and direction from the Father alone. The believer's call is the same: in the world but not defined by it. In the marketplace but not enslaved to its logic. Raising children but not handing them over to the current uncritically. Working a job but not building Pharaoh's city. The distinction is not geography — it is source."
+    summary: "Jesus did not ask the Father to extract His people from the system. He asked for them to be kept from the evil one while remaining within it. This is not withdrawal — it is non-derivation. Jesus was in the world but not sourced by it. He drew His identity, security, purpose, and direction from the Father alone. The believer's call is the same: in the world but not defined by it. In the marketplace but not enslaved to its logic. Raising children but not handing them over to the current uncritically. Working a job but not letting the system's values set the agenda. The distinction is not geography — it is source."
   },
   { arrow: "green" },
   {
@@ -562,7 +563,7 @@ const data = [
   {
     num: 14, title: "THE LONELINESS OF SEEING", verse: "1 Peter 2:11, Hebrews 11:13–16", cls: "dark",
     scripture: "Beloved, I beg you as sojourners and pilgrims, abstain from fleshly lusts which war against the soul.",
-    summary: "To see the current is to feel its pull differently. The path that once felt like <em>just life</em> now feels like a choice — and choosing differently is isolating. The writer of Hebrews describes the patriarchs as strangers and pilgrims on the earth — people who could see a homeland that others couldn't, and who lived accordingly. This is not superiority. It is displacement. You no longer fit seamlessly into the system's expectations — the career trajectory that defines your worth, the consumption patterns that signal belonging, the educational pipeline that promises your children's security. To opt out of any of it, even partially, is to be counter-cultural in a way that is lonely and hard. The New Testament does not pretend otherwise."
+    summary: "To see the current is to feel its pull differently. The path that once felt like <em>just life</em> now feels like a choice — and choosing differently is isolating. The writer of Hebrews describes the patriarchs as strangers and pilgrims on the earth — people who could see a homeland that others couldn't, and who lived accordingly. This is not superiority. It is displacement. You no longer fit seamlessly into the system's unquestioned assumptions — the career trajectory that defines your worth, the consumption patterns that signal belonging, the narrative that security and significance come from getting the next thing right. To opt out of any of it, even partially, is to be counter-cultural in a way that is lonely and hard. The New Testament does not pretend otherwise."
   },
   { arrow: "green" },
   {
@@ -586,7 +587,7 @@ function buildNode(n) {
   h += `<div class="node-header"><span class="node-number">${n.num}</span><div>`;
   h += `<h3 class="node-title">${n.title}</h3>`;
   h += `<span class="node-verse">${n.verse}</span></div></div>`;
-  h += `<div class="node-scripture">"${n.scripture}"</div>`;
+  h += `<div class="node-scripture">${n.scripture}</div>`;
   h += `<div class="node-summary">${n.summary}</div>`;
   h += `<div class="node-tap">Tap to expand</div>`;
   div.innerHTML = h;
@@ -612,7 +613,10 @@ function buildSection(s) {
 }
 const flow = document.getElementById('flow');
 data.forEach(item => {
-  if (item.section) flow.appendChild(buildSection(item));
+  if (item.insertParallel) {
+    flow.appendChild(document.getElementById('parallel-table'));
+    flow.appendChild(document.getElementById('parallel-insight'));
+  } else if (item.section) flow.appendChild(buildSection(item));
   else if (item.arrow) flow.appendChild(buildArrow({ cls: item.arrow, label: item.label }));
   else flow.appendChild(buildNode(item));
 });

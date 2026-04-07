@@ -205,37 +205,6 @@
     font-size: 15px; color: #909098; font-style: italic; line-height: 1.6;
   }
 
-  /* Layers box */
-  .layers-box {
-    margin: 24px 0; padding: 20px;
-    border-radius: 10px;
-    background: rgba(13,28,20,0.4);
-    border: 1px solid rgba(104,230,160,0.12);
-  }
-  .layers-header {
-    text-align: center; margin-bottom: 14px;
-  }
-  .layers-header span {
-    font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #68e6a0;
-  }
-  .layer {
-    padding: 10px 14px;
-    border-left: 2px solid rgba(104,230,160,0.2);
-    margin-bottom: 10px;
-  }
-  .layer:last-child { margin-bottom: 0; }
-  .layer-title {
-    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
-    color: #68e6a0; margin-bottom: 3px;
-  }
-  .layer-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px; color: #80a090; font-style: italic; line-height: 1.5;
-  }
-  .layer-ref {
-    font-size: 11px; color: #506050; margin-top: 2px;
-  }
-
   /* Callout */
   .callout {
     margin: 24px 0; padding: 18px 20px;
@@ -647,41 +616,9 @@
 
   <div id="flow"></div>
 
-  <!-- Layers of the Mystery -->
-  <div class="layers-box">
-    <div class="layers-header">
-      <span>THE LAYERS OF THE MYSTERY — UNPACKED</span>
-    </div>
-    <div class="layer">
-      <div class="layer-title">LAYER 1: CHRIST IN YOU</div>
-      <div class="layer-text">The individual indwelling. God's life in a human vessel. The hope of glory residing in ordinary people.</div>
-      <div class="layer-ref">Colossians 1:27</div>
-    </div>
-    <div class="layer">
-      <div class="layer-title">LAYER 2: JEW AND GENTILE ONE BODY</div>
-      <div class="layer-text">The dividing wall abolished. Two peoples made into one new man. An utterly new entity that never existed before.</div>
-      <div class="layer-ref">Ephesians 3:6</div>
-    </div>
-    <div class="layer">
-      <div class="layer-title">LAYER 3: CHRIST AND THE CHURCH</div>
-      <div class="layer-text">The great mystery. Head and body. Bridegroom and bride. Two becoming one flesh — not just metaphor but spiritual reality.</div>
-      <div class="layer-ref">Ephesians 5:32</div>
-    </div>
-    <div class="layer">
-      <div class="layer-title">LAYER 4: GOD'S WISDOM DISPLAYED</div>
-      <div class="layer-text">Through the ekklesia, the manifold wisdom of God is made known to principalities and powers. The church is the demonstration to the cosmos.</div>
-      <div class="layer-ref">Ephesians 3:10</div>
-    </div>
-    <div class="layer">
-      <div class="layer-title">LAYER 5: ALL THINGS SUMMED UP IN CHRIST</div>
-      <div class="layer-text">The final layer. Everything in heaven and on earth gathered together under one head — Christ. The mystery is ultimately about the supremacy and centrality of one Person.</div>
-      <div class="layer-ref">Ephesians 1:9–10</div>
-    </div>
-  </div>
-
   <div class="callout gold-theme">
     <div class="callout-text">"To me, who am less than the least of all the saints, this grace was given, that I should preach among the Gentiles the unsearchable riches of Christ, and to make all see what is the fellowship of the mystery."</div>
-    <div class="callout-ref">EPHESIANS 3:8–9</div>
+    <div class="callout-ref">EPHESIANS 3:8–9 (NKJV)</div>
   </div>
 
   <div class="footer">
@@ -711,29 +648,29 @@ const data = [
 
   { phase: "hinted", phaseLabel: "HINTED", phaseSub: "Shadows and whispers in the Old Testament" },
   {
-    num: 3, title: "EVE FROM ADAM'S SIDE", verse: "Genesis 2:21–23, cf. Ephesians 5:30–32", cls: "purple",
+    num: 3, title: "EVE FROM ADAM'S SIDE", verse: "Genesis 2:21–23, cf. Ephesians 5:30–32", cls: "purple", excerpt: true,
     scripture: "And the Lord God caused a deep sleep to fall on Adam... He took one of his ribs, and closed up the flesh in its place. Then the rib which the Lord God had taken from man He made into a woman.",
-    summary: "Adam falls into a deep sleep — a picture of death. From his opened side, a bride is formed. She is bone of his bone, flesh of his flesh. Paul explicitly connects this to Christ and the church in Ephesians 5:32 — 'This is a great mystery, and I am speaking of Christ and the church.' The mystery was hidden in the first pages of Scripture, but no one could see it until Paul unveiled it."
+    summary: "Adam falls into a deep sleep. From his side, a bride is formed — bone of his bone, flesh of his flesh. Christians have long read this typologically, and Paul himself makes the connection explicit in Ephesians 5:31–32: <em>This is a great mystery, but I speak concerning Christ and the church.</em> Paul shows that Genesis 2 reaches beyond human marriage into its fullest horizon — the union of Christ and His people. The mystery was embedded in the first pages of Scripture, but no one could see it until Paul unveiled it."
   },
   { arrow: "purple" },
   {
-    num: 4, title: "WHISPERS IN THE PROPHETS", verse: "Isaiah 49:6, 54:5, Hosea 2:19–20", cls: "purple",
+    num: 4, title: "WHISPERS IN THE PROPHETS", verse: "Isaiah 49:6, 54:5, Jeremiah 31:31–33, Hosea 2:19–20", cls: "purple",
     scripture: "I will also give You as a light to the Gentiles, that You should be My salvation to the ends of the earth.",
-    summary: "Scattered throughout the prophets are hints that God's plan extended beyond Israel. A light to the Gentiles. A husband to a bride. A new covenant written on hearts. A temple not made with hands. The prophets saw fragments but couldn't assemble the full picture. They were describing a puzzle they couldn't solve. The key was Christ — and He hadn't come yet."
+    summary: "Scattered throughout the prophets are hints that God's plan extended beyond Israel. A light to the Gentiles. A husband to a bride. A new covenant written on hearts (Jer. 31:33). The prophets saw fragments but could not assemble the full picture. They were describing a puzzle they could not solve. The key was Christ — and He had not come yet."
   },
   { arrow: "gold", label: "UNTIL" },
 
   { phase: "revealed", phaseLabel: "REVEALED", phaseSub: "The veil is lifted in Christ" },
   {
-    num: 5, title: "REVEALED IN THE SON", verse: "Ephesians 1:9–10, 3:3–5", cls: "gold",
+    num: 5, title: "REVEALED IN THE SON", verse: "Ephesians 1:9–10, 3:3–5", cls: "gold", excerpt: true,
     badge: "THE UNVEILING",
-    scripture: "Having made known to us the mystery of His will, according to His good pleasure which He purposed in Himself, that in the dispensation of the fullness of the times He might gather together in one all things in Christ.",
+    scripture: "Having made known to us the mystery of His will, according to His good pleasure which He purposed in Himself, that in the dispensation of the fullness of the times He might gather together in one all things in Christ, both which are in heaven and which are on earth — in Him.",
     summary: "In Christ, the secret is out. What was hidden for ages is now unveiled. And the content of the mystery is breathtaking — God's plan is to sum up all things in Christ. Everything in heaven and on earth, gathered under one head. The mystery isn't just about personal salvation. It's about cosmic reconciliation and unification in one Person."
   },
   { arrow: "gold" },
   {
-    num: 6, title: "ENTRUSTED TO PAUL", verse: "Ephesians 3:2–3, Colossians 1:25–26", cls: "gold",
-    scripture: "If indeed you have heard of the dispensation of the grace of God which was given to me for you, how that by revelation He made known to me the mystery.",
+    num: 6, title: "ENTRUSTED TO PAUL", verse: "Ephesians 3:2–3, Colossians 1:25–26", cls: "gold", excerpt: true,
+    scripture: "If indeed you have heard of the dispensation of the grace of God which was given to me for you, how that by revelation He made known to me the mystery…",
     summary: "Paul received a specific stewardship — to make the mystery known. This wasn't something he deduced from the Old Testament. It was given to him by direct revelation. The mystery in its fullness — Christ and the church, Jew and Gentile in one body, God's eternal purpose — was given to Paul to unfold with unusual clarity. His letters return to it again and again because it was the burden he was entrusted with."
   },
   { arrow: "green", label: "AND ITS CONTENT IS" },
@@ -743,21 +680,21 @@ const data = [
     num: 7, title: "CHRIST IN YOU", verse: "Colossians 1:27", cls: "green",
     badge: "LAYER 1",
     scripture: "To them God willed to make known what are the riches of the glory of this mystery among the Gentiles: which is Christ in you, the hope of glory.",
-    summary: "The first layer of the mystery: God living inside human beings. Not God far away. Not God in a temple. Not God demanding obedience from the outside. God in you. The Creator taking up residence in the creature. The life that was with the Father from eternity is now dwelling in ordinary people — including Gentiles, which was unthinkable. This is the hope of glory. Not a distant heaven, but an indwelling Person."
+    summary: "The first layer of the mystery: God living inside human beings. Not God far away. Not God in a temple. God <em>in you</em>. The Creator taking up residence in the creature. The life that was with the Father from eternity is now dwelling in ordinary people — including Gentiles, which was unthinkable. This is the hope of glory — not merely a future heaven to wait for, but an indwelling Person who is Himself the substance of that glory."
   },
   { arrow: "green" },
   {
     num: 8, title: "ONE NEW MAN", verse: "Ephesians 3:6, 2:14–16", cls: "green",
     badge: "LAYER 2",
     scripture: "That the Gentiles should be fellow heirs, of the same body, and partakers of His promise in Christ through the gospel.",
-    summary: "The second layer: Jew and Gentile — the most fundamental division in the ancient world — made into one body. Not Gentiles becoming Jews. Not Jews becoming Gentiles. Both becoming something entirely new. A new humanity. A new man. The dividing wall abolished in Christ's flesh. This was the scandal that got Paul arrested. The mystery creates an entity that never existed before — not an improved version of Israel, but the body of Christ."
+    summary: "The second layer: Jew and Gentile — the most fundamental division in the ancient world — made into one body. Not Gentiles becoming Jews. Not Jews becoming Gentiles. Both becoming something entirely new. A new humanity. A new man. The dividing wall abolished in Christ's flesh. This was the scandal that got Paul arrested. The mystery creates an entity that had not previously appeared in history — the body of Christ, in which Jew and Gentile are joined as one new man."
   },
   { arrow: "green" },
   {
     num: 9, title: "CHRIST AND THE CHURCH", verse: "Ephesians 5:31–32", cls: "green",
     badge: "LAYER 3",
     scripture: "For this reason a man shall leave his father and mother and be joined to his wife, and the two shall become one flesh. This is a great mystery, but I speak concerning Christ and the church.",
-    summary: "The third layer — and Paul calls this one <em>great</em>. The union between Christ and the church is so profound that it mirrors the one-flesh union of marriage. Head and body. Bridegroom and bride. He gave Himself for her to make her holy. She is His fullness, His expression, His complement. This is what Genesis 2 was really about all along — not just human marriage, but the divine romance between Christ and His people."
+    summary: "The third layer — and Paul calls this one <em>great</em>. The union between Christ and the church is so profound that it mirrors the one-flesh union of marriage. Head and body. Bridegroom and bride. He gave Himself for her to make her holy. She is His fullness, His expression, His complement. Paul reveals that Genesis 2 reaches forward into its deepest horizon — not just human marriage, but the divine union between Christ and His people."
   },
   { arrow: "blue", label: "DEPOSITED IN" },
 
@@ -766,13 +703,13 @@ const data = [
     num: 10, title: "THE EKKLESIA AS STEWARD", verse: "Ephesians 3:10, 1 Timothy 3:15–16", cls: "blue",
     badge: "THE STEWARDSHIP",
     scripture: "To the intent that now the manifold wisdom of God might be made known by the church to the principalities and powers in the heavenly places.",
-    summary: "The mystery isn't just revealed to the church — it's demonstrated through the church. The ekklesia is the vessel through which God's multi-faceted wisdom is displayed to the cosmos. Angels look at the gathered body and see the mystery enacted. When believers meet together under Christ's headship, each one contributing from His indwelling life, the mystery becomes visible. The church doesn't just believe the mystery. The church is the mystery made manifest."
+    summary: "The mystery isn't just revealed to the church — it's demonstrated through the church. The ekklesia is the vessel through which God's multi-faceted wisdom is displayed to the cosmos. Principalities and powers look at the gathered body and see the mystery enacted. When believers meet together under Christ's headship, each one contributing from His indwelling life, the mystery becomes visible. The church doesn't just believe the mystery — it is the sphere where the mystery is made manifest."
   },
   { arrow: "blue" },
   {
-    num: 11, title: "GOD MANIFESTED IN THE FLESH", verse: "1 Timothy 3:16", cls: "blue",
+    num: 11, title: "GOD MANIFESTED IN THE FLESH", verse: "1 Timothy 3:16 (NKJV)", cls: "blue",
     scripture: "And without controversy great is the mystery of godliness: God was manifested in the flesh, justified in the Spirit, seen by angels, preached among the Gentiles, believed on in the world, received up in glory.",
-    summary: "Paul compresses the entire mystery into one statement. God manifested in the flesh. The verse speaks first of Christ Himself — God made visible in a human body. But the logic of the mystery presses further: if Christ now indwells His people, then the same manifestation continues. The mystery of godliness is God becoming visible through human vessels — first in one body, then through many. The same life, expanding outward."
+    summary: "Here Paul gives a concentrated Christological statement. God manifested in the flesh. The verse speaks first and most directly of Christ Himself — God made visible in a human body, vindicated by the Spirit, witnessed by angels, proclaimed among the nations. But given what Paul has already established — that Christ now indwells His people — the principle extends: the same life that was manifested in one body is now being expressed through many. This is not what the verse itself says, but it is where the logic of the mystery leads."
   },
   { arrow: "bright", label: "CULMINATING IN" },
 
@@ -798,7 +735,7 @@ function buildNode(n) {
   h += `<div class="node-header"><span class="node-number">${n.num}</span><div>`;
   h += `<h3 class="node-title">${n.title}</h3>`;
   h += `<span class="node-verse">${n.verse}</span></div></div>`;
-  h += `<div class="node-scripture">"${n.scripture}"</div>`;
+  h += `<div class="node-scripture">${n.excerpt ? '' : '\u201C'}${n.scripture}${n.excerpt ? '' : '\u201D'}</div>`;
   h += `<div class="node-summary">${n.summary}</div>`;
   h += `<div class="node-tap">Tap to expand</div>`;
   div.innerHTML = h;
